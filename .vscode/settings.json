@@ -1,0 +1,5 @@
+{
+    "chat.customAgentInSubagent.enabled": true,
+    "github.copilot.chat.askQuestions.enabled": true,
+    "chat.useAgentSkills": true
+}
