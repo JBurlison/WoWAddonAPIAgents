@@ -1,0 +1,15 @@
+{
+  "name": "wow-addon-api-agents",
+  "description": "Build and maintain addons for Retail, Forever, and Classic progression with version-aware API research and shared Lua code.",
+  "owner": {
+    "name": "James Burlison"
+  },
+  "plugins": [
+    {
+      "name": "wow-addon-dev",
+      "source": "./plugins/wow-addon-dev",
+      "description": "Build and maintain addons for Retail, Forever, and Classic progression with version-aware API research and shared Lua code.",
+      "version": "1.0.0"
+    }
+  ]
+}

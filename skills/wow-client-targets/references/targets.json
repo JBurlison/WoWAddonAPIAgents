@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "repository": "Gethe/wow-ui-source",
+  "targets": {
+    "retail": {
+      "branch": "live",
+      "commit": "d07eb00237d8891f153215db98a5df880a26cfe5",
+      "version": "12.1.5.70688",
+      "interface": 120105,
+      "interfaceEvidence": "Derived from version.txt (major*10000 + minor*100 + patch); confirm with select(4, GetBuildInfo()) in the target client.",
+      "verifiedAt": "2026-10-31T14:15:42.643Z",
+      "fingerprint": "c967cd33f212d40f8402bfba303f49be87d42b8775dec6a05fef4b8ae19452ce",
+      "verification": "Source inventory and version verified; API availability requires per-feature verification including client load conditions.",
+      "sources": {
+        "version": "https://github.com/Gethe/wow-ui-source/blob/d07eb00237d8891f153215db98a5df880a26cfe5/version.txt",
+        "api": "https://github.com/Gethe/wow-ui-source/tree/d07eb00237d8891f153215db98a5df880a26cfe5/Interface/AddOns/Blizzard_APIDocumentationGenerated",
+        "ui": "https://github.com/Gethe/wow-ui-source/tree/d07eb00237d8891f153215db98a5df880a26cfe5/Interface"
+      }
+    },
+    "forever": {
+      "branch": "forever",
+      "commit": "ca8368f2f2380cbe696854f7f2646387c278a61b",
+      "version": "1.60.1.70532",
+      "interface": 16001,
+      "interfaceEvidence": "Derived from version.txt (major*10000 + minor*100 + patch); confirm with select(4, GetBuildInfo()) in the target client.",
+      "verifiedAt": "2026-10-31T14:15:42.649Z",
+      "fingerprint": "7d9aa7e9fdf2170945e11ce32fea4001658e59228aa485f704539834edce3830",
+      "verification": "Source inventory and version verified; API availability requires per-feature verification including client load conditions.",
+      "sources": {
+        "version": "https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/version.txt",
+        "api": "https://github.com/Gethe/wow-ui-source/tree/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_APIDocumentationGenerated",
+        "ui": "https://github.com/Gethe/wow-ui-source/tree/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface"
+      }
+    },
+    "classic": {
+      "branch": "classic",
+      "commit": "e5d9b3a22c3f0f6f41ebac0e454f4969594261cf",
+      "version": "5.5.4.70631",
+      "interface": 50504,
+      "interfaceEvidence": "Derived from version.txt (major*10000 + minor*100 + patch); confirm with select(4, GetBuildInfo()) in the target client.",
+      "verifiedAt": "2026-10-31T14:15:42.653Z",
+      "fingerprint": "6e7f2cacbdddb974ca00eafdb7ef61ec5734d2884a4046e7f9cd279ca6653f6b",
+      "verification": "Source inventory and version verified; API availability requires per-feature verification including client load conditions.",
+      "sources": {
+        "version": "https://github.com/Gethe/wow-ui-source/blob/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/version.txt",
+        "api": "https://github.com/Gethe/wow-ui-source/tree/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/Interface/AddOns/Blizzard_APIDocumentationGenerated",
+        "ui": "https://github.com/Gethe/wow-ui-source/tree/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/Interface"
+      }
+    }
+  }
+}

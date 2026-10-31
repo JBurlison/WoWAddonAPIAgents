@@ -1,0 +1,23 @@
+{
+  "name": "wow-addon-dev",
+  "version": "1.0.0",
+  "description": "Build and maintain addons for Retail, Forever, and Classic progression with version-aware API research and shared Lua code.",
+  "author": {
+    "name": "James Burlison"
+  },
+  "repository": "https://github.com/JBurlison/WoWAddonAPIAgents",
+  "license": "MIT",
+  "keywords": [
+    "wow",
+    "addons",
+    "lua",
+    "retail",
+    "forever",
+    "classic"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "WoW Addon Development",
+    "shortDescription": "WoW addons for Retail, Forever, and Classic"
+  }
+}
