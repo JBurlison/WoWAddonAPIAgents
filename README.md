@@ -11,6 +11,8 @@ Version-aware addon development for **Retail**, **Forever**, and **Classic progr
 
 Classic Era, Anniversary, PTR, beta, and private servers are outside this release. Ambiguous targets require clarification.
 
+Version **2.1.0** adds a [UI design and testing workflow](skills/wow-addon-development/references/UI-DESIGN-AND-TESTING.md): ask whether the user wants a mock-up before UI implementation, respect an existing choice, and use [UIForever](https://uiforever.com/) for supported simulator checks. Simulator availability and reported build are checked separately from real-client acceptance; a simulator pass does not certify addon compatibility.
+
 ## Install
 
 Marketplace: `wow-addon-api-agents`. Plugin: `wow-addon-dev`. Packages are committed; consumers do not need Node.js or a build step.
