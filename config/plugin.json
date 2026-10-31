@@ -1,0 +1,10 @@
+{
+  "name": "wow-addon-dev",
+  "marketplace": "wow-addon-api-agents",
+  "version": "1.0.0",
+  "displayName": "WoW Addon Development",
+  "description": "Build and maintain addons for Retail, Forever, and Classic progression with version-aware API research and shared Lua code.",
+  "author": { "name": "James Burlison" },
+  "repository": "https://github.com/JBurlison/WoWAddonAPIAgents",
+  "license": "MIT"
+}
