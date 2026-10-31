@@ -7,15 +7,15 @@ For the complete list, see https://warcraft.wiki.gg/wiki/Console_variables
 
 ## Quick Workflow
 
-- Prefer `GetCVar` and `SetCVar` in addon code.
+- Start with the selected client's `C_CVar` declarations and [current contracts](CURRENT-SETTINGS.md); verify any legacy global aliases independently.
 - Use `/console` for one-off changes and debugging.
 - Edit Config.wtf only while the game is closed.
 
 ## Secure CVars
 
-- Secure CVars cannot be changed in combat.
-- Secure CVars must be changed with `SetCVar`, not `/console`.
-- Use `GetCVarInfo` to check secure status.
+- At the pinned Retail/Forever builds, `C_CVar.SetCVar` requires a non-secure, non-read-only, valid public CVar. Leaving combat does not override those preconditions.
+- Use `C_CVar.GetCVarInfo` to inspect secure, read-only, user-lock and storage flags. Failed setter preconditions can produce no result.
+- Neither `/console` nor a legacy alias bypasses access restrictions.
 
 ## Scope and Sync
 

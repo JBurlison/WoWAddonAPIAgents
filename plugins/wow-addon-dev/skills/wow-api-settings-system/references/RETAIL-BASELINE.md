@@ -44,9 +44,7 @@ SetCVar("scriptErrors", 1)
 
 ## Secure CVars and Combat Restrictions
 
-- Secure CVars cannot be changed in combat.
-- Secure CVars must be changed via `SetCVar` (not `/console`).
-- Use `GetCVarInfo` to determine if a CVar is secure before changing it.
+Correction for the pinned 2026-10-31 sources: do not infer that a secure CVar becomes writable outside combat. Retail/Forever `C_CVar.SetCVar` requires a valid public, non-read-only, **non-secure** CVar. Failed preconditions can return nothing. A global alias or `/console` is not a permission bypass. Inspect `C_CVar.GetCVarInfo` and the selected client's predicates; see [current CVar contracts](CURRENT-SETTINGS.md).
 
 ## CVar Scope (Account vs Character)
 

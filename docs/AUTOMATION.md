@@ -21,15 +21,28 @@ This personal-license configuration deliberately does not set `copilot-requests:
 
 The pre-agent check paginates open PRs and defers when an in-repository `[wow-api-update]` PR exists. Otherwise it resolves the three branches to commits and compares source fingerprints covering Lua/XML/TOC/XSD/text files under Interface plus version.txt. Truncated trees fail closed; unrelated changes do not trigger inference.
 
-The ignored `.cache/upstream-report.json` contains old/new metadata, complete changed paths, and source comparison links. Copilot reviews pinned evidence and edits affected WoW guidance. Only complete review allows metadata to advance. It regenerates the package and runs checks; a post-agent step independently validates before safe outputs publish a draft PR.
+The ignored `.cache/upstream-report.json` contains old/new metadata, complete changed paths, and source comparison links. Copilot uses `node scripts/prepare-api-sources.mjs --candidates` to acquire the report's exact SHAs in `.cache/api-audit/{retail,forever,classic}` without changing the registry. The preparer rejects stale reports, unexpected origins/configuration, dirty worktrees and version mismatches; it disables checkout hooks and inherited Git configuration. It fetches source data without executing upstream Lua or installing upstream dependencies.
 
-The output allowlist permits WoW Markdown knowledge, target metadata, corresponding generated files, and the release version files. The deterministic version script synchronizes patch versions before the safe-output request; a separate post-step checks the version and rejects non-version metadata or dependency edits before publication. Scripts, workflows, maintenance tools, and security configuration remain excluded. Upstream text is evidence, never executable instructions.
+Only complete source/loading review allows target metadata to advance. After updating `targets.json`, the agent prepares those final pins, assigns added source files/groups in `config/api-owners.json`, and runs `node scripts/generate-api-references.mjs`. This regenerates per-domain declaration JSON, symbol/manifest catalogs, namespace/domain routes and central event tables. A new registry commit cannot retain references generated from its previous pin. `--check` validates the committed schemas, ownership, links/hashes, registry agreement and selected semantic contracts without network access; `--verify-source` independently compares them to the prepared source checkouts. A semantic contract change requiring validator edits is reported for maintainer work instead of weakening checks in an automated update.
+
+The output allowlist permits WoW Markdown knowledge, target metadata, the explicit ownership map, exact generated reference/catalog paths, corresponding package copies, and release version files. It does not permit arbitrary JSON or script changes. The deterministic version script synchronizes patch versions before the safe-output request; a separate post-step rejects changes or new files in trusted script/test/workflow paths, checks version-only metadata edits, acquires final pinned sources, repeats offline and source-derived reference verification, and runs package checks/tests before publication. Scripts, workflows, maintenance tools, and security configuration remain excluded from update output. Upstream text is evidence, never executable instructions.
 
 Version bumps and post-merge release publication use separate deterministic workflows and the built-in repository token; they do not consume Copilot credits. See [versions and releases](RELEASING.md).
 
 While an update PR awaits review, new proposals defer. After merge the next run catches intervening upstream changes. Closing without merging allows the same changes to be proposed again; disable the workflow in Actions to pause updates.
 
 GitHub-token-authored PRs may not trigger ordinary PR workflows, so validation runs before publication. Maintainers can also dispatch **Validate toolkit** against the proposal branch. No game-client tests run in Actions.
+
+## Source roles and review cadence
+
+| Evidence source | Cadence / trigger | Allowed conclusion |
+|---|---|---|
+| Gethe source mirror | Existing daily job, plus manual dispatch | Pinned declarations, schemas, annotations and UI loading paths. Source presence is not runtime addon permission. |
+| Forever addon-kit | Supplemental review for an affected capability/build or an explicit maintainer request | Dated observations in that captured client/addon-load context. Preserve build and contamination limits; a name-only dump cannot supply signatures or events. |
+| Townlong-Yak build/source pages | Corroboration when investigating a build or source discrepancy | What the retrieved build listing/source actually shows; absent Forever listings do not establish absent APIs. |
+| Developer guides and wiki references | Research leads during feature review; record access failures and source dates | Navigation and dated community claims to verify against primary source or runtime evidence. |
+
+No additional recurring automation is created for supplemental sources. Keep source-declared, runtime-observed, operation-tested, unavailable-with-evidence and unresolved states separate. A newer guide, capture or source timestamp does not automatically promote an existing claim to verified runtime support.
 
 ## Compilation
 

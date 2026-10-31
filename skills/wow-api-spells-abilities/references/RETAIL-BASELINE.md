@@ -1,5 +1,7 @@
 > **Historical Retail baseline:** Retained from the original repository. Claims and examples require re-verification for every selected client, including current Retail. Follow the [active skill](../SKILL.md) first.
 
+> Duration-object and `SPELL_UPDATE_COOLDOWN` entries below were corrected on 2026-10-31; their [pinned contracts and target differences](CURRENT-CONTRACTS.md) supersede the original baseline. Other entries remain historical.
+
 # Spell & Ability API (Retail — Patch 12.0.0)
 
 Comprehensive reference for all Spell, SpellBook, ActionBar, Cooldown, Totem, Shapeshifting, and related APIs. Covers spell information, cooldowns, usability, range checking, spellbook navigation, action bar slot management, spell procs, diminishing returns, assisted combat, and global spell functions.
@@ -81,11 +83,11 @@ The `C_Spell` namespace provides direct access to spell data by `spellIdentifier
 | Function | Returns | Description |
 |----------|---------|-------------|
 | `C_Spell.GetSpellCooldown(spellIdentifier)` | `spellCooldownInfo` | Start time, duration, enabled, modRate |
-| `C_Spell.GetSpellCooldownDuration(spellIdentifier)` | `duration` | Remaining cooldown in seconds |
+| `C_Spell.GetSpellCooldownDuration(spellIdentifier, ignoreGCD=false)` | `LuaDurationObject` or no result | Active cooldown object; [reviewed contract](CURRENT-CONTRACTS.md#duration-objects) |
 | `C_Spell.GetSpellCharges(spellIdentifier)` | `chargeInfo` | Charges, maxCharges, start, duration |
-| `C_Spell.GetSpellChargeDuration(spellIdentifier)` | `duration` | Charge recharge duration |
+| `C_Spell.GetSpellChargeDuration(spellIdentifier)` | `LuaDurationObject` or no result | Active recharge object; [reviewed contract](CURRENT-CONTRACTS.md#duration-objects) |
 | `C_Spell.GetSpellLossOfControlCooldown(spellIdentifier)` | `startTime, duration` | LoC lockout timing |
-| `C_Spell.GetSpellLossOfControlCooldownDuration(spellIdentifier)` | `duration` | Remaining LoC duration |
+| `C_Spell.GetSpellLossOfControlCooldownDuration(spellIdentifier)` | `LuaDurationObject` or no result | Active LoC cooldown object; [reviewed contract](CURRENT-CONTRACTS.md#duration-objects) |
 
 ### Usability & Range
 
@@ -713,7 +715,7 @@ end
 | `UPDATE_POSSESS_BAR` | — | Possession bar changed |
 | `SPELL_ACTIVATION_OVERLAY_SHOW` | `spellID, ...` | Proc overlay should show |
 | `SPELL_ACTIVATION_OVERLAY_HIDE` | `spellID` | Proc overlay should hide |
-| `SPELL_UPDATE_COOLDOWN` | — | Spell cooldowns changed |
+| `SPELL_UPDATE_COOLDOWN` | `spellID?, baseSpellID?, category?, startRecoveryCategory?`; Retail/Forever also `itemID?` | Optional numbers; nil spellID means full refresh. [Per-target contract](CURRENT-CONTRACTS.md#spell_update_cooldown) |
 | `SPELL_UPDATE_USABLE` | — | Spell usability changed |
 | `SPELL_UPDATE_CHARGES` | — | Spell charges changed |
 | `CURRENT_SPELL_CAST_CHANGED` | — | Current cast changed |

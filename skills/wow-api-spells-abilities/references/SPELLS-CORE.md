@@ -115,9 +115,9 @@ Returns cooldown state:
 
 **⚠ Patch 12.0.0:** `startTime` and `duration` may be **secret values** when `C_Secrets.ShouldSpellCooldownBeSecret(spellIdentifier)` is true. Pass directly to `Cooldown:SetCooldown()` without branching.
 
-### C_Spell.GetSpellCooldownDuration(spellIdentifier) → duration
+### C_Spell.GetSpellCooldownDuration(spellIdentifier, ignoreGCD=false) → LuaDurationObject or no result
 
-Returns the remaining cooldown in seconds. Convenience wrapper over `GetSpellCooldown`.
+Correction reviewed 2026-10-31: returns an object describing the active cooldown, not remaining seconds. All three pinned clients declare `ignoreGCD=false` and `MayReturnNothing=true`. Preserve the object and handle the no-result case; see [per-target signatures, access annotations and widget constraints](CURRENT-CONTRACTS.md#duration-objects).
 
 > **Wiki:** https://warcraft.wiki.gg/wiki/API_C_Spell.GetSpellCooldownDuration
 
@@ -138,9 +138,9 @@ Returns charge state for spells with charges:
 
 Returns `nil` for spells without charges.
 
-### C_Spell.GetSpellChargeDuration(spellIdentifier) → duration
+### C_Spell.GetSpellChargeDuration(spellIdentifier) → LuaDurationObject or no result
 
-Returns the recharge duration for one charge.
+Returns an object describing the active recharge time, with `MayReturnNothing=true` at all three reviewed pins. See [reviewed duration contracts](CURRENT-CONTRACTS.md#duration-objects); do not interpret the object as a numeric duration.
 
 > **Wiki:** https://warcraft.wiki.gg/wiki/API_C_Spell.GetSpellChargeDuration
 
@@ -150,9 +150,9 @@ Returns cooldown imposed by loss-of-control effects (stuns, silences).
 
 > **Wiki:** https://warcraft.wiki.gg/wiki/API_C_Spell.GetSpellLossOfControlCooldown
 
-### C_Spell.GetSpellLossOfControlCooldownDuration(spellIdentifier) → duration
+### C_Spell.GetSpellLossOfControlCooldownDuration(spellIdentifier) → LuaDurationObject or no result
 
-Returns remaining LoC lockout duration.
+Returns an object describing the active loss-of-control cooldown, with `MayReturnNothing=true` at all three reviewed pins. See [reviewed duration contracts](CURRENT-CONTRACTS.md#duration-objects).
 
 > **Wiki:** https://warcraft.wiki.gg/wiki/API_C_Spell.GetSpellLossOfControlCooldownDuration
 

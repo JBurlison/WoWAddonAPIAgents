@@ -1,5 +1,7 @@
 > **Historical Retail baseline:** Retained from the original repository. Claims and examples require re-verification for every selected client, including current Retail. Follow the [active skill](../SKILL.md) first.
 
+> **Current-use corrections:** Use [reviewed combat contracts](CURRENT-CONTRACTS.md), [cooldown contracts](../../wow-api-spells-abilities/references/CURRENT-CONTRACTS.md) and [access rules](../../wow-api-lua-environment/references/CURRENT-CONTRACTS.md). Historical blanket statements about addon permission, instance restrictions and widget acceptance below are not implementation guidance for a current client.
+
 # Combat API (Retail — Patch 12.0.0)
 
 Comprehensive reference for all combat-related APIs in WoW Retail. **Critical: The combat log system was fundamentally changed in 12.0.0.** `COMBAT_LOG_EVENT_UNFILTERED` is no longer available to addons.
@@ -48,40 +50,7 @@ This skill covers:
 
 ## C_DamageMeter — Built-in Damage Meter
 
-New in 12.0.0. Provides official damage/healing meter data without needing combat log parsing.
-
-### Functions
-
-| Function | Returns | Description |
-|----------|---------|-------------|
-| `C_DamageMeter.GetCurrentSessionID()` | `sessionID` | Current combat session |
-| `C_DamageMeter.GetSessions()` | `sessions` | All available sessions |
-| `C_DamageMeter.GetSessionInfo(sessionID)` | `sessionInfo` | Session details |
-| `C_DamageMeter.GetPlayerData(sessionID, unitGUID)` | `playerData` | Player's damage/healing |
-| `C_DamageMeter.GetPartyData(sessionID)` | `partyData` | All party/raid data |
-| `C_DamageMeter.ResetSessions()` | — | Clear all sessions |
-
-### Events
-
-| Event | Description |
-|-------|-------------|
-| `DAMAGE_METER_COMBAT_SESSION_UPDATED` | Session data updated |
-| `DAMAGE_METER_CURRENT_SESSION_UPDATED` | Current session changed |
-| `DAMAGE_METER_RESET` | Sessions cleared |
-
-### Pattern: Reading Damage Meter Data
-
-```lua
-local frame = CreateFrame("Frame")
-frame:RegisterEvent("DAMAGE_METER_COMBAT_SESSION_UPDATED")
-frame:SetScript("OnEvent", function(self, event)
-    local sessionID = C_DamageMeter.GetCurrentSessionID()
-    if sessionID then
-        local partyData = C_DamageMeter.GetPartyData(sessionID)
-        -- partyData contains per-player damage/healing totals
-    end
-end)
-```
+The former six-method table and runnable example are withdrawn: their names do not match the reviewed Retail, Forever or Classic generated declarations. Use the canonical [eight functions, three event payloads, structures and enums](CURRENT-CONTRACTS.md#c_damagemeter). That reference also records the Classic loading limitation and the Retail/Forever secrecy annotations. Source existence is not a promise of unrestricted damage/healing data.
 
 ---
 

@@ -1,5 +1,7 @@
 > **Historical Retail 12.0.0 notes:** These original claims require re-verification against the selected commit. They are not global instructions. See [client targets](../../wow-client-targets/SKILL.md).
 
+> **Current-use corrections:** Prefer [reviewed combat contracts](CURRENT-CONTRACTS.md), [cooldown contracts](../../wow-api-spells-abilities/references/CURRENT-CONTRACTS.md), and [access rules](../../wow-api-lua-environment/references/CURRENT-CONTRACTS.md). The old restrictions and display snippets below have not been certified for a current client. In particular, a widget accepting a value does not establish permission for every calling context.
+
 # Patch 12.0.0 (Midnight) — Critical API Changes
 
 > **TOC version: `120000`**
@@ -422,5 +424,5 @@ cooldown:SetCooldownFromDurationObject(duration)
 | Using old `GetSpellInfo()` | Fully removed in 12.0.0 | Use `C_Spell.GetSpellInfo()` |
 | Parsing combat log chat text | Messages are now KStrings | Cannot be parsed; use official APIs |
 | Doing arithmetic on cooldown durations | May be secret values | Use `DurationObject` APIs |
-| Reading widget values after setting secrets | Getters return secrets after aspect is applied | Use `SetToDefaults()` to clear, or design without reading back |
+| Reading widget values after setting secrets | Getters may retain restricted state | Design without reading restricted values back; resetting a widget does not authorize recovery of prior data |
 | Branching on `UnitName()` for enemy identification | Secret when unit identity restricted | Cannot identify specific enemies programmatically in combat |

@@ -293,7 +293,7 @@ Key events for monitoring spell casting:
 | `UNIT_SPELLCAST_EMPOWER_START` | `unitTarget, castGUID, spellID` | Empower cast started |
 | `UNIT_SPELLCAST_EMPOWER_STOP` | `unitTarget, castGUID, spellID` | Empower cast stopped |
 | `UNIT_SPELLCAST_EMPOWER_UPDATE` | `unitTarget, castGUID, spellID` | Empower stage changed |
-| `SPELL_UPDATE_COOLDOWN` | — | Any cooldown changed |
+| `SPELL_UPDATE_COOLDOWN` | `spellID?, baseSpellID?, category?, startRecoveryCategory?`; Retail/Forever also `itemID?` | Corrected 2026-10-31: optional numbers; nil spellID means full refresh. [Per-target contract](CURRENT-CONTRACTS.md#spell_update_cooldown) |
 | `SPELL_UPDATE_CHARGES` | — | Any charge count changed |
 | `SPELL_UPDATE_USABLE` | — | Any spell usability changed |
 | `LOSS_OF_CONTROL_ADDED` | — | Loss of control effect applied |

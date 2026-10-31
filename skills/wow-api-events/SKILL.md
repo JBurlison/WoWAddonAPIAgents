@@ -1,29 +1,22 @@
 ---
 name: wow-api-events
-description: Full reference for WoW frame events, payloads, and event handling
-  patterns. Includes setup, registration, and categorized event lists with
-  payloads. Select Retail, Forever, or Classic with wow-client-targets before
-  using historical listings.
+description: Look up complete source-pinned WoW event declarations, ordered typed payloads, nilability, secrecy and callback-versus-frame dispatch across Retail, Forever and Classic progression. Verify addon-facing registration and runtime delivery separately.
 ---
 
-# api events
+# Events and payloads
 
-Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
+Resolve the target with [wow-client-targets](../wow-client-targets/SKILL.md). Use the [current event contract guide](references/RETAIL-BASELINE.md) and the complete alphabetical catalogues below. These catalogues replace the historical partial lists; they cover every generated Event declaration at the pinned builds.
 
-## Target-specific decisions
+| Catalogue | Event names |
+|---|---|
+| [A–F](references/EVENTS-A-F.md) | Names beginning A through F |
+| [G–L](references/EVENTS-G-L.md) | Names beginning G through L |
+| [M–R](references/EVENTS-M-R.md) | Names beginning M through R |
+| [S–Z](references/EVENTS-S-Z.md) | Names beginning S through Z |
+| [Non-generated events and callbacks](references/EVENTS-UNDOCUMENTED.md) | Evidence policy and separate callback research |
 
-Verify that each event is addon-facing, its payload and client availability, and registration lifecycle. Existence in a generated table does not imply addon subscription is permitted.
+Retrieve one full contract with `node <wow-api-index>/scripts/query.mjs forever SPELL_UPDATE_COOLDOWN --kind event`. The [query guide](../wow-api-index/references/CURRENT-REFERENCES.md) explains exact lookup, named payload structures and target comparison. Event payload records live with the domain that owns the event; the [EventUtils ledger](references/generated/README.md) contains this skill's own generated functions.
 
-Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.
+Preserve payload order, field types, nilability and secret-value annotations. `CallbackEvent` is not a frame-event subscription. `Environment = All` does not mean third-party addons can register an event. Validate registration, loading, restricted contexts and delivery in the selected client before declaring support. An absent generated event remains unknown, not removed.
 
-## Detailed lookup material
-
-The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
-
-- [EVENTS A F](references/EVENTS-A-F.md)
-- [EVENTS G L](references/EVENTS-G-L.md)
-- [EVENTS M R](references/EVENTS-M-R.md)
-- [EVENTS S Z](references/EVENTS-S-Z.md)
-- [EVENTS UNDOCUMENTED](references/EVENTS-UNDOCUMENTED.md)
-
-For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).
+For implementation and release acceptance, use [wow-addon-development](../wow-addon-development/SKILL.md).

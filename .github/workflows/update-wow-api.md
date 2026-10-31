@@ -42,10 +42,23 @@ safe-outputs:
       - 'skills/wow-*/SKILL.md'
       - 'skills/wow-*/references/*.md'
       - 'skills/wow-client-targets/references/targets.json'
+      - 'config/api-owners.json'
+      - 'skills/wow-*/references/generated/retail.json'
+      - 'skills/wow-*/references/generated/forever.json'
+      - 'skills/wow-*/references/generated/classic.json'
+      - 'skills/wow-*/references/generated/README.md'
+      - 'skills/wow-api-index/references/generated/manifest.json'
+      - 'skills/wow-api-index/references/generated/symbols.json'
       - '.github/agents/wow-addon.agent.md'
       - 'plugins/wow-addon-dev/skills/wow-*/SKILL.md'
       - 'plugins/wow-addon-dev/skills/wow-*/references/*.md'
       - 'plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json'
+      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/retail.json'
+      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/forever.json'
+      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/classic.json'
+      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/README.md'
+      - 'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'
+      - 'plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json'
       - 'plugins/wow-addon-dev/agents/wow-addon.md'
       - 'plugins/wow-addon-dev/com.github.copilot/agents/wow-addon.agent.md'
       - 'config/plugin.json'
@@ -62,6 +75,19 @@ safe-outputs:
         - '/skills/wow-*/SKILL.md'
         - '/skills/wow-*/references/*.md'
         - '/skills/wow-client-targets/references/targets.json'
+        - '/config/api-owners.json'
+        - '/skills/wow-*/references/generated/retail.json'
+        - '/skills/wow-*/references/generated/forever.json'
+        - '/skills/wow-*/references/generated/classic.json'
+        - '/skills/wow-*/references/generated/README.md'
+        - '/skills/wow-api-index/references/generated/manifest.json'
+        - '/skills/wow-api-index/references/generated/symbols.json'
+        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/retail.json'
+        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/forever.json'
+        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/classic.json'
+        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'
+        - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json'
         - '/.github/agents/wow-addon.agent.md'
         - '/config/plugin.json'
         - '/package.json'
@@ -87,8 +113,13 @@ pre-agent-steps:
 post-steps:
   - name: Validate proposed content before safe outputs
     run: |
+      git diff --exit-code "$GITHUB_SHA" -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/
+      test -z "$(git ls-files --others -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/)"
       node scripts/version.mjs guard "$GITHUB_SHA"
       node scripts/version.mjs check "$GITHUB_SHA"
+      node scripts/prepare-api-sources.mjs
+      node scripts/generate-api-references.mjs --check
+      node scripts/generate-api-references.mjs --verify-source
       npm run check
       npm test
 ---
@@ -112,12 +143,42 @@ domain verified after checking one function. New claims need target/build, sourc
 links, signatures, event payloads, loading conditions, and access restrictions.
 Unknown is better than guessed availability.
 
+Gethe is the daily primary declaration/loading source. The Forever addon-kit is
+build-scoped supplemental runtime evidence, reviewed when relevant to a changed
+feature or explicitly requested by a maintainer; it is not a second scheduled
+monitor. Keep its build, enabled-addon context and observed names separate from
+source declarations and operation-tested permission. Townlong build listings
+corroborate available builds; community guides are research leads. Neither can
+silently override the pinned source or certify runtime support.
+
+Run `node scripts/prepare-api-sources.mjs --candidates` to acquire the exact
+candidate SHAs from the report without changing targets.json. The trusted
+preparer checks origin, clean worktrees, commit identities and version files,
+disables Git hooks/filters from local user configuration, and never executes
+upstream Lua. Do not patch this script or forcibly clean a dirty source cache.
+
 Only after every changed target has been reviewed successfully, replace those
 targets' metadata in canonical targets.json with the report's candidate metadata.
 Update SOURCE-EVIDENCE.md observations and links when advancing its commits.
 Interface values remain derived and pending in-client confirmation. Leave every
 snapshot unchanged if evidence retrieval or review is incomplete. If source
 changes do not affect documentation, explain why the baseline can advance.
+
+After advancing the reviewed registry, run `node scripts/prepare-api-sources.mjs`
+against those final pins. Review added/changed groups and source files in
+`config/api-owners.json`; that declarative ownership map is the only non-version
+configuration editable by this update. Assign new groups deliberately, preserving
+unknown runtime/access states. Run `node scripts/generate-api-references.mjs` to
+regenerate all per-domain JSON, symbol/manifest catalogs, namespace/domain routes
+and central event tables. Never hand-edit these generated artifacts or advance a
+target registry while retaining references generated from its previous commit.
+
+Run the offline `node scripts/generate-api-references.mjs --check` and the cached
+source comparison `node scripts/generate-api-references.mjs --verify-source`.
+If a new upstream contract violates an existing semantic anchor, report the
+required maintainer change; do not alter validation scripts/tests or weaken the
+check to make an update pass. Restore the registry and its generated artifacts
+to their original state if review, generation or verification cannot finish.
 
 Before calling the safe-output tool, run `npm run build`,
 `node scripts/version.mjs ensure`, `npm run check`, and `npm test`, in that order.
