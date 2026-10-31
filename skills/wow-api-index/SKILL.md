@@ -1,65 +1,28 @@
 ---
 name: wow-api-index
-description: Find the WoW domain skill for an API namespace, event, widget, or addon subsystem across Retail, Forever, and Classic progression. Resolve the target client before using detailed listings.
+description: Find source-pinned WoW functions, events, object methods, structures, enums and domain guidance across Retail, Forever and Classic progression. Use the packaged narrow-query tool and complete ownership routing before implementation.
 ---
 
-# WoW API skill index
+# WoW API index
 
-First read [wow-client-targets](../wow-client-targets/SKILL.md) to resolve targets and pin source evidence. Use this index to select a domain skill, then verify relevant signatures, loading conditions, and access restrictions for that client. The lookup tables are navigational aids; listed namespaces are not a compatibility guarantee.
+Resolve the client/build with [wow-client-targets](../wow-client-targets/SKILL.md). Start addon design or porting with [wow-addon-development](../wow-addon-development/SKILL.md). A namespace name, source declaration or lexical mention is not evidence that an operation loads or is permitted for addons.
 
-Start addon design and porting with [wow-addon-development](../wow-addon-development/SKILL.md). For offline work, disclose the recorded snapshot date/version and unresolved API claims.
+## Current contracts
 
-## Reference Files
+Use the [current reference guide](references/CURRENT-REFERENCES.md) and [package-local query tool](scripts/query.mjs) to retrieve only the desired symbol's full typed contract and security annotations. The ledger includes every generated function, event, object method, structure, enum, callback type, constant group and predicate at the pinned target commits. It retains explicit unknown load/runtime/access states.
 
-| Reference | Contents |
-|-----------|----------|
-| [DOMAIN-SKILLS.md](references/DOMAIN-SKILLS.md) | Detailed per-domain tables with API systems and key functions |
-| [NAMESPACE-LOOKUP.md](references/NAMESPACE-LOOKUP.md) | `C_` namespace → skill quick lookup (~90 entries) |
-| [CATEGORY-LOOKUP.md](references/CATEGORY-LOOKUP.md) | Wiki category → skill quick lookup (~45 entries) |
-| [MAINTENANCE.md](references/MAINTENANCE.md) | How to update this index when skills or patches change |
+With Node.js 22+, run `node <this-skill>/scripts/query.mjs forever C_Spell.GetSpellInfo` or `node <this-skill>/scripts/query.mjs forever SPELL_UPDATE_COOLDOWN --kind event`. Exact queries return full records; namespace searches return bounded summaries unless `--full` is used. No Node dependency is needed to follow the domain JSON links directly.
 
----
+| Reference | Purpose |
+|---|---|
+| [Namespace lookup](references/NAMESPACE-LOOKUP.md) | Every declared C_ namespace, owner, target inventory and scope classification |
+| [Domain routing](references/DOMAIN-SKILLS.md) | All installed skills and complete namespace/global/object/data-system ownership |
+| [Category lookup](references/CATEGORY-LOOKUP.md) | Task-oriented categories, including Mail and Macros |
+| [Current reference guide](references/CURRENT-REFERENCES.md) | Query usage, evidence meaning, structures, enums and representation rules |
+| [Maintenance](references/MAINTENANCE.md) | Reproducible regeneration and offline semantic checks |
 
-## Domain Skills Summary
+## Non-generated surfaces
 
-| Skill | Scope | Status |
-|-------|-------|--------|
-| wow-addon-structure | Addon files, TOC, SavedVariables, loading lifecycle | :white_check_mark: |
-| wow-api-widget | Widget API, widget hierarchy, all frame/region/texture/font/animation types | :white_check_mark: |
-| wow-api-xml-schema | XML schema, XML elements, attributes, templates, UI definitions in XML | :white_check_mark: |
-| wow-api-framexml | FrameXML functions, mixins, pools, SharedXML & game utils | :white_check_mark: |
-| wow-api-unit-player | Unit functions, player info, auras, roles, death | :white_check_mark: |
-| wow-api-spells-abilities | Spells, spellbook, action bars, cooldowns, casting | :white_check_mark: |
-| wow-api-items-inventory | Items, bags, bank, loot, equipment | :white_check_mark: |
-| wow-api-combat | Combat log, threat, damage meters, loss of control | :white_check_mark: |
-| wow-api-quests | Quest log, quest info, quest offers, content tracking | :white_check_mark: |
-| wow-api-map-navigation | Maps, area POIs, taxi, waypoints, vignettes | :white_check_mark: |
-| wow-api-social-chat | Chat, clubs/communities, friends, voice, BattleNet | :white_check_mark: |
-| wow-api-guild | Guild management, guild bank | :white_check_mark: |
-| wow-api-group-lfg | Party, dungeon finder, premade groups, social queue | :white_check_mark: |
-| wow-api-pvp | PvP, battlegrounds, arenas, war mode | :white_check_mark: |
-| wow-api-professions | Tradeskill UI, crafting orders, recipes | :white_check_mark: |
-| wow-api-collections | Mounts, pets, pet battles, toys | :white_check_mark: |
-| wow-api-transmog | Transmog, appearances, sets, outfits, dye colors | :white_check_mark: |
-| wow-api-achievements | Achievements, statistics | :white_check_mark: |
-| wow-api-calendar-events | Calendar, event scheduler | :white_check_mark: |
-| wow-api-encounters | Encounter journal, timeline, M+, instances | :white_check_mark: |
-| wow-api-reputation | Reputation, major factions | :white_check_mark: |
-| wow-api-currency-economy | Currency, auction house, tokens, stores | :white_check_mark: |
-| wow-api-talents | Class talents, hero talents, traits, specialization | :white_check_mark: |
-| wow-api-settings-system | CVars, console, settings, sound, video, build info | :white_check_mark: |
-| wow-macro-commands | Macro slash commands, conditionals, syntax, /cast, /use, #showtooltip | :white_check_mark: |
-| wow-api-housing | Player housing (new Patch 12.0) | :white_check_mark: |
-| wow-api-events | Game events reference and payloads | :white_check_mark: |
-| wow-lua-api | Lua 5.1 base functions, libraries, and WoW-only additions | :white_check_mark: |
-| wow-api-lua-environment | WoW Lua specifics, restrictions, taint system | :white_check_mark: |
-| wow-api-escape-sequences | UI escape sequences: color codes, inline textures, atlas markup, grammar, Kstrings | :white_check_mark: |
-| wow-api-weekly-rewards | Great Vault / weekly rewards | :white_check_mark: |
-| wow-api-misc-systems | Miscellaneous smaller API systems | :white_check_mark: |
+Use [FrameXML](../wow-api-framexml/SKILL.md), [widgets](../wow-api-widget/SKILL.md), [XML](../wow-api-xml-schema/SKILL.md), [macros](../wow-macro-commands/SKILL.md), [settings/CVars](../wow-api-settings-system/SKILL.md) and [Lua/security](../wow-api-lua-environment/SKILL.md) for their separately sourced guides. Generated object methods do not enumerate all handwritten mixins, callbacks or template dependencies.
 
-### Status Legend
-
-| Status | Meaning |
-|--------|---------|
-| :white_check_mark: | Skill exists and is documented |
-| :construction: | Skill planned but not yet created |
+Follow current target-specific references first. Retained historical material is a research lead; never use it to override a pinned current signature or restriction. If a symbol is absent from the ledger, its status is unknown until loaded source and runtime evidence resolve it. Offline use must disclose the pinned build and untested behavior.

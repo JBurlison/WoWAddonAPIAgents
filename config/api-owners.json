@@ -1,0 +1,5236 @@
+{
+  "schemaVersion": 1,
+  "description": "Explicit documentation ownership, not client availability. Every source file and named system needs a reviewed owner; internal/front-end/platform classifications preserve scope distinctions.",
+  "groups": {
+    "C_AccessibilityOptions": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_AccountInfo": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_AccountStore": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_AchievementInfo": {
+      "owner": "wow-api-achievements",
+      "classification": "client-system"
+    },
+    "C_AchievementTelemetry": {
+      "owner": "wow-api-achievements",
+      "classification": "client-system"
+    },
+    "C_ActionBar": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_AddOnProfiler": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "C_AddOns": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "C_AdventureJournal": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_AdventureMap": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_AlliedRaces": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_AnimaDiversion": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_ArdenwealdGardening": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_AreaPoiInfo": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_ArtifactUI": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_AssistedCombat": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_AuctionHouse": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_AuraContainerUtil": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_AutoComplete": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_AutoLoot": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_AzeriteEmpoweredItem": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_AzeriteEssence": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_AzeriteItem": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_Bank": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_BarberShop": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "C_BarberShopInternal": {
+      "owner": "wow-api-transmog",
+      "classification": "internal-or-restricted"
+    },
+    "C_BattleNet": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_BattlePet": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_BehavioralMessaging": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_BlackMarketInfo": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_BlizzCon2026": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Browser": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Calendar": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "C_CampaignInfo": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_CatalogShop": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_ChallengeMode": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_ChatBubbles": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_ChatInfo": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_ChromieTime": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_CinematicList": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_ClassColor": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_ClassTalents": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "C_ClassTrial": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_ClickBindings": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_ClientScene": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_Club": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_ClubFinder": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_ColorOverrides": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_ColorUtil": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_CombatAudioAlert": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_CombatLog": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_CombatLogInternal": {
+      "owner": "wow-api-combat",
+      "classification": "internal-or-restricted"
+    },
+    "C_CombatLogSecure": {
+      "owner": "wow-api-combat",
+      "classification": "internal-or-restricted"
+    },
+    "C_CombatText": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_Commentator": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_CompactUnitFrames": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_ConfigurationWarnings": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_ConsoleScriptCollection": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Container": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_ContentTracking": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_ContributionCollector": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "C_CooldownViewer": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_CovenantCallings": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_CovenantPreview": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Covenants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_CovenantSanctumUI": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_CraftInfo": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "C_CraftingOrders": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "C_CreatureInfo": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_CurrencyInfo": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_Cursor": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_CursorUtil": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_CurveUtil": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_CVar": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_DamageMeter": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_DateAndTime": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_DeathAlert": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_DeathInfo": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_DeathRecap": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_DelvesUI": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_Discord": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_DuelInfo": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "C_DurationUtil": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_DyeColor": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "C_EditMode": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_EncodingUtil": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "C_EncounterEvents": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_EncounterInfo": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_EncounterJournal": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_EncounterTimeline": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_EncounterWarnings": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_EndOfMatchUI": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "C_Engraving": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_EquipmentSet": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_EventScheduler": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "C_EventToastManager": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_EventUtils": {
+      "owner": "wow-api-events",
+      "classification": "client-system"
+    },
+    "C_ExpansionTrial": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_ExternalEventURL": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Flyout": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_FogOfWar": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_FrameManager": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_FriendList": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_GamePad": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_GamepadTargeting": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_GamepadUI": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_GameRules": {
+      "owner": "wow-api-settings-system",
+      "classification": "mixed-context"
+    },
+    "C_Garrison": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_GenericWidgetDisplay": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_Glue": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "C_GlyphInfo": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "C_GMTicketInfo": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_GossipInfo": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_GuildBank": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "C_GuildInfo": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "C_HeirloomInfo": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_HouseEditor": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HouseExterior": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_Housing": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingBasicMode": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingBlueprint": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingCatalog": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingCleanupMode": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingCustomizeMode": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingDecor": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingExpertMode": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingInspectMode": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingLayout": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_HousingNeighborhood": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_ImmersiveInteraction": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_IncomingSummon": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_InputInterfaceStyle": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_InstanceEncounter": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_InstanceLeaver": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_InterfaceFileManifest": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "C_Intl": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "C_InvasionInfo": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_IslandsInfo": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_IslandsQueue": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Item": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_ItemInteraction": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_ItemSocketInfo": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_ItemText": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_ItemUpgrade": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_KeyBindings": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_LegendaryCrafting": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "C_LevelLink": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_LevelSquish": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_LFGInfo": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "C_LFGList": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "C_LFGListRoles": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "C_LimitedInput": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "C_LiveEvent": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_LoadingScreen": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_LobbyMatchmakerInfo": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "C_Log": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Loot": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_LootFrame": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_LootHistory": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_LootJournal": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_LoreText": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_LossOfControl": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_MacOptions": {
+      "owner": "wow-api-settings-system",
+      "classification": "platform-specific"
+    },
+    "C_Macro": {
+      "owner": "wow-macro-commands",
+      "classification": "client-system"
+    },
+    "C_Mail": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_MajorFactions": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "C_Map": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_MapExplorationInfo": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_MerchantFrame": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_Minimap": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_ModelInfo": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_ModifiedInstance": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_MountJournal": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_MythicPlus": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_NamePlate": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_NamePlateManager": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_NameUtil": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "C_Navigation": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_NeighborhoodInitiative": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "C_NewItems": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_PaperDollInfo": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_PartyInfo": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "C_PartyPose": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "C_PerksActivities": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_PerksProgram": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_PetBattles": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_PetInfo": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_PetJournal": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_PhotoSharing": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Ping": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_PingSecure": {
+      "owner": "wow-api-social-chat",
+      "classification": "internal-or-restricted"
+    },
+    "C_Platform": {
+      "owner": "wow-api-settings-system",
+      "classification": "platform-specific"
+    },
+    "C_PlayerChoice": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_PlayerInfo": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_PlayerInteractionManager": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_PlayerMentorship": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_Pony": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_ProfSpecs": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "C_PvP": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "C_QuestChoice": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_QuestHub": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_QuestInfoSystem": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_QuestItemUse": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_QuestLine": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_QuestLog": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_QuestOffer": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_QuestSession": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_RaidLocks": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_RecentAllies": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_RecruitAFriend": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_Reforge": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_RemixArtifactUI": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_ReportSystem": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Reputation": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "C_ResearchInfo": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_RestrictedActions": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "C_Roleset": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "C_ScenarioInfo": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_ScrappingMachineUI": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_ScriptedAnimations": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_ScriptWarnings": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "C_SeasonInfo": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_Seasons": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "C_Secrets": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_SecureTransfer": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "C_SettingsUtil": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_SkillInfo": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "C_SocialQueue": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "C_SocialRestrictions": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_SocialUI": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_Soulbinds": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "C_Sound": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_SpecializationInfo": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "C_Spell": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_SpellActivationOverlay": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_SpellBook": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_SpellDiminish": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "C_SplashScreen": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_StableInfo": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_StorePublic": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_StringUtil": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "C_SummonInfo": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_SuperTrack": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_SwingTimer": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "C_System": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_SystemVisibilityManager": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_TableUtil": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "C_TalkingHead": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_TaskQuest": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "C_TaxiMap": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_Texture": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_Timer": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "C_TimerunningUI": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_TooltipComparison": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_TooltipInfo": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_ToyBoxInfo": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "C_TradeInfo": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_TradeSkillUI": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "C_Trainer": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "C_TraitConfig": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "C_Traits": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "C_Transmog": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "C_TransmogCollection": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "C_TransmogOutfitInfo": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "C_TransmogSets": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "C_TTSSettings": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_Tutorial": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_UI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_UIActionHandler": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_UIColor": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_UIFileAsset": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_UIWidgetManager": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_UnitAuras": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "C_UserFeedback": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Vehicle": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_VideoOptions": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "C_VignetteInfo": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_VoiceChat": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "C_WarbandScene": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_Weather": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_WeeklyRewards": {
+      "owner": "wow-api-weekly-rewards",
+      "classification": "client-system"
+    },
+    "C_WorldLootObject": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "C_WorldSafeLocsUIInternal": {
+      "owner": "wow-api-misc-systems",
+      "classification": "internal-or-restricted"
+    },
+    "C_WorldStateInfo": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "C_WowEntitlementInfo": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_WowSurvey": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "C_WowTokenUI": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "C_XMLUtil": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "C_ZoneAbility": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:AccountConstants": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:Action": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:ActionBarShared": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:AddOnConstants": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "Data:AddOnProfilerConstants": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "Data:AppearanceSource": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "Data:ArrowCalloutConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:AsyncAssistActionsConstants": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:AuctionHouseConstants": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:AuctionHouseEnums": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:AuraContainerShared": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:AutoCompleteShared": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:AzeriteConstants": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:BagConstants": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:Base": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:BattleNetShared": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:BattlepayConstants": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "Data:BattlePetConstants": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "Data:BountyShared": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:ButtonState": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:CalendarConstants": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "Data:CameraConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:CatalogShopConstants": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "Data:CharacterCreationConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "Data:CharacterCustomizationShared": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:CharacterSelectionConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "Data:CharacterServicesConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "Data:ChatConstants": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:ChatShared": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:CinematicConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:ClickBindingsConstants": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:ClientSettings": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:ClubShared": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:Color": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:ColorOverrideConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:CombatAudioAlertConstants": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:CombatAudioAlertShared": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:CombatLogConstants": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:CombatLogShared": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:CombatTextShared": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:CommentatorShared": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:ConfigurationWarningConstants": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:ContentTrackingTypes": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:CooldownFrameConstants": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:CooldownViewerConstants": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:CovenantCallingsConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:CovenantSanctumConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:CovenantsConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:CraftingOrderUIConstants": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "Data:CraftingOrderUIShared": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "Data:CurrencyConstants": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "Data:CurrencyConstants_Classic": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "Data:CurrencyConstants_Mainline": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "Data:CursorConst": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:DamageConstants": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:DamageMeterConstants": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:DeathRecapConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:DelvesConstants": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Data:DiscordConstants": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:DistrictConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:DungeonEncounterConstants": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Data:DurationTextBindingShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:DyeColorInfoShared": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "Data:EditModeManagerConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:EditModeManagerConstants_Classic": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:EditModeManagerConstants_Mainline": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:EncodingUtilConstants": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:EncounterEventsShared": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Data:EncounterJournalConstants": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Data:EncounterTimelineConstants": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Data:EventSchedulerConstants": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "Data:ExpansionConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:ExpansionLandingPageConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:ExpansionLevelConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:ForbiddenAspectConstants": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:FrameAPIModelSceneFrameShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:GamePadConst": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:GameRulesConstants": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:GARRISON_FOLLOWER_TYPEConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:GARRISON_TYPEConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:GarrisonConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:GarrisonShared": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:GlyphConstants": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:GossipConstants": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:GroupFinderConstants": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Data:GuildConstants": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "Data:GuildInfoShared": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "Data:HouseExteriorConstants": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:HousingBlueprintConstants": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:HousingCatalogConstants": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:HousingDecorShared": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:HousingLayoutUITypes": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:HousingUIShared": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:ImageSharingConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:InputConstants": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:IntlSharedTypes": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:ItemConstants": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:ItemConstants_Classic": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:ItemConstants_Mainline": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:ItemConstants_Shared": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:ItemQualities": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:ItemShared": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:LegacyConstants": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:LegendaryCraftingTypes": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "Data:LevelConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:LFGConstants": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Data:LocalizationShared": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:LogConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:LogicConstants": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:LootConstants": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:LootConstants_Mainline": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Data:LossOfControlConstants": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Data:LuaCurveObjectConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:LuaDurationObjectShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:LuaValuePredicates": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:MacroConstants": {
+      "owner": "wow-macro-commands",
+      "classification": "client-system"
+    },
+    "Data:MajorFactionsConstants": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "Data:MapConstants": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:MatrixShared": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:MinimapConstants": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:ModelAnimationShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:MoneyConstants": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "Data:MountConstants": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "Data:MythicPlusInfoShared": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Data:NameGenConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:NamePlateConstants": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:NeighborhoodInitiativesConstants": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:NumericRuleFormatterShared": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:PartyConstants": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Data:PartyPoseUIConstants": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Data:PerksVendorConstants": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "Data:PetBattleConstants": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "Data:PetConstants": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "Data:PetConstants_Shared": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "Data:PetScalingConstants": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "Data:PingConstants": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:PingManagerShared": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:Player": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:PlayerChoiceConstants": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:PlayerDataConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:PlayerHousingConstants": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Data:PlayerInfoShared": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:PlayerInteractionManagerConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:PlayerMentorshipConstants": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:PowerTypeConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:ProceduralSpawnConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:ProfessionConstants": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "Data:ProfessionSpecConstants": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "Data:PvPFactionConstants": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "Data:PvpInfoConstants": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "Data:PVPMgrConstants": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "Data:QuestConstants": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:QuestConstants_Classic": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:QuestConstants_Mainline": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:QuestInfoShared": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:QuestRewards": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:QuestSessionConstants": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Data:QueueSpecific": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Data:RaidMarkerConstants": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Data:RecentAlliesConstants": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:RecruitAFriendShared": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:RenownConstants": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "Data:ReportSystemConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:RestrictedActionsConstants": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "Data:RolodexConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:ScreenLocationConstants": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:SeasonsConstants": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Data:SecondsFormatterShared": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:SecretAspectConstants": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:SecretPredicates": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:SecretWrapperConstants": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:SharedScriptObjectModelLight": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:SharedScriptObjectNamePlateFrame": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:SharedScriptObjectUnitPositionFrame": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:SharedTraitsEnums": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:SimpleFrameScriptObjectConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:SimpleHTMLShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:SimpleStatusBarConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:SocialConstants": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Data:SoftTargetConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:SoulbindsConstants": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:SpecializationConstants": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:SpellBookConstants": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:SpellConstants": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:SpellDiminishConstants": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:SpellID": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:SpellShared": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:SplashScreenConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:SummonConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:SuperTrackManagerShared": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:TalentAndGlyphConstants": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:TalentConstants": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:TextureShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:Time": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:TimedSignalMapShared": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:TimerConstants": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Data:TimerunningConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:TooltipConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:TooltipInfoShared": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:TradeSkillUITypes": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "Data:TrainerConstants": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "Data:TraitConstants": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Data:TransformManipulatorConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:TransmogConstants": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "Data:TransmogOutfitConstants": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "Data:TransmogShared": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "Data:UIActionConstants": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Data:UIButtonShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UICharacterClassConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UIColorShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UICovenantDisplayInfoConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UIEventToastConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UIFileAssetShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UIMapPinShared": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:UIModelInfoShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UiModelSceneConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UiRpcRequestManagerConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:UIShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UITextureAssetShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UITextureConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UIWidgetManagerShared": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:UnitAuraConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:UnitAuraShared": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:UnitConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:UnitHealPredictionCalculatorShared": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:UnitSexConstants": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:UnitShared": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Data:ValidateNameConstants": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:VectorShared": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Data:VignetteConstants": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Data:VisualAlertConstants": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Data:WarbandSceneInfoConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:WeatherConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:WeeklyRewardsShared": {
+      "owner": "wow-api-weekly-rewards",
+      "classification": "client-system"
+    },
+    "Data:WorldElapsedTimerConstants": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Data:WowCSConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Data:WowSurveyConstants": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:ArenaTeam": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "Global:BagIndexConstants": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "Global:BNetOutage": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Global:Build": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:Camera": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:Cinematic": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:Client": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:ConnectionScript": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:Console": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:DebugToggle": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:Expansion": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:ExpansionInfo": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:Font": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Global:FrameScript": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Global:GameCursor": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:GameError": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:GameUI": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:Input": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:Instance": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Global:Locale": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Global:Localization": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Global:MirrorTimer": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Global:Movie": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:Os": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Global:ParentalControls": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:PerformanceScript": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:PlayerScript": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Global:PvpInfo": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "Global:RaidMarkers": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Global:RestrictedActions": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "Global:Screen": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:SlashCommand": {
+      "owner": "wow-macro-commands",
+      "classification": "client-system"
+    },
+    "Global:SpecializationShared": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "Global:Streaming": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:SystemTime": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "Global:TargetScript": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Global:Threat": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "Global:Title": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Global:Totem": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Global:Unit": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Global:UnitRole": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Global:URL": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "Global:ZoneScript": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "math": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:AbbreviateConfigAPI": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:AbbreviatedNumberFormatterAPI": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:DurationTextBindingObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIArchaeologyDigSiteFrame": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIBlob": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPICharacterModelBase": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPICinematicModel": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPICooldown": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIDressUpModel": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIFogOfWarFrame": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIModelSceneFrame": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIModelSceneFrameActor": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIModelSceneFrameActorBase": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPINamePlate": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIQuestPOI": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIScenarioPOI": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "Object:FrameAPISimpleCheckout": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPITabardModel": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPITabardModelBase": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPITooltip": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:FrameAPIUnitPositionFrame": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "Object:HousingCatalogSearcherAPI": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Object:HousingFixturePointFrameAPI": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Object:HousingLayoutPinFrameAPI": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "Object:LuaColorCurveObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:LuaCurveObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:LuaCurveObjectBaseAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:LuaDurationClockObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:LuaDurationManualClockAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:LuaDurationObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:LuaLocaleContextAPI": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:MinimapFrameAPI": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Object:NumericFormatterAPI": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:NumericRuleFormatterAPI": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:PingPinFrameAPI": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "Object:SecondsFormatterAPI": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimAlphaAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimatableObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimFlipBookAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimGroupAPI": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimPathAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimRadialProgressAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimRotationAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimScaleAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimScaleLineAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimTextureCoordTranslationAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimTranslationAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimTranslationLineAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleAnimVertexColorAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleBrowserAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleButtonAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleCheckboxAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleColorSelectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleControlPointAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleEditBoxAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleFontAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleFontStringAPI": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "Object:SimpleFrameAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleFrameScriptObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleHTMLAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleLineAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleMapSceneAPI": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "Object:SimpleMaskTextureAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleMessageFrameAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleModelAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleModelFFXAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleMovieAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleObjectAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleOffScreenFrameAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleRegionAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleScriptRegionAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleScriptRegionResizingAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleScrollFrameAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleSliderAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleStatusBarAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleTextureAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleTextureBaseAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:SimpleVectorGraphicsAPI": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "Object:TimedSignalMapAPI": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "Object:UnitHealPredictionCalculatorAPI": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "string": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "table": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    }
+  },
+  "files": {
+    "AbbreviateConfigAPIDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "AbbreviatedNumberFormatterAPIDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "AccessibilityOptionsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "AccountConstantsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "AccountInfoDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "AccountStoreDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "AchievementInfoDocumentation.lua": {
+      "owner": "wow-api-achievements",
+      "classification": "client-system"
+    },
+    "AchievementTelemetryDocumentation.lua": {
+      "owner": "wow-api-achievements",
+      "classification": "client-system"
+    },
+    "ActionBarFrameDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "ActionBarSharedDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "ActionDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "AddOnConstantsDocumentation.lua": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "AddOnProfilerConstantsDocumentation.lua": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "AddOnProfilerDocumentation.lua": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "AddOnsDocumentation.lua": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "AdventureJournalDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "AdventureMapDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "AlliedRacesFrameDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "AnimaDiversionUIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "AppearanceSourceDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "ArdenwealdGardeningDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "AreaPoiInfoDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "ArenaTeamDocumentation.lua": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "ArrowCalloutConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ArtifactUIDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "AssistedCombatDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "AsyncAssistActionsConstantsDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "AuctionHouseConstantsDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "AuctionHouseDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "AuctionHouseEnumsDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "AuraContainerSharedDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "AuraContainerUtilDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "AutoCompleteDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "AutoCompleteSharedDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "AutoLootDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "AzeriteConstantsDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "AzeriteEmpoweredItemDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "AzeriteEssenceDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "AzeriteItemDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "BagConstantsDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "BagIndexConstantsDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "BankDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "BarberShopDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "BarberShopInternalDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "internal-or-restricted"
+    },
+    "BaseDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "BattleNetDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "BattleNetSharedDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "BattlepayConstantsDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "BattlePetConstantsDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "BattlePetDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "BehavioralMessagingDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "BlackMarketInfoDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "BlizzCon2026Documentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "BNetOutageDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "BountySharedDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "BrowserDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "BuildDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ButtonStateDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "CalendarConstantsDocumentation.lua": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "CalendarDocumentation.lua": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "CameraConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CameraDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CatalogShopConstantsDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "CatalogShopDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "ChallengeModeInfoDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "CharacterCreationConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "CharacterCustomizationSharedDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CharacterSelectionConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "CharacterServicesConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "ChatBubblesDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ChatConstantsDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ChatInfoDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ChatSharedDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ChromieTimeUIDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CinematicConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CinematicDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CinematicListDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ClassColorDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ClassTalentsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "ClassTrialDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ClickBindingsConstantsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ClickBindingsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ClientDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ClientSceneDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ClientSettingsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ClubDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ClubFinderDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ClubSharedDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ColorDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ColorOverrideConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ColorOverridesDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ColorUtilDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "CombatAudioAlertConstantsDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CombatAudioAlertDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CombatAudioAlertSharedDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CombatLogConstantsDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CombatLogDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CombatLogInternalDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "internal-or-restricted"
+    },
+    "CombatLogSecureDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "internal-or-restricted"
+    },
+    "CombatLogSharedDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CombatTextDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CombatTextSharedDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CommentatorFrameDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CommentatorSharedDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "CompactUnitFramesDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "ConfigurationWarningConstantsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ConfigurationWarningsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ConnectionDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ConsoleDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ConsoleScriptCollectionDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ContainerDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ContentTrackingDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "ContentTrackingTypesDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "ContributionCollectorDocumentation.lua": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "CooldownFrameConstantsDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "CooldownViewerConstantsDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "CooldownViewerDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "CovenantCallingsConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CovenantCallingsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CovenantPreviewDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CovenantSanctumConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CovenantSanctumDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CovenantsConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CovenantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CraftInfoDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "CraftingOrderUIConstantsDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "CraftingOrderUIDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "CraftingOrderUISharedDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "CreatureInfoDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "CurrencyConstants_ClassicDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "CurrencyConstants_MainlineDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "CurrencyConstantsDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "CurrencyInfoDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "CursorConstDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CursorDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CursorUtilDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "CurveUtilDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "CVarDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "DamageConstantsDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "DamageMeterConstantsDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "DamageMeterDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "DateAndTimeDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "DeathAlertDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "DeathInfoDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "DeathRecapConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "DeathRecapDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "DebugToggleDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "DelvesConstantsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "DelvesUIDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "DiscordConstantsDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "DiscordDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "DistrictConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "DuelInfoDocumentation.lua": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "DungeonEncounterConstantsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "DurationTextBindingObjectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "DurationTextBindingSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "DurationUtilDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "DyeColorInfoDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "DyeColorInfoSharedDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "EditModeManagerConstants_ClassicDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "EditModeManagerConstants_MainlineDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "EditModeManagerConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "EditModeManagerDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "EncodingUtilConstantsDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "EncodingUtilDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "EncounterEventsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EncounterEventsSharedDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EncounterInfoDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EncounterJournalConstantsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EncounterJournalDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EncounterTimelineConstantsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EncounterTimelineDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EncounterWarningsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "EndOfMatchUIDocumentation.lua": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "EngravingInfoDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "EquipmentManagerDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "EventSchedulerConstantsDocumentation.lua": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "EventSchedulerUIDocumentation.lua": {
+      "owner": "wow-api-calendar-events",
+      "classification": "client-system"
+    },
+    "EventUtilsDocumentation.lua": {
+      "owner": "wow-api-events",
+      "classification": "client-system"
+    },
+    "ExpansionConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ExpansionDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ExpansionInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ExpansionLandingPageConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ExpansionLevelConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ExpansionTrialDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ExternalEventURLDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "FlyoutDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "FogOfWarDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "FontDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ForbiddenAspectConstantsDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "FrameAPIArchaeologyDigsiteDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPIBlobDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPICharacterModelBaseDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPICinematicModelDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPICooldownDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "FrameAPIDressUpModelDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPIFogOfWarFrameDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "FrameAPIModelSceneFrameActorBaseDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPIModelSceneFrameActorDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPIModelSceneFrameDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPIModelSceneFrameSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPINamePlateDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "FrameAPIQuestPOIDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "FrameAPIScenarioPOIDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "FrameAPISimpleCheckoutDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPITabardModelBaseDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPITabardModelDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPITooltipDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FrameAPIUnitPositionFrameDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "FrameScriptDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "FriendListDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "GameCursorDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GameErrorDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GamePadConstDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "GamePadDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "GamepadTargetingDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "GamepadUIDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "GameRulesConstantsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "GameRulesDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "mixed-context"
+    },
+    "GameUIDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GARRISON_FOLLOWER_TYPEConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GARRISON_TYPEConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GarrisonConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GarrisonInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GarrisonSharedDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GlueDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "front-end"
+    },
+    "GlyphConstantsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "GlyphInfoDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "GMTicketInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "GossipConstantsDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "GossipInfoDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "GroupFinderConstantsDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "GuildBankDocumentation.lua": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "GuildConstantsDocumentation.lua": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "GuildInfoDocumentation.lua": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "GuildInfoSharedDocumentation.lua": {
+      "owner": "wow-api-guild",
+      "classification": "client-system"
+    },
+    "HeirloomInfoDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "HouseEditorUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HouseExteriorConstantsDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HouseExteriorUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingBasicModeUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingBlueprintConstantsDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingBlueprintUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingCatalogConstantsDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingCatalogSearcherAPIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingCatalogUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingCleanupModeUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingCustomizeModeUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingDecorSharedDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingDecorUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingExpertModeUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingFixturePointFrameAPIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingInspectModeUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingLayoutPinFrameAPIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingLayoutUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingLayoutUITypesDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingNeighborhoodUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingUIDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "HousingUISharedDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "ImageSharingConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ImmersiveInteractionManagerDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "IncomingSummonDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "InGameNavigationDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "InputConstantsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "InputDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "InputInterfaceStyleDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "InstanceDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "InstanceEncounterDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "InstanceLeaverInfoDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "InterfaceFileManifestDocumentation.lua": {
+      "owner": "wow-addon-structure",
+      "classification": "client-system"
+    },
+    "IntlDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "IntlSharedTypesDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "InvasionInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "IslandsInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "IslandsQueueUIDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ItemConstants_ClassicDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemConstants_MainlineDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemConstants_SharedDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemConstantsDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemInteractionUIDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemQualitiesDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemSharedDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemSocketInfoDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemTextDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ItemUpgradeDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "KeyBindingsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "LegacyConstantsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "LegendaryCraftingDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "LegendaryCraftingTypesDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "LevelConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "LevelLinkDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "LevelSquishDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "LFGConstantsDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "LFGInfoDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "LFGListInfoDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "LFGListRolesDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "LimitedInputDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "LiveEventDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "LoadingScreenDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "LobbyMatchmakerInfoDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "LocaleDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LocalizationDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LocalizationSharedDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LogConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "LogDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "LogicConstantsDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LootConstants_MainlineDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "LootConstantsDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "LootDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "LootFrameDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "LootHistoryDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "LootJournalDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "LoreTextDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "LossOfControlConstantsDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "LossOfControlDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "LuaColorCurveObjectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaCurveObjectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaCurveObjectBaseAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaCurveObjectConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaDurationClockAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaDurationManualClockAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaDurationObjectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaDurationObjectSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "LuaLocaleContextAPIDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LuaMathExtensionsDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LuaStringExtensionsDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LuaTableExtensionsDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LuaTableUtilDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "LuaValuePredicatesDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "MacOptionsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "platform-specific"
+    },
+    "MacroConstantsDocumentation.lua": {
+      "owner": "wow-macro-commands",
+      "classification": "client-system"
+    },
+    "MailInfoDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "MajorFactionsConstantsDocumentation.lua": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "MajorFactionsDocumentation.lua": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "MapConstantsDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "MapDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "MapExplorationDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "MatrixSharedDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "MerchantFrameDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "MinimapConstantsDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "MinimapDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "MinimapFrameAPIDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "MirrorTimerDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "ModelAnimationSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "MoneyConstantsDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "MountConstantsDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "MountJournalDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "MovieDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "MythicPlusInfoDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "MythicPlusInfoSharedDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "NameGenConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "NamePlateConstantsDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "NamePlateDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "NamePlateManagerDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "NameUtilDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "NeighborhoodInitiativeDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "NeighborhoodInitiativesConstantsDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "NewItemsDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "NumericFormatterAPIDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "NumericRuleFormatterAPIDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "NumericRuleFormatterSharedDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "OsDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "PaperDollInfoDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "ParentalControlsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "PartyConstantsDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "PartyInfoDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "PartyInfoSystemStatusDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "PartyPoseUIConstantsDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "PartyPoseUIDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "PerformanceDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "PerksActivitiesDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "PerksProgramDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "PerksVendorConstantsDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "PetBattleConstantsDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "PetBattlesDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "PetConstants_SharedDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "PetConstantsDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "PetInfoDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "PetJournalInfoDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "PetScalingConstantsDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "PhotoSharingUIDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "PingConstantsDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "PingManagerDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "PingManagerSecureDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "internal-or-restricted"
+    },
+    "PingManagerSharedDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "PingPinFrameAPIDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "PlatformDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "platform-specific"
+    },
+    "PlayerChoiceConstantsDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "PlayerChoiceDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "PlayerDataConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PlayerDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PlayerHousingConstantsDocumentation.lua": {
+      "owner": "wow-api-housing",
+      "classification": "client-system"
+    },
+    "PlayerInfoDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PlayerInfoSharedDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PlayerInteractionManagerConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PlayerInteractionManagerDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PlayerLocationDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PlayerMentorshipConstantsDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "PlayerMentorshipDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "PlayerScriptDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "PonyDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "PowerTypeConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "ProceduralSpawnConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ProfessionConstantsDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "ProfessionSpecConstantsDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "ProfessionSpecUIDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "PvPFactionConstantsDocumentation.lua": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "PvpInfoConstantsDocumentation.lua": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "PvpInfoDocumentation.lua": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "PVPMgrConstantsDocumentation.lua": {
+      "owner": "wow-api-pvp",
+      "classification": "client-system"
+    },
+    "QuestChoiceDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestConstants_ClassicDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestConstants_MainlineDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestConstantsDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestHubInfoDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestInfoSharedDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestInfoSystemDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestItemUseDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestLineInfoDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestLogDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestOfferDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestRewardsDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestSessionConstantsDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestSessionDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QuestTaskInfoDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "QueueSpecificDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "RaidLocksDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "RaidMarkerConstantsDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "RaidMarkersDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "RecentAlliesConstantsDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "RecentAlliesDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "RecruitAFriendDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "RecruitAFriendSharedDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "ReforgeDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "RemixArtifactUIDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "RenownConstantsDocumentation.lua": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "ReportSystemConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ReportSystemDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ReputationInfoDocumentation.lua": {
+      "owner": "wow-api-reputation",
+      "classification": "client-system"
+    },
+    "ResearchInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "RestrictedActionsConstantsDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "RestrictedActionsDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "RolesetSystemDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "RolodexConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ScenarioInfoDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "ScrappingMachineUIDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "ScreenDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ScreenLocationConstantsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "ScriptedAnimationsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ScriptWarningsDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "SeasonInfoDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "SeasonsConstantsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "SeasonsDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "SecondsFormatterAPIDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "SecondsFormatterSharedDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "SecretAspectConstantsDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "SecretPredicateAPIDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "SecretPredicatesDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "SecretWrapperConstantsDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "SecureTransferDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "internal-or-restricted"
+    },
+    "SettingsUtilDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "SharedScriptObjectModelLightDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SharedScriptObjectNamePlateFrameDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "SharedScriptObjectUnitPositionFrameDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "SharedTraitsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "SharedTraitsEnumsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "SimpleAnimAlphaAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimatableObjectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimFlipBookAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimGroupAPIDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "SimpleAnimPathAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimRadialProgressAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimRotationAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimScaleAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimScaleLineAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimTextureCoordTranslationAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimTranslationAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimTranslationLineAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleAnimVertexColorAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleBrowserAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleButtonAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleCheckboxAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleColorSelectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleControlPointAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleEditBoxAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleFontAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleFontStringAPIDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "SimpleFrameAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleFrameScriptObjectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleFrameScriptObjectConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleHTMLAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleHTMLSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleLineAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleMapSceneAPIDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "SimpleMaskTextureAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleMessageFrameAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleModelAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleModelFFXAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleMovieAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleObjectAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleOffScreenFrameAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleRegionAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleScriptRegionAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleScriptRegionResizingAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleScrollFrameAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleSliderAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleStatusBarAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleStatusBarConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleTextureAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleTextureBaseAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SimpleVectorGraphicsAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SkillInfoDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "SlashCommandDocumentation.lua": {
+      "owner": "wow-macro-commands",
+      "classification": "client-system"
+    },
+    "SocialConstantsDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "SocialQueueDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "SocialQueueSystemStatusDocumentation.lua": {
+      "owner": "wow-api-group-lfg",
+      "classification": "client-system"
+    },
+    "SocialRestrictionsDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "SocialUIDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "SoftTargetConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "SoulbindsConstantsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "SoulbindsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "SoundDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "SpecializationConstantsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "SpecializationInfoDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "SpecializationSharedDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "SpellActivationOverlayDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellBookConstantsDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellBookDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellConstantsDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellDiminishConstantsDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellDiminishUIDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellIDDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SpellSharedDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "SplashScreenConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "SplashScreenDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "StableInfoDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "StorePublicUIDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "StreamingDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "StringUtilDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "SummonConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "SummonInfoDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "SuperTrackManagerDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "SuperTrackManagerSharedDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "SwingTimerDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "SystemDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "SystemTimeDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "TalentAndGlyphConstantsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "TalentConstantsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "TalkingHeadDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "TargetScriptDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "TaxiMapDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "TextureSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "TextureUtilsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ThreatDocumentation.lua": {
+      "owner": "wow-api-combat",
+      "classification": "client-system"
+    },
+    "TimeDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "TimedSignalMapAPIDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "TimedSignalMapSharedDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "TimerConstantsDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "TimerunningConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "TimerunningUIDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "TitleDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "TooltipComparisonDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "TooltipConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "TooltipInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "TooltipInfoSharedDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "TotemDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "ToyBoxInfoDocumentation.lua": {
+      "owner": "wow-api-collections",
+      "classification": "client-system"
+    },
+    "TradeInfoDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "TradeSkillUIDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "TradeSkillUITypesDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "TrainerConstantsDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "TrainerDocumentation.lua": {
+      "owner": "wow-api-professions",
+      "classification": "client-system"
+    },
+    "TraitConfigDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "TraitConstantsDocumentation.lua": {
+      "owner": "wow-api-talents",
+      "classification": "client-system"
+    },
+    "TransformManipulatorConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "TransmogConstantsDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "TransmogDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "TransmogItemsDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "TransmogOutfitConstantsDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "TransmogOutfitInfoDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "TransmogSetsDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "TransmogSharedDocumentation.lua": {
+      "owner": "wow-api-transmog",
+      "classification": "client-system"
+    },
+    "TTSSettingsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "TutorialDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "UIActionConstantsDocumentation.lua": {
+      "owner": "wow-api-spells-abilities",
+      "classification": "client-system"
+    },
+    "UIActionDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIButtonSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UICharacterClassConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIColorDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIColorSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UICovenantDisplayInfoConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIEventToastConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIEventToastManagerDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIFileAssetAPIDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIFileAssetSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIFrameManagerDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIGenericWidgetDisplayDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIMacrosDocumentation.lua": {
+      "owner": "wow-macro-commands",
+      "classification": "client-system"
+    },
+    "UIManagerDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIMapPinSharedDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "UIModelInfoDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIModelInfoSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UiModelSceneConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIModifiedInstanceDocumentation.lua": {
+      "owner": "wow-api-encounters",
+      "classification": "client-system"
+    },
+    "UiRpcRequestManagerConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "UISharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UISystemVisibilityManagerDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "UITextureAssetSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UITextureConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UITimerDocumentation.lua": {
+      "owner": "wow-api-lua-environment",
+      "classification": "client-system"
+    },
+    "UIWidgetManagerDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UIWidgetManagerSharedDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "UnitAuraConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitAuraDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitAuraSharedDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitHealPredictionCalculatorAPIDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitHealPredictionCalculatorSharedDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitRoleDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitSexConstantsDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "UnitSharedDocumentation.lua": {
+      "owner": "wow-api-unit-player",
+      "classification": "client-system"
+    },
+    "URLDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "UserFeedbackDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "ValidateNameConstantsDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "VectorSharedDocumentation.lua": {
+      "owner": "wow-lua-api",
+      "classification": "client-system"
+    },
+    "VehicleDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "VideoDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "VignetteConstantsDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "VignetteInfoDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "VisualAlertConstantsDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "VoiceChatDocumentation.lua": {
+      "owner": "wow-api-social-chat",
+      "classification": "client-system"
+    },
+    "WarbandSceneInfoConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WarbandSceneInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WarCampaignDocumentation.lua": {
+      "owner": "wow-api-quests",
+      "classification": "client-system"
+    },
+    "WeatherConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WeatherScriptDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WeeklyRewardsDocumentation.lua": {
+      "owner": "wow-api-weekly-rewards",
+      "classification": "client-system"
+    },
+    "WeeklyRewardsSharedDocumentation.lua": {
+      "owner": "wow-api-weekly-rewards",
+      "classification": "client-system"
+    },
+    "WorldElapsedTimerConstantsDocumentation.lua": {
+      "owner": "wow-api-settings-system",
+      "classification": "client-system"
+    },
+    "WorldLootObjectDocumentation.lua": {
+      "owner": "wow-api-items-inventory",
+      "classification": "client-system"
+    },
+    "WorldSafeLocsUIInternalDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "internal-or-restricted"
+    },
+    "WorldStateInfoDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "WowCSConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WowEntitlementInfoDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WowSurveyConstantsDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WowSurveyDocumentation.lua": {
+      "owner": "wow-api-misc-systems",
+      "classification": "client-system"
+    },
+    "WowTokenUIDocumentation.lua": {
+      "owner": "wow-api-currency-economy",
+      "classification": "client-system"
+    },
+    "XMLUtilDocumentation.lua": {
+      "owner": "wow-api-widget",
+      "classification": "client-system"
+    },
+    "ZoneAbilityDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    },
+    "ZoneScriptDocumentation.lua": {
+      "owner": "wow-api-map-navigation",
+      "classification": "client-system"
+    }
+  }
+}

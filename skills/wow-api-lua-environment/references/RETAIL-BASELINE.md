@@ -1,5 +1,7 @@
 > **Historical Retail baseline:** Retained from the original repository. Claims and examples require re-verification for every selected client, including current Retail. Follow the [active skill](../SKILL.md) first.
 
+> Start with [reviewed access contracts](CURRENT-CONTRACTS.md) for current source evidence. This historical file's broad security statements are not a per-client permission model. The `issecurevariable` example below is corrected, with its current verification limits recorded there.
+
 # Lua Environment & Security (Retail — Patch 12.0.0)
 
 Comprehensive reference for the WoW Lua sandbox, security model, taint system, secure execution, timers, hooks, logging, and restricted actions.
@@ -115,13 +117,13 @@ All addon code runs as **"tainted"** (insecure). Blizzard UI code runs as **"sec
 ### Checking Taint
 
 ```lua
--- Check if a global variable is tainted
-local isTainted, source = issecurevariable("SomeGlobalVar")
--- isTainted: false = secure, true = tainted
--- source: string name of the addon that tainted it (or nil if secure)
+-- Historical diagnostic contract; verify it in the selected client.
+local isSecure, taintSource = issecurevariable("SomeGlobalVar")
+-- isSecure: true = secure, false = tainted
+-- taintSource identifies the source when available; this grants no permission.
 
 -- Check table field
-local isTainted, source = issecurevariable(someTable, "someKey")
+local isSecure, taintSource = issecurevariable(someTable, "someKey")
 ```
 
 ### Common Taint Pitfalls
@@ -287,14 +289,14 @@ New in 12.0.0. Tracks when addon restrictions are active (e.g., inside instances
 |----------|---------|-------------|
 | `C_RestrictedActions.GetAddOnRestrictionState(type)` | `state` | Current restriction state |
 | `C_RestrictedActions.IsAddOnRestrictionActive(type)` | `active` | Is restriction currently active? |
-| `C_RestrictedActions.CheckAllowProtectedFunctions(object [, silent])` | `protectedFunctionsAllowed` | Can object call protected funcs? |
+| `C_RestrictedActions.CheckAllowProtectedFunctions(object, silent=false)` | `protectedFunctionsAllowed` | Can the current calling context use protected functions on this object? [Reviewed contract](CURRENT-CONTRACTS.md#protected-operations) |
 | `InCombatLockdown()` | `inCombatLockdown` | Combat lockdown active? |
 
 ### Restriction Events
 
 | Event | Description |
 |-------|-------------|
-| `ADDON_RESTRICTION_STATE_CHANGED` | Restriction state changed (entering/leaving instance) |
+| `ADDON_RESTRICTION_STATE_CHANGED` | Ordered `type: AddOnRestrictionType, state: AddOnRestrictionState`; before activation/after deactivation. [Reviewed timing](CURRENT-CONTRACTS.md#protected-operations) |
 | `PLAYER_REGEN_DISABLED` | Entering combat |
 | `PLAYER_REGEN_ENABLED` | Leaving combat |
 
@@ -319,7 +321,7 @@ WoW provides special FrameScript functions for working with the secure/secret va
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-| `issecurevariable([table,] name)` | `isSecure, taintSource` | Check taint status |
+| `issecurevariable([table,] name)` | `isSecure, taintSource` | True means secure; historical diagnostic, [current evidence unresolved](CURRENT-CONTRACTS.md#issecurevariable-boolean-correction) |
 | `issecretvalue(value)` | `isSecret` | Is value a secret? |
 | `issecrettable(table)` | `isSecretOrContentsSecret` | Is table or contents secret? |
 | `canaccessvalue(value)` | `isAccessible` | Can addon access this value? |

@@ -21,6 +21,8 @@ Read the relevant row in [compatibility guidance](../wow-client-targets/referenc
 
 ## Detailed lookup material
 
+Start with [current loaded UI sources](references/CURRENT-UI-SOURCES.md) for pinned TOCs, mixins/pools, callback ownership, secure templates and the boundary between Lua helpers and native methods.
+
 The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
 
 - [CHATFRAME CONTAINERS](references/CHATFRAME-CONTAINERS.md)

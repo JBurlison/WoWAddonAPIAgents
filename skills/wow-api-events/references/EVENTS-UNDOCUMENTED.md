@@ -1,39 +1,13 @@
-> **Historical Retail reference:** Verify this material for the selected client/build using [wow-client-targets](../../wow-client-targets/SKILL.md). This file does not establish current or cross-version API availability.
+# Non-generated events and internal callbacks
 
-# Undocumented Events
+The alphabetical catalogues contain every generated Event declaration at the pinned commits. They do not claim every runtime event or handwritten callback has been discovered. The old unversioned list of allegedly undocumented events has been removed because it did not establish current per-target availability or payloads.
 
-These events are listed as undocumented on the Events page. Payloads are not always specified.
+## Evidence required for an additional entry
 
-> Source: https://warcraft.wiki.gg/wiki/Events
-> Current as of: Patch 12.0.0 (Retail)
+Record the literal name, target/build, source commit and caller/dispatcher path, frame-event versus callback classification, ordered payload schema or explicitly unknown fields, loading requirements, access restrictions, and a reproducible permitted runtime scenario. A reference to a name in unexecuted or excluded UI code is source evidence only.
 
-- `AUTH_CHALLENGE_FINISHED`
-- `AUTH_CHALLENGE_UI_INVALID`
-- `BILLING_NAG_DIALOG`
-- `DEBUG_MENU_TOGGLED`
-- `EVENT_CLASS_TRIAL_TIMER_START`
-- `EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED`
-- `IGR_BILLING_NAG_DIALOG`
-- `PLAYTIME_CHANGED`
-- `PRODUCT_ASSIGN_TO_TARGET_FAILED`
-- `PRODUCT_CHOICE_UPDATE`
-- `PRODUCT_DISTRIBUTIONS_UPDATED`
-- `SESSION_TIME_ALERT`
-- `STORE_BOOST_AUTO_CONSUMED`
-- `STORE_CHARACTER_LIST_RECEIVED`
-- `STORE_CONFIRM_PURCHASE`
-- `STORE_OPEN_SIMPLE_CHECKOUT`
-- `STORE_ORDER_INITIATION_FAILED`
-- `STORE_PRODUCTS_UPDATED`
-- `STORE_PRODUCT_DELIVERED`
-- `STORE_PURCHASE_ERROR`
-- `STORE_PURCHASE_LIST_UPDATED`
-- `STORE_REFRESH`
-- `STORE_STATUS_CHANGED`
-- `STORE_VAS_PURCHASE_COMPLETE`
-- `STORE_VAS_PURCHASE_ERROR`
-- `SUBSCRIPTION_CHANGED_KICK_IMMINENT`
-- `TRIAL_CAP_REACHED_LEVEL`
-- `TRIAL_STATUS_UPDATE`
-- `UPDATE_EXPANSION_LEVEL`
-- `UPDATE_GM_STATUS`
+## Known separate callback surface
+
+Forever's [Legacy utility](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacySystemUtil.lua) publishes `Legacy.UpdateCurrencyInfo` through EventRegistry. That is a loaded-UI callback, not a generated frame event. Consult the [talent skill](../../wow-api-talents/SKILL.md) and [FrameXML skill](../../wow-api-framexml/SKILL.md) for its ownership and dispatcher evidence before subscribing.
+
+The older [Forever runtime capture](https://github.com/Thunderz96/forever-addon-kit/blob/8dc297689059dd204bf8663a05aaa36d6a628b76/data/forever_api.json) contains function names and frames but no event catalogue or payload schemas. It cannot fill these gaps. A RegisterAllEvents observer can record only events actually delivered in its tested context; it is not an exhaustive API inventory.

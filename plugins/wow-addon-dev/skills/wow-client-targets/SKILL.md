@@ -23,8 +23,10 @@ For current evidence:
 
 1. Resolve `https://api.github.com/repos/Gethe/wow-ui-source/commits/<branch>` and capture the full SHA. Do not mix moving branch content with pinned evidence.
 2. Inspect `version.txt` and the tree at that SHA. Start with `Interface/AddOns/Blizzard_APIDocumentationGenerated`, then follow the UI addon's TOC/XML includes and client-specific files. Check shared versus game-specific loading conditions.
-3. For each needed capability, record target, commit, source path, signature, event payload, loading conditions, addon restrictions, and status: verified / unavailable / unknown. Missing generated documentation alone means unknown, not removed.
+3. For each needed capability, use the [evidence record](references/EVIDENCE-RECORDS.md): target, commit, source path, contract, loading and restrictions, with source declaration, runtime observation and operation testing recorded separately. Missing generated documentation alone means unknown, not removed.
 4. Trace the loaded constants before implementing runtime detection. The same tree may contain Mainline, Vanilla, Mists, and other constants with different `WOW_PROJECT_ID` assignments. Do not invent a Forever project ID. When detection cannot uniquely distinguish clients, use per-target packaged configuration plus runtime build validation.
 5. Consult [COMPATIBILITY.md](references/COMPATIBILITY.md), then the specific domain skill. Scope every deprecation and restriction to the target/build where it was verified.
 
 If access fails, state that the latest version could not be checked. Use dated bundled evidence only where sufficient; flag unresolved features and do not advance snapshot metadata. A successful function-existence probe does not establish matching semantics or permission to inspect returned values.
+
+For Forever detection, beta defect history and current source boundaries, read [Forever build evidence](references/FOREVER.md). For a fresh runtime comparison, follow the [capture and validation procedure](../wow-addon-development/references/RUNTIME-VALIDATION.md).

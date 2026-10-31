@@ -64,7 +64,13 @@ Run `npm run build` after editing maintained files. Host discovery catalogs rema
 
 ## API freshness
 
-[Target snapshots](skills/wow-client-targets/references/targets.json) record source commits, versions, derived interface values, and verification dates. They certify source inventories, not every API. Existing detailed references are marked as historical Retail material; relevant current behavior must be verified per target. Offline work must disclose stale or unresolved evidence.
+[Target snapshots](skills/wow-client-targets/references/targets.json) record source commits, versions, derived interface values, and verification dates. Version **2.0.0** adds complete generated-declaration catalogs for those three source snapshots, with signatures, event payloads, object methods, types and access annotations. The [API index](skills/wow-api-index/SKILL.md) routes narrow lookups to the packaged references and optional query script. Consumers do not need upstream checkouts to read them.
+
+The [documentation gap matrix](docs/audit/GAP-MATRIX.md) tracks the original findings and their 2.0.0 implementation. Curated guides cover corrected damage-meter/cooldown contracts, restricted values, Forever identity, swing timers, GameRules and Legacy, Settings registration, and UI loading/callback boundaries. Historical Retail references remain labeled and are subordinate to pinned contracts.
+
+Source-declared, loaded, permitted and runtime-tested are separate evidence states. The catalogs do not certify in-game availability, including shared/internal/Glue declarations. Offline work must disclose the snapshot and unresolved behavior; actual addon operations still need per-client tests.
+
+See the [2.0.0 implementation and validation report](docs/RELEASE-2.0.0.md) for delivered coverage, checks and remaining evidence boundaries.
 
 Multi-version addons default to shared Lua and compatibility code with separate client distributables. See [compatibility guidance](skills/wow-client-targets/references/COMPATIBILITY.md) and [client acceptance](skills/wow-addon-development/references/CLIENT-VALIDATION.md). CI does not imply in-game testing.
 

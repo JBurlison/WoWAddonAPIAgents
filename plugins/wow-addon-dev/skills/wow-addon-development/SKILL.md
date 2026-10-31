@@ -30,4 +30,4 @@ Never fabricate a signature, silently substitute a Retail API into Forever/Class
 
 ## Verify and deliver
 
-Run relevant static checks and inspect each target's packaged TOC/file list. Use [client validation](references/CLIENT-VALIDATION.md) for in-game acceptance. Report selected targets, source commits, compatibility choices, checks performed, unsupported features, and checks requiring a game client. Static checks do not prove in-game compatibility.
+Run relevant static checks and inspect each target's packaged TOC/file list. Use [client validation](references/CLIENT-VALIDATION.md) for in-game acceptance. For fresh API captures, disputed availability or event probes, use [runtime validation](references/RUNTIME-VALIDATION.md) and keep source, presence, registration and operation results separate. Report selected targets, source commits, compatibility choices, checks performed, unsupported features, and checks requiring a game client. Static checks do not prove in-game compatibility.
