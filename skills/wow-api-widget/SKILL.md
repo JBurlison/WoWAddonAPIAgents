@@ -12,6 +12,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+For visible UI changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
+
 Verify frame type/method availability, inherited methods, widget script arguments, protected state and loaded templates. Prefer simple verified primitives when a specialized widget is unavailable.
 
 Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.

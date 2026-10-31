@@ -2,6 +2,8 @@
 
 Run this checklist for every selected client/build. Record pass/fail/not-run separately for Retail, Forever, and Classic; never extrapolate a Retail pass to the others.
 
+Before game-client acceptance, use [UI design and UIForever testing](UI-DESIGN-AND-TESTING.md) for visible UI changes. Record the user's mock-up choice, design feedback and simulator results separately. Only use an available matching simulator flavor; its reported build can differ from the pinned source and intended client. A simulator pass does not complete any in-game row below.
+
 | Check | Acceptance |
 |---|---|
 | Artifact | ZIP root is the addon folder; every TOC/XML include exists with correct case and load order. |
@@ -14,6 +16,6 @@ Run this checklist for every selected client/build. Record pass/fail/not-run sep
 | World transitions | Zoning, instance entry/exit, group changes, and login lifecycle remain correct where relevant. |
 | Unsupported feature | Explicitly disabled or omitted on the affected target with an accurate user-facing explanation. |
 
-Static checks can inspect syntax, packaging, references, and mocked adapter contracts. They cannot emulate Blizzard's secure execution, secrets, server state, or complete event timing. Report unavailable in-game testing plainly.
+Static checks can inspect syntax, packaging, references, and mocked adapter contracts. Browser simulation can expose layout/interaction problems and simulator-specific API gaps. Neither establishes Blizzard's secure execution, secrets, server state, complete event timing, real persistence or actual performance. Report unavailable simulator and in-game testing separately.
 
 For reproducible capability captures and event tests, use [runtime validation](RUNTIME-VALIDATION.md). Record the actual client build, enabled addons, loaded dependencies and scenario with each result. For Forever, apply the [build-scoped identity and defect history](../../wow-client-targets/references/FOREVER.md); earlier beta behavior is not a current pass or failure.

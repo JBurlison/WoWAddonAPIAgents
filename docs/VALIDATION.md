@@ -1,5 +1,15 @@
 # Validation record
 
+## 2.1.0 UI workflow update
+
+Validated on Windows, 2026-10-31. `npm run build` rebuilt 278 outputs; `npm run check` verified them, all 35 skills, manifests, reference ledgers and local links. All **42 Node tests** passed. The five changed skill entry points passed skill-creator validation, and version policy confirmed **2.0.0 → 2.1.0**.
+
+The live [UIForever](https://uiforever.com/app?flavor=forever) interface was inspected in Codex's desktop in-app browser (browser version not recorded). The default Blizzard UI loaded, the Dungeon scenario was selected and `Errors` showed no Lua errors. `Missing APIs` and `Developer` were inspected; the latter reported **1.60.1.70450 / interface 16001**. No custom addons or personal WTF data were imported. This verifies the documented entry points and baseline flow, not a user's addon or actual WoW client behavior.
+
+Independent document review covered six cases: unspecified mock-up preference, explicit decline, previously accepted design, non-UI fix, Classic-only UI and missing simulator APIs. This was a behavior walkthrough, not an isolated host/model evaluation. Retail simulator testing was not run because the site marked it temporarily disabled; Classic progression was listed as coming soon. Custom-addon simulation and real-client acceptance remain not run for this documentation update.
+
+## Historical installation and release-automation baseline
+
 Validated on Windows, October 31, 2026. These results describe this implementation, not future upstream updates.
 
 After relocating maintained sources to root-level `skills/`, `agents/`, `instructions/`, and `config/`, package/link checks, all 20 tests, workflow compilation/drift checks, and isolated installation in all three hosts passed again. The generator now supplies the Copilot checkout adapters; VS Code skill-location configuration and agent references were checked statically. AI-builder's previously invalid description YAML was repaired during the move.
