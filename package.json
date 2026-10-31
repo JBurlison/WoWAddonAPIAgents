@@ -1,16 +1,21 @@
 {
   "name": "wow-addon-api-agents",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "node scripts/build-plugin.mjs",
     "check": "node scripts/build-plugin.mjs --check && node scripts/validate.mjs",
     "test": "node --test",
+    "version:bump": "node scripts/version.mjs bump",
     "check:upstream": "node scripts/check-upstream.mjs",
     "check:workflow": "node scripts/compile-workflow.mjs --check",
     "compile:workflow": "node scripts/compile-workflow.mjs"
   },
-  "devDependencies": { "yaml": "2.9.1" }
+  "devDependencies": {
+    "yaml": "2.9.1"
+  }
 }

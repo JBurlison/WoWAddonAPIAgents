@@ -13,7 +13,7 @@ Build synchronizes the package and host adapters. Check rejects drift, malformed
 
 New claims need target, commit, source, signature/payload, load conditions, and restrictions. Preserve historical provenance for unverified claims. Missing generated documentation does not prove removal. Never vendor a complete upstream source tree.
 
-`npm run check:upstream` writes candidate evidence to ignored `.cache/upstream-report.json` without changing committed snapshots. Review every changed target before advancing metadata. Rebuild and validate after edits. Update release versions in `config/plugin.json` and regenerate; preserve marketplace/plugin names.
+`npm run check:upstream` writes candidate evidence to ignored `.cache/upstream-report.json` without changing committed snapshots. Review every changed target before advancing metadata. Rebuild and validate after edits. Use `npm run version:bump -- patch` (or `minor`/`major`) to synchronize release versions; preserve marketplace/plugin names. Same-repository plugin-changing PRs receive a patch bump automatically. See [versions and releases](docs/RELEASING.md).
 
 AI-builder and its four helper skills remain maintainer-only. Provider-specific folders and agent metadata are not interchangeable; use the actual host specifications.
 

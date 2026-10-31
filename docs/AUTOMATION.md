@@ -23,7 +23,9 @@ The pre-agent check paginates open PRs and defers when an in-repository `[wow-ap
 
 The ignored `.cache/upstream-report.json` contains old/new metadata, complete changed paths, and source comparison links. Copilot reviews pinned evidence and edits affected WoW guidance. Only complete review allows metadata to advance. It regenerates the package and runs checks; a post-agent step independently validates before safe outputs publish a draft PR.
 
-The output allowlist permits WoW Markdown knowledge, target metadata, and corresponding generated files. It excludes scripts, workflows, manifests, maintenance tools, and security configuration. Upstream text is evidence, never executable instructions.
+The output allowlist permits WoW Markdown knowledge, target metadata, corresponding generated files, and the release version files. The deterministic version script synchronizes patch versions before the safe-output request; a separate post-step checks the version and rejects non-version metadata or dependency edits before publication. Scripts, workflows, maintenance tools, and security configuration remain excluded. Upstream text is evidence, never executable instructions.
+
+Version bumps and post-merge release publication use separate deterministic workflows and the built-in repository token; they do not consume Copilot credits. See [versions and releases](RELEASING.md).
 
 While an update PR awaits review, new proposals defer. After merge the next run catches intervening upstream changes. Closing without merging allows the same changes to be proposed again; disable the workflow in Actions to pause updates.
 

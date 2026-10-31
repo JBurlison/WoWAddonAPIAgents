@@ -1,0 +1,32 @@
+name: Version plugin PRs
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: read
+  actions: write
+concurrency:
+  group: version-plugin-${{ github.event.pull_request.number || 'sweep' }}
+  cancel-in-progress: false
+jobs:
+  version:
+    if: github.event_name == 'pull_request_target' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      # Never check out the PR head or run its scripts with this write token.
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/heads/main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Update only version JSON fields using trusted code
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/version-pr.mjs

@@ -76,6 +76,8 @@ Configure `COPILOT_GITHUB_TOKEN` with a fine-grained personal GitHub token grant
 
 See the [validation record](docs/VALIDATION.md) for tested host versions, installation results, and checks that still require GitHub or game clients.
 
+Plugin-changing PRs receive an automatic patch version bump (explicit higher versions are preserved). After merge to `main`, passing Windows/Linux and compiler checks publish a tagged GitHub release with the plugin ZIP and SHA-256 checksum. These workflows use the built-in repository token. See [versions and releases](docs/RELEASING.md) for manual version choices, fork PRs, and retries.
+
 ## Sources and license
 
 - [Gethe's Blizzard UI source mirror](https://github.com/Gethe/wow-ui-source)
