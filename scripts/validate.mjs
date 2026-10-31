@@ -5,6 +5,7 @@ import YAML from 'yaml';
 import { root, files, frontmatter, readJSON } from './lib.mjs';
 import { branches, interfaceFromVersion } from '../skills/wow-client-targets/scripts/targets.mjs';
 import { registryPath } from './upstream.mjs';
+import { validateVersions } from './version.mjs';
 
 export function validateSkill(text, expectedName) {
   const { yaml } = frontmatter(text);
@@ -48,6 +49,7 @@ export function validateRegistry(registry) {
   }
 }
 export async function validate(base = root) {
+  await validateVersions(base);
   const errors = [];
   const plugin = path.join(base, 'plugins/wow-addon-dev');
   const sourceSkills = (await files(path.join(base, 'skills'))).filter(file => path.relative(path.join(base, 'skills'), file).startsWith('wow-'));

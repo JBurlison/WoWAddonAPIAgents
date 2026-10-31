@@ -7,13 +7,15 @@ After relocating maintained sources to root-level `skills/`, `agents/`, `instruc
 | Check | Result |
 |---|---|
 | Deterministic package and manifest/link checks | Passed; 35 packaged skills with all references inside the package. |
-| Node tests | 20 tests passed: target selection, per-client evidence decisions, source fingerprints/diffs, errors, isolated package references, generation drift, and compiled publication/model guards. |
+| Node tests | 29 tests passed: target selection, per-client evidence decisions, source fingerprints/diffs, errors, isolated package references, generation drift, compiled publication/model guards, version policy, safe PR edits, and release recovery. |
 | Live upstream comparison | Resolved live/forever/classic and reported no relevant changes against the initialized snapshots. |
 | gh-aw v1.0.1 | Workflow compiled; generated YAML uses Copilot Sonnet for agent and detection with personal Copilot authentication and SHA-pinned actions/container images. |
 | Codex CLI 0.166.0-alpha.5.1 | Isolated local marketplace registration, discovery, and plugin installation passed. |
 | Claude Code 2.1.316 | Manifest validation and isolated installation passed; component inventory reports 35 skills and one agent. |
 | Copilot CLI 1.0.105 | Isolated marketplace registration, browse, install, and enabled-plugin listing passed; 35 skills installed. |
 | Existing Copilot checkout | Agent path/frontmatter, shared behavior and relative references validated statically. |
+| Release automation | Version 1.0.1 is synchronized across all eight versioned JSON files. PR/release API calls are tested with fixtures, including forks, racing heads, unchanged packages, retries, upload failures, and immutable tags. |
+| Workflow syntax | actionlint v1.7.12 passed for validation, PR versioning, and release workflows; the agentic workflow passed its pinned compiler. |
 
 The machine's older Copilot CLI 0.0.362 does not expose plugin commands; a separate temporary 1.0.105 installation was used without upgrading the user's global CLI. Claude was also installed in a temporary tools directory. Host configuration tests used isolated profiles; the user's normal profiles were not changed. Codex reported a harmless refusal to create PATH helper aliases beneath the temporary profile, but plugin operations succeeded.
 
