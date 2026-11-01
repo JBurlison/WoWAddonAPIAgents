@@ -1,5 +1,13 @@
 # Validation record
 
+## 2.2.0 visual fidelity and connected-client testing
+
+Validated on Windows, 2026-11-01. Package build/check verified **280 generated outputs** and all **35 skills**, manifests, reference ledgers and links. All **42 Node tests** passed, the five changed skill entry points passed skill-creator validation, and version policy confirmed **2.1.0 → 2.2.0**.
+
+Witchcraft documentation and tool implementation were reviewed at commit `9027fcfedba8b5b9fa60892ca9adbec121628793`. The new guide separates its context/error tools from native computer-use interaction and visual evidence, including freshness and target-build limits. Relevant texture/frame/button operations were checked against the packaged Forever source schemas; this does not verify media conversion or actual rendering.
+
+Independent read-only review exercised the documented decisions for custom artwork versus stock skins, functional controls versus flat images, comparable screenshots, unavailable assets/renderers/tools, and stale MCP observations. It identified ambiguous media-path wording, corrected to an explicit game asset path. This was a document/behavior walkthrough, not a live host/model evaluation. No Witchcraft installation, MCP registration, daemon launch, live game interaction, addon screenshot comparison or new asset-pipeline test was performed. Those results remain not run until an actual addon/client test session is available.
+
 ## 2.1.0 UI workflow update
 
 Validated on Windows, 2026-10-31. `npm run build` rebuilt 278 outputs; `npm run check` verified them, all 35 skills, manifests, reference ledgers and local links. All **42 Node tests** passed. The five changed skill entry points passed skill-creator validation, and version policy confirmed **2.0.0 → 2.1.0**.

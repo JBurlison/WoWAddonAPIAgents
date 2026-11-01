@@ -17,6 +17,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 For visible UI changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
 
+Use [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md) to preserve accepted artwork, layout and styling with verified templates/custom media, and compare the actual render rather than assuming a native template matches.
+
 Trace the owning Blizzard addon and its TOC/XML includes to the selected game type before using a mixin, pool, helper, or global. Verify load-on-demand dependencies and method signatures.
 
 Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.

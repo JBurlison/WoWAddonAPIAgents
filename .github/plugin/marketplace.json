@@ -9,7 +9,7 @@
       "name": "wow-addon-dev",
       "source": "./plugins/wow-addon-dev",
       "description": "Build and maintain addons for Retail, Forever, and Classic progression with version-aware API research and shared Lua code.",
-      "version": "2.1.0"
+      "version": "2.2.0"
     }
   ]
 }
