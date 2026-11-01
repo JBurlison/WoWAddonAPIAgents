@@ -106,15 +106,18 @@ steps:
     run: npm ci --ignore-scripts
 pre-agent-steps:
   - name: Check upstream before inference
+    id: upstream
     env:
       GH_TOKEN: ${{ github.token }}
       COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+      GH_AW_SAFE_OUTPUTS: ${{ steps.set-runtime-paths.outputs.GH_AW_SAFE_OUTPUTS }}
     run: node scripts/check-upstream.mjs --automation
 post-steps:
   - name: Validate proposed content before safe outputs
+    if: steps.upstream.outputs.review_required == 'true'
     run: |
-      git diff --exit-code "$GITHUB_SHA" -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/
-      test -z "$(git ls-files --others -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/)"
+      git diff --exit-code "$GITHUB_SHA" -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/
+      test -z "$(git ls-files --others -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/)"
       node scripts/version.mjs guard "$GITHUB_SHA"
       node scripts/version.mjs check "$GITHUB_SHA"
       node scripts/prepare-api-sources.mjs
