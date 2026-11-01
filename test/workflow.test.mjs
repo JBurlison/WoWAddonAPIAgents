@@ -70,3 +70,21 @@ test('compiled preflight writes no-op results to the same channel consumed by th
   assert.match(paths.run,/GH_AW_SAFE_OUTPUTS=.+outputs\.jsonl/);
   assert.equal(preflight['continue-on-error'],undefined);
 });
+
+test('unchanged pre-activation decisions skip activation, inference and detection',async()=>{
+  const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
+  const gate=compiled.jobs.pre_activation;
+  const decision=gate.steps.find(step=>step.id==='upstream');
+  assert.equal(decision.run,'node scripts/check-upstream.mjs --gate');
+  assert.equal(decision['continue-on-error'],undefined);
+  assert.equal(decision.env.GH_AW_SAFE_OUTPUTS,undefined);
+  assert.equal(gate.outputs.review_required,'${{ steps.upstream.outputs.review_required }}');
+  assert.deepEqual(gate.permissions,{contents:'read','pull-requests':'read'});
+  assert.equal(compiled.jobs.activation.needs,'pre_activation');
+  assert.equal(compiled.jobs.activation.if,"needs.pre_activation.outputs.activated == 'true' && (needs.pre_activation.outputs.review_required == 'true')");
+  assert.equal(compiled.jobs.agent.needs,'activation');
+  assert.ok(!/always\(\)|!cancelled\(\)/.test(compiled.jobs.agent.if));
+  assert.equal(compiled.jobs.detection.if,"always() && needs.agent.result != 'skipped'");
+  assert.match(compiled.jobs.safe_outputs.if,/needs\.agent\.result == 'success'/);
+  assert.match(compiled.jobs.safe_outputs.if,/needs\.detection\.result == 'success'/);
+});

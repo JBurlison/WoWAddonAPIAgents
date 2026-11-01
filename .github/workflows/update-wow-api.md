@@ -4,6 +4,23 @@ on:
   schedule:
     - cron: '17 9 * * *'
   workflow_dispatch:
+  permissions:
+    contents: read
+    pull-requests: read
+  steps:
+    - uses: actions/checkout@v7.0.1
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@v7.1.0
+      with:
+        node-version: '22'
+    - name: Decide whether an API review is needed
+      id: upstream
+      env:
+        GH_TOKEN: ${{ github.token }}
+        COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+      run: node scripts/check-upstream.mjs --gate
+if: needs.pre_activation.outputs.review_required == 'true'
 permissions:
   contents: read
   pull-requests: read
@@ -15,6 +32,9 @@ concurrency:
   group: wow-api-upstream-update
   cancel-in-progress: false
 jobs:
+  pre-activation:
+    outputs:
+      review_required: ${{ steps.upstream.outputs.review_required }}
   safe_outputs:
     if: needs.agent.result == 'success'
 network:

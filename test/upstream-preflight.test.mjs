@@ -161,3 +161,59 @@ test('manual unchanged checks do not require or write GitHub Actions output file
   assert.equal(await readIfPresent(f.env.GITHUB_OUTPUT), '');
   assert.equal(await readIfPresent(f.env.GH_AW_SAFE_OUTPUTS), '');
 });
+
+test('gate-only unchanged and pending-PR decisions do not need or emit safe outputs', async t => {
+  for (const scenario of ['unchanged', 'pending-review']) {
+    await t.test(scenario, async t => {
+      const f = await fixture(t);
+      const safeOutput = f.env.GH_AW_SAFE_OUTPUTS;
+      delete f.env.GH_AW_SAFE_OUTPUTS;
+      const logged = [];
+      const api = scenario === 'pending-review' ? client({ pulls: [[pr('[wow-api-update] current proposal')]] }) : client();
+      const result = await checkUpstream({ ...f, automation: true, gateOnly: true, client: api, log: message => logged.push(message) });
+      assert.deepEqual(result, { status: scenario, reviewRequired: false });
+      assert.equal(await fs.readFile(f.env.GITHUB_OUTPUT, 'utf8'), 'review_required=false\n');
+      assert.equal(await readIfPresent(safeOutput), '');
+      assert.equal(logged.length, 1);
+      await assert.rejects(fs.access(f.reportPath), { code: 'ENOENT' });
+      if (scenario === 'pending-review') assert.equal(api.calls.length, 1);
+    });
+  }
+});
+
+test('gate-only changes write a candidate report and enable review without safe outputs', async t => {
+  const f = await fixture(t);
+  const safeOutput = f.env.GH_AW_SAFE_OUTPUTS;
+  delete f.env.GH_AW_SAFE_OUTPUTS;
+  const result = await checkUpstream({ ...f, automation: true, gateOnly: true, client: client({ changed: true }) });
+  assert.deepEqual(result, { status: 'review', reviewRequired: true, reportPath: f.reportPath });
+  const report = JSON.parse(await fs.readFile(f.reportPath, 'utf8'));
+  assert.equal(report.updates.length, 3);
+  assert.ok(report.updates.every(update => update.candidate.commit === changedCommit));
+  assert.equal(await fs.readFile(f.env.GITHUB_OUTPUT, 'utf8'), 'review_required=true\n');
+  assert.equal(await readIfPresent(safeOutput), '');
+});
+
+test('gate-only network and credential failures cannot enable review', async t => {
+  for (const scenario of ['network', 'credentials']) {
+    await t.test(scenario, async t => {
+      const f = await fixture(t);
+      const safeOutput = f.env.GH_AW_SAFE_OUTPUTS;
+      delete f.env.GH_AW_SAFE_OUTPUTS;
+      if (scenario === 'credentials') delete f.env.COPILOT_GITHUB_TOKEN;
+      const api = scenario === 'network' ? client({ failure: new Error('HTTP 503') }) : client({ changed: true });
+      await assert.rejects(checkUpstream({ ...f, automation: true, gateOnly: true, client: api }), scenario === 'network' ? /HTTP 503/ : /missing-credentials/);
+      assert.equal(await readIfPresent(f.env.GITHUB_OUTPUT), '');
+      assert.equal(await readIfPresent(safeOutput), '');
+      await assert.rejects(fs.access(f.reportPath), { code: 'ENOENT' });
+    });
+  }
+});
+
+test('gate-only API usage requires automation mode', async t => {
+  const f = await fixture(t);
+  const api = client();
+  await assert.rejects(checkUpstream({ ...f, gateOnly: true, client: api }), /gateOnly requires automation mode/);
+  assert.equal(api.calls.length, 0);
+  assert.equal(await readIfPresent(f.env.GITHUB_OUTPUT), '');
+});

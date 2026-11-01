@@ -6,11 +6,13 @@ import { root, readJSON, write, json } from './lib.mjs';
 
 export async function checkUpstream({
   automation = false,
+  gateOnly = false,
   env = process.env,
   client = createClient({ token: env.GH_TOKEN || env.GITHUB_TOKEN || '' }),
   workspace = root,
   log = console.log,
 } = {}) {
+  if (gateOnly && !automation) throw new Error('gateOnly requires automation mode');
   const reportPath = path.join(workspace, '.cache/upstream-report.json');
   await fs.rm(reportPath, { force: true });
   if (automation && !env.GITHUB_OUTPUT) throw new Error('GITHUB_OUTPUT is missing');
@@ -18,7 +20,7 @@ export async function checkUpstream({
     if (automation) await fs.appendFile(env.GITHUB_OUTPUT, `review_required=${required}\n`);
   }
   async function noop(reason, status) {
-    if (automation) {
+    if (automation && !gateOnly) {
       if (!env.GH_AW_SAFE_OUTPUTS) throw new Error('GH_AW_SAFE_OUTPUTS is missing');
       await fs.mkdir(path.dirname(env.GH_AW_SAFE_OUTPUTS), { recursive: true });
       await fs.appendFile(env.GH_AW_SAFE_OUTPUTS, JSON.stringify({ type: 'noop', message: reason }) + '\n');
@@ -50,5 +52,6 @@ export async function checkUpstream({
   return { status, reviewRequired: true, reportPath };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  checkUpstream({ automation: process.argv.includes('--automation') }).catch(error => { console.error(error.message); process.exitCode = 1; });
+  const gateOnly = process.argv.includes('--gate');
+  checkUpstream({ automation: gateOnly || process.argv.includes('--automation'), gateOnly }).catch(error => { console.error(error.message); process.exitCode = 1; });
 }
