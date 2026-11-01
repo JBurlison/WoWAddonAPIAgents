@@ -4,6 +4,23 @@ on:
   schedule:
     - cron: '17 9 * * *'
   workflow_dispatch:
+  permissions:
+    contents: read
+    pull-requests: read
+  steps:
+    - uses: actions/checkout@v7.0.1
+      with:
+        persist-credentials: false
+    - uses: actions/setup-node@v7.1.0
+      with:
+        node-version: '22'
+    - name: Decide whether an API review is needed
+      id: upstream
+      env:
+        GH_TOKEN: ${{ github.token }}
+        COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+      run: node scripts/check-upstream.mjs --gate
+if: needs.pre_activation.outputs.review_required == 'true'
 permissions:
   contents: read
   pull-requests: read
@@ -15,6 +32,9 @@ concurrency:
   group: wow-api-upstream-update
   cancel-in-progress: false
 jobs:
+  pre-activation:
+    outputs:
+      review_required: ${{ steps.upstream.outputs.review_required }}
   safe_outputs:
     if: needs.agent.result == 'success'
 network:
@@ -106,15 +126,18 @@ steps:
     run: npm ci --ignore-scripts
 pre-agent-steps:
   - name: Check upstream before inference
+    id: upstream
     env:
       GH_TOKEN: ${{ github.token }}
       COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+      GH_AW_SAFE_OUTPUTS: ${{ steps.set-runtime-paths.outputs.GH_AW_SAFE_OUTPUTS }}
     run: node scripts/check-upstream.mjs --automation
 post-steps:
   - name: Validate proposed content before safe outputs
+    if: steps.upstream.outputs.review_required == 'true'
     run: |
-      git diff --exit-code "$GITHUB_SHA" -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/
-      test -z "$(git ls-files --others -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/)"
+      git diff --exit-code "$GITHUB_SHA" -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/
+      test -z "$(git ls-files --others -- scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/)"
       node scripts/version.mjs guard "$GITHUB_SHA"
       node scripts/version.mjs check "$GITHUB_SHA"
       node scripts/prepare-api-sources.mjs

@@ -11,8 +11,9 @@ test('compiled publication requires agent success, including post-agent validati
   assert.match(compiled.jobs.safe_outputs.if,/needs\.agent\.result == 'success'/);
   const validation=compiled.jobs.agent.steps.find(step=>step.name==='Validate proposed content before safe outputs');
   assert.ok(validation); assert.equal(validation['continue-on-error'],undefined);
+  assert.equal(validation.if,"steps.upstream.outputs.review_required == 'true'");
   assert.match(validation.run,/npm run check/); assert.match(validation.run,/npm test/);
-  const trustedPaths='scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/';
+  const trustedPaths='scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/';
   assert.ok(validation.run.includes('git diff --exit-code "$GITHUB_SHA" -- '+trustedPaths));
   assert.ok(validation.run.includes('test -z "$(git ls-files --others -- '+trustedPaths+')"'));
   assert.match(validation.run,/node scripts\/prepare-api-sources\.mjs/);
@@ -53,4 +54,37 @@ test('compiled updater uses Copilot Sonnet and personal Copilot credentials with
   assert.equal(compiled.jobs.agent.permissions['copilot-requests'],undefined);
   const preflight=steps.find(step=>step.name==='Check upstream before inference');
   assert.equal(preflight.env.COPILOT_GITHUB_TOKEN,'${{ secrets.COPILOT_GITHUB_TOKEN }}');
+});
+
+test('compiled preflight writes no-op results to the same channel consumed by the harness',async()=>{
+  const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
+  const steps=compiled.jobs.agent.steps;
+  const preflight=steps.find(step=>step.id==='upstream');
+  const paths=steps.find(step=>step.id==='set-runtime-paths');
+  const inference=steps.find(step=>step.env?.COPILOT_MODEL);
+  assert.ok(preflight); assert.ok(paths); assert.ok(inference);
+  assert.ok(steps.indexOf(paths)<steps.indexOf(preflight));
+  assert.ok(steps.indexOf(preflight)<steps.indexOf(inference));
+  assert.equal(preflight.env.GH_AW_SAFE_OUTPUTS,'${{ steps.set-runtime-paths.outputs.GH_AW_SAFE_OUTPUTS }}');
+  assert.equal(preflight.env.GH_AW_SAFE_OUTPUTS,inference.env.GH_AW_SAFE_OUTPUTS);
+  assert.match(paths.run,/GH_AW_SAFE_OUTPUTS=.+outputs\.jsonl/);
+  assert.equal(preflight['continue-on-error'],undefined);
+});
+
+test('unchanged pre-activation decisions skip activation, inference and detection',async()=>{
+  const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
+  const gate=compiled.jobs.pre_activation;
+  const decision=gate.steps.find(step=>step.id==='upstream');
+  assert.equal(decision.run,'node scripts/check-upstream.mjs --gate');
+  assert.equal(decision['continue-on-error'],undefined);
+  assert.equal(decision.env.GH_AW_SAFE_OUTPUTS,undefined);
+  assert.equal(gate.outputs.review_required,'${{ steps.upstream.outputs.review_required }}');
+  assert.deepEqual(gate.permissions,{contents:'read','pull-requests':'read'});
+  assert.equal(compiled.jobs.activation.needs,'pre_activation');
+  assert.equal(compiled.jobs.activation.if,"needs.pre_activation.outputs.activated == 'true' && (needs.pre_activation.outputs.review_required == 'true')");
+  assert.equal(compiled.jobs.agent.needs,'activation');
+  assert.ok(!/always\(\)|!cancelled\(\)/.test(compiled.jobs.agent.if));
+  assert.equal(compiled.jobs.detection.if,"always() && needs.agent.result != 'skipped'");
+  assert.match(compiled.jobs.safe_outputs.if,/needs\.agent\.result == 'success'/);
+  assert.match(compiled.jobs.safe_outputs.if,/needs\.detection\.result == 'success'/);
 });
