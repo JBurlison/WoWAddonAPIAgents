@@ -13,6 +13,8 @@ Classic Era, Anniversary, PTR, beta, and private servers are outside this releas
 
 Version **2.1.0** adds a [UI design and testing workflow](skills/wow-addon-development/references/UI-DESIGN-AND-TESTING.md): ask whether the user wants a mock-up before UI implementation, respect an existing choice, and use [UIForever](https://uiforever.com/) for supported simulator checks. Simulator availability and reported build are checked separately from real-client acceptance; a simulator pass does not certify addon compatibility.
 
+Version **2.2.0** adds [visual-fidelity guardrails](skills/wow-addon-development/references/VISUAL-FIDELITY.md): preserve the accepted artwork and layout, combine custom textures with functional native controls where needed, and compare actual rendered screenshots before declaring a match. [Connected client testing](skills/wow-addon-development/references/CONNECTED-CLIENT-TESTING.md) supports optional [Witchcraft](https://github.com/Geraldlol/witchcraft) MCP context/error reads and computer use on capable hosts, with fresh evidence and explicit fallback paths.
+
 ## Install
 
 Marketplace: `wow-addon-api-agents`. Plugin: `wow-addon-dev`. Packages are committed; consumers do not need Node.js or a build step.

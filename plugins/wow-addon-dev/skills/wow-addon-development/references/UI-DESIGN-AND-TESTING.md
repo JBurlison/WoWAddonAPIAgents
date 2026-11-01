@@ -10,6 +10,12 @@ For "Mock-up first", establish the intended task, target clients, screen size/UI
 
 For "Implement directly", continue implementation without inserting another design approval step. Independent source research can proceed while a mock-up choice or design feedback is pending. A non-UI fix does not need this question.
 
+## Carry the design through implementation
+
+Use [visual fidelity](VISUAL-FIDELITY.md) to turn the accepted mock-up into an asset/layout plan and compare it with actual rendered screenshots. Custom artwork behind native interactive controls is an appropriate technique when stock visuals do not match. A native-only approximation, a flat mock-up image with no working controls, or a clean Lua-error panel is not sufficient visual acceptance. Compare a representative panel early, fix material mismatches, and retain both the baseline and implementation evidence.
+
+For a real-client test session, use [Witchcraft MCP and computer use](CONNECTED-CLIENT-TESTING.md) when those capabilities are available. MCP context/error reads, simulator screenshots and computer-use observations answer different questions; keep their results separate.
+
 ## Check the simulator's actual target
 
 Availability observed on **2026-10-31** on the [official homepage](https://uiforever.com/#flavors-title):
@@ -32,7 +38,7 @@ Use a supported desktop browser. Record the `Developer` panel's build/interface 
 4. Exercise relevant `Solo`, `Dungeon` and `Raid` states, plus target/focus and character/class changes where the UI depends on them. The `JSON` scenario menu can preserve a reproducible fixture. Simulated combat is useful for display transitions but does not certify secure execution or protected operations.
 5. Inspect `Errors`, `Missing APIs` and `Lua Console`; capture the first useful stack trace and reproduction steps. `Missing APIs` identifies simulator gaps, potentially returning stub defaults. Check the pinned WoW contract before changing addon code; a missing emulator implementation is not proof the game API is missing. Do not add production shims merely to silence the simulator.
 6. Use `/reload` to check the simulated initialization/settings lifecycle, then repeat the relevant visual states. `Developer` reports load/memory/object data, including estimates; treat these as simulator diagnostics, not measured game performance.
-7. Save representative screenshots, fixture identity, errors and pass/fail/not-run results in the addon project's test notes. Follow with real-client tests for every selected target, including actual persistence, event timing, dependencies, combat lockdown, taint and restricted values.
+7. Save representative screenshots and compare them with the accepted mock-up using the visual-fidelity guide. Record fixture identity, mismatches, errors and pass/fail/not-run results in the addon project's test notes. Follow with real-client tests for every selected target, including actual persistence, event timing, dependencies, combat lockdown, taint and restricted values.
 
 If browser automation is unavailable, provide these steps and mark execution not run. Do not invent a UIForever CLI, public test API or CI integration. If startup fails, record the visible error and use static/in-game checks; do not bypass browser security controls or claim the addon failed from an emulator startup error.
 

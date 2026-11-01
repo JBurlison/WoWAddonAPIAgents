@@ -24,6 +24,16 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 | Retail/Classic flavor unavailable in UIForever | Mark simulator testing not run; do not substitute a Forever pass or call the addon unsupported. |
 | Missing API reported by simulator | Check the pinned client contract; distinguish an emulator gap/stub from an addon bug and avoid production compatibility shims just for the emulator. |
 | Browser testing tools unavailable | Provide reproducible simulator steps and mark execution not run; do not claim a visual pass. |
+| Ornate accepted mock-up, default controls are easier | Plan/create the needed custom artwork and retain native interaction; do not silently substitute stock skins. |
+| Native-only implementation works but looks different | Keep visual acceptance open, compare actual screenshots and fix material differences; functionality is not visual fidelity. |
+| Whole mock-up painted into one texture | Keep dynamic text and controls live; a flat image with broken hit regions or no interaction fails acceptance. |
+| Screenshots differ in scale/state or contain moving scenery | Normalize the documented capture conditions/crop; preserve originals and explicit exclusions without distorting the UI to force a match. |
+| Approved asset/effect unavailable | State the concrete limitation and proposed visual alternative; do not silently redefine the design. |
+| No rendered screenshot can be obtained | Report visual comparison not run, provide capture steps and do not claim the implementation matches. |
+| Witchcraft exposes context/errors but no click/screenshot tools | Use only discovered tools for fresh context/error evidence; use separate computer-use capabilities or user reproduction for UI interaction and screenshots. |
+| Error read returns stale/pre-action data | Correlate session/revision/timestamps/repeat counts; bounded follow-up or inconclusive result, never a false pass. |
+| Computer use available, Witchcraft absent | Perform authorized visual UI checks with fresh window evidence; report MCP checks not run without requiring installation. |
+| Witchcraft setup not requested | Use an existing authorized connection if available; do not install helpers, calibrate capture, change sharing or resume sessions just to facilitate a UI test. |
 
 Verify installed references without the source repository nearby. Invoke the workflow skill in Codex, the namespaced skill and agent in Claude, and the agent in Copilot. Verify checkout use in VS Code still discovers the existing agent path.
 

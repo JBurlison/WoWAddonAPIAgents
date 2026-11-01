@@ -1,6 +1,6 @@
 ---
 name: wow-addon-development
-description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for addon architecture, optional UI mock-ups, UIForever simulator testing, Lua/XML/TOC implementation, compatibility, API selection, and release validation.
+description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for addon architecture, UI mock-ups and visual fidelity, UIForever testing, optional Witchcraft MCP and computer-use checks, Lua/XML/TOC implementation, compatibility, and release validation.
 ---
 
 # WoW addon development
@@ -16,6 +16,12 @@ description: Design, build, debug, port, and package World of Warcraft addons fo
 When the task creates or changes a visible addon UI, ask once before implementing it: **"Would you like a UI mock-up before I start implementation, or should I implement it directly?"** Offer "Mock-up first" and "Implement directly". Honor an existing answer, an explicit mock-up request, or an already accepted design without asking again. This question is not needed for work with no UI change.
 
 Wait for the choice before writing the production UI; continue independent API research and project inspection while waiting. If a mock-up is requested, show a concrete layout with representative states and collect feedback before implementing that design. If declined, proceed directly. Use [UI design and simulator testing](references/UI-DESIGN-AND-TESTING.md) for the mock-up handoff and UIForever workflow. A simulator prototype is optional; a static mock-up is valid when interactive tools or the target flavor are unavailable.
+
+## Preserve the accepted appearance
+
+Visually inspect the accepted mock-up and follow [visual fidelity](references/VISUAL-FIDELITY.md): record its layout and asset plan, choose rendering techniques that reproduce it, and compare actual implementation screenshots against it. Use custom artwork with native text/input/hit regions when the design requires it; do not silently replace the artwork or styling with stock controls and built-in textures. Native controls must remain functional and respect target-specific security rules.
+
+Compare a representative panel early, fix material differences, and repeat before claiming visual completion. Working controls and no Lua errors are not a visual pass. If capture or rendering is unavailable, report the visual comparison as not run; if the design cannot be reproduced, surface the concrete limitation and proposed alternative instead of redefining the accepted mock-up.
 
 ## Research only the needed systems
 
@@ -37,3 +43,5 @@ Never fabricate a signature, silently substitute a Retail API into Forever/Class
 ## Verify and deliver
 
 Run relevant static checks and inspect each target's packaged TOC/file list. For UI changes, use [UIForever simulator testing](references/UI-DESIGN-AND-TESTING.md) when the selected flavor and browser tools are available; record unsupported or unavailable simulator checks as not run. Use [client validation](references/CLIENT-VALIDATION.md) for in-game acceptance. For fresh API captures, disputed availability or event probes, use [runtime validation](references/RUNTIME-VALIDATION.md) and keep source, presence, registration and operation results separate. Report selected targets, source commits, compatibility choices, mock-up choice, checks performed, unsupported features, and checks requiring a game client. Static checks and simulator passes do not prove in-game compatibility.
+
+Use [connected client testing](references/CONNECTED-CLIENT-TESTING.md) when the agent actually has Witchcraft MCP or computer-use capabilities. Witchcraft supplies game context/errors; computer use can inspect and exercise the relevant UI in an authorized client session. Discover available tools, honor existing setup authorization, and keep context freshness, screenshots, interaction results and per-client acceptance separate. Neither capability is mandatory for hosts that lack it; provide reproducible steps and explicit not-run results instead of inventing tool access or success.

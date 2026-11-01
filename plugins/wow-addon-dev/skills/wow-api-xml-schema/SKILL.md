@@ -22,6 +22,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 For visible UI changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
 
+Use [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md) for custom artwork, native controls, layering and comparison with the accepted mock-up. A schema-valid template does not establish that its appearance matches the design.
+
 Verify the selected branch XML schema, templates, includes, script handlers and client load conditions. A valid XML element in Retail may not be available in another client.
 
 Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.

@@ -14,6 +14,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 For visible settings-panel changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
 
+Follow [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md) when an accepted panel design exists. Preserve its appearance while keeping real settings controls functional; verify the rendered result instead of substituting a default settings layout silently.
+
 Verify loaded Settings panel registration APIs, CVars and their permitted scopes, and client/build detection. If an integration is unavailable, use a verified custom configuration UI rather than guessing a legacy replacement.
 
 Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.
