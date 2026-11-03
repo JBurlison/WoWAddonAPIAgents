@@ -16021,7 +16021,7 @@
   "artifacts": [
     {
       "path": "wow-api-index/references/generated/symbols.json",
-      "sha256": "5bcd62133b525198cc161b3014363f43b6db386fa7845eb8969ff1533d0cf66e"
+      "sha256": "a978d985ddd1baed92bbc14c1f3adce1884ded69a1f65dd374e516aeeae518ac"
     },
     {
       "path": "wow-addon-structure/references/generated/README.md",
@@ -16166,6 +16166,6 @@
   ],
   "symbolIndex": {
     "path": "wow-api-index/references/generated/symbols.json",
-    "sha256": "5bcd62133b525198cc161b3014363f43b6db386fa7845eb8969ff1533d0cf66e"
+    "sha256": "a978d985ddd1baed92bbc14c1f3adce1884ded69a1f65dd374e516aeeae518ac"
   }
 }

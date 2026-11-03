@@ -3,9 +3,31 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { extractReferenceRecords } from '../scripts/reference-data.mjs';
-import { validateReferences, root } from '../scripts/generate-api-references.mjs';
+import { validateReferences, serializeSymbolIndex, root } from '../scripts/generate-api-references.mjs';
 import { queryReferences } from '../skills/wow-api-index/scripts/query.mjs';
+
+test('one changed symbol produces a small patch without changing the index schema',async()=>{
+  const index=JSON.parse(await fs.readFile(path.join(root,'skills/wow-api-index/references/generated/symbols.json'),'utf8'));
+  const before=serializeSymbolIndex(index);
+  assert.deepEqual(JSON.parse(before),index);
+  const changed=structuredClone(index);
+  changed.targets.forever[Math.floor(changed.targets.forever.length/2)][0]+='_PATCH_SIZE_REGRESSION';
+  const after=serializeSymbolIndex(changed);
+  assert.deepEqual(JSON.parse(after),changed);
+  const temp=await fs.mkdtemp(path.join(os.tmpdir(),'wow-symbol-diff-test-'));
+  try {
+    const oldFile=path.join(temp,'before.json'), newFile=path.join(temp,'after.json');
+    await fs.writeFile(oldFile,before); await fs.writeFile(newFile,after);
+    const diff=spawnSync('git',['diff','--no-index','--no-ext-diff','--no-textconv','--',oldFile,newFile],{encoding:'utf8',maxBuffer:16*1024*1024});
+    assert.equal(diff.status,1,diff.error?.message || diff.stderr);
+    assert.ok(Buffer.byteLength(diff.stdout)<4096,'A single export change must not replace the entire multi-megabyte symbol index');
+  } finally {
+    if(path.dirname(path.resolve(temp))!==path.resolve(os.tmpdir()) || !path.basename(temp).startsWith('wow-symbol-diff-test-')) throw new Error('Unsafe temporary cleanup path');
+    await fs.rm(temp,{recursive:true,force:true});
+  }
+});
 
 test('complete schemas retain nested secrecy, optional/default fields, enums, callbacks and predicates',()=>{
   const source=`local X={Name="X",Type="System",Namespace="C_X",Environment="All",

@@ -3,6 +3,34 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import YAML from 'yaml';
 import { root, frontmatter } from '../scripts/lib.mjs';
+import { versionFiles } from '../scripts/version.mjs';
+
+test('publication budgets fit complete generated snapshots and reach the compiled handlers',async()=>{
+  const source=YAML.parse(frontmatter(await fs.readFile(root+'.github/workflows/update-wow-api.md','utf8')).yaml);
+  const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
+  const manifest=JSON.parse(await fs.readFile(root+'skills/wow-api-index/references/generated/manifest.json','utf8'));
+  const references=new Set([...manifest.chunks,...manifest.artifacts].map(entry=>entry.path));
+  references.add('wow-api-index/references/generated/manifest.json');
+  references.add('wow-client-targets/references/targets.json');
+  references.add('wow-client-targets/references/SOURCE-EVIDENCE.md');
+  const files=new Set([...versionFiles,'config/api-owners.json']);
+  for(const file of references) {
+    files.add('skills/'+file); files.add('plugins/wow-addon-dev/skills/'+file);
+  }
+  const policy=source['safe-outputs']['create-pull-request'];
+  // Reserve room for 16 handwritten guides and their packaged copies.
+  assert.ok(Number.isInteger(policy['max-patch-files']) && policy['max-patch-files']>=files.size+32,
+    `A complete refresh and guide updates need at least ${files.size+32} output paths`);
+  assert.ok(policy['max-patch-size']>0 && policy['max-patch-size']<=10240);
+  const configs=Object.values(compiled.jobs).flatMap(job=>job.steps||[])
+    .filter(step=>step.env?.GH_AW_SAFE_OUTPUTS_CONFIG)
+    .map(step=>JSON.parse(step.env.GH_AW_SAFE_OUTPUTS_CONFIG).create_pull_request);
+  assert.ok(configs.length>0);
+  for(const config of configs) {
+    assert.equal(config.max_patch_files,policy['max-patch-files']);
+    assert.equal(config.max_patch_size,policy['max-patch-size']);
+  }
+});
 
 test('compiled publication requires agent success, including post-agent validation',async()=>{
   const source=YAML.parse(frontmatter(await fs.readFile(root+'.github/workflows/update-wow-api.md','utf8')).yaml);

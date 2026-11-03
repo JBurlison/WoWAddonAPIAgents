@@ -16,6 +16,13 @@ const sourceURL = (commit, file, line) => `https://github.com/Gethe/wow-ui-sourc
 const evidence = { declaration: 'source-declared', loadConditions: 'unknown', runtime: 'unknown', addonAccess: 'unknown' };
 const skillsPrefix = relative => relative.replace(/^skills\//, '');
 
+// Keep one tuple per line so a changed export does not replace the entire index.
+export function serializeSymbolIndex({ targets, ...metadata }) {
+  const entries = Object.entries(targets).map(([target, rows]) =>
+    JSON.stringify(target) + ':[\n' + rows.map(row => JSON.stringify(row)).join(',\n') + '\n]');
+  return JSON.stringify(metadata).slice(0, -1) + ',"targets":{\n' + entries.join(',\n') + '\n}}\n';
+}
+
 async function filesUnder(dir) {
   const result = [];
   for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
@@ -104,7 +111,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
     for (const key of Object.keys(entries)) if (!used.has(key)) throw new Error(`Stale ${kind} ownership row: ${key}`);
   }
   manifest.groups = Object.fromEntries(Object.entries(manifest.groups).sort(([a], [b]) => compare(a, b)));
-  const indexContent = JSON.stringify(index) + '\n';
+  const indexContent = serializeSymbolIndex(index);
   outputs.set(`${indexDir}/symbols.json`, indexContent);
   manifest.symbolIndex = { path: skillsPrefix(`${indexDir}/symbols.json`), sha256: hash(indexContent) };
   for (const owner of [...new Set(manifest.chunks.map(c => c.owner))].sort(compare)) {
