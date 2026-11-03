@@ -17,6 +17,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+
 Verify Lua extensions, taint, secure execution, secret-value access and protected operations for the selected build. Never transfer a blanket Retail prohibition or permission to another client.
 
 Start security work with [reviewed access contracts](references/CURRENT-CONTRACTS.md). They separate variable taint, value access and protected operations, correct the historical `issecurevariable` boolean example, and identify evidence still requiring a client probe.

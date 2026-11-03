@@ -18,6 +18,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+
 Verify C_Spell/C_SpellBook signatures, SpellInfo table shapes, spell overrides, bank enums, cooldown representation, and secret-value restrictions. Isolate actual differences in adapters.
 
 For duration objects or `SPELL_UPDATE_COOLDOWN`, use [reviewed cooldown contracts](references/CURRENT-CONTRACTS.md) before historical examples. Retail/Forever declare a fifth event argument that the inspected Classic build does not.

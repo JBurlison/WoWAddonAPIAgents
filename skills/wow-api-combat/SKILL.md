@@ -15,7 +15,7 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 Verify addon access to combat logs, events, damage-meter data, threat and loss-of-control fields separately. Read security annotations and preserve opaque values. Retail 12.0 notes do not establish Forever or Classic restrictions.
 
-For damage meters or Forever swing timers, start with [reviewed contracts](references/CURRENT-CONTRACTS.md): exact functions, payloads, structures, enums, client loading and access annotations. Runtime acceptance remains separate.
+For damage meters, loss of control, crowd-control classification or Forever swing timers, start with [reviewed contracts](references/CURRENT-CONTRACTS.md): exact functions, payloads, structures, enums, client loading and access annotations. Runtime acceptance remains separate.
 
 Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.
 

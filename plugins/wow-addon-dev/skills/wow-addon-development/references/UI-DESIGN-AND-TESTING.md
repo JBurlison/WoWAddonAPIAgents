@@ -28,7 +28,7 @@ Availability observed on **2026-10-31** on the [official homepage](https://uifor
 
 Recheck the live selector before each session; availability changes. Planned Era/Anniversary flavors do not expand this marketplace's supported targets. Never substitute Forever simulation for a Retail or Classic pass.
 
-Use a supported desktop browser. Record the `Developer` panel's build/interface separately from the selected client and pinned source commit. The observed simulator reported **1.60.1.70450 / interface 16001**, while the packaged Forever source ledger is pinned to 1.60.1.70532. A shared interface number does not make those builds identical. If a build is not exposed, record it as unknown; do not alter source pins to match the emulator.
+Use a supported desktop browser. Record the `Developer` panel's build/interface separately from the selected client and pinned source commit. The observed simulator reported **1.60.1.70450 / interface 16001**, while the source ledger at that observation was pinned to 1.60.1.70532. Read the current [target registry](../../wow-client-targets/references/targets.json) for the packaged source build. A shared interface number does not make those builds identical. If a build is not exposed, record it as unknown; do not alter source pins to match the emulator.
 
 ## Run the UI checks
 

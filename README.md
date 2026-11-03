@@ -15,6 +15,8 @@ Version **2.1.0** adds a [UI design and testing workflow](skills/wow-addon-devel
 
 Version **2.2.0** adds [visual-fidelity guardrails](skills/wow-addon-development/references/VISUAL-FIDELITY.md): preserve the accepted artwork and layout, combine custom textures with functional native controls where needed, and compare actual rendered screenshots before declaring a match. [Connected client testing](skills/wow-addon-development/references/CONNECTED-CLIENT-TESTING.md) supports optional [Witchcraft](https://github.com/Geraldlol/witchcraft) MCP context/error reads and computer use on capable hosts, with fresh evidence and explicit fallback paths.
 
+Version **2.3.0** adds [persistent project planning](skills/wow-addon-development/references/PROJECT-PLANNING.md), with reusable [requirements](skills/wow-addon-development/assets/REQUIREMENTS.template.md) and [implementation matrix](skills/wow-addon-development/assets/IMPLEMENTATION-MATRIX.template.md) templates for larger changes and new addons. Stable requirement IDs, acceptance evidence and a resumption checkpoint keep long tasks grounded across agents and context resets. It also refreshes [Forever API and UI guidance to 1.60.1.70707](skills/wow-client-targets/references/FOREVER-70707-CHANGES.md) and repairs updater publication limits. See the [release validation report](docs/RELEASE-2.3.0.md).
+
 ## Install
 
 Marketplace: `wow-addon-api-agents`. Plugin: `wow-addon-dev`. Packages are committed; consumers do not need Node.js or a build step.

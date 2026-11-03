@@ -12,6 +12,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+
 For visible UI changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
 
 Preserve the accepted appearance with the [custom artwork/native-control and screenshot comparison guide](../wow-addon-development/references/VISUAL-FIDELITY.md). Functional stock widgets are not a visual substitute for a materially different mock-up; verify both appearance and interaction.
