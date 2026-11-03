@@ -1,6 +1,6 @@
 # Loaded UI helpers, callbacks and secure templates
 
-Reviewed 2026-10-31 at the commits in [target snapshots](../../wow-client-targets/references/targets.json). This is the entry point for current source-backed UI research. Historical helper lists remain useful for names; their old links are not current loading evidence. Generated native methods/types are searchable through the [API index](../../wow-api-index/SKILL.md); Lua-defined helpers and XML templates also need the source paths below.
+Reviewed 2026-10-31 at the explicit pins below. For the newer Forever 1.60.1.70707 snapshot, also read the [bag, item-button, gamepad and PvP UI changes](../../wow-client-targets/references/FOREVER-70707-CHANGES.md). The foundational sources below are unchanged in that comparison. Historical helper lists remain useful for names; their old links are not current loading evidence. Generated native methods/types are searchable through the [API index](../../wow-api-index/SKILL.md); Lua-defined helpers and XML templates also need the source paths below.
 
 ## Pin and follow the owner
 

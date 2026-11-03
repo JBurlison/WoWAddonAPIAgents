@@ -34,6 +34,13 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 | Error read returns stale/pre-action data | Correlate session/revision/timestamps/repeat counts; bounded follow-up or inconclusive result, never a false pass. |
 | Computer use available, Witchcraft absent | Perform authorized visual UI checks with fresh window evidence; report MCP checks not run without requiring installation. |
 | Witchcraft setup not requested | Use an existing authorized connection if available; do not install helpers, calibrate capture, change sharing or resume sessions just to facilitate a UI test. |
+| Long request for a new multi-system addon | Persist requirements with stable IDs and a matrix covering every requested behavior, target, dependency and acceptance check; implement bounded slices without adding an approval gate. |
+| Resume after a context reset or agent handoff | Read the project documents/checkpoint, inspect the recorded revision and current changes, reconcile completed work, and continue the next ready slice without restarting or trusting stale chat summaries. |
+| User adds a feature halfway through implementation | Add or revise the affected requirement and work rows, preserve unaffected requirements and record dependency/acceptance changes; do not silently replace the original task. |
+| Code and simulator pass but real-client checks are unavailable | Record each evidence result separately, keep required acceptance open or explicitly deferred by the user, and avoid a blanket completion/support claim. |
+| Approved UI design changes mid-project | Version the design reference and reopen affected visual acceptance rows; retain evidence for the earlier revision without calling it a pass for the new design. |
+| Two agents own dependent work | Assign explicit row/file ownership, record the dependency and let the integrating agent reconcile evidence before marking completion; do not overwrite shared planning documents concurrently. |
+| Small isolated addon bug fix | Use proportionate task notes and focused verification rather than creating unnecessary planning documents. |
 
 Verify installed references without the source repository nearby. Invoke the workflow skill in Codex, the namespaced skill and agent in Claude, and the agent in Copilot. Verify checkout use in VS Code still discovers the existing agent path.
 

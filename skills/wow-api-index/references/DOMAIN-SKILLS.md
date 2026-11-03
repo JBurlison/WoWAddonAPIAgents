@@ -8,7 +8,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-addon-structure](../../wow-addon-structure/SKILL.md) | 53 / 53 / 53 | [source schemas](../../wow-addon-structure/references/generated/README.md) |
 | [wow-api-achievements](../../wow-api-achievements/SKILL.md) | 20 / 20 / 20 | [source schemas](../../wow-api-achievements/references/generated/README.md) |
 | [wow-api-calendar-events](../../wow-api-calendar-events/SKILL.md) | 150 / 150 / 139 | [source schemas](../../wow-api-calendar-events/references/generated/README.md) |
-| [wow-api-collections](../../wow-api-collections/SKILL.md) | 205 / 218 / 167 | [source schemas](../../wow-api-collections/references/generated/README.md) |
+| [wow-api-collections](../../wow-api-collections/SKILL.md) | 205 / 220 / 167 | [source schemas](../../wow-api-collections/references/generated/README.md) |
 | [wow-api-combat](../../wow-api-combat/SKILL.md) | 317 / 322 / 306 | [source schemas](../../wow-api-combat/references/generated/README.md) |
 | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | 448 / 452 / 338 | [source schemas](../../wow-api-currency-economy/references/generated/README.md) |
 | [wow-api-encounters](../../wow-api-encounters/SKILL.md) | 348 / 350 / 274 | [source schemas](../../wow-api-encounters/references/generated/README.md) |
@@ -20,14 +20,14 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-housing](../../wow-api-housing/SKILL.md) | 701 / 701 / 625 | [source schemas](../../wow-api-housing/references/generated/README.md) |
 | [wow-api-index](../../wow-api-index/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | 672 / 688 / 440 | [source schemas](../../wow-api-items-inventory/references/generated/README.md) |
-| [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | 84 / 89 / 42 | [source schemas](../../wow-api-lua-environment/references/generated/README.md) |
+| [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | 84 / 90 / 42 | [source schemas](../../wow-api-lua-environment/references/generated/README.md) |
 | [wow-api-map-navigation](../../wow-api-map-navigation/SKILL.md) | 258 / 260 / 147 | [source schemas](../../wow-api-map-navigation/references/generated/README.md) |
 | [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | 628 / 643 / 271 | [source schemas](../../wow-api-misc-systems/references/generated/README.md) |
 | [wow-api-professions](../../wow-api-professions/SKILL.md) | 314 / 328 / 53 | [source schemas](../../wow-api-professions/references/generated/README.md) |
 | [wow-api-pvp](../../wow-api-pvp/SKILL.md) | 199 / 200 / 108 | [source schemas](../../wow-api-pvp/references/generated/README.md) |
 | [wow-api-quests](../../wow-api-quests/SKILL.md) | 319 / 325 / 152 | [source schemas](../../wow-api-quests/references/generated/README.md) |
 | [wow-api-reputation](../../wow-api-reputation/SKILL.md) | 81 / 84 / 15 | [source schemas](../../wow-api-reputation/references/generated/README.md) |
-| [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | 338 / 382 / 279 | [source schemas](../../wow-api-settings-system/references/generated/README.md) |
+| [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | 338 / 384 / 279 | [source schemas](../../wow-api-settings-system/references/generated/README.md) |
 | [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | 808 / 833 / 669 | [source schemas](../../wow-api-social-chat/references/generated/README.md) |
 | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | 342 / 363 / 269 | [source schemas](../../wow-api-spells-abilities/references/generated/README.md) |
 | [wow-api-talents](../../wow-api-talents/SKILL.md) | 261 / 278 / 140 | [source schemas](../../wow-api-talents/references/generated/README.md) |

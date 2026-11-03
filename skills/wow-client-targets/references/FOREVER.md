@@ -1,5 +1,7 @@
 # Forever build evidence
 
+For the current **1.60.1.70707** refresh, read [API and loaded-UI changes](FOREVER-70707-CHANGES.md) and [current source observations](SOURCE-EVIDENCE.md). The identity and beta-history evidence below remains explicitly dated to its reviewed build; it is not a fresh runtime capture.
+
 Reviewed 2026-10-31 against Gethe commit `ca8368f2f2380cbe696854f7f2646387c278a61b`, [version 1.60.1.70532](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/version.txt). Source-verified observations below are not in-game test results. Confirm the actual client build before applying them to a release.
 
 ## Client identity and loading

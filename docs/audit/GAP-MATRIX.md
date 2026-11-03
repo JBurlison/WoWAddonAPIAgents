@@ -4,6 +4,8 @@ Initial review: 2026-10-31 against repository commit `09d83eb6a88f0b2a62d08e63bf
 
 **2.0.0 result:** the high-priority contracts and Forever guides are filled, and all generated source declarations have packaged schemas and explicit ownership. The marketplace retains 35 skills. Source declarations, load conditions, addon permission and actual runtime acceptance remain separate evidence states.
 
+**2026-11-03 source refresh:** [Forever 1.60.1.70707 changes](../../skills/wow-client-targets/references/FOREVER-70707-CHANGES.md) supersede affected earlier observations. G06 now has 30 GameRules functions and seven events, including separate pre/post-login setters and a loaded in-game Preset panel. G02/G04 include stricter secret-value contracts; G01 includes the new pet-order and settings-header events; G14 includes changed item-button and gamepad helper contracts. Runtime acceptance remains open. The 2.0.0 table and original census below preserve their historical scope.
+
 The original review found 129 empty event headings, incorrect sampled contracts, incomplete routing and historical domain references. Those findings drove the changes below. This implementation does not certify unexecuted game-client behavior or complete wiki parity.
 
 ## Filled matrix — version 2.0.0

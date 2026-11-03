@@ -31,6 +31,8 @@ The output allowlist permits WoW Markdown knowledge, target metadata, the explic
 
 Version bumps and post-merge release publication use separate deterministic workflows and the built-in repository token; they do not consume Copilot credits. See [versions and releases](RELEASING.md).
 
+Draft update patches are bounded at **300 files and 10,240 KiB**. A complete refresh includes both maintained references and their packaged copies; the default 100-file limit rejected a validated 146-file Forever update. Symbol indexes use one tuple per line so small API changes produce small diffs instead of replacing both complete indexes. The same file allowlist, protected paths, source verification, tests, and security review still apply. If a complete update exceeds either bound, inspect its actual patch and report the limitation; do not omit generated copies or split an inconsistent snapshot across PRs to fit.
+
 While an update PR awaits review, new proposals defer. After merge the next run catches intervening upstream changes. Closing without merging allows the same changes to be proposed again; disable the workflow in Actions to pause updates.
 
 GitHub-token-authored PRs may not trigger ordinary PR workflows, so validation runs before publication. Maintainers can also dispatch **Validate toolkit** against the proposal branch. No game-client tests run in Actions.

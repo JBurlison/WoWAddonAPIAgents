@@ -1,6 +1,6 @@
 ---
 name: wow-addon-development
-description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for addon architecture, UI mock-ups and visual fidelity, UIForever testing, optional Witchcraft MCP and computer-use checks, Lua/XML/TOC implementation, compatibility, and release validation.
+description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for requirements and implementation tracking on larger addon projects, architecture, UI mock-ups and visual fidelity, UIForever testing, optional Witchcraft MCP and computer-use checks, Lua/XML/TOC implementation, compatibility, and release validation.
 ---
 
 # WoW addon development
@@ -10,6 +10,12 @@ description: Design, build, debug, port, and package World of Warcraft addons fo
 1. Read [wow-client-targets](../wow-client-targets/SKILL.md) before selecting APIs. Explicit user targets take precedence over existing configuration. Inspect TOCs, packaging configuration, and existing compatibility modules; ask if the target remains ambiguous. Do not silently default to Retail.
 2. Support `retail`, `forever`, `classic`, and `all` (exactly these three). Classic means the progression branch, not Classic Era. Requests for Era, Anniversary, PTR, beta, or private servers require a scope change, not silent substitution.
 3. Record selected targets, upstream commits, client/interface versions, feature requirements, and unresolved availability in the addon project's documentation. Keep installed plugin files read-only during ordinary addon work.
+
+## Keep larger projects anchored to written requirements
+
+For a new addon, a substantial feature, or a long request spanning multiple systems, follow [project planning and resumption](references/PROJECT-PLANNING.md). Create or update the requirements document and implementation matrix in the user's addon repository, using the packaged templates when no equivalent documents exist. Give requirements stable IDs and connect every requested behavior to implementation work and observable acceptance evidence, including target-specific and visual checks. A small isolated fix can use concise task notes instead.
+
+Work through bounded, dependency-ordered slices. Update the matrix and its checkpoint after each slice and before a handoff or context reset. On resumption, read those files and inspect the recorded revision before continuing; reconcile new user instructions without silently losing earlier requirements. Existing authorization remains valid: the documents organize work and do not create an extra approval gate. Keep unresolved required behavior visible instead of marking the whole project complete because the current slice passes.
 
 ## Ask about a UI mock-up before implementation
 

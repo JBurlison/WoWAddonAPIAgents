@@ -58,6 +58,9 @@ safe-outputs:
     max: 1
     draft: true
     fallback-as-issue: false
+    # Full client refreshes include maintained references and packaged copies.
+    max-patch-files: 300
+    max-patch-size: 10240
     allowed-files:
       - 'skills/wow-*/SKILL.md'
       - 'skills/wow-*/references/*.md'
