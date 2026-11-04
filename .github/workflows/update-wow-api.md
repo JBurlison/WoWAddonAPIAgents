@@ -50,11 +50,13 @@ tools:
     toolsets: [repos, pull_requests]
 safe-outputs:
   threat-detection:
+    continue-on-error: false
     engine:
       id: copilot
       model: sonnet
   create-pull-request:
     title-prefix: '[wow-api-update] '
+    base-branch: ${{ github.ref_name }}
     max: 1
     draft: true
     fallback-as-issue: false
@@ -260,6 +262,12 @@ Before calling the safe-output tool, run `npm run build`,
 `node scripts/version.mjs ensure`, `npm run check`, and `npm test`, in that order.
 The version script increments the patch once relative to the original checkout.
 Include those version edits in the submitted patch; post-steps do not modify it.
+Work on a named local proposal branch created at `GITHUB_SHA`. Keep all changes
+uncommitted until validation passes. Stage only the complete reviewed update, then
+run `node scripts/commit-api-update.mjs` from the repository root. It commits that
+tree in batches sized for GitHub's signed-commit API. Submit this same local branch
+to the safe-output tool and keep its commits intact so the publisher can sign each
+batch. The draft targets the branch on which this workflow was run.
 Never hand-edit generated files. Do not create a PR on failure or if an update PR is already open. Do not
 merge PRs, publish releases, or switch models. If time is insufficient, report
 the limitation without advancing the baseline.

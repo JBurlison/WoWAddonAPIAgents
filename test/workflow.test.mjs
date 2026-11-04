@@ -142,6 +142,9 @@ test('unchanged pre-activation decisions skip activation, inference and detectio
   assert.equal(compiled.jobs.agent.needs,'activation');
   assert.ok(!/always\(\)|!cancelled\(\)/.test(compiled.jobs.agent.if));
   assert.equal(compiled.jobs.detection.if,"always() && needs.agent.result != 'skipped'");
+  const verdict=compiled.jobs.detection.steps.find(step=>step.id==='detection_conclusion');
+  assert.equal(verdict.env.GH_AW_DETECTION_CONTINUE_ON_ERROR,'false');
+  assert.notEqual(verdict['continue-on-error'],true);
   assert.match(compiled.jobs.safe_outputs.if,/needs\.agent\.result == 'success'/);
   assert.match(compiled.jobs.safe_outputs.if,/needs\.detection\.result == 'success'/);
 });
