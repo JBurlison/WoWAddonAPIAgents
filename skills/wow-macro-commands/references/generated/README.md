@@ -4,8 +4,8 @@ These are complete extracted source schemas for this domain at the pinned commit
 
 | Target | Build | Declarations | Source schemas |
 |---|---|---:|---|
-| retail | 12.1.5.70688 | 9 | [retail.json](retail.json) |
-| forever | 1.60.1.70707 | 9 | [forever.json](forever.json) |
+| retail | 12.1.5.70783 | 9 | [retail.json](retail.json) |
+| forever | 1.60.1.70790 | 9 | [forever.json](forever.json) |
 | classic | 5.5.4.70631 | 9 | [classic.json](classic.json) |
 
 Use the [package-local query tool](../../../wow-api-index/scripts/query.mjs) to retrieve a named function, event, structure, enum, callback type or predicate without reading the entire file. The [catalogue guide](../../../wow-api-index/references/CURRENT-REFERENCES.md) describes querying, schema representation and evidence status.
