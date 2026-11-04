@@ -35,7 +35,7 @@ Draft updates have a **300-file and 10,240 KiB patch limit**. gh-aw also applies
 
 Protected-file exceptions use exact paths. The workflow enumerates the generated domain READMEs in both the maintained skills and the plugin. A test compares the exceptions to the reference manifest. The root README and other protected files remain subject to the publisher's checks.
 
-Scheduled runs propose changes against the default branch. For a manual test, select the branch containing the workflow change. The resulting draft targets that branch. Publication requires successful content validation and threat detection. If the detector fails before recording a result, retry its job to reuse the existing update artifact.
+Scheduled runs and manual updater runs target `main`. For an end-to-end publication test, dispatch the merged workflow from `main`. Publication requires successful content validation and threat detection. If the detector fails before recording a result, retry its job to reuse the existing update artifact.
 
 While an update PR awaits review, new proposals defer. After merge the next run catches intervening upstream changes. Closing without merging allows the same changes to be proposed again; disable the workflow in Actions to pause updates.
 

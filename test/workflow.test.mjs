@@ -32,6 +32,7 @@ test('publication budgets fit complete generated snapshots and reach the compile
     `A complete refresh and guide updates need at least ${files.size+32} output paths`);
   assert.ok(policy['max-patch-size']>0 && policy['max-patch-size']<=10240);
   for(const config of publicationConfigs(compiled.jobs)) {
+    assert.equal(config.base_branch,'main','Use the same literal remote branch in both publisher configurations');
     assert.equal(config.max_patch_files,policy['max-patch-files']);
     assert.equal(config.max_patch_size,policy['max-patch-size']);
   }

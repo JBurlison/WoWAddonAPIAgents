@@ -56,7 +56,7 @@ safe-outputs:
       model: sonnet
   create-pull-request:
     title-prefix: '[wow-api-update] '
-    base-branch: ${{ github.ref_name }}
+    base-branch: main
     max: 1
     draft: true
     fallback-as-issue: false
@@ -267,7 +267,7 @@ uncommitted until validation passes. Stage only the complete reviewed update, th
 run `node scripts/commit-api-update.mjs` from the repository root. It commits that
 tree in batches sized for GitHub's signed-commit API. Submit this same local branch
 to the safe-output tool and keep its commits intact so the publisher can sign each
-batch. The draft targets the branch on which this workflow was run.
+batch. The draft targets the repository's main branch.
 Never hand-edit generated files. Do not create a PR on failure or if an update PR is already open. Do not
 merge PRs, publish releases, or switch models. If time is insufficient, report
 the limitation without advancing the baseline.
