@@ -55,6 +55,7 @@ test('a staged refresh becomes a linear, payload-bounded history with the exact 
   let parent = base;
   for (const commit of commits) {
     assert.equal(git('show', '-s', '--format=%P', commit), parent);
+    assert.equal(git('show', '-s', '--format=%s', commit).includes('[skip ci]'), commit !== commits.at(-1));
     const paths = git('diff', '--no-renames', '--diff-filter=AM', '--name-only', parent, commit);
     const addedBytes = paths ? paths.split('\n').reduce((total, file) =>
       total + Number(git('cat-file', '-s', commit + ':' + file)), 0) : 0;

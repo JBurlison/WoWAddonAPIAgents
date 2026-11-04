@@ -98,7 +98,9 @@ function commitUpdate() {
       git(['update-index', '-z', '--index-info'], { ...options, input });
       const tree = gitLine(['write-tree'], options);
       if (i === batches.length - 1 && tree !== finalTree) throw new Error('Prepared commit tree differs from the validated index.');
-      parent = gitLine(['commit-tree', tree, '-p', parent, '-m', `Update WoW API references (${i + 1}/${batches.length})`], options);
+      // A signing client can push each batch separately. Only the final tree is a complete snapshot.
+      const subject = `Update WoW API references (${i + 1}/${batches.length})` + (i + 1 < batches.length ? ' [skip ci]' : '');
+      parent = gitLine(['commit-tree', tree, '-p', parent, '-m', subject], options);
     }
   } finally {
     fs.rmSync(index, { force: true });
