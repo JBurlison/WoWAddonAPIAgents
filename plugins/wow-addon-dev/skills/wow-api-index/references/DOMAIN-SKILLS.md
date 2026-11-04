@@ -28,8 +28,8 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-quests](../../wow-api-quests/SKILL.md) | 319 / 325 / 152 | [source schemas](../../wow-api-quests/references/generated/README.md) |
 | [wow-api-reputation](../../wow-api-reputation/SKILL.md) | 81 / 84 / 15 | [source schemas](../../wow-api-reputation/references/generated/README.md) |
 | [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | 338 / 384 / 279 | [source schemas](../../wow-api-settings-system/references/generated/README.md) |
-| [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | 808 / 833 / 669 | [source schemas](../../wow-api-social-chat/references/generated/README.md) |
-| [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | 342 / 363 / 269 | [source schemas](../../wow-api-spells-abilities/references/generated/README.md) |
+| [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | 808 / 834 / 669 | [source schemas](../../wow-api-social-chat/references/generated/README.md) |
+| [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | 342 / 364 / 269 | [source schemas](../../wow-api-spells-abilities/references/generated/README.md) |
 | [wow-api-talents](../../wow-api-talents/SKILL.md) | 261 / 278 / 140 | [source schemas](../../wow-api-talents/references/generated/README.md) |
 | [wow-api-transmog](../../wow-api-transmog/SKILL.md) | 333 / 336 / 335 | [source schemas](../../wow-api-transmog/references/generated/README.md) |
 | [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) | 850 / 886 / 649 | [source schemas](../../wow-api-unit-player/references/generated/README.md) |
