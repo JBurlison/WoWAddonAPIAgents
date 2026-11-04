@@ -50,11 +50,13 @@ tools:
     toolsets: [repos, pull_requests]
 safe-outputs:
   threat-detection:
+    continue-on-error: false
     engine:
       id: copilot
       model: sonnet
   create-pull-request:
     title-prefix: '[wow-api-update] '
+    base-branch: main
     max: 1
     draft: true
     fallback-as-issue: false
@@ -95,20 +97,70 @@ safe-outputs:
     protected-files:
       policy: blocked
       exclude:
-        - '/skills/wow-*/SKILL.md'
-        - '/skills/wow-*/references/*.md'
+        # gh-aw v1.0.1 matches protected path exceptions literally. List the
+        # generated domain READMEs and their packaged copies from the manifest.
+        - '/skills/wow-addon-structure/references/generated/README.md'
+        - '/skills/wow-api-achievements/references/generated/README.md'
+        - '/skills/wow-api-calendar-events/references/generated/README.md'
+        - '/skills/wow-api-collections/references/generated/README.md'
+        - '/skills/wow-api-combat/references/generated/README.md'
+        - '/skills/wow-api-currency-economy/references/generated/README.md'
+        - '/skills/wow-api-encounters/references/generated/README.md'
+        - '/skills/wow-api-events/references/generated/README.md'
+        - '/skills/wow-api-group-lfg/references/generated/README.md'
+        - '/skills/wow-api-guild/references/generated/README.md'
+        - '/skills/wow-api-housing/references/generated/README.md'
+        - '/skills/wow-api-items-inventory/references/generated/README.md'
+        - '/skills/wow-api-lua-environment/references/generated/README.md'
+        - '/skills/wow-api-map-navigation/references/generated/README.md'
+        - '/skills/wow-api-misc-systems/references/generated/README.md'
+        - '/skills/wow-api-professions/references/generated/README.md'
+        - '/skills/wow-api-pvp/references/generated/README.md'
+        - '/skills/wow-api-quests/references/generated/README.md'
+        - '/skills/wow-api-reputation/references/generated/README.md'
+        - '/skills/wow-api-settings-system/references/generated/README.md'
+        - '/skills/wow-api-social-chat/references/generated/README.md'
+        - '/skills/wow-api-spells-abilities/references/generated/README.md'
+        - '/skills/wow-api-talents/references/generated/README.md'
+        - '/skills/wow-api-transmog/references/generated/README.md'
+        - '/skills/wow-api-unit-player/references/generated/README.md'
+        - '/skills/wow-api-weekly-rewards/references/generated/README.md'
+        - '/skills/wow-api-widget/references/generated/README.md'
+        - '/skills/wow-lua-api/references/generated/README.md'
+        - '/skills/wow-macro-commands/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-addon-structure/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-achievements/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-calendar-events/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-collections/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-combat/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-currency-economy/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-encounters/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-events/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-group-lfg/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-guild/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-housing/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-items-inventory/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-lua-environment/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-map-navigation/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-misc-systems/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-professions/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-pvp/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-quests/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-reputation/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-settings-system/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-social-chat/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-spells-abilities/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-talents/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-transmog/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-unit-player/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-weekly-rewards/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-api-widget/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-lua-api/references/generated/README.md'
+        - '/plugins/wow-addon-dev/skills/wow-macro-commands/references/generated/README.md'
         - '/skills/wow-client-targets/references/targets.json'
         - '/config/api-owners.json'
-        - '/skills/wow-*/references/generated/retail.json'
-        - '/skills/wow-*/references/generated/forever.json'
-        - '/skills/wow-*/references/generated/classic.json'
-        - '/skills/wow-*/references/generated/README.md'
         - '/skills/wow-api-index/references/generated/manifest.json'
         - '/skills/wow-api-index/references/generated/symbols.json'
-        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/retail.json'
-        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/forever.json'
-        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/classic.json'
-        - '/plugins/wow-addon-dev/skills/wow-*/references/generated/README.md'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json'
         - '/.github/agents/wow-addon.agent.md'
@@ -210,6 +262,12 @@ Before calling the safe-output tool, run `npm run build`,
 `node scripts/version.mjs ensure`, `npm run check`, and `npm test`, in that order.
 The version script increments the patch once relative to the original checkout.
 Include those version edits in the submitted patch; post-steps do not modify it.
+Work on a named local proposal branch created at `GITHUB_SHA`. Keep all changes
+uncommitted until validation passes. Stage only the complete reviewed update, then
+run `node scripts/commit-api-update.mjs` from the repository root. It commits that
+tree in batches sized for GitHub's signed-commit API. Submit this same local branch
+to the safe-output tool and keep its commits intact so the publisher can sign each
+batch. The draft targets the repository's main branch.
 Never hand-edit generated files. Do not create a PR on failure or if an update PR is already open. Do not
 merge PRs, publish releases, or switch models. If time is insufficient, report
 the limitation without advancing the baseline.

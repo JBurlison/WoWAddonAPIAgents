@@ -5,6 +5,15 @@ import YAML from 'yaml';
 import { root, frontmatter } from '../scripts/lib.mjs';
 import { versionFiles } from '../scripts/version.mjs';
 
+function publicationConfigs(jobs) {
+  const setup=jobs.agent.steps.find(step=>step.env?.GH_AW_SAFE_OUTPUTS_CONFIG);
+  const publish=jobs.safe_outputs.steps.find(step=>step.id==='process_safe_outputs');
+  return [
+    JSON.parse(setup.env.GH_AW_SAFE_OUTPUTS_CONFIG).create_pull_request,
+    JSON.parse(publish.env.GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG).create_pull_request,
+  ];
+}
+
 test('publication budgets fit complete generated snapshots and reach the compiled handlers',async()=>{
   const source=YAML.parse(frontmatter(await fs.readFile(root+'.github/workflows/update-wow-api.md','utf8')).yaml);
   const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
@@ -22,13 +31,34 @@ test('publication budgets fit complete generated snapshots and reach the compile
   assert.ok(Number.isInteger(policy['max-patch-files']) && policy['max-patch-files']>=files.size+32,
     `A complete refresh and guide updates need at least ${files.size+32} output paths`);
   assert.ok(policy['max-patch-size']>0 && policy['max-patch-size']<=10240);
-  const configs=Object.values(compiled.jobs).flatMap(job=>job.steps||[])
-    .filter(step=>step.env?.GH_AW_SAFE_OUTPUTS_CONFIG)
-    .map(step=>JSON.parse(step.env.GH_AW_SAFE_OUTPUTS_CONFIG).create_pull_request);
-  assert.ok(configs.length>0);
-  for(const config of configs) {
+  for(const config of publicationConfigs(compiled.jobs)) {
+    assert.equal(config.base_branch,'main','Use the same literal remote branch in both publisher configurations');
     assert.equal(config.max_patch_files,policy['max-patch-files']);
     assert.equal(config.max_patch_size,policy['max-patch-size']);
+  }
+});
+
+test('compiled publication exempts only the generated README paths in the manifest and package',async()=>{
+  const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
+  const manifest=JSON.parse(await fs.readFile(root+'skills/wow-api-index/references/generated/manifest.json','utf8'));
+  const generatedReadmes=manifest.artifacts.map(entry=>entry.path)
+    .filter(path=>path.endsWith('/references/generated/README.md'));
+  assert.ok(generatedReadmes.length>0);
+  const expected=generatedReadmes.flatMap(path=>['skills/'+path,'plugins/wow-addon-dev/skills/'+path]).sort();
+  for(const config of publicationConfigs(compiled.jobs)) {
+    assert.equal(config.protected_files_policy,'blocked');
+    assert.ok(config.protected_files.includes('README.md'),'Keep basename protection for root and other READMEs');
+    const exactPaths=config.protected_files_path_exclude;
+    // gh-aw v1.0.1 uses literal path equality for these exceptions in both protection checks.
+    assert.ok(exactPaths.every(path=>!/[?*\[]/.test(path)),'Protected-file exceptions must be exact paths');
+    const exemptReadmes=exactPaths.filter(path=>path.split('/').at(-1)==='README.md').sort();
+    assert.deepEqual(exemptReadmes,expected,'Exempt every generated copy and no other README');
+    for(const file of [...versionFiles,'.github/agents/wow-addon.agent.md']) {
+      assert.ok(exactPaths.includes(file),`Missing protected-file exception: ${file}`);
+    }
+    for(const prefix of ['skills/','plugins/wow-addon-dev/skills/']) {
+      assert.ok(config.allowed_files.includes(prefix+'wow-*/references/generated/README.md'));
+    }
   }
 });
 
@@ -54,10 +84,10 @@ test('compiled publication requires agent success, including post-agent validati
   const exclusions=source['safe-outputs']['create-pull-request']['protected-files'].exclude;
   for (const file of ['config/api-owners.json','skills/wow-*/references/generated/retail.json','skills/wow-*/references/generated/forever.json','skills/wow-*/references/generated/classic.json','skills/wow-*/references/generated/README.md','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/symbols.json']) {
     assert.ok(allowed.includes(file),`Missing output path: ${file}`);
-    assert.ok(exclusions.includes('/'+file),`Missing protected-file exclusion: ${file}`);
+    if(!file.includes('*')) assert.ok(exclusions.includes('/'+file),`Missing protected-file exclusion: ${file}`);
     if(file.startsWith('skills/')) {
       assert.ok(allowed.includes('plugins/wow-addon-dev/'+file));
-      assert.ok(exclusions.includes('/plugins/wow-addon-dev/'+file));
+      if(!file.includes('*')) assert.ok(exclusions.includes('/plugins/wow-addon-dev/'+file));
     }
   }
   assert.ok(allowed.every(file=>!file.startsWith('scripts/')&&!file.includes('/scripts/')&&!file.startsWith('test/')&&file!=='config/*.json'));
@@ -113,6 +143,9 @@ test('unchanged pre-activation decisions skip activation, inference and detectio
   assert.equal(compiled.jobs.agent.needs,'activation');
   assert.ok(!/always\(\)|!cancelled\(\)/.test(compiled.jobs.agent.if));
   assert.equal(compiled.jobs.detection.if,"always() && needs.agent.result != 'skipped'");
+  const verdict=compiled.jobs.detection.steps.find(step=>step.id==='detection_conclusion');
+  assert.equal(verdict.env.GH_AW_DETECTION_CONTINUE_ON_ERROR,'false');
+  assert.notEqual(verdict['continue-on-error'],true);
   assert.match(compiled.jobs.safe_outputs.if,/needs\.agent\.result == 'success'/);
   assert.match(compiled.jobs.safe_outputs.if,/needs\.detection\.result == 'success'/);
 });

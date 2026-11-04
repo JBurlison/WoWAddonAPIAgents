@@ -31,7 +31,11 @@ The output allowlist permits WoW Markdown knowledge, target metadata, the explic
 
 Version bumps and post-merge release publication use separate deterministic workflows and the built-in repository token; they do not consume Copilot credits. See [versions and releases](RELEASING.md).
 
-Draft update patches are bounded at **300 files and 10,240 KiB**. A complete refresh includes both maintained references and their packaged copies; the default 100-file limit rejected a validated 146-file Forever update. Symbol indexes use one tuple per line so small API changes produce small diffs instead of replacing both complete indexes. The same file allowlist, protected paths, source verification, tests, and security review still apply. If a complete update exceeds either bound, inspect its actual patch and report the limitation; do not omit generated copies or split an inconsistent snapshot across PRs to fit.
+Draft updates have a **300-file and 10,240 KiB patch limit**. gh-aw also applies the size limit to the full new file contents it uploads for each signed commit. A 5.4 MiB diff can therefore require more than 43 MiB of uploads. After validation, `scripts/commit-api-update.mjs` divides the staged update into linear commits that fit the signing limit. The publisher signs each commit and submits the complete snapshot in one draft PR. A single oversized file or an oversized overall patch still requires maintainer review.
+
+Protected-file exceptions use exact paths. The workflow enumerates the generated domain READMEs in both the maintained skills and the plugin. A test compares the exceptions to the reference manifest. The root README and other protected files remain subject to the publisher's checks.
+
+Scheduled runs and manual updater runs target `main`. For an end-to-end publication test, dispatch the merged workflow from `main`. Publication requires successful content validation and threat detection. If the detector fails before recording a result, retry its job to reuse the existing update artifact.
 
 While an update PR awaits review, new proposals defer. After merge the next run catches intervening upstream changes. Closing without merging allows the same changes to be proposed again; disable the workflow in Actions to pause updates.
 
