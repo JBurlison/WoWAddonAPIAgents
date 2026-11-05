@@ -20,6 +20,11 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 | User requests a mock-up first | Show a concrete design/prototype and collect design feedback before production UI implementation. |
 | User declines a mock-up or already accepted a design | Honor the choice and implement; do not ask again or insert a new design approval step. |
 | Non-UI bug fix | Proceed without a mock-up question. |
+| Forever addon ready to test, no testing preference | Ask once whether to use Witchcraft in-game testing or UIForever; explain the evidence each provides, continue static checks while waiting and record the answer. |
+| Forever testing choice already recorded, including after handoff | Use the recorded route without asking again; keep the mock-up choice separate. |
+| UIForever selected while Witchcraft tools are connected | Follow the simulator route and retain unperformed real-client checks as not run. |
+| Witchcraft selected but setup or build support is missing | Explain the concrete prerequisite, offer setup/alternative/deferral and honor existing authorization or fallback decisions. |
+| Witchcraft selected with working telemetry but no native computer use | Read relevant fresh context/errors and give the user reproduction/capture steps; record who acted and which checks remain not run. |
 | UI testing with an available matching UIForever flavor | Record reported build, scenario, resolution/scale, interactions and diagnostics; keep simulator evidence separate from real-client checks. |
 | Retail/Classic flavor unavailable in UIForever | Mark simulator testing not run; do not substitute a Forever pass or call the addon unsupported. |
 | Missing API reported by simulator | Check the pinned client contract; distinguish an emulator gap/stub from an addon bug and avoid production compatibility shims just for the emulator. |
@@ -33,7 +38,7 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 | Witchcraft exposes context/errors but no click/screenshot tools | Use only discovered tools for fresh context/error evidence; use separate computer-use capabilities or user reproduction for UI interaction and screenshots. |
 | Error read returns stale/pre-action data | Correlate session/revision/timestamps/repeat counts; bounded follow-up or inconclusive result, never a false pass. |
 | Computer use available, Witchcraft absent | Perform authorized visual UI checks with fresh window evidence; report MCP checks not run without requiring installation. |
-| Witchcraft setup not requested | Use an existing authorized connection if available; do not install helpers, calibrate capture, change sharing or resume sessions just to facilitate a UI test. |
+| Witchcraft setup not requested | Use an existing authorized connection when that testing route was chosen; follow the user's setup or fallback choice if the connection needs work. |
 | Long request for a new multi-system addon | Persist requirements with stable IDs and a matrix covering every requested behavior, target, dependency and acceptance check; implement bounded slices without adding an approval gate. |
 | Resume after a context reset or agent handoff | Read the project documents/checkpoint, inspect the recorded revision and current changes, reconcile completed work, and continue the next ready slice without restarting or trusting stale chat summaries. |
 | User adds a feature halfway through implementation | Add or revise the affected requirement and work rows, preserve unaffected requirements and record dependency/acceptance changes; do not silently replace the original task. |

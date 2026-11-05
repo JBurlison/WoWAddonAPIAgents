@@ -2,9 +2,9 @@
 
 Run this checklist for every selected client/build. Record pass/fail/not-run separately for Retail, Forever, and Classic; never extrapolate a Retail pass to the others.
 
-Before game-client acceptance, use [UI design and UIForever testing](UI-DESIGN-AND-TESTING.md) for visible UI changes. Record the user's mock-up choice, design feedback and simulator results separately. Only use an available matching simulator flavor; its reported build can differ from the pinned source and intended client. A simulator pass does not complete any in-game row below.
+At testing time for Forever, follow the [testing choice](../SKILL.md#verify-and-deliver) and reuse an existing answer. Record the chosen route separately from the user's mock-up choice and design feedback. For UIForever, follow [simulator testing](UI-DESIGN-AND-TESTING.md) with an available matching flavor and record its reported build. Keep unperformed in-game rows below marked not run.
 
-Where supported, use [connected client testing](CONNECTED-CLIENT-TESTING.md) for Witchcraft context/Lua errors and computer-use inspection. Verify the actual client and observation freshness. For an accepted mock-up, apply the [visual comparison checks](VISUAL-FIDELITY.md); no-error or functional checks cannot substitute for appearance.
+For selected in-game testing, use [connected client testing](CONNECTED-CLIENT-TESTING.md) for Witchcraft context/Lua errors and computer-use inspection where supported, or user reproduction where needed. Verify the actual client and observation freshness. For an accepted mock-up, apply the [visual comparison checks](VISUAL-FIDELITY.md); no-error or functional checks cannot substitute for appearance.
 
 | Check | Acceptance |
 |---|---|
