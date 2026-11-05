@@ -1,6 +1,6 @@
 # UI mock-ups and UIForever testing
 
-Use this workflow for visible addon UI changes. [UIForever](https://uiforever.com/) is a hosted browser simulator for layout and interaction checks. It supplements the [real-client acceptance checklist](CLIENT-VALIDATION.md); it is not the source of truth for WoW API contracts.
+Use this workflow for visible addon UI changes. At testing time, follow the [Forever testing choice](../SKILL.md#verify-and-deliver) between Witchcraft in-game testing and UIForever, honoring an existing answer. [UIForever](https://uiforever.com/) is a hosted browser simulator for layout and interaction checks. Keep its results separate from the [real-client acceptance checklist](CLIENT-VALIDATION.md) and pinned WoW API contracts.
 
 ## Choose the design workflow first
 
@@ -14,7 +14,7 @@ For "Implement directly", continue implementation without inserting another desi
 
 Use [visual fidelity](VISUAL-FIDELITY.md) to turn the accepted mock-up into an asset/layout plan and compare it with actual rendered screenshots. Custom artwork behind native interactive controls is an appropriate technique when stock visuals do not match. A native-only approximation, a flat mock-up image with no working controls, or a clean Lua-error panel is not sufficient visual acceptance. Compare a representative panel early, fix material mismatches, and retain both the baseline and implementation evidence.
 
-For a real-client test session, use [Witchcraft MCP and computer use](CONNECTED-CLIENT-TESTING.md) when those capabilities are available. MCP context/error reads, simulator screenshots and computer-use observations answer different questions; keep their results separate.
+For a chosen real-client session, follow [Witchcraft MCP and computer use](CONNECTED-CLIENT-TESTING.md). For a chosen UIForever session, use the simulator steps below. MCP context/error reads, simulator screenshots and computer-use observations answer different questions; keep their results separate. Record game-only checks still pending after a simulator session.
 
 ## Check the simulator's actual target
 
@@ -38,9 +38,9 @@ Use a supported desktop browser. Record the `Developer` panel's build/interface 
 4. Exercise relevant `Solo`, `Dungeon` and `Raid` states, plus target/focus and character/class changes where the UI depends on them. The `JSON` scenario menu can preserve a reproducible fixture. Simulated combat is useful for display transitions but does not certify secure execution or protected operations.
 5. Inspect `Errors`, `Missing APIs` and `Lua Console`; capture the first useful stack trace and reproduction steps. `Missing APIs` identifies simulator gaps, potentially returning stub defaults. Check the pinned WoW contract before changing addon code; a missing emulator implementation is not proof the game API is missing. Do not add production shims merely to silence the simulator.
 6. Use `/reload` to check the simulated initialization/settings lifecycle, then repeat the relevant visual states. `Developer` reports load/memory/object data, including estimates; treat these as simulator diagnostics, not measured game performance.
-7. Save representative screenshots and compare them with the accepted mock-up using the visual-fidelity guide. Record fixture identity, mismatches, errors and pass/fail/not-run results in the addon project's test notes. Follow with real-client tests for every selected target, including actual persistence, event timing, dependencies, combat lockdown, taint and restricted values.
+7. Save representative screenshots and compare them with the accepted mock-up using the visual-fidelity guide. Record fixture identity, mismatches, errors and pass/fail/not-run results in the addon project's test notes. Keep required real-client checks for every selected target pending until performed, including actual persistence, event timing, dependencies, combat lockdown, taint and restricted values. Honor the user's choice for this testing round when scheduling those checks.
 
-If browser automation is unavailable, provide these steps and mark execution not run. Do not invent a UIForever CLI, public test API or CI integration. If startup fails, record the visible error and use static/in-game checks; do not bypass browser security controls or claim the addon failed from an emulator startup error.
+If browser automation is unavailable, provide these steps and mark execution not run. Do not invent a UIForever CLI, public test API or CI integration. If startup fails, record the visible error, continue static checks and follow the user's fallback choice for runtime testing; do not bypass browser security controls or claim the addon failed from an emulator startup error.
 
 ## Imports, exports and external actions
 

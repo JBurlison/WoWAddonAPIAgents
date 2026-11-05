@@ -39,6 +39,7 @@ Validation statuses: `pass`, `fail`, `not run`, `not applicable` (with reason), 
 - Next executable action: [concrete command or edit/test step, working directory and prerequisites]
 - Open questions / blockers: [Q IDs and blocked rows; what can continue]
 - Decisions to retain: [DEC IDs and concise effects]
+- Testing choice: [route and user answer/source; setup or fallback decision; pending checks]
 - Read next: [ordered, short list of requirement sections, code files and evidence paths]
 - Drift since verification: [changed code, source pins, targets, design or none; validation IDs made stale]
 

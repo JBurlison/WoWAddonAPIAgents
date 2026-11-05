@@ -10,6 +10,8 @@ Give every required behavior and constraint a stable `REQ-` ID, including compat
 
 Record selected clients, source commits/builds and relevant API/loading evidence using [client targets](../../wow-client-targets/SKILL.md). Preserve unknown availability. For UI work, record the existing [mock-up choice](UI-DESIGN-AND-TESTING.md), accepted design revision, assets and representative states; link durable project copies where available. A design acceptance does not establish functional or in-game acceptance.
 
+When the addon reaches testing, record the [Forever testing choice](../SKILL.md#verify-and-deliver), its source, any setup authorization and agreed fallback in the requirements and resume checkpoint. Reuse that choice on subsequent slices and after resumption. An unresolved testing preference can remain pending while independent implementation and static checks proceed.
+
 Creating or updating the plan is part of the authorized work, not a new approval gate. Continue independent work while a material clarification or the existing UI choice is pending. Honor prior answers and authorization; do not request approval of each document, slice or checkpoint.
 
 ## Implement bounded slices

@@ -27,6 +27,12 @@
 - Layout, assets and states to preserve: [references]
 - Intended resolution/UI scale and interaction criteria: [values]
 
+## Testing preference
+
+- Route and source: [Witchcraft in-game / UIForever simulator / another explicit choice / pending until testing is needed; user answer or reference]
+- Setup or fallback decision: [existing authorization, agreed alternative, or pending]
+- Remaining real-client checks: [acceptance criteria requiring a client or user reproduction]
+
 ## Open questions and assumptions
 
 | ID | Question or assumption | Related REQ IDs | Impact / independent work available | Resolution and source |
