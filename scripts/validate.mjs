@@ -86,7 +86,8 @@ export async function validate(base = root) {
     if (entry.name !== portable.name || (typeof entry.source === 'string' ? entry.source : entry.source.path) !== './plugins/wow-addon-dev') errors.push(`Invalid marketplace source: ${file}`);
   }
   const skills = await fs.readdir(path.join(plugin,'skills'));
-  if (skills.length !== 35 || skills.some(name => !name.startsWith('wow-'))) errors.push('Expected 33 WoW domain skills plus two workflow/target skills');
+  const maintainedSkills = (await fs.readdir(path.join(base, 'skills'))).filter(name => name.startsWith('wow-')).sort();
+  if (JSON.stringify(skills.sort()) !== JSON.stringify(maintainedSkills)) errors.push('Packaged skills must match the maintained WoW skill set exactly');
   const workflowPath = path.join(base,'.github/workflows/update-wow-api.md');
   try {
     const workflow = YAML.parse(frontmatter(await fs.readFile(workflowPath,'utf8')).yaml);

@@ -15,6 +15,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+Use [native UI composition](../wow-native-ui/SKILL.md) for template and artwork selection, or [UI skinning](../wow-ui-skinning/SKILL.md) for window-specific loader, hook and refresh design. Use this reference for the underlying helpers, mixins and include graphs.
+
 For visible UI changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
 
 Use [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md) to preserve accepted artwork, layout and styling with verified templates/custom media, and compare the actual render rather than assuming a native template matches.

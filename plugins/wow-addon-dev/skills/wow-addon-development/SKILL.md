@@ -31,6 +31,8 @@ Compare a representative panel early, fix material differences, and repeat befor
 
 ## Research only the needed systems
 
+For Blizzard-style panels, borders, buttons, fonts, textures and other native controls, use [native UI composition](../wow-native-ui/SKILL.md). For reskinning existing Blizzard windows, including the character screen and spellbook, use [UI skinning](../wow-ui-skinning/SKILL.md). Use both when a custom theme combines new addon-owned widgets with existing game frames. Native composition does not imply stock artwork when the accepted design calls for custom art.
+
 Use [wow-api-index](../wow-api-index/SKILL.md) to select domain skills. Each old domain reference is a historical Retail baseline unless a section supplies newer, target-specific evidence. Use [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md) for differences.
 
 Resolve the selected source branches to commits once per task, and use those commit-pinned sources throughout the task. Check generated API definitions, client-specific Lua/XML loading paths, events and payloads, argument/return types, and addon access restrictions. A name in a shared generated file is not proof that the feature loads for the selected client. Version-specific wiki pages supplement source evidence; they do not override the selected client.

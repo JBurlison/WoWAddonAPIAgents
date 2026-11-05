@@ -1,6 +1,6 @@
 # WoW Addon API Agents
 
-Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, and GitHub Copilot. It includes 33 API/domain skills, an addon-development workflow, and a client-target skill. AI-builder remains a repository maintenance tool.
+Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, and GitHub Copilot. It includes 33 API/domain skills, two UI implementation skills, an addon-development workflow, and a client-target skill (37 total). AI-builder remains a repository maintenance tool.
 
 | Target | Upstream branch | Request example |
 |---|---|---|
@@ -18,6 +18,8 @@ Version **2.2.0** adds [visual-fidelity guardrails](skills/wow-addon-development
 Version **2.3.0** adds [persistent project planning](skills/wow-addon-development/references/PROJECT-PLANNING.md), with reusable [requirements](skills/wow-addon-development/assets/REQUIREMENTS.template.md) and [implementation matrix](skills/wow-addon-development/assets/IMPLEMENTATION-MATRIX.template.md) templates for larger changes and new addons. Stable requirement IDs, acceptance evidence and a resumption checkpoint keep long tasks grounded across agents and context resets. It also refreshes [Forever API and UI guidance to 1.60.1.70707](skills/wow-client-targets/references/FOREVER-70707-CHANGES.md) and repairs updater publication limits. See the [release validation report](docs/RELEASE-2.3.0.md).
 
 When a Forever addon reaches testing, the workflow asks whether to use Witchcraft in the game or UIForever in the browser. It remembers the user's choice across work sessions and records simulator results, game observations and Lua-error checks separately. See the [testing workflow](skills/wow-addon-development/SKILL.md#verify-and-deliver).
+
+Version **2.4.0** adds [native UI composition](skills/wow-native-ui/SKILL.md) for Blizzard panels, borders, buttons and controls, and [UI skinning](skills/wow-ui-skinning/SKILL.md) for independently reskinning existing windows such as the character screen and spellbook. ElvUI is a source-reading example, not a dependency. Start with “Build a Forever panel with Blizzard-style buttons and borders” or “Reskin the character screen and spellbook without requiring ElvUI.” Each selected client still needs its own source and runtime checks. See the [release validation report](docs/RELEASE-2.4.0.md).
 
 ## Install
 
