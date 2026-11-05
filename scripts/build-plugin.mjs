@@ -17,8 +17,8 @@ export async function expectedFiles(base = root) {
   }
   add(`${plugin}/LICENSE`, await fs.readFile(path.join(base, 'LICENSE'), 'utf8'));
   const common = { name: config.name, version: config.version, description: config.description, author: config.author,
-    repository: config.repository, license: config.license, keywords: ['wow', 'addons', 'lua', 'retail', 'forever', 'classic'] };
-  const ui = { displayName: config.displayName, shortDescription: 'WoW addons for Retail, Forever, and Classic' };
+    repository: config.repository, homepage: config.repository, license: config.license, keywords: ['wow', 'addons', 'lua', 'retail', 'forever', 'classic'] };
+  const ui = { displayName: config.displayName, shortDescription: 'WoW addons for Retail, Forever, and Classic', websiteURL: config.repository };
   add(`${plugin}/plugin.json`, json({ $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', ...common,
     extensions: { 'com.openai': { interface: ui } } }));
   add(`${plugin}/.codex-plugin/plugin.json`, json({ ...common, skills: './skills/', interface: ui }));
