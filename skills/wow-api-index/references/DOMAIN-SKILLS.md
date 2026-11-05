@@ -39,6 +39,8 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-client-targets](../../wow-client-targets/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-lua-api](../../wow-lua-api/SKILL.md) | 262 / 264 / 172 | [source schemas](../../wow-lua-api/references/generated/README.md) |
 | [wow-macro-commands](../../wow-macro-commands/SKILL.md) | 9 / 9 / 9 | [source schemas](../../wow-macro-commands/references/generated/README.md) |
+| [wow-native-ui](../../wow-native-ui/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
+| [wow-ui-skinning](../../wow-ui-skinning/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 
 ## Complete system ownership
 

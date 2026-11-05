@@ -1,6 +1,6 @@
 {
   "name": "wow-addon-dev",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "description": "Build and maintain addons for Retail, Forever, and Classic progression with version-aware API research and shared Lua code.",
   "author": {
     "name": "James Burlison"

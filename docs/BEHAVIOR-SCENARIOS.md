@@ -20,6 +20,11 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 | User requests a mock-up first | Show a concrete design/prototype and collect design feedback before production UI implementation. |
 | User declines a mock-up or already accepted a design | Honor the choice and implement; do not ask again or insert a new design approval step. |
 | Non-UI bug fix | Proceed without a mock-up question. |
+| Forever panel with native buttons, border and scrollable content | Load native UI composition; verify the selected templates, Camelot overrides, state artwork and load order. Avoid making an interactive frame inherit decorative behavior blindly. |
+| Character screen reskin without ElvUI installed | Load UI skinning; trace the selected client's paper-doll owner, keep equip/drag/tooltip semantics and style only identified art. Implement local styling helpers, not ElvUI calls. |
+| Spellbook reskin on all three clients | Inspect each client's actual spellbook owner and dynamic button lifecycle; separate one-time setup from per-binding refresh. Do not assume Retail globals, pools or security permissions match. |
+| Skin enabled before or after a load-on-demand window appears | Initialize once when ready, also handle already-loaded owners; defer restricted mutations during combat and re-resolve live controls afterward. |
+| User requests a flat theme inspired by ElvUI | Read pinned ElvUI architecture examples and derive an independent implementation. Do not add ElvUI as a dependency or copy textures/framework helpers without checking their separate license and dependencies. |
 | Forever addon ready to test, no testing preference | Ask once whether to use Witchcraft in-game testing or UIForever; explain the evidence each provides, continue static checks while waiting and record the answer. |
 | Forever testing choice already recorded, including after handoff | Use the recorded route without asking again; keep the mock-up choice separate. |
 | UIForever selected while Witchcraft tools are connected | Follow the simulator route and retain unperformed real-client checks as not run. |

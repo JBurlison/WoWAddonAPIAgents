@@ -18,4 +18,6 @@ When a Forever addon needs runtime or UI testing, follow the workflow's testing 
 
 Use [client targets](../../skills/wow-client-targets/SKILL.md) to resolve the requested clients before applying API guidance. Load the relevant domain skills linked by the workflow. Report evidence limitations and distinguish static checks from in-game testing.
 
+Use [native UI composition](../../skills/wow-native-ui/SKILL.md) for Blizzard controls, borders and templates, and [UI skinning](../../skills/wow-ui-skinning/SKILL.md) for deep customization of existing Blizzard windows. The skinning guide uses ElvUI as a source-reading example, with no ElvUI dependency.
+
 This is the shared agent definition. Host adapters are generated from it; the workflow skill remains the Codex entrypoint.

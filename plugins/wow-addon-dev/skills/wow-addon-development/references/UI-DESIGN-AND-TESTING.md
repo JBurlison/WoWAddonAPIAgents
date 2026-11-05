@@ -12,6 +12,8 @@ For "Implement directly", continue implementation without inserting another desi
 
 ## Carry the design through implementation
 
+Choose implementation guidance by ownership: [native UI composition](../../wow-native-ui/SKILL.md) for new controls and [UI skinning](../../wow-ui-skinning/SKILL.md) for modifying existing Blizzard windows. For reskins, include original and themed states, reopening, changed character/spell data, and combat transitions in the visual and functional checks.
+
 Use [visual fidelity](VISUAL-FIDELITY.md) to turn the accepted mock-up into an asset/layout plan and compare it with actual rendered screenshots. Custom artwork behind native interactive controls is an appropriate technique when stock visuals do not match. A native-only approximation, a flat mock-up image with no working controls, or a clean Lua-error panel is not sufficient visual acceptance. Compare a representative panel early, fix material mismatches, and retain both the baseline and implementation evidence.
 
 For a chosen real-client session, follow [Witchcraft MCP and computer use](CONNECTED-CLIENT-TESTING.md). For a chosen UIForever session, use the simulator steps below. MCP context/error reads, simulator screenshots and computer-use observations answer different questions; keep their results separate. Record game-only checks still pending after a simulator session.
