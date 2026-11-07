@@ -12,6 +12,8 @@ For "Implement directly", continue implementation without inserting another desi
 
 ## Carry the design through implementation
 
+Every UI design includes a [controller interaction plan](../../wow-controller-support/SKILL.md). Identify focusable controls and decorative elements, entry/exit and modal return targets, primary/back actions, tab/scroll/text-entry paths, and focus/action-hint visuals. Preserve the user's design and bindings while making applicable interactions reachable; record explicit user exclusions or unresolved client limitations. Include these states in a requested mock-up instead of leaving controller operation until the end.
+
 Choose implementation guidance by ownership: [native UI composition](../../wow-native-ui/SKILL.md) for new controls and [UI skinning](../../wow-ui-skinning/SKILL.md) for modifying existing Blizzard windows. For reskins, include original and themed states, reopening, changed character/spell data, and combat transitions in the visual and functional checks.
 
 Use [visual fidelity](VISUAL-FIDELITY.md) to turn the accepted mock-up into an asset/layout plan and compare it with actual rendered screenshots. Custom artwork behind native interactive controls is an appropriate technique when stock visuals do not match. A native-only approximation, a flat mock-up image with no working controls, or a clean Lua-error panel is not sufficient visual acceptance. Compare a representative panel early, fix material mismatches, and retain both the baseline and implementation evidence.
@@ -51,6 +53,8 @@ Use project fixtures or user-selected settings; a personal WTF folder is optiona
 For a requested transfer, inspect the exported ZIP and its instructions before applying it, and back up the destination WTF settings. Settings exports are not a substitute for the addon's release package. The [terms](https://uiforever.com/nutzungsbedingungen) describe catalog packages as simulator copies with audio removed; obtain real game packages from their original source. Action-bar transfer requires the optional companion addon according to the [homepage](https://uiforever.com/#bars-title); installing it is not required for ordinary UI testing.
 
 ## Evidence to deliver
+
+Include the controller/device or emulation route actually exercised, current input mode, tested actions/focus transitions and remaining hardware/client checks. Mouse clicks, keyboard simulation or a screenshot alone do not establish gamepad support. If the selected simulator or host cannot send the needed controller input, mark those checks not run and retain the user's testing-route choice.
 
 Record the addon revision/dependencies, mock-up choice and design reference, selected real client/source pin, simulator URL/date/reported build, browser, scenario/fixture, resolution/UI scale, interactions, screenshots and diagnostics. Keep **design review**, **static validation**, **simulator results** and **in-game acceptance** separate. A useful result is "Forever simulator, reported build X, dungeon fixture Y: layout passed; API Z not emulated; real-client combat/persistence not run" rather than "Forever supported".
 

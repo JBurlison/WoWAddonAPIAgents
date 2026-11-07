@@ -27,11 +27,21 @@
 - Layout, assets and states to preserve: [references]
 - Intended resolution/UI scale and interaction criteria: [values]
 
+## Controller interaction assessment (required for UI changes)
+
+| UI element or control group | Role | Controller path and visible cues | Target evidence / gaps | Acceptance or explicit user exclusion |
+|---|---|---|---|---|
+| [element/group] | [interactive / decorative / passive] | [focus entry/order/return, primary/back, tabs/scroll/text entry as applicable, focus/action hints; or not applicable with reason] | [client/build, verified native owner/contracts, unresolved behavior] | [reproducible checks or user's exclusion and source] |
+
+- Input modes/devices to exercise: [actual available devices/routes; hardware or host limitations]
+- Bindings/settings to preserve: [existing user configuration and explicitly requested changes only]
+
 ## Testing preference
 
 - Route and source: [Witchcraft in-game / UIForever simulator / another explicit choice / pending until testing is needed; user answer or reference]
 - Setup or fallback decision: [existing authorization, agreed alternative, or pending]
 - Remaining real-client checks: [acceptance criteria requiring a client or user reproduction]
+- Controller checks: [device/input route, pending actions/focus transitions, not-run reasons; keep separate from mouse/keyboard results]
 
 ## Open questions and assumptions
 

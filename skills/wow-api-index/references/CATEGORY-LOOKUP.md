@@ -32,6 +32,7 @@ This is task routing, not an API-availability claim. Resolve the target first; u
 | Transmog, appearances, dyes and barber shop | [wow-api-transmog](../../wow-api-transmog/SKILL.md) |
 | UI escape sequences and text markup | [wow-api-escape-sequences](../../wow-api-escape-sequences/SKILL.md) |
 | Native Blizzard panels, borders, buttons and control composition | [wow-native-ui](../../wow-native-ui/SKILL.md) |
+| Controller/gamepad navigation, focus, prompts and UI acceptance | [wow-controller-support](../../wow-controller-support/SKILL.md) |
 | Reskin character screens, spellbooks and other Blizzard windows | [wow-ui-skinning](../../wow-ui-skinning/SKILL.md) |
 | Units, player identity, auras, stats and inspection | [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) |
 | Weekly rewards / Great Vault | [wow-api-weekly-rewards](../../wow-api-weekly-rewards/SKILL.md) |

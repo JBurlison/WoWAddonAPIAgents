@@ -15,6 +15,8 @@ Pin the selected client's source, then trace its owning TOC, selected XML/Lua va
 
 ## Implement a small skin layer
 
+Every reskin must consider [controller support](../wow-controller-support/SKILL.md). Inventory the existing focus/navigation owner, controller targets and action hints before moving or hiding regions. Preserve their roles when changing the art; check that selection/focus remains visible and that modal back/close and recycled-control navigation still work. Keep target-specific gaps and any explicit user exclusion in the task record.
+
 Read [skinning architecture](references/SKINNING-ARCHITECTURE.md) for module boundaries, load timing, repeated updates, pooling, safe hooks and disable behavior. Keep theme tokens separate from client adapters and per-window modules. Enable only the modules the user requested.
 
 - Style existing controls where that meets the design. Keep their scripts, action attributes, hit targets, keyboard/gamepad behavior and state indicators. Add addon-owned decoration only when its layering and input behavior are understood.

@@ -9,6 +9,8 @@ Use native controls and artwork when they match the requested appearance. Start 
 
 For new visible UI, follow the [design and mock-up choice](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation, honoring an already accepted design or choice.
 
+Apply [controller support](../wow-controller-support/SKILL.md) to every UI element: distinguish decorative regions from interactive controls and plan focus, activation, back navigation, scrolling/text entry and action hints as applicable. Template inheritance alone does not certify controller navigation. Preserve the chosen native input paths and record any explicit user exclusion or target limitation.
+
 1. Identify the component and ownership: an addon-owned window, ordinary control, reusable list row, or protected action control. Use [element selection](references/ELEMENTS.md) for the practical choices. Reskinning an existing CharacterFrame, spellbook, or other Blizzard window belongs in [UI skinning](../wow-ui-skinning/SKILL.md).
 2. Find the native example, its XML declaration and Lua mixins, then trace the owning TOC, includes, client selectors, dependencies and initialization. Record the resolved template, expected parent keys, required scripts, asset identifiers and verified client/build. The [source map](references/SOURCE-MAP.md) supplies dated starting points, not a universal template catalog.
 3. Preserve the chosen template's behavior. Reuse its child references, normal/highlight/pushed/disabled state handling, resizing and layout lifecycle. Do not replace inherited setup scripts or alter shared fonts/layout tables to style one frame. Add your own children or use an addon-owned wrapper when composition is sufficient.

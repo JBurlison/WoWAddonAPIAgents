@@ -1,6 +1,6 @@
 # WoW Addon API Agents
 
-Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, and GitHub Copilot. It includes 33 API/domain skills, two UI implementation skills, an addon-development workflow, and a client-target skill (37 total). AI-builder remains a repository maintenance tool.
+Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, and GitHub Copilot. It includes 33 API/domain skills, three UI implementation skills, an addon-development workflow, and a client-target skill (38 total). AI-builder remains a repository maintenance tool.
 
 | Target | Upstream branch | Request example |
 |---|---|---|
@@ -20,6 +20,8 @@ Version **2.3.0** adds [persistent project planning](skills/wow-addon-developmen
 When a Forever addon reaches testing, the workflow asks whether to use Witchcraft in the game or UIForever in the browser. It remembers the user's choice across work sessions and records simulator results, game observations and Lua-error checks separately. See the [testing workflow](skills/wow-addon-development/SKILL.md#verify-and-deliver).
 
 Version **2.4.0** adds [native UI composition](skills/wow-native-ui/SKILL.md) for Blizzard panels, borders, buttons and controls, and [UI skinning](skills/wow-ui-skinning/SKILL.md) for independently reskinning existing windows such as the character screen and spellbook. ElvUI is a source-reading example, not a dependency. Start with “Build a Forever panel with Blizzard-style buttons and borders” or “Reskin the character screen and spellbook without requiring ElvUI.” Each selected client still needs its own source and runtime checks. See the [release validation report](docs/RELEASE-2.4.0.md).
+
+Version **2.5.0** adds [controller support](skills/wow-controller-support/SKILL.md) and makes controller interaction a required consideration for every UI change. Native controls and reskins must account for focus, activation, back/close, applicable tabs/scrolling/text entry, visible action hints and existing mouse/keyboard behavior. Plans and acceptance checklists retain per-client limitations, explicit user exclusions and unperformed hardware tests. See the [release validation report](docs/RELEASE-2.5.0.md).
 
 ## Install
 

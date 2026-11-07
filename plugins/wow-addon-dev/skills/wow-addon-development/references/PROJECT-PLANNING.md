@@ -12,6 +12,8 @@ Record selected clients, source commits/builds and relevant API/loading evidence
 
 When the addon reaches testing, record the [Forever testing choice](../SKILL.md#verify-and-deliver), its source, any setup authorization and agreed fallback in the requirements and resume checkpoint. Reuse that choice on subsequent slices and after resumption. An unresolved testing preference can remain pending while independent implementation and static checks proceed.
 
+For every UI change, record the required [controller assessment](../../wow-controller-support/SKILL.md) by element or coherent control group: interactive/decorative role, controller actions/focus path, per-client evidence and unresolved checks. Connect these interaction criteria to requirement and validation rows. Carry explicit user exclusions and controller test availability through the resume checkpoint; lack of hardware does not remove the assessment or justify a support claim.
+
 Creating or updating the plan is part of the authorized work, not a new approval gate. Continue independent work while a material clarification or the existing UI choice is pending. Honor prior answers and authorization; do not request approval of each document, slice or checkpoint.
 
 ## Implement bounded slices

@@ -63,12 +63,12 @@ local function CreateNativePanel(parent, backdrop, localizedButtonText)
 end
 ```
 
-The panel deliberately keeps the inherited backdrop resize handler. If adding resizing, dragging, ESC handling, tooltips or persistence, verify and implement those separately rather than treating decoration as a complete window-management contract. Integrate through the addon's normal initialization and expose a local reference to its UI controller.
+The panel deliberately keeps the inherited backdrop resize handler. If adding resizing, dragging, ESC handling, tooltips or persistence, verify and implement those separately rather than treating decoration as a complete window-management contract. Integrate through the addon's normal initialization and expose a local reference to its UI controller. Before shipping, complete the required [controller assessment](../../wow-controller-support/SKILL.md): the click handler alone does not establish controller reachability, focus indication or back/close navigation.
 
 ## Verify the result
 
 - Open, close, reopen, resize and change UI scale; check border alignment, clipping and overlapping hit targets.
-- Exercise hover, pressed, disabled, checked/selected, keyboard focus and gamepad input where supported and requested.
+- Exercise hover, pressed, disabled, checked/selected, keyboard focus and applicable gamepad input. Record per-client limitations, explicit user exclusions and unperformed controller checks; controller assessment is required even when not mentioned in the request.
 - Test long/localized labels, empty and overflowing lists, row recycling, selection after sorting, tooltip ownership and missing assets.
 - Check loading and actual interaction on each selected client, including combat transitions if the UI interacts with protected objects. Record Lua errors and distinguish an unsupported capability from a rendering defect.
 - Compare screenshots to the accepted design using [visual fidelity](../../wow-addon-development/references/VISUAL-FIDELITY.md). Use the already selected [testing route](../../wow-addon-development/SKILL.md); simulator appearance alone is not client acceptance.
