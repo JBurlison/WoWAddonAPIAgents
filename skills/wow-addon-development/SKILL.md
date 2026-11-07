@@ -1,6 +1,6 @@
 ---
 name: wow-addon-development
-description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for requirements and implementation tracking on larger addon projects, architecture, UI mock-ups and visual fidelity, user-selected Witchcraft or UIForever testing, optional computer-use checks, Lua/XML/TOC implementation, compatibility, and release validation.
+description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for requirements and implementation tracking on larger addon projects, architecture, UI mock-ups, visual fidelity and required controller consideration, user-selected Witchcraft or UIForever testing, optional computer-use checks, Lua/XML/TOC implementation, compatibility, and release validation.
 ---
 
 # WoW addon development
@@ -28,6 +28,12 @@ Wait for the choice before writing the production UI; continue independent API r
 Visually inspect the accepted mock-up and follow [visual fidelity](references/VISUAL-FIDELITY.md): record its layout and asset plan, choose rendering techniques that reproduce it, and compare actual implementation screenshots against it. Use custom artwork with native text/input/hit regions when the design requires it; do not silently replace the artwork or styling with stock controls and built-in textures. Native controls must remain functional and respect target-specific security rules.
 
 Compare a representative panel early, fix material differences, and repeat before claiming visual completion. Working controls and no Lua errors are not a visual pass. If capture or rendering is unavailable, report the visual comparison as not run; if the design cannot be reproduced, surface the concrete limitation and proposed alternative instead of redefining the accepted mock-up.
+
+## Consider controller support for every UI element
+
+For every task that creates or changes UI, use [controller support](../wow-controller-support/SKILL.md) during design, implementation and acceptance. This is required even when the request mentions only mouse interaction. Classify decorative elements separately; for each interactive element, account for focus/reachability, activation, back/close, tabs, scrolling or text entry as applicable, and visible focus/action hints. Preserve native controller behavior when restyling controls. Honor an explicit user decision to exclude controller operation and record its scope instead of silently forgetting the assessment.
+
+Record the controller interaction plan and per-client capability gaps in the project's requirements or concise task notes. Use verified native navigation/input paths; a mouse-click handler or emulated cursor alone does not prove directional navigation. Keep existing mouse/keyboard behavior and user bindings/settings intact. If controller testing is unavailable, carry the outstanding checks forward and report them as not run rather than claiming support. A passive display can be not applicable with a reason; decorative regions need not become focus stops.
 
 ## Research only the needed systems
 

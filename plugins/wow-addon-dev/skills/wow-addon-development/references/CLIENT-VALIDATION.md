@@ -15,6 +15,8 @@ For selected in-game testing, use [connected client testing](CONNECTED-CLIENT-TE
 | UI | Frames, text, menus, templates, and options work before and after dependency loading. |
 | Visual fidelity | Actual client screenshots at the agreed resolution/UI scale match the accepted design's layout, artwork, typography and relevant states. Material differences are fixed or explicitly resolved; evidence retained. |
 | Interaction | Hit regions match visible controls; hover/pressed/disabled states, focus, text entry, scrolling and tooltips work. Custom artwork does not obstruct native controls. |
+| Controller assessment | Every changed UI element is classified as decorative/passive or interactive, with the applicable controller path, explicit user exclusion or unresolved limitation recorded per client. Follow [controller support](../../wow-controller-support/SKILL.md). |
+| Controller operation | With the recorded device/input mode, test entry and focus order, activation, back/close and modal return, tabs, scrolling, recycled rows and text entry where applicable; focus/action hints remain visible. Check input-mode changes, reopen/reload and combat transitions, preserving mouse/keyboard operation and user bindings. Record unsupported/not-run checks explicitly. |
 | Feature | Auras/spells/bags/talents/events used by the addon return the expected shapes in relevant states. |
 | Combat | Enter/leave combat; no protected-action or secret-value errors, taint regressions, or forbidden data inspection. |
 | World transitions | Zoning, instance entry/exit, group changes, and login lifecycle remain correct where relevant. |

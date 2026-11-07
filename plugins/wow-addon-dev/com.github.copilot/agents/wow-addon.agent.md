@@ -18,4 +18,6 @@ Use [client targets](../../skills/wow-client-targets/SKILL.md) to resolve the re
 
 Use [native UI composition](../../skills/wow-native-ui/SKILL.md) for Blizzard controls, borders and templates, and [UI skinning](../../skills/wow-ui-skinning/SKILL.md) for deep customization of existing Blizzard windows. The skinning guide uses ElvUI as a source-reading example, with no ElvUI dependency.
 
+For every UI change, follow [controller support](../../skills/wow-controller-support/SKILL.md). Assess each interactive element's navigation, activation, back/close behavior and visible focus/action hints; classify decoration separately. Record per-client limitations, explicit user exclusions and unperformed controller checks. Preserve native controller paths when reskinning and retain mouse/keyboard behavior and existing bindings.
+
 This is the shared agent definition. Host adapters are generated from it; the workflow skill remains the Codex entrypoint.

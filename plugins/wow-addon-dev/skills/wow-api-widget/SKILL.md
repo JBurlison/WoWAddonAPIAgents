@@ -12,6 +12,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+Every UI element needs the [controller-support assessment](../wow-controller-support/SKILL.md), including focus/reachability and applicable activation, back, scrolling and text entry. Preserve native gamepad behavior and visible state hints when changing widget scripts or artwork; verify the selected client's contracts before wiring input.
+
 For choosing and assembling native controls, read [native UI composition](../wow-native-ui/SKILL.md). For modifying Blizzard-owned windows, read [UI skinning](../wow-ui-skinning/SKILL.md). Keep this skill for the underlying widget contracts and object methods.
 
 For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
