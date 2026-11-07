@@ -14,6 +14,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 For UI input and controller-facing settings, follow [controller support](../wow-controller-support/SKILL.md). Assess controller reachability and operation, preserve user bindings and CVars, and verify client-specific settings APIs before offering an opt-in change.
 
+For a window that cannot acquire controller focus or a Game Menu-style focus shortcut, use [focus acquisition and diagnostics](../wow-controller-support/references/FOCUS-ACQUISITION.md). Resolve the actual action/context and distinguish an unbound action from an unavailable query before installing temporary bindings or rendering a hint.
+
 For visible settings-panel changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
 
 Follow [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md) when an accepted panel design exists. Preserve its appearance while keeping real settings controls functional; verify the rendered result instead of substituting a default settings layout silently.
