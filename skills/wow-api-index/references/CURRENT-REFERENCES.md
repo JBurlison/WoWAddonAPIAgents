@@ -5,7 +5,7 @@ The packaged ledger contains every Function, Event, ScriptObject method, Structu
 | Target | Build | Declarations | Functions / events / object methods |
 |---|---|---:|---|
 | Retail | 12.1.5.70783 | 9,981 | 4,970 / 1,784 / 1,470 |
-| Forever | 1.60.1.70790 | 10,257 | 5,144 / 1,816 / 1,477 |
+| Forever | 1.60.1.70862 | 10,257 | 5,144 / 1,816 / 1,477 |
 | Classic progression | 5.5.4.70631 | 7,435 | 3,231 / 1,483 / 1,360 |
 
 The [manifest](generated/manifest.json) pins source commits and Git blob IDs, records expected per-file counts, and hashes every generated chunk and navigation artifact. The [namespace routing](NAMESPACE-LOOKUP.md) and [domain routing](DOMAIN-SKILLS.md) cover every generated system, including data-only files and global/object systems.

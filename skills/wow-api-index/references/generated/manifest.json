@@ -28,8 +28,8 @@
     },
     "forever": {
       "branch": "forever",
-      "commit": "eac30af597e5aaa43a60f6675ef5fdcea100375f",
-      "version": "1.60.1.70790",
+      "commit": "9dc84f0d3bbae1768ac3405b3716000bd93eda06",
+      "version": "1.60.1.70862",
       "sourceFiles": 642,
       "records": 10257,
       "kinds": {
@@ -488,7 +488,7 @@
       "target": "forever",
       "owner": "wow-addon-structure",
       "path": "wow-addon-structure/references/generated/forever.json",
-      "sha256": "a54bd8fdb55c241db716769023282905217e195e67d93c71074f55715af401d4",
+      "sha256": "6083a16c47d6fe78a494439a865a9622b22657b30a583001cc3a52a15c7fbf6f",
       "records": 53,
       "kinds": {
         "enumeration": 4,
@@ -501,7 +501,7 @@
       "target": "forever",
       "owner": "wow-api-achievements",
       "path": "wow-api-achievements/references/generated/forever.json",
-      "sha256": "078fb9dde9b061735689a2e0c72e3c7e0aafeb0c817216a84e64729681a52b16",
+      "sha256": "90d271252d919063b7408c900540953e62c27f829dc90708eb8c754bd99f82a6",
       "records": 20,
       "kinds": {
         "event": 11,
@@ -512,7 +512,7 @@
       "target": "forever",
       "owner": "wow-api-calendar-events",
       "path": "wow-api-calendar-events/references/generated/forever.json",
-      "sha256": "86528e353680643b71cb9178ffdd7e1425242f64e072614a95722b466c947f30",
+      "sha256": "01608ce66f673df681add5c5a59b9566f7aef5ff61a5a1308c12db87664ef704",
       "records": 150,
       "kinds": {
         "constants": 2,
@@ -526,7 +526,7 @@
       "target": "forever",
       "owner": "wow-api-collections",
       "path": "wow-api-collections/references/generated/forever.json",
-      "sha256": "6e563a782c4053528689521122748650f7b2452a09a1220db30af2bfe1d22ca6",
+      "sha256": "305056e257a56961f0a882448c0f0607483d3405963f3e14ffd79a547a2b899a",
       "records": 220,
       "kinds": {
         "constants": 3,
@@ -540,7 +540,7 @@
       "target": "forever",
       "owner": "wow-api-combat",
       "path": "wow-api-combat/references/generated/forever.json",
-      "sha256": "80f201fd67e1c666ee2191798e00e95b556c780ab2afbb65878f23afe06e9bac",
+      "sha256": "abb6e58b18293836a1b36f6029e5edf7f89692d12d1fa91d94e4d377e76d2b44",
       "records": 322,
       "kinds": {
         "constants": 5,
@@ -555,7 +555,7 @@
       "target": "forever",
       "owner": "wow-api-currency-economy",
       "path": "wow-api-currency-economy/references/generated/forever.json",
-      "sha256": "1cbc6ccb75dc2aa728f59e9a5a90fd3fcafc30da7f9ac2f872ac1c3b44219726",
+      "sha256": "cb818c7c8e5916f2439e91e3a054982cbe49d0ac978b7d371701f5db1dc22be3",
       "records": 452,
       "kinds": {
         "constants": 3,
@@ -569,7 +569,7 @@
       "target": "forever",
       "owner": "wow-api-encounters",
       "path": "wow-api-encounters/references/generated/forever.json",
-      "sha256": "e0596fe0b976b0aec994de238479d4b1f7f084b6fc2aefdb2e8b5353df844840",
+      "sha256": "50b5a55762cf762a91d0b98ffb5d8efd66b20bf56af838cbc38f7a693ca1a144",
       "records": 350,
       "kinds": {
         "constants": 4,
@@ -586,7 +586,7 @@
       "target": "forever",
       "owner": "wow-api-events",
       "path": "wow-api-events/references/generated/forever.json",
-      "sha256": "ecc98861ba97838ebdd7de06598823c388c3e706bc8d9ed4ba5558752a5223d8",
+      "sha256": "f67c9670b79faa0194e431005912beca0eb224eddb9bd444d4f47e2b8f272384",
       "records": 2,
       "kinds": {
         "function": 2
@@ -596,7 +596,7 @@
       "target": "forever",
       "owner": "wow-api-group-lfg",
       "path": "wow-api-group-lfg/references/generated/forever.json",
-      "sha256": "929179f239c29b70e2b7189b23ead9f2b021fb108ef0e492af3dad4cf7da0782",
+      "sha256": "e4f291976cbba3fb59c643735b7b47c63e7a80c671862c36933fd1d0a19e0c7b",
       "records": 324,
       "kinds": {
         "constants": 4,
@@ -612,7 +612,7 @@
       "target": "forever",
       "owner": "wow-api-guild",
       "path": "wow-api-guild/references/generated/forever.json",
-      "sha256": "334f755939a326cd0a769fa170c1d2882b18d6bcaea767c952b7d857eac23907",
+      "sha256": "4d0cb17967f0ef44d0e636161bba2b6d265079aa157004ef3f7562dbd2d933a2",
       "records": 87,
       "kinds": {
         "enumeration": 1,
@@ -625,7 +625,7 @@
       "target": "forever",
       "owner": "wow-api-housing",
       "path": "wow-api-housing/references/generated/forever.json",
-      "sha256": "0900aee8c3f3054d3dfc9ff93950d13a7da1efe7cea4923373ffd8fb6837141c",
+      "sha256": "b74f1841214a85d9962147aa0f397715740ae70df5c146c0af014fcb4dad7aa0",
       "records": 701,
       "kinds": {
         "callbacktype": 3,
@@ -641,7 +641,7 @@
       "target": "forever",
       "owner": "wow-api-items-inventory",
       "path": "wow-api-items-inventory/references/generated/forever.json",
-      "sha256": "216623e034b91b4a68f157ee6b075fa0fc8594334fd043fd13fb106f05a31c84",
+      "sha256": "8bb019783b5934556060c3461251fcad6dd657618f534c84cdf9f5a9321dc1c8",
       "records": 688,
       "kinds": {
         "constants": 6,
@@ -655,7 +655,7 @@
       "target": "forever",
       "owner": "wow-api-lua-environment",
       "path": "wow-api-lua-environment/references/generated/forever.json",
-      "sha256": "23631f38cd05bb9e7cfb884686c9deca73e9d8c2e270aaa0adba7f42f1188cb9",
+      "sha256": "aac04953f984fa3ac3acec87019229a76f1aab3a7aceaedefd2f91d04a8da091",
       "records": 90,
       "kinds": {
         "callbacktype": 3,
@@ -672,7 +672,7 @@
       "target": "forever",
       "owner": "wow-api-map-navigation",
       "path": "wow-api-map-navigation/references/generated/forever.json",
-      "sha256": "6c619145de227b97792c05c6146ed60ab2c94bc6e0420f135c0ef54b671a857e",
+      "sha256": "4e13766018ae08fc977e56e762f21012ca09d74cf02d919ca40c3f9251ac8bcd",
       "records": 260,
       "kinds": {
         "enumeration": 25,
@@ -687,7 +687,7 @@
       "target": "forever",
       "owner": "wow-api-misc-systems",
       "path": "wow-api-misc-systems/references/generated/forever.json",
-      "sha256": "6ea3db07864b0a8bd1fdd98eb296a4b01ff1d84b973956afa2f12f5856359fdb",
+      "sha256": "95c186aaf4f3e0f76cf60e82d9798fe0d8b70c69dd6cdc5831e4dceea8a80a7f",
       "records": 643,
       "kinds": {
         "constants": 3,
@@ -702,7 +702,7 @@
       "target": "forever",
       "owner": "wow-api-professions",
       "path": "wow-api-professions/references/generated/forever.json",
-      "sha256": "80fb3900aa84568981e92cf18da51561993ab99dfa5dc056b12e074efd34a32f",
+      "sha256": "8310fb1497517e0835a3b3b4c83891378e0704c9d037dfefd8e43929d16029df",
       "records": 328,
       "kinds": {
         "callbacktype": 2,
@@ -717,7 +717,7 @@
       "target": "forever",
       "owner": "wow-api-pvp",
       "path": "wow-api-pvp/references/generated/forever.json",
-      "sha256": "e577ed0536f41f8d94036003d063f9fe18b24b1a5a309985920496bdded805e5",
+      "sha256": "0e889212f9e64cc48757e2a10ca01c2cc5ec6ea98f112c404f3c26a351a45fa2",
       "records": 200,
       "kinds": {
         "constants": 1,
@@ -731,7 +731,7 @@
       "target": "forever",
       "owner": "wow-api-quests",
       "path": "wow-api-quests/references/generated/forever.json",
-      "sha256": "5e1926835d26f82944a3b59d57fe01fff3795b7b9fe1ea145c978c21f3b173c5",
+      "sha256": "4f8a48973f06bfab308ab120ad4528a7326f35a0432d6d84c02ec59408ca253d",
       "records": 325,
       "kinds": {
         "constants": 4,
@@ -746,7 +746,7 @@
       "target": "forever",
       "owner": "wow-api-reputation",
       "path": "wow-api-reputation/references/generated/forever.json",
-      "sha256": "0e42983e545a1ae3d44ceb1de818957003e8626756953143c4096e32cde5da32",
+      "sha256": "5a107c8bd07f45e08a69ddb32aca9dcf405aa39e73e0965443c6089caf662d0a",
       "records": 84,
       "kinds": {
         "constants": 1,
@@ -760,7 +760,7 @@
       "target": "forever",
       "owner": "wow-api-settings-system",
       "path": "wow-api-settings-system/references/generated/forever.json",
-      "sha256": "3e3fc7e93c6cbba9613928afa3bb78a8c5daeba6d02e6894d08514213c3ad505",
+      "sha256": "89592fa18c3366c863b44210dfc31d38a3ca07736c13f6d884e06774749efdc6",
       "records": 384,
       "kinds": {
         "callbacktype": 1,
@@ -776,7 +776,7 @@
       "target": "forever",
       "owner": "wow-api-social-chat",
       "path": "wow-api-social-chat/references/generated/forever.json",
-      "sha256": "17d8c9410a4296c7f1f8a26653cc673722cef4ef254928da64920a67cbfec8d6",
+      "sha256": "b3a70bc3e60b67d85e14af9c42a482e276dcbf93af69cbcf8400483dfb6c60e6",
       "records": 834,
       "kinds": {
         "callbacktype": 8,
@@ -792,7 +792,7 @@
       "target": "forever",
       "owner": "wow-api-spells-abilities",
       "path": "wow-api-spells-abilities/references/generated/forever.json",
-      "sha256": "97111e893c917aea99050f970c37e74b92a54cbe138c7cc59ceec233ba41463b",
+      "sha256": "6958e834254399e4f86d61bee97aefba9a8201f2bd84d5a4b60a186f6e10a4a4",
       "records": 364,
       "kinds": {
         "constants": 6,
@@ -808,7 +808,7 @@
       "target": "forever",
       "owner": "wow-api-talents",
       "path": "wow-api-talents/references/generated/forever.json",
-      "sha256": "0be26fec7c529cc99b847db7026e1b2db883c0ecc2826e2a20d5dbee3015bc5e",
+      "sha256": "46586d48cbdf3330d93a6b837a58bf057d605e51c670a2a55bd84cd978fefdf3",
       "records": 278,
       "kinds": {
         "constants": 4,
@@ -822,7 +822,7 @@
       "target": "forever",
       "owner": "wow-api-transmog",
       "path": "wow-api-transmog/references/generated/forever.json",
-      "sha256": "d0dfc5165b0c5c6e425ccf5d36f02469045afa07cf773b21e21b6046d742f356",
+      "sha256": "14820e9dbe9789f76ab7939c7f3cb04812faf524dfc4aeeb28fc7d3f9266760d",
       "records": 336,
       "kinds": {
         "constants": 2,
@@ -836,7 +836,7 @@
       "target": "forever",
       "owner": "wow-api-unit-player",
       "path": "wow-api-unit-player/references/generated/forever.json",
-      "sha256": "03f8d95095b8c66fd57e107fe2dc6c05cf2395f6985eca8711e8b38fce04ab67",
+      "sha256": "3a4cdf6011d201e22da4d43a354bcbbf9c5340f8d3aa7c9723137d2d1abc605a",
       "records": 886,
       "kinds": {
         "constants": 4,
@@ -852,7 +852,7 @@
       "target": "forever",
       "owner": "wow-api-weekly-rewards",
       "path": "wow-api-weekly-rewards/references/generated/forever.json",
-      "sha256": "381e72d0c5bec00644bbd10a4018d16580c6f67eae5215aab8062f193f1cae97",
+      "sha256": "f08269c0a59d79d447161a4dd2b43defe64b3b67391b56bb2db1af36687bf5a2",
       "records": 29,
       "kinds": {
         "enumeration": 1,
@@ -865,7 +865,7 @@
       "target": "forever",
       "owner": "wow-api-widget",
       "path": "wow-api-widget/references/generated/forever.json",
-      "sha256": "e96d4b29750d93877414d1a4529f8cea2d68ede87422567d86bb2b0a2428fe29",
+      "sha256": "da5822bf5917eb1e0d609451698a736bdf082f2f46b8b0e40881593b59a7e1c0",
       "records": 1574,
       "kinds": {
         "callbacktype": 3,
@@ -882,7 +882,7 @@
       "target": "forever",
       "owner": "wow-lua-api",
       "path": "wow-lua-api/references/generated/forever.json",
-      "sha256": "04f8df9882ed2bb115a1bd9f5d4e568fe8b03490dc8676617c4fa4b89ce3ef48",
+      "sha256": "f275a5c5d2d5933c8dd82ad0c04946cd6f231437ea395174388409db24674959",
       "records": 264,
       "kinds": {
         "constants": 1,
@@ -897,7 +897,7 @@
       "target": "forever",
       "owner": "wow-macro-commands",
       "path": "wow-macro-commands/references/generated/forever.json",
-      "sha256": "ef8550e4070b76b50c0cb9a8e9b72a495a960aa87d58cdbba66f427211c710bb",
+      "sha256": "34deec09de5f8e2b939c4fff80440a6e1b1ecd116cb75c7691735e5cb3679d5a",
       "records": 9,
       "kinds": {
         "callbacktype": 1,
@@ -16025,119 +16025,119 @@
     },
     {
       "path": "wow-addon-structure/references/generated/README.md",
-      "sha256": "cf7dc91d48eca14016527b0ff6acc19aee9074a8a571032cc98b7161b7c9a5bb"
+      "sha256": "6e71466ba4be1b70978135f42057123b81769082f7ce2b327f513ec4b1172eab"
     },
     {
       "path": "wow-api-achievements/references/generated/README.md",
-      "sha256": "097dfa88a41a0ba425456fcab2104acc91ff99efbfc83af6fd1287ccb5d21755"
+      "sha256": "437d95daadc98e78ca5ef85db514c957a5d81642733685a345099c51cfaa77f7"
     },
     {
       "path": "wow-api-calendar-events/references/generated/README.md",
-      "sha256": "b6550144b8b29d6c067f8b2992c4dc072c964dbd8674d0110e4a23cbb2f409fb"
+      "sha256": "b7394b6de81d895ef3953e4a773a8e86bdbd2a069376bdabc867d0dcd2b4da23"
     },
     {
       "path": "wow-api-collections/references/generated/README.md",
-      "sha256": "042c1fb5cf2a726d3c97ee35e00d8321bc00e7aebaf8bebc666eeebcb1e47230"
+      "sha256": "ad83bc4ab8311a1244ffd6bc5424d9130eade6af42b77f1d46122451c61fe45d"
     },
     {
       "path": "wow-api-combat/references/generated/README.md",
-      "sha256": "f15126ca951992056aa86baaf24753b69bd65f00d4516b57aedd096076322a88"
+      "sha256": "4d604029145705757410a3c43b7c78401b3fbef6d527e6c751efbe612884d2d4"
     },
     {
       "path": "wow-api-currency-economy/references/generated/README.md",
-      "sha256": "e080228dbc61dc57071ccd1d43c428eedf85b2ab35aa4a2a7810555552cbaefc"
+      "sha256": "f6409b3ce5d0c4f2b701c0d839a0b92b64e7613442111ef7a6de2045763c48d4"
     },
     {
       "path": "wow-api-encounters/references/generated/README.md",
-      "sha256": "ea8af6e9b2a7df683bece4f40f2c9b7f46d044e1f07a87d368fa8374eee2004b"
+      "sha256": "c87da43610d1cdfd183cf9e944560f7220657dbe4ea32e646d8c009c64ba3607"
     },
     {
       "path": "wow-api-events/references/generated/README.md",
-      "sha256": "92ded7fd2809c32731cfb4795a40a55014cabe245fdab4c323ffcbd1110e05de"
+      "sha256": "e8893d3167716666fae7cd84279d475ab7e9edf6acd649c160fd347c066919dc"
     },
     {
       "path": "wow-api-group-lfg/references/generated/README.md",
-      "sha256": "4fbc80b885680509b2c9379c88c237a71841804fa9b77834ac40262710e9f418"
+      "sha256": "0213f99a202dbf17aff1b5db0210d648d91257a74dc24451b62ee88c10468beb"
     },
     {
       "path": "wow-api-guild/references/generated/README.md",
-      "sha256": "1bfa12cf3e211f9522e7c96146a3606653ec02ad90d11d591f312fdacf553ede"
+      "sha256": "325924677930b11a45a925b178cf084440b661f2559a4ce64ae731649c1956a3"
     },
     {
       "path": "wow-api-housing/references/generated/README.md",
-      "sha256": "856ef80a7d0ceba4cff57e6f73fe99632da119e0be6881236ee8ac14a1d1b8dc"
+      "sha256": "61995dab85d299cdcf1e986b83acbfc188171aa23baa31041b88dc85fd1603fd"
     },
     {
       "path": "wow-api-items-inventory/references/generated/README.md",
-      "sha256": "0254c09a97c10a1e7bf204013811643f11f9f9c07f4d380d6a7db32db898cba0"
+      "sha256": "868d48c4b1504ef65e0f9ec7158dac4294f9ea0d2f038476b03aa04582849fe2"
     },
     {
       "path": "wow-api-lua-environment/references/generated/README.md",
-      "sha256": "92d78d9770c648a0bdfdf334da4567002f44aad79ccbcde6202bfc36c73f114a"
+      "sha256": "ac2c179392eabf186623d8e3af7147c9c27caca05694723d28d0ed341baf0984"
     },
     {
       "path": "wow-api-map-navigation/references/generated/README.md",
-      "sha256": "4a2bcf1c4e13bdb9fd53626222304fac484f0898cf758921d13c8d292724ebd3"
+      "sha256": "7faa3003a6b9ad02ee209561724305e98f388e55e2253992473b94f0ac4b629a"
     },
     {
       "path": "wow-api-misc-systems/references/generated/README.md",
-      "sha256": "a22cd662133ca0946cd65a11bf6ea4481565fed24d927796d95b8cbdb269cf30"
+      "sha256": "eb5aca66724af580e3f5bac91dd50c7cde1e31a8d9b7dc6083c57ea559ca4e94"
     },
     {
       "path": "wow-api-professions/references/generated/README.md",
-      "sha256": "9d3177c01df760858d19a7aa7aedb0228bf0cda6f83607f192a29238fecc1ba7"
+      "sha256": "5090f1b399b55ca512eeabf47bebc8f4295aaf8d938945e8132afbe8dcabf41c"
     },
     {
       "path": "wow-api-pvp/references/generated/README.md",
-      "sha256": "907b9eea6dd90b427815105f3d2e9949a3af77050bcc8a28d8db8397565c93ef"
+      "sha256": "94ceb2c8afed3d87abe72474cf8178896944c35ff195301bc891443b045c267c"
     },
     {
       "path": "wow-api-quests/references/generated/README.md",
-      "sha256": "a1ab0e13052676e0dc31f34a3d6acd55efe5429108600787ff108306c59b96d5"
+      "sha256": "097b35da2feb766d8a569816a6eecbb1950fc02f1a59e6e38e0ee63915a3094d"
     },
     {
       "path": "wow-api-reputation/references/generated/README.md",
-      "sha256": "81fcdc774ed6818ae042eecca76d44f370f03db28e95c48ffc7aa01516eca630"
+      "sha256": "75e3e2ef81d609e13a4f101d5ee168199227717e22e5a43dccf65648a0230a5c"
     },
     {
       "path": "wow-api-settings-system/references/generated/README.md",
-      "sha256": "b96b2e978c4e5b13c7510513bc0aa997797702c9fde9f1a95f9cdb8047382555"
+      "sha256": "c5927baf6f0f4a7eb26be5679eb82efe32e09814aedc8c3ee0371698fca2d1c9"
     },
     {
       "path": "wow-api-social-chat/references/generated/README.md",
-      "sha256": "6e16c3f156c9ac0d2a0c937080f285914bb08279b468a35613f4581bf20544f5"
+      "sha256": "739d876b8a301513e502cc60ed878119331f2dd142f1c38985e0dd6199e0ae4c"
     },
     {
       "path": "wow-api-spells-abilities/references/generated/README.md",
-      "sha256": "e8ac6221fe8041ee6ffadc687a5f0da42a2850b9964a513216d47ed9d9554831"
+      "sha256": "0184270c816fc2fc71e161d144793e0f4b3a1c7ca128063e396aa9cececa97ca"
     },
     {
       "path": "wow-api-talents/references/generated/README.md",
-      "sha256": "c1290b357f1d71c7a7b29f5499c1e4e05e4ccaa8f54d5fca5a16e10ca04d76e5"
+      "sha256": "082118ac8a110a931f68e0bb68b37e1c45171ffdfaf0bad6a2aaedc3aa02db23"
     },
     {
       "path": "wow-api-transmog/references/generated/README.md",
-      "sha256": "a9f0a733b4fc47c70c887ae63b7a5266f4fa958c54db5ab43c5f21992c53f25d"
+      "sha256": "586032f33ec5ebfa45c182add87d0910d4df56b64770ec546b0866ef8879c432"
     },
     {
       "path": "wow-api-unit-player/references/generated/README.md",
-      "sha256": "cdd3ed72d3be10231d31f15a15e615063fa0e95da037be3c4827dd96f9f2c93f"
+      "sha256": "330de5e5a9aefb33c2eda5d17de2f1c53b3ba620773a0a4cd48dab8ea44e887c"
     },
     {
       "path": "wow-api-weekly-rewards/references/generated/README.md",
-      "sha256": "835a5afc0e57a0ed34334d22aaeab6a175823e0af35e1d56dab4be7cdefc1832"
+      "sha256": "b99d9db749b9be667df4a354ab3daffa9fa522526a9913fa54bfce89b243af28"
     },
     {
       "path": "wow-api-widget/references/generated/README.md",
-      "sha256": "4c129ff9d35b288e1d5a66bf8dfd3839ddb77d41e8bc2cf111622b3417f0fb2a"
+      "sha256": "5248c9f5adb668ae3fb9eeba13223a17182541b840b6f09d8ec4445976c911b7"
     },
     {
       "path": "wow-lua-api/references/generated/README.md",
-      "sha256": "ab53ae10540f5d894f6fbac15b4994e88da308d75ed490b9a546caf98ef2ccdd"
+      "sha256": "c7c744a32d3d553554aad0d8e313b7819dd58587d78b413707e087735a59f253"
     },
     {
       "path": "wow-macro-commands/references/generated/README.md",
-      "sha256": "abc6373f331e3ce7be97b0957b1e98de6f1ee212425e513f4776f8f2ca7b6d7f"
+      "sha256": "44ffc2efc7775be3701adce4c4cec48ac30376b63a8159ea4c0392dabdf050c7"
     },
     {
       "path": "wow-api-index/references/NAMESPACE-LOOKUP.md",
@@ -16149,19 +16149,19 @@
     },
     {
       "path": "wow-api-events/references/EVENTS-A-F.md",
-      "sha256": "5b45e3a6e0794231d2c8a794b48a7b61ab1c57ec8c0c67dc56a3b7182199c681"
+      "sha256": "3ebe5e6aaf8b9a97a7235b93a4ecb62f1c3b8f6e39cd96a1e80402c0fef4e745"
     },
     {
       "path": "wow-api-events/references/EVENTS-G-L.md",
-      "sha256": "1a18deb7d31ac5744150f79d924364b203c66fee9ac88b7bea7b6bc11bfd6686"
+      "sha256": "04184de856798a0ab612a2b5f37b731885822c7dd34f292d9cc83fb4d262e091"
     },
     {
       "path": "wow-api-events/references/EVENTS-M-R.md",
-      "sha256": "0c7e18544b5b703a750ef2b392dadc35a1e3f9102ff693f9401ffda652b8e4a1"
+      "sha256": "13748bb2694102a8249fd40066915a4bc8535c0859c31a29db4dfcda95efaeae"
     },
     {
       "path": "wow-api-events/references/EVENTS-S-Z.md",
-      "sha256": "66ce82f93b19bb389c41e5913785ae300c488283fb9ee9c8b814ac03b9a0e356"
+      "sha256": "8dd680b6407ab1527466cc05212c7c81724859205ede27a386ad961554ef6e71"
     }
   ],
   "symbolIndex": {
