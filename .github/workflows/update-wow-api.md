@@ -2,7 +2,7 @@
 name: Update WoW API knowledge
 on:
   schedule:
-    - cron: '17 9 * * *'
+    - cron: '17 9 * * 1'
   workflow_dispatch:
   permissions:
     contents: read
@@ -221,7 +221,7 @@ domain verified after checking one function. New claims need target/build, sourc
 links, signatures, event payloads, loading conditions, and access restrictions.
 Unknown is better than guessed availability.
 
-Gethe is the daily primary declaration/loading source. The Forever addon-kit is
+Gethe is the primary declaration/loading source for the weekly review. The Forever addon-kit is
 build-scoped supplemental runtime evidence, reviewed when relevant to a changed
 feature or explicitly requested by a maintainer; it is not a second scheduled
 monitor. Keep its build, enabled-addon context and observed names separate from
