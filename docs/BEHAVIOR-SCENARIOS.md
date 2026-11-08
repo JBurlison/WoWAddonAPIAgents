@@ -71,7 +71,7 @@ Verify installed references without the source repository nearby. Invoke the wor
 
 Use the [per-client checklist](../skills/wow-addon-development/references/CLIENT-VALIDATION.md) for actual addon releases.
 
-## Controller guidance review — 2.5.1
+## Controller guidance review — 2.5.2
 
 On 2026-11-07, an independent Codex desktop subagent received the following prompts and read the updated maintained skills without the author's intended answers. Host version/model identifier were not exposed in the review result. This was a local guidance review, not an isolated installed-plugin invocation, addon implementation, simulator run or physical-controller test.
 
