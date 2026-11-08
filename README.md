@@ -88,7 +88,7 @@ Multi-version addons default to shared Lua and compatibility code with separate 
 
 ## Maintenance
 
-The daily [agentic workflow](.github/workflows/update-wow-api.md) checks upstream before inference and proposes draft PRs for relevant changes using **GitHub Copilot with Sonnet**, billed through the token owner's Copilot plan and credits. It never merges automatically and defers proposals while an update PR is open.
+The weekly [agentic workflow](.github/workflows/update-wow-api.md) checks upstream on Mondays at **09:17 UTC** before inference and proposes draft PRs for relevant changes using **GitHub Copilot with Sonnet**, billed through the token owner's Copilot plan and credits. It never merges automatically and defers proposals while an update PR is open. Manual runs remain available.
 
 Configure `COPILOT_GITHUB_TOKEN` with a fine-grained personal GitHub token granting **Account permissions → Copilot Requests: Read**, enable Actions PR creation, and merge the compiled workflow to the default branch. No OpenAI or Anthropic API key is required. See [automation setup](docs/AUTOMATION.md) and [contributing](CONTRIBUTING.md). Repository files alone do not configure credentials or activate a remote workflow.
 

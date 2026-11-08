@@ -1,6 +1,6 @@
 # Upstream automation
 
-[Workflow source](../.github/workflows/update-wow-api.md) is compiled with **gh-aw v1.0.1**. Its lock YAML runs daily at **09:17 UTC**, with manual dispatch available. GitHub can delay scheduled runs.
+[Workflow source](../.github/workflows/update-wow-api.md) is compiled with **gh-aw v1.0.1**. Its lock YAML runs weekly on **Mondays at 09:17 UTC** (`17 9 * * 1`), with manual dispatch available. GitHub can delay scheduled runs.
 
 ## Activate
 
@@ -45,7 +45,7 @@ GitHub-token-authored PRs may not trigger ordinary PR workflows, so validation r
 
 | Evidence source | Cadence / trigger | Allowed conclusion |
 |---|---|---|
-| Gethe source mirror | Existing daily job, plus manual dispatch | Pinned declarations, schemas, annotations and UI loading paths. Source presence is not runtime addon permission. |
+| Gethe source mirror | Weekly on Mondays at 09:17 UTC, plus manual dispatch | Pinned declarations, schemas, annotations and UI loading paths. Source presence is not runtime addon permission. |
 | Forever addon-kit | Supplemental review for an affected capability/build or an explicit maintainer request | Dated observations in that captured client/addon-load context. Preserve build and contamination limits; a name-only dump cannot supply signatures or events. |
 | Townlong-Yak build/source pages | Corroboration when investigating a build or source discrepancy | What the retrieved build listing/source actually shows; absent Forever listings do not establish absent APIs. |
 | Developer guides and wiki references | Research leads during feature review; record access failures and source dates | Navigation and dated community claims to verify against primary source or runtime evidence. |
