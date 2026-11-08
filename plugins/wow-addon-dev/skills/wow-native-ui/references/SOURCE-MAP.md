@@ -12,6 +12,8 @@ The three commits' `version.txt` files were read. The Classic tree uses client-s
 
 ## Forever starting points
 
+For a later, narrowly reviewed **2026-11-08 / 1.60.1.70862** observation of the HUD Edit Mode dialog, gold artwork and close/button state assets, see [Forever native artwork](FOREVER-NATIVE-ART.md). That reference uses its own immutable pin; it does not advance the declaration registry or certify the rest of the client. Keep the older table's provenance intact.
+
 | Component | Pinned source | Observation and boundary |
 |---|---|---|
 | Backdrop mixin | [Backdrop.xml](https://github.com/Gethe/wow-ui-source/blob/eac30af597e5aaa43a60f6675ef5fdcea100375f/Interface/AddOns/Blizzard_SharedXML/Backdrop.xml), [Backdrop.lua](https://github.com/Gethe/wow-ui-source/blob/eac30af597e5aaa43a60f6675ef5fdcea100375f/Interface/AddOns/Blizzard_SharedXML/Backdrop.lua) | SharedXML includes the XML; it imports Lua and defines `BackdropTemplate` with load/resize handlers. The Lua defines the backdrop descriptor and color methods. |
