@@ -2,7 +2,7 @@
 name: wow-api-settings-system
 description: Look up WoW Settings registration, CVars, input/keybindings,
   gamepad, Edit Mode, sound/video, time/build information and Forever game
-  rules. Use for addon preferences, client options and settings integration.
+  rules. Use for addon preferences, built-in addon options-menu registration, client options and settings integration.
   Resolve Retail, Forever or Classic with wow-client-targets first.
 ---
 
@@ -11,6 +11,8 @@ description: Look up WoW Settings registration, CVars, input/keybindings,
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
+
+Start with [addon options integration](references/ADDON-OPTIONS.md) for required menu discoverability, registration lifetime, saved defaults, profile changes and acceptance. Use [localization](../wow-addon-development/references/LOCALIZATION.md) for category names, controls, tooltips and messages; keep setting identifiers unlocalized and translate intent naturally.
 
 For UI input and controller-facing settings, follow [controller support](../wow-controller-support/SKILL.md). Assess controller reachability and operation, preserve user bindings and CVars, and verify client-specific settings APIs before offering an opt-in change.
 

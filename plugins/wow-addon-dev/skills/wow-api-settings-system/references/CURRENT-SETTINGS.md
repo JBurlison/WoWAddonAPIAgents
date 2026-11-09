@@ -4,6 +4,8 @@ Reviewed 2026-10-31 against the three commits in [target snapshots](../../wow-cl
 
 ## Settings UI and saved preferences
 
+Follow [addon options](ADDON-OPTIONS.md) for baseline menu integration and acceptance, and [localization](../../wow-addon-development/references/LOCALIZATION.md) before constructing user-facing strings. The focused options source map supplies a newer dated contract review without relabeling this historical review as fresh.
+
 The same five registration signatures used below occur in the inspected [Retail Settings implementation](https://github.com/Gethe/wow-ui-source/blob/d07eb00237d8891f153215db98a5df880a26cfe5/Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Settings.lua), [Forever implementation](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Settings.lua) and [Classic implementation](https://github.com/Gethe/wow-ui-source/blob/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Settings.lua). Shared source signatures do not prove identical panel availability in every client state.
 
 | Helper | Contract and purpose |
@@ -18,7 +20,8 @@ The same five registration signatures used below occur in the inspected [Retail 
 Initialize SavedVariables after the addon's own `ADDON_LOADED`, not at file parse time. The [Forever implementation guide](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_Settings_Shared/Blizzard_ImplementationReadme.lua) documents the addon-facing registration flow. This minimal example needs `## SavedVariables: MyAddonSettings` in the selected client's TOC:
 
 ```lua
-local addonName = ...
+local addonName, ns = ...
+local L = ns.L -- Load the complete base catalog and locale overrides first.
 local category
 local loader = CreateFrame("Frame")
 loader:RegisterEvent("ADDON_LOADED")
@@ -31,19 +34,19 @@ loader:SetScript("OnEvent", function(self, _, loadedName)
     if not (Settings and Settings.RegisterVerticalLayoutCategory
         and Settings.RegisterAddOnSetting and Settings.CreateCheckbox
         and Settings.RegisterAddOnCategory) then
-        print(addonName .. ": Settings integration is unavailable in this client state.")
+        print(L.OPTIONS_UNAVAILABLE)
         return
     end
     category = Settings.RegisterVerticalLayoutCategory(addonName)
     local setting = Settings.RegisterAddOnSetting(category,
         addonName .. "_ENABLED", "enabled", MyAddonSettings,
-        Settings.VarType.Boolean, "Enabled", true)
-    Settings.CreateCheckbox(category, setting, "Enable this addon's display.")
+        Settings.VarType.Boolean, L.OPTIONS_ENABLED, true)
+    Settings.CreateCheckbox(category, setting, L.OPTIONS_ENABLED_TOOLTIP)
     Settings.RegisterAddOnCategory(category)
 end)
 ```
 
-This demonstrates persistence and registration, not the addon's display implementation. If behavior must update immediately, attach `setting:SetValueChangedCallback(function(setting, value) ... end)` and apply the ordinary saved boolean to addon-owned UI. Register once and open the category from a user action; do not recreate settings every time the panel opens.
+The base catalog must define `OPTIONS_UNAVAILABLE`, `OPTIONS_ENABLED` and `OPTIONS_ENABLED_TOOLTIP`; a stable proper addon name can remain the category title. This demonstrates persistence and registration, not the addon's display implementation. If behavior must update immediately, attach `setting:SetValueChangedCallback(function(setting, value) ... end)` and apply the ordinary saved boolean to addon-owned UI. Apply the initial saved state separately. Register once and open the category from a user action; do not recreate settings every time the panel opens.
 
 Loading evidence matters: [Blizzard_Settings_Shared.toc](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_Settings_Shared/Blizzard_Settings_Shared.toc) loads the API, inbound bridge and panel; [SettingsDefinitions_Shared](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_SettingsDefinitions_Shared/Blizzard_SettingsDefinitions_Shared.toc) depends on it. `Blizzard_Settings` is a separate load-on-demand marker addon; loading that marker alone is not proof that the full shared UI is ready. If the verified registration path is unavailable, keep saved preferences intact and use a separately verified custom panel.
 

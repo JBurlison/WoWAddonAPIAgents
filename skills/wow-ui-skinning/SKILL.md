@@ -5,6 +5,8 @@ description: Reskin and deeply customize Blizzard's existing windows and control
 
 # Skin Blizzard UI without a framework dependency
 
+Expose configurable skin preferences through [addon options](../wow-api-settings-system/references/ADDON-OPTIONS.md). Follow [localization](../wow-addon-development/references/LOCALIZATION.md) for addon-owned text and preserve native localized labels, glyph coverage and layouts; a reskin must not replace game-supplied wording with hardcoded English.
+
 Use this skill when the requested interface already belongs to Blizzard. For new addon-owned windows or controls with native styling, use [wow-native-ui](../wow-native-ui/SKILL.md). For the overall design and testing choices, follow [wow-addon-development](../wow-addon-development/SKILL.md), honoring answers already given.
 
 ## Establish the surface and target

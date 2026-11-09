@@ -12,6 +12,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+Load the base [localization catalog](../wow-addon-development/references/LOCALIZATION.md), locale overrides and then text consumers in each target's file list. Initialize/migrate SavedVariables before [options registration](../wow-api-settings-system/references/ADDON-OPTIONS.md); keep database keys independent of display language.
+
 Verify third-party TOC directives, client interface, addon loading APIs, dependencies, initialization order, and SavedVariables. Package a normal TOC per target rather than assuming every client supports the same suffixes or conditions.
 
 Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.

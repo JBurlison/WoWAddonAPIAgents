@@ -23,6 +23,8 @@ Version **2.4.0** adds [native UI composition](skills/wow-native-ui/SKILL.md) fo
 
 Version **2.5.0** adds [controller support](skills/wow-controller-support/SKILL.md) and makes controller interaction a required consideration for every UI change. Native controls and reskins must account for focus, activation, back/close, applicable tabs/scrolling/text entry, visible action hints and existing mouse/keyboard behavior. Plans and acceptance checklists retain per-client limitations, explicit user exclusions and unperformed hardware tests. See the [release validation report](docs/RELEASE-2.5.0.md).
 
+Version **2.6.0** makes [addon options-menu integration](skills/wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](skills/wow-addon-development/references/LOCALIZATION.md) baseline requirements for new addons and relevant changes. Guidance covers discoverable settings, saved preferences and profiles, fallback catalogs, natural target-language meaning and phrasing, translation coverage, and per-client acceptance. Existing skill entrypoints, agent adapters and planning templates carry these requirements.
+
 ## Install
 
 Marketplace: `wow-addon-api-agents`. Plugin: `wow-addon-dev`. Packages are committed; consumers do not need Node.js or a build step.

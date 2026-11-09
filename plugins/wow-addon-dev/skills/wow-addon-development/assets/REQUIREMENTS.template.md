@@ -27,6 +27,14 @@
 - Layout, assets and states to preserve: [references]
 - Intended resolution/UI scale and interaction criteria: [values]
 
+## Options-menu integration and localization (baseline requirements)
+
+- Options discovery: [built-in addon settings category/subcategories and shortcuts; or no configurable behavior / explicit user exclusion with reason]
+- Settings lifecycle: [account/character/profile scope, defaults/migrations, immediate/Apply/reload behavior, reset scope and stable IDs]
+- Locale architecture: [base catalog, override/consumer file order, fallback policy and internal IDs to preserve]
+- Translation coverage: [locales; complete/partial/unreviewed; context and natural-language terminology/meaning review; remaining work]
+- Acceptance REQ IDs: [menu discovery, persistence/defaults/profile switching, missing-key fallback, formatting, natural phrasing and localized layout; per-client results belong in the matrix]
+
 ## Controller interaction assessment (required for UI changes)
 
 | UI element or control group | Role | Controller path and visible cues | Target evidence / gaps | Acceptance or explicit user exclusion |

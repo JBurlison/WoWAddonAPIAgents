@@ -41,6 +41,7 @@ Validation statuses: `pass`, `fail`, `not run`, `not applicable` (with reason), 
 - Decisions to retain: [DEC IDs and concise effects]
 - Testing choice: [route and user answer/source; setup or fallback decision; pending checks]
 - Controller assessment: [UI requirement IDs, action/focus plan, device/input mode tested, explicit exclusions, per-client gaps and pending checks]
+- Options/localization: [menu and saved-preference REQ IDs, catalog/locale coverage, linguistic review status, exclusions and outstanding per-client checks]
 - Read next: [ordered, short list of requirement sections, code files and evidence paths]
 - Drift since verification: [changed code, source pins, targets, design or none; validation IDs made stale]
 

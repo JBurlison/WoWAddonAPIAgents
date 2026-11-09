@@ -5,6 +5,8 @@ description: Build addon-owned windows and controls using Blizzard's native UI t
 
 # Build with native UI elements
 
+Treat [options-menu discovery](../wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](../wow-addon-development/references/LOCALIZATION.md) as baseline concerns. Catalog addon-owned labels/tooltips and translate their meaning naturally; verify long-text layout and glyphs alongside controller focus. Keep native game-supplied localized text intact where appropriate.
+
 Use native controls and artwork when they match the requested appearance. Start with [client targets](../wow-client-targets/SKILL.md): resolve each selected client and pin its branch before choosing templates. A template in the source tree may belong to another game family, depend on another addon, or have client-specific overrides.
 
 For new visible UI, follow the [design and mock-up choice](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation, honoring an already accepted design or choice.
