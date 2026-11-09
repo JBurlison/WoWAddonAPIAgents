@@ -13,6 +13,8 @@ This is task routing, not an API-availability claim. Resolve the target first; u
 | Calendar and scheduled events | [wow-api-calendar-events](../../wow-api-calendar-events/SKILL.md) |
 | Combat, damage meters, swings and threat | [wow-api-combat](../../wow-api-combat/SKILL.md) |
 | CVars, settings, game rules, input and key bindings | [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) |
+| Addon categories in the options/settings menu | [Addon options integration](../../wow-api-settings-system/references/ADDON-OPTIONS.md) |
+| Localization, natural translations, text catalogs and locale fallback | [Addon localization](../../wow-addon-development/references/LOCALIZATION.md) |
 | Encounters, instances, scenarios, Mythic+, raids and seasons | [wow-api-encounters](../../wow-api-encounters/SKILL.md) |
 | Event names, payloads and callback distinction | [wow-api-events](../../wow-api-events/SKILL.md) |
 | FrameXML globals, mixins, pools and callbacks | [wow-api-framexml](../../wow-api-framexml/SKILL.md) |

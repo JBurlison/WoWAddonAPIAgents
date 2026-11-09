@@ -21,6 +21,8 @@ Use for any selected combination of Retail, Forever, and Classic progression. Fi
 
 ## Target-specific decisions
 
+For addon text and translations, use [localization](../wow-addon-development/references/LOCALIZATION.md): catalogs/fallback, natural target-language meaning, formatting, layout and actual translation coverage. Native Locale/Localization declarations do not translate addon-owned text automatically.
+
 Identify the particular subsystem first; verify its availability, owning addon, namespace, signatures, and security. A miscellaneous lookup is not evidence that all listed systems exist on a target.
 
 Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.

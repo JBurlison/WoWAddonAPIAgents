@@ -23,6 +23,8 @@ With Node.js 22+, run `node <this-skill>/scripts/query.mjs forever C_Spell.GetSp
 
 ## Non-generated surfaces
 
+Use [addon options](../wow-api-settings-system/references/ADDON-OPTIONS.md) for built-in menu discovery and saved preference lifecycle, and [localization](../wow-addon-development/references/LOCALIZATION.md) for catalogs, natural target-language phrasing and locale acceptance. Both are baseline concerns for new addons and relevant changes.
+
 Use [controller support](../wow-controller-support/SKILL.md) for required UI interaction assessment, native gamepad navigation, focus, action hints and per-client controller acceptance. Source declarations alone do not show that a custom panel is reachable or operable with a controller.
 
 For task-level UI work, use [native UI composition](../wow-native-ui/SKILL.md) to select and assemble controls and [UI skinning](../wow-ui-skinning/SKILL.md) to restyle Blizzard-owned windows while preserving their behavior. The generated object-method ledger supplies contracts; these skills supply composition and lifecycle guidance.

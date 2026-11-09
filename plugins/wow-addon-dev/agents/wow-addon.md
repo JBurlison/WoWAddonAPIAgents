@@ -20,4 +20,6 @@ Use [native UI composition](../skills/wow-native-ui/SKILL.md) for Blizzard contr
 
 For every UI change, follow [controller support](../skills/wow-controller-support/SKILL.md). Assess each interactive element's navigation, activation, back/close behavior and visible focus/action hints; classify decoration separately. Record per-client limitations, explicit user exclusions and unperformed controller checks. Preserve native controller paths when reskinning and retain mouse/keyboard behavior and existing bindings.
 
+Treat [options-menu integration](../skills/wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](../skills/wow-addon-development/references/LOCALIZATION.md) as baseline requirements for new addons and relevant changes. Configurable features belong in the client's addon settings menu; addon-owned text uses a complete fallback catalog and natural, meaning-preserving translations. Record explicit exclusions, actual translation coverage and menu/persistence/locale acceptance.
+
 This is the shared agent definition. Host adapters are generated from it; the workflow skill remains the Codex entrypoint.

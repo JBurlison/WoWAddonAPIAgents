@@ -18,6 +18,8 @@ Creating or updating the plan is part of the authorized work, not a new approval
 
 ## Implement bounded slices
 
+For new addons and relevant changes, include baseline [options-menu integration](../../wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](LOCALIZATION.md) requirements and acceptance rows. Record category discovery, preference scope/defaults/migrations, catalog loading/fallback, declared locale coverage, natural phrasing/meaning review and localized layout. Preserve stable internal IDs and existing settings across language/profile changes. Record explicit exclusions or no configurable behavior with a reason; an English fallback or automated placeholder check is not a translation-quality pass.
+
 Map every `REQ-` ID to matrix rows, including blocked, deferred or superseded requirements. Split broad requirements into rows by target or acceptance case when needed. Each row identifies a bounded vertical slice, dependencies/order, one owner, affected files and validation evidence. A useful slice completes one observable behavior through its data, state and UI layers, small enough to inspect and verify before expanding.
 
 Before a slice, read the relevant requirements, checkpoint, dependencies and code. Implement it, run the checks appropriate to the changed behavior, then reconcile its files and results in the matrix. Keep implementation status separate from verification: written code may be implemented while client acceptance remains not run. Record validation by target and build, with separate design/visual comparison, static, simulator and in-game results. Follow [client validation](CLIENT-VALIDATION.md); a simulator or static pass never fills an in-game result.

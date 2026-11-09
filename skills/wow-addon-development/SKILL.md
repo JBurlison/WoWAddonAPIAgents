@@ -1,6 +1,6 @@
 ---
 name: wow-addon-development
-description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for requirements and implementation tracking on larger addon projects, architecture, UI mock-ups, visual fidelity and required controller consideration, user-selected Witchcraft or UIForever testing, optional computer-use checks, Lua/XML/TOC implementation, compatibility, and release validation.
+description: Design, build, debug, port, and package World of Warcraft addons for Retail, Forever, Classic progression, or any combination of these clients. Use for requirements tracking, options-menu integration, localization, architecture, UI mock-ups, visual fidelity and controller consideration, user-selected Witchcraft or UIForever testing, Lua/XML/TOC implementation, compatibility, and release validation.
 ---
 
 # WoW addon development
@@ -16,6 +16,12 @@ description: Design, build, debug, port, and package World of Warcraft addons fo
 For a new addon, a substantial feature, or a long request spanning multiple systems, follow [project planning and resumption](references/PROJECT-PLANNING.md). Create or update the requirements document and implementation matrix in the user's addon repository, using the packaged templates when no equivalent documents exist. Give requirements stable IDs and connect every requested behavior to implementation work and observable acceptance evidence, including target-specific and visual checks. A small isolated fix can use concise task notes instead.
 
 Work through bounded, dependency-ordered slices. Update the matrix and its checkpoint after each slice and before a handoff or context reset. On resumption, read those files and inspect the recorded revision before continuing; reconcile new user instructions without silently losing earlier requirements. Existing authorization remains valid: the documents organize work and do not create an extra approval gate. Keep unresolved required behavior visible instead of marking the whole project complete because the current slice passes.
+
+## Treat options and localization as baseline requirements
+
+For new addons and relevant changes, follow [addon options](../wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](references/LOCALIZATION.md). Expose user-configurable behavior through the selected client's built-in addon settings menu, with stable setting identities, saved defaults/migrations and verified registration/loading. Route options work through [settings](../wow-api-settings-system/SKILL.md). A slash command can supplement discovery. An addon with no configurable behavior can record that reason; preserve explicit user exclusions and avoid expanding an isolated unrelated fix.
+
+Route addon-owned visible text through a localization catalog with a complete English fallback, including options, tooltips, help, errors and controller hints. Translate intent into natural target-language phrasing, grammar and terminology rather than matching English words or sentence structure. Record supported locales, translation/review coverage and per-client menu, persistence and localized-layout acceptance in requirements or task notes. Fallback readiness is not evidence that every language is translated or tested. Carry both requirements through implementation and delivery without adding approval gates.
 
 ## Ask about a UI mock-up before implementation
 
