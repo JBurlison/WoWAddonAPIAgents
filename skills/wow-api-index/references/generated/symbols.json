@@ -16658,6 +16658,7 @@
 ["C_TradeSkillUI.GetSourceTypeFilter","function","wow-api-professions"],
 ["C_TradeSkillUI.GetTradeSkillDisplayName","function","wow-api-professions"],
 ["C_TradeSkillUI.HasFavoriteOrderRecipes","function","wow-api-professions"],
+["C_TradeSkillUI.HasNoReagentCost","function","wow-api-professions"],
 ["C_TradeSkillUI.IsEnchantTargetValid","function","wow-api-professions"],
 ["C_TradeSkillUI.IsGuildTradeSkillsEnabled","function","wow-api-professions"],
 ["C_TradeSkillUI.IsNPCCrafting","function","wow-api-professions"],
