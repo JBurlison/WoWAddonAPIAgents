@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="WoW Addon Development">
+  <path d="M128 34 L202 58 C202 124 178 180 128 220 C78 180 54 124 54 58 Z" fill="#13294B" stroke="#B87D14" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M128 34 L202 58 C202 124 178 180 128 220 C78 180 54 124 54 58 Z" fill="none" stroke="#F2B830" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M128 44 L128 210 C85 174 64 122 64 64 Z" fill="#1E3F73"/>
+  <path d="M128 46 L191 66 C191 122 170 172 128 208 C86 172 65 122 65 66 Z" fill="none" stroke="#F2B830" stroke-opacity="0.35" stroke-width="2" stroke-linejoin="round"/>
+  <polyline points="96,108 78,126 96,144" fill="none" stroke="#F2B830" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="138" y1="102" x2="118" y2="150" stroke="#F2B830" stroke-width="6" stroke-linecap="round"/>
+  <polyline points="160,108 178,126 160,144" fill="none" stroke="#F2B830" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="128,101 144,126 128,151 112,126" fill="#38BDF8" stroke="#13294B" stroke-width="2.5" stroke-linejoin="round"/>
+  <polygon points="128,110 136,126 128,142 120,126" fill="#5CE1E6"/>
+</svg>

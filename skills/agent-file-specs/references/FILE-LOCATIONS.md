@@ -8,8 +8,9 @@ The source of truth is root-level skills/, agents/, instructions/, and config/pl
 | Codex portable plugin | skills at plugin root | Workflow skill entrypoint | .agents/plugins/marketplace.json at repository root |
 | Claude plugin | skills at plugin root | agents at plugin root | .claude-plugin/marketplace.json at repository root |
 | Copilot portable plugin | skills at plugin root | com.github.copilot/agents; com.github.copilot/rules | .github/plugin/marketplace.json at repository root |
+| Antigravity plugin | skills at plugin root | agents and rules/AGENTS.md at plugin root | .antigravity-plugin/plugin.json; discovered via ~/.gemini/config/plugins/, .agents/plugins/, or plugins.json |
 
-The portable root plugin.json uses Agent Plugins 1.0. Claude reads its own .claude-plugin/plugin.json. The Codex compatibility manifest is .codex-plugin/plugin.json; only the manifest belongs there, not the skills. Do not assume every host supports Copilot tool names or file types.
+The portable root plugin.json uses Agent Plugins 1.0. Claude reads its own .claude-plugin/plugin.json. The Codex compatibility manifest is .codex-plugin/plugin.json; only the manifest belongs there, not the skills. Antigravity reads .antigravity-plugin/plugin.json (falling back to root plugin.json) and always-on rules/AGENTS.md without frontmatter. Do not assume every host supports Copilot tool names or file types.
 
 For standalone project customization, Codex uses AGENTS.md for repository instructions and .agents/skills for project skills; Claude uses its own project/skill/agent conventions. Consult current host documentation rather than deriving paths by renaming .github. The maintenance helper examples using <provider>/ are Copilot-oriented patterns.
 

@@ -1,6 +1,6 @@
 # Contributing
 
-Use Node.js 22+. Maintained sources are curated `skills/` content, `agents/`, `instructions/wow-api.instructions.md`, `config/plugin.json`, and the explicit declaration ownership map `config/api-owners.json`. The shared WoW agent delegates to the `wow-addon-development` workflow skill. Do not hand-edit generated `.github/agents/`, `.github/instructions/`, reference JSON/catalogs/event tables, or `plugins/wow-addon-dev`.
+Use Node.js 22+. Maintained sources are curated `skills/` content, `agents/`, `instructions/wow-api.instructions.md`, `assets/logo.svg`, `config/plugin.json`, and the explicit declaration ownership map `config/api-owners.json`. The shared WoW agent delegates to the `wow-addon-development` workflow skill. Do not hand-edit generated `.github/agents/`, `.github/instructions/`, reference JSON/catalogs/event tables, or `plugins/wow-addon-dev`.
 
 ```sh
 npm ci --ignore-scripts

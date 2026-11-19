@@ -9,6 +9,7 @@ export const versionFiles = [
   'plugins/wow-addon-dev/plugin.json',
   'plugins/wow-addon-dev/.codex-plugin/plugin.json',
   'plugins/wow-addon-dev/.claude-plugin/plugin.json',
+  'plugins/wow-addon-dev/.antigravity-plugin/plugin.json',
   '.claude-plugin/marketplace.json', '.github/plugin/marketplace.json',
 ];
 export function parts(version) {

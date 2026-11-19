@@ -92,6 +92,7 @@ safe-outputs:
       - 'plugins/wow-addon-dev/plugin.json'
       - 'plugins/wow-addon-dev/.codex-plugin/plugin.json'
       - 'plugins/wow-addon-dev/.claude-plugin/plugin.json'
+      - 'plugins/wow-addon-dev/.antigravity-plugin/plugin.json'
       - '.claude-plugin/marketplace.json'
       - '.github/plugin/marketplace.json'
     protected-files:
@@ -170,6 +171,7 @@ safe-outputs:
         - '/plugins/wow-addon-dev/plugin.json'
         - '/plugins/wow-addon-dev/.codex-plugin/plugin.json'
         - '/plugins/wow-addon-dev/.claude-plugin/plugin.json'
+        - '/plugins/wow-addon-dev/.antigravity-plugin/plugin.json'
         - '/.claude-plugin/marketplace.json'
         - '/.github/plugin/marketplace.json'
 steps:
