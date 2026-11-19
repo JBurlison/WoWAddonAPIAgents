@@ -63,6 +63,8 @@ Keep large source/store PNGs outside the shipped addon; include the game texture
 
 ## Loading and validation
 
+For a full native macro-style icon grid, see [native icon pickers](ICON-PICKERS.md): reusable template/provider, search, caller-owned drafts, and the separate controller-ownership requirements. For native eight-sector wheel composition and protected-input limits, see [radial menus](../../wow-controller-support/references/RADIAL-MENUS.md).
+
 [Blizzard_SharedXML.toc](https://github.com/Gethe/wow-ui-source/blob/9dc84f0d3bbae1768ac3405b3716000bd93eda06/Interface/AddOns/Blizzard_SharedXML/Blizzard_SharedXML.toc) loads family NineSlice layouts, [Camelot offset overrides](https://github.com/Gethe/wow-ui-source/blob/9dc84f0d3bbae1768ac3405b3716000bd93eda06/Interface/AddOns/Blizzard_SharedXML/Camelot/NineSliceLayoutOverrides.lua) for Camelot, then `NineSlice.lua`. It also loads family SharedUIPanelTemplates Lua/XML, the Camelot Lua override, and `Shared/Dialog/DialogTemplates.xml`. The Camelot NineSlice overrides target specific metal-corner atlas IDs; do not assume they change every layout.
 
 [Blizzard_EditMode.toc](https://github.com/Gethe/wow-ui-source/blob/9dc84f0d3bbae1768ac3405b3716000bd93eda06/Interface/AddOns/Blizzard_EditMode/Blizzard_EditMode.toc) loads the reference manager XML and declares dependencies including `Blizzard_UIPanelTemplates`. Its native use is evidence for that owner's composition, not proof of an addon-facing Edit Mode extension API.
