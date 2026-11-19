@@ -13,6 +13,14 @@ test('package generation is deterministic and host adapters relocate references'
   assert.ok(a.get('plugins/wow-addon-dev/agents/wow-addon.md').includes('../skills/wow-client-targets/'));
   assert.ok(a.get('plugins/wow-addon-dev/com.github.copilot/agents/wow-addon.agent.md').includes('../../skills/wow-client-targets/'));
   assert.ok(a.get('.github/agents/wow-addon.agent.md').includes('../../skills/wow-client-targets/'));
+  const antigravity=JSON.parse(a.get('plugins/wow-addon-dev/.antigravity-plugin/plugin.json'));
+  assert.equal(antigravity.displayName,'WoW Addon Development');
+  assert.equal(antigravity.logo,'assets/logo.svg');
+  assert.equal(antigravity.suggestedPrompts.length,3);
+  assert.ok(a.has('plugins/wow-addon-dev/assets/logo.svg'));
+  const rules=a.get('plugins/wow-addon-dev/rules/AGENTS.md');
+  assert.ok(!/^---\r?\n/.test(rules));
+  assert.ok(rules.includes('../skills/wow-client-targets/'));
   assert.ok(![...a.keys()].filter(key=>key.startsWith('plugins/')).some(key=>key.includes('ai-builder')||key.includes('agent-file-specs')));
   await build({check:true});
 });
@@ -38,6 +46,7 @@ test('check detects drift without rewriting and build removes obsolete generated
   try {
     await write(path.join(temp,'LICENSE'),'Fixture license\n');
     await write(path.join(temp,'config/plugin.json'),await fs.readFile(root+'config/plugin.json','utf8'));
+    await write(path.join(temp,'assets/logo.svg'),await fs.readFile(root+'assets/logo.svg','utf8'));
     await write(path.join(temp,'instructions/wow-api.instructions.md'),'---\napplyTo: "**/*.lua"\n---\nFixture\n');
     await write(path.join(temp,'agents/wow-addon.md'),'---\nname: wow-addon\ndescription: Fixture\n---\nRead [workflow](../skills/wow-addon-development/SKILL.md).\n');
     await write(path.join(temp,'agents/ai-builder.md'),'---\nname: ai-builder\ndescription: Fixture\n---\nMaintainer only.\n');

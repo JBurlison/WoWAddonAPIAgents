@@ -1,6 +1,6 @@
 # WoW Addon API Agents
 
-Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, and GitHub Copilot. It includes 39 skills covering WoW APIs, UI implementation, addon development, client selection and CurseForge packaging. AI-builder remains a repository maintenance tool.
+Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, GitHub Copilot, and Antigravity. It includes 39 skills covering WoW APIs, UI implementation, addon development, client selection and CurseForge packaging. AI-builder remains a repository maintenance tool.
 
 | Target | Upstream branch | Request example |
 |---|---|---|
@@ -60,6 +60,22 @@ copilot plugin install wow-addon-dev@wow-addon-api-agents
 
 Start a new session and select the WoW addon agent or workflow skill. Refresh with `copilot plugin marketplace update wow-addon-api-agents` and `copilot plugin update wow-addon-dev`. See [Copilot plugin reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference).
 
+### Antigravity
+
+1. **Git clone + `plugins.json` (recommended for `git pull` updates):** Clone this repository and register its `plugins` directory in `~/.gemini/config/plugins.json` (global) or `<addon-repo>/.agents/plugins.json` (workspace):
+
+```json
+{
+  "entries": [
+    { "path": "/path/to/WoWAddonAPIAgents/plugins" }
+  ]
+}
+```
+
+2. **Release ZIP:** Download `wow-addon-dev-<version>.zip` from [GitHub Releases](https://github.com/JBurlison/WoWAddonAPIAgents/releases) and extract `wow-addon-dev/` into `~/.gemini/config/plugins/` (global) or `<addon-repo>/.agents/plugins/` (workspace).
+
+Antigravity loads the plugin's 39 skills, `wow-addon` agent, and WoW-scoped `rules/AGENTS.md` automatically on the next turn. You can toggle the plugin on or off under **Customizations → Plugins**.
+
 ### Existing VS Code workflow
 
 Open this repository in VS Code with Copilot and select [wow-addon](.github/agents/wow-addon.agent.md). The workspace's `chat.agentSkillsLocations` setting includes root-level `skills/`; the generated agent also links directly to the shared workflow. CLI clients do not inherit editor settings: use the marketplace plugin in Codex, Claude Code, or Copilot CLI. When copying customizations into an addon repository, include complete skill directories, instruction files, and the VS Code location setting, preserving relative paths. Avoid enabling both copied and plugin-provided versions in one project.
@@ -72,6 +88,7 @@ Open this repository in VS Code with Copilot and select [wow-addon](.github/agen
 | `agents/` | Maintained shared WoW agent and AI-builder definition |
 | `instructions/` | Maintained client-aware guidance |
 | `config/plugin.json` | Plugin identity and release metadata |
+| `assets/logo.svg` | Maintained square plugin icon |
 | `plugins/wow-addon-dev/` | Generated, self-contained installable package |
 | `.github/agents/`, `.github/instructions/` | Generated Copilot checkout adapters |
 | `.github/workflows/` | GitHub Actions validation and upstream updates |

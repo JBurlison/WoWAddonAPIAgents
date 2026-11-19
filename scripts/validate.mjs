@@ -14,6 +14,15 @@ export function validateSkill(text, expectedName) {
   if (typeof meta.description !== 'string' || !meta.description.trim() || meta.description.length > 1024) throw new Error('Invalid skill description');
   return meta;
 }
+async function existsCaseSensitive(boundary, relative) {
+  let cursor = boundary;
+  for (const segment of relative.split(path.sep).filter(Boolean)) {
+    const entries = await fs.readdir(cursor).catch(() => null);
+    if (!entries || !entries.includes(segment)) return false;
+    cursor = path.join(cursor, segment);
+  }
+  return true;
+}
 export async function validateLinks(file, boundary) {
   const text = (await fs.readFile(file, 'utf8')).replace(/```[\s\S]*?```/g, '');
   const errors = [];
@@ -24,14 +33,8 @@ export async function validateLinks(file, boundary) {
     const resolved = path.resolve(path.dirname(file), target);
     const relative = path.relative(boundary, resolved);
     if (path.isAbsolute(relative) || relative.startsWith('..')) { errors.push(`Link escapes package: ${url}`); continue; }
-    try {
-      // Case-sensitive existence also on Windows, matching Linux installations.
-      let cursor = boundary;
-      for (const segment of relative.split(path.sep).filter(Boolean)) {
-        if (!(await fs.readdir(cursor)).includes(segment)) throw new Error('missing');
-        cursor = path.join(cursor, segment);
-      }
-    } catch { errors.push(`Broken or wrong-case link: ${url}`); }
+    // Case-sensitive existence also on Windows, matching Linux installations.
+    if (!(await existsCaseSensitive(boundary, relative))) errors.push(`Broken or wrong-case link: ${url}`);
   }
   return errors;
 }
@@ -75,10 +78,32 @@ export async function validate(base = root) {
   const portable = await readJSON(path.join(plugin, 'plugin.json'));
   const allowed = ['$schema','name','version','description','author','homepage','repository','license','keywords','extensions'];
   if (portable.$schema !== 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json' || Object.keys(portable).some(key => !allowed.includes(key))) errors.push('Invalid portable manifest envelope');
-  for (const file of ['.codex-plugin/plugin.json','.claude-plugin/plugin.json']) {
+  for (const file of ['.codex-plugin/plugin.json','.claude-plugin/plugin.json','.antigravity-plugin/plugin.json']) {
     const manifest = await readJSON(path.join(plugin,file));
     if (manifest.name !== portable.name || manifest.version !== portable.version) errors.push(`Manifest identity mismatch: ${file}`);
   }
+  const antigravity = await readJSON(path.join(plugin, '.antigravity-plugin/plugin.json'));
+  const antigravityAllowed = ['name', 'displayName', 'version', 'description', 'author', 'homepage', 'repository', 'logo', 'suggestedPrompts', 'disabled'];
+  if (Object.keys(antigravity).some(key => !antigravityAllowed.includes(key))) errors.push('Invalid Antigravity manifest envelope');
+  if (antigravity.logo !== undefined) {
+    const logo = antigravity.logo;
+    if (typeof logo !== 'string' || !logo || logo.startsWith('/') || logo.startsWith('\\') || /^[a-z][a-z0-9+.-]*:/i.test(logo) || logo.split(/[\\/]/).includes('..') || !/\.(png|svg|jpg|jpeg|webp)$/i.test(logo)) {
+      errors.push(`Invalid Antigravity logo path: ${logo}`);
+    } else {
+      const relLogo = path.relative(plugin, path.resolve(plugin, logo));
+      if (path.isAbsolute(relLogo) || relLogo.startsWith('..') || !(await existsCaseSensitive(plugin, relLogo))) errors.push(`Missing or wrong-case Antigravity logo: ${logo}`);
+    }
+  }
+  if (antigravity.suggestedPrompts !== undefined) {
+    if (!Array.isArray(antigravity.suggestedPrompts) || antigravity.suggestedPrompts.length < 1 || antigravity.suggestedPrompts.length > 3 || antigravity.suggestedPrompts.some(prompt => typeof prompt !== 'string' || !prompt.trim())) {
+      errors.push('Invalid Antigravity suggestedPrompts');
+    }
+  }
+  try {
+    const rulesText = await fs.readFile(path.join(plugin, 'rules/AGENTS.md'), 'utf8');
+    if (/^---\r?\n/.test(rulesText)) errors.push('Plugin rules/AGENTS.md must not include YAML frontmatter');
+    if (Buffer.byteLength(rulesText, 'utf8') > 24000) errors.push('Plugin rules/AGENTS.md exceeds 24,000 byte limit');
+  } catch { errors.push('Missing plugins/wow-addon-dev/rules/AGENTS.md'); }
   for (const file of ['.agents/plugins/marketplace.json','.claude-plugin/marketplace.json','.github/plugin/marketplace.json']) {
     const market = await readJSON(path.join(base,file));
     if (market.name !== 'wow-addon-api-agents' || market.plugins.length !== 1) errors.push(`Invalid catalog: ${file}`);
