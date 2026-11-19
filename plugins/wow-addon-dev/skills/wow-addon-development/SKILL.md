@@ -56,6 +56,7 @@ Never fabricate a signature, silently substitute a Retail API into Forever/Class
 - Preserve the addon's established architecture and requested features. Prefer event-driven Lua, addon-local namespaces, intentional globals, safe initialization, and explicit dependency loading.
 - For multiple targets, share core modules and isolate differing signatures and behavior in a small compatibility layer. Follow [addon layout](references/MULTI-VERSION-ADDONS.md).
 - Produce a separate distributable for each selected target with the correct interface number and file load order. Do not require users to install multiple copies of the addon in one client's AddOns folder.
+- For CurseForge distribution, follow [CurseForge setup and automatic packaging](../wow-curseforge-packaging/SKILL.md) for project setup, webhook triggers, PackageMeta and per-client release checks.
 - Determine security rules per target and context. Respect protected operations, combat lockdown, taint, and secret values where applicable. Do not attempt to reveal restricted data.
 - If a required capability is unavailable, report the affected target and propose a reduced feature or an explicit unsupported result. Do not silently return fabricated data or remove the target.
 - Reuse verified library APIs when appropriate. Create project-specific knowledge in the user's addon repository when it serves the requested work; never edit a cached marketplace installation to remember it.

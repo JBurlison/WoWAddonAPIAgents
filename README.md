@@ -1,6 +1,6 @@
 # WoW Addon API Agents
 
-Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, and GitHub Copilot. It includes 33 API/domain skills, three UI implementation skills, an addon-development workflow, and a client-target skill (38 total). AI-builder remains a repository maintenance tool.
+Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, and GitHub Copilot. It includes 39 skills covering WoW APIs, UI implementation, addon development, client selection and CurseForge packaging. AI-builder remains a repository maintenance tool.
 
 | Target | Upstream branch | Request example |
 |---|---|---|
@@ -24,6 +24,8 @@ Version **2.4.0** adds [native UI composition](skills/wow-native-ui/SKILL.md) fo
 Version **2.5.0** adds [controller support](skills/wow-controller-support/SKILL.md) and makes controller interaction a required consideration for every UI change. Native controls and reskins must account for focus, activation, back/close, applicable tabs/scrolling/text entry, visible action hints and existing mouse/keyboard behavior. Plans and acceptance checklists retain per-client limitations, explicit user exclusions and unperformed hardware tests. See the [release validation report](docs/RELEASE-2.5.0.md).
 
 Version **2.6.0** makes [addon options-menu integration](skills/wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](skills/wow-addon-development/references/LOCALIZATION.md) baseline requirements for new addons and relevant changes. Guidance covers discoverable settings, saved preferences and profiles, fallback catalogs, natural target-language meaning and phrasing, translation coverage, and per-client acceptance. Existing skill entrypoints, agent adapters and planning templates carry these requirements.
+
+For help releasing an addon, ask “Set up CurseForge to package my Forever addon when I push a version tag” or “Check that my Retail, Forever and Classic ZIPs each install into the right folder and have the right CurseForge game version.” See [CurseForge setup and automatic packaging](skills/wow-curseforge-packaging/SKILL.md).
 
 ## Install
 

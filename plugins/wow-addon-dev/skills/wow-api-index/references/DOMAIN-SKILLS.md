@@ -23,7 +23,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | 84 / 90 / 42 | [source schemas](../../wow-api-lua-environment/references/generated/README.md) |
 | [wow-api-map-navigation](../../wow-api-map-navigation/SKILL.md) | 258 / 260 / 147 | [source schemas](../../wow-api-map-navigation/references/generated/README.md) |
 | [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | 628 / 643 / 271 | [source schemas](../../wow-api-misc-systems/references/generated/README.md) |
-| [wow-api-professions](../../wow-api-professions/SKILL.md) | 314 / 328 / 53 | [source schemas](../../wow-api-professions/references/generated/README.md) |
+| [wow-api-professions](../../wow-api-professions/SKILL.md) | 314 / 329 / 53 | [source schemas](../../wow-api-professions/references/generated/README.md) |
 | [wow-api-pvp](../../wow-api-pvp/SKILL.md) | 199 / 200 / 108 | [source schemas](../../wow-api-pvp/references/generated/README.md) |
 | [wow-api-quests](../../wow-api-quests/SKILL.md) | 319 / 325 / 152 | [source schemas](../../wow-api-quests/references/generated/README.md) |
 | [wow-api-reputation](../../wow-api-reputation/SKILL.md) | 81 / 84 / 15 | [source schemas](../../wow-api-reputation/references/generated/README.md) |
@@ -38,6 +38,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-xml-schema](../../wow-api-xml-schema/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-client-targets](../../wow-client-targets/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-controller-support](../../wow-controller-support/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
+| [wow-curseforge-packaging](../../wow-curseforge-packaging/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-lua-api](../../wow-lua-api/SKILL.md) | 262 / 264 / 172 | [source schemas](../../wow-lua-api/references/generated/README.md) |
 | [wow-macro-commands](../../wow-macro-commands/SKILL.md) | 9 / 9 / 9 | [source schemas](../../wow-macro-commands/references/generated/README.md) |
 | [wow-native-ui](../../wow-native-ui/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
