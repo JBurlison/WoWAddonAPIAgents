@@ -1,16 +1,9 @@
 ---
 name: wow-api-achievements
-description: Look up WoW Achievement, Statistics, and Achievement Criteria APIs.
-  Covers C_AchievementInfo, global achievement functions (GetAchievementInfo,
-  GetAchievementCriteriaInfo, GetStatistic, GetComparisonStatistic), achievement
-  categories, guild achievements, achievement links, tracked achievements, toast
-  notifications, and achievement-related events. Use when working with
-  achievement tracking, achievement display, statistics, achievement criteria,
-  guild achievements, or achievement completion detection. Select Retail,
-  Forever, or Classic with wow-client-targets before using historical listings.
+description: Look up WoW achievement, criteria, statistics, guild achievement, and toast notification APIs (`C_AchievementInfo`, `GetAchievementInfo`, `GetStatistic`).
 ---
 
-# api achievements
+# WoW Achievements API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

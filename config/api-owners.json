@@ -47,7 +47,7 @@
       "classification": "client-system"
     },
     "C_AnimaDiversion": {
-      "owner": "wow-api-widget",
+      "owner": "wow-api-misc-systems",
       "classification": "client-system"
     },
     "C_ArdenwealdGardening": {
@@ -71,7 +71,7 @@
       "classification": "client-system"
     },
     "C_AuraContainerUtil": {
-      "owner": "wow-api-items-inventory",
+      "owner": "wow-api-unit-player",
       "classification": "client-system"
     },
     "C_AutoComplete": {
@@ -1191,15 +1191,15 @@
       "classification": "client-system"
     },
     "Data:AuctionHouseConstants": {
-      "owner": "wow-api-housing",
+      "owner": "wow-api-currency-economy",
       "classification": "client-system"
     },
     "Data:AuctionHouseEnums": {
-      "owner": "wow-api-housing",
+      "owner": "wow-api-currency-economy",
       "classification": "client-system"
     },
     "Data:AuraContainerShared": {
-      "owner": "wow-api-items-inventory",
+      "owner": "wow-api-unit-player",
       "classification": "client-system"
     },
     "Data:AutoCompleteShared": {
@@ -2144,7 +2144,7 @@
     },
     "Global:DebugToggle": {
       "owner": "wow-api-settings-system",
-      "classification": "client-system"
+      "classification": "internal-or-restricted"
     },
     "Global:Expansion": {
       "owner": "wow-api-misc-systems",
@@ -2443,7 +2443,7 @@
       "classification": "client-system"
     },
     "Object:SimpleAnimGroupAPI": {
-      "owner": "wow-api-group-lfg",
+      "owner": "wow-api-widget",
       "classification": "client-system"
     },
     "Object:SimpleAnimPathAPI": {
@@ -2511,7 +2511,7 @@
       "classification": "client-system"
     },
     "Object:SimpleFontStringAPI": {
-      "owner": "wow-lua-api",
+      "owner": "wow-api-widget",
       "classification": "client-system"
     },
     "Object:SimpleFrameAPI": {
@@ -2689,7 +2689,7 @@
       "classification": "client-system"
     },
     "AnimaDiversionUIDocumentation.lua": {
-      "owner": "wow-api-widget",
+      "owner": "wow-api-misc-systems",
       "classification": "client-system"
     },
     "AppearanceSourceDocumentation.lua": {
@@ -2725,7 +2725,7 @@
       "classification": "client-system"
     },
     "AuctionHouseConstantsDocumentation.lua": {
-      "owner": "wow-api-housing",
+      "owner": "wow-api-currency-economy",
       "classification": "client-system"
     },
     "AuctionHouseDocumentation.lua": {
@@ -2733,15 +2733,15 @@
       "classification": "client-system"
     },
     "AuctionHouseEnumsDocumentation.lua": {
-      "owner": "wow-api-housing",
+      "owner": "wow-api-currency-economy",
       "classification": "client-system"
     },
     "AuraContainerSharedDocumentation.lua": {
-      "owner": "wow-api-items-inventory",
+      "owner": "wow-api-unit-player",
       "classification": "client-system"
     },
     "AuraContainerUtilDocumentation.lua": {
-      "owner": "wow-api-items-inventory",
+      "owner": "wow-api-unit-player",
       "classification": "client-system"
     },
     "AutoCompleteDocumentation.lua": {
@@ -3202,7 +3202,7 @@
     },
     "DebugToggleDocumentation.lua": {
       "owner": "wow-api-settings-system",
-      "classification": "client-system"
+      "classification": "internal-or-restricted"
     },
     "DelvesConstantsDocumentation.lua": {
       "owner": "wow-api-encounters",
@@ -3265,7 +3265,7 @@
       "classification": "client-system"
     },
     "EditModeManagerDocumentation.lua": {
-      "owner": "wow-api-misc-systems",
+      "owner": "wow-api-widget",
       "classification": "client-system"
     },
     "EncodingUtilConstantsDocumentation.lua": {
@@ -4501,7 +4501,7 @@
       "classification": "client-system"
     },
     "SimpleAnimGroupAPIDocumentation.lua": {
-      "owner": "wow-api-group-lfg",
+      "owner": "wow-api-widget",
       "classification": "client-system"
     },
     "SimpleAnimPathAPIDocumentation.lua": {
@@ -4569,7 +4569,7 @@
       "classification": "client-system"
     },
     "SimpleFontStringAPIDocumentation.lua": {
-      "owner": "wow-lua-api",
+      "owner": "wow-api-widget",
       "classification": "client-system"
     },
     "SimpleFrameAPIDocumentation.lua": {
@@ -5053,7 +5053,7 @@
       "classification": "client-system"
     },
     "UISystemVisibilityManagerDocumentation.lua": {
-      "owner": "wow-api-misc-systems",
+      "owner": "wow-api-widget",
       "classification": "client-system"
     },
     "UITextureAssetSharedDocumentation.lua": {

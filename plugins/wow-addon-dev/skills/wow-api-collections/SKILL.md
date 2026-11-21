@@ -1,24 +1,15 @@
 ---
 name: wow-api-collections
-description: Look up WoW Mount, Pet, Pet Battle, Toy, Stable, and Heirloom
-  Collection APIs. Covers C_MountJournal (mount list, filtering, favorites,
-  summoning, display info), C_PetJournal (pet collection, favorites, summoning,
-  caging, abilities), C_PetBattles (pet battle system, turns, actions, pets,
-  abilities, traps), C_PetInfo, C_ToyBox/C_ToyBoxInfo (toy collection, use,
-  favorites), C_StableInfo (hunter pet stables), C_Heirloom/C_HeirloomInfo
-  (heirloom collection, upgrades). Use when working with mount journal, pet
-  journal, pet battles, toy box, heirloom collection, or hunter stables. Select
-  Retail, Forever, or Classic with wow-client-targets before using historical
-  listings.
+description: Look up WoW Mount, Pet, Pet Battle, Toy Box, Hunter Stable, and Heirloom collection APIs (`C_MountJournal`, `C_PetJournal`, `C_PetBattles`, `C_ToyBox`, `C_Heirloom`).
 ---
 
-# api collections
+# WoW Collections API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
 
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
 
 Verify mount, pet, toy, heirloom and collection APIs individually. Do not treat the presence of one collection system as support for the others.
 

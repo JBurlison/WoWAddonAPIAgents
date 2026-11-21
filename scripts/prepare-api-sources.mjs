@@ -1,8 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
-import { pathToFileURL } from 'node:url';
-import { root } from './lib.mjs';
+import { root, hardenedGit, isMainModule } from './lib.mjs';
 
 const repository = 'Gethe/wow-ui-source';
 const remoteURL = `https://github.com/${repository}.git`;
@@ -40,30 +38,12 @@ async function realDirectory(dir, { empty = false } = {}) {
   if (empty && (await fs.readdir(dir)).length) throw new Error(`Expected empty hooks/template directory: ${dir}`);
 }
 
-function gitRunner(disabledHooks) {
-  const env = { ...process.env };
-  // Ignore inherited Git repository/config overrides and credential helpers.
-  for (const key of Object.keys(env)) if (key.startsWith('GIT_')) delete env[key];
-  Object.assign(env, { GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: path.join(disabledHooks, 'unused-global-config'), GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0' });
-  return (cwd, args, { allowFailure = false } = {}) => {
-    try {
-      return execFileSync('git', ['-c', `core.hooksPath=${disabledHooks}`, '-c', 'core.fsmonitor=false', '-c', 'submodule.recurse=false', '-c', 'protocol.allow=never', '-c', 'protocol.https.allow=always', ...args], {
-        cwd, env, encoding: 'utf8', shell: false, stdio: ['ignore', 'pipe', 'pipe'], maxBuffer: 8 * 1024 * 1024,
-      }).trim();
-    } catch (error) {
-      if (allowFailure) return null;
-      // Do not echo arbitrary repository config or inherited credentials on failure.
-      throw new Error(`Git ${args[0]} failed in ${cwd} (exit ${error.status ?? 'unavailable'})`);
-    }
-  };
-}
-
 export async function prepareCheckout({ cacheRoot, id, pin }) {
   validatePin(id, pin);
   const disabledHooks = path.join(cacheRoot, '.disabled-hooks');
   await realDirectory(cacheRoot);
   await realDirectory(disabledHooks, { empty: true });
-  const git = gitRunner(disabledHooks);
+  const git = hardenedGit(disabledHooks, { allowHttps: true });
   const checkout = path.join(cacheRoot, id);
   const existing = await fs.lstat(checkout).catch(error => { if (error.code === 'ENOENT') return null; throw error; });
   if (existing && (!existing.isDirectory() || existing.isSymbolicLink())) throw new Error(`Unexpected source cache path: ${id}`);
@@ -78,7 +58,7 @@ export async function prepareCheckout({ cacheRoot, id, pin }) {
   const top = git(checkout, ['rev-parse', '--show-toplevel']);
   if (await fs.realpath(top) !== await fs.realpath(checkout)) throw new Error(`Unexpected repository root: ${id}`);
   const configKeys = git(checkout, ['config', '--local', '--no-includes', '--name-only', '--list']).split(/\r?\n/).filter(Boolean);
-  const safeKey = /^(?:core\.(?:repositoryformatversion|filemode|bare|logallrefupdates|ignorecase|symlinks)|remote\.origin\.(?:url|fetch)|branch\.[\w.-]+\.(?:remote|merge))$/;
+  const safeKey = /^(?:core\.(?:repositoryformatversion|filemode|bare|logallrefupdates|ignorecase|precomposeunicode|symlinks)|remote\.origin\.(?:url|fetch)|branch\.[\w.-]+\.(?:remote|merge))$/;
   if (configKeys.some(key => !safeKey.test(key))) throw new Error(`Unexpected local Git configuration in ${id}; use a clean source cache`);
   const origin = git(checkout, ['config', '--local', '--no-includes', '--get-all', 'remote.origin.url']);
   if (![remoteURL, `https://github.com/${repository}`].includes(origin)) throw new Error(`Unexpected source repository: ${id}`);
@@ -91,7 +71,10 @@ export async function prepareCheckout({ cacheRoot, id, pin }) {
   if (git(checkout, ['rev-parse', '--verify', `${pin.commit}^{commit}`]) !== pin.commit) throw new Error(`Fetched source identity mismatch: ${id}`);
   git(checkout, ['checkout', '--detach', pin.commit]);
   if (git(checkout, ['rev-parse', 'HEAD']) !== pin.commit || git(checkout, ['status', '--porcelain=v1', '--untracked-files=all', '--ignored']).length) throw new Error(`Source checkout verification failed: ${id}`);
-  const version = (await fs.readFile(path.join(checkout, 'version.txt'), 'utf8')).trim();
+  const versionPath = path.join(checkout, 'version.txt');
+  const versionStat = await fs.lstat(versionPath);
+  if (!versionStat.isFile() || versionStat.isSymbolicLink()) throw new Error(`Unexpected version file type: ${id}`);
+  const version = (await fs.readFile(versionPath, 'utf8')).trim();
   if (version !== pin.version) throw new Error(`Source version mismatch: ${id}`);
   return { id, commit: pin.commit, version, checkout };
 }
@@ -109,7 +92,7 @@ export async function prepareSources({ base = root, candidates = false } = {}) {
   return result;
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (isMainModule(import.meta.url)) {
   const args = process.argv.slice(2);
   if (args.some(arg => arg !== '--candidates') || args.length > 1) {
     console.error('Use node scripts/prepare-api-sources.mjs [--candidates]');

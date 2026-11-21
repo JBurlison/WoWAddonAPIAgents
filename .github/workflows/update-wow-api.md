@@ -43,7 +43,6 @@ network:
     - api.github.com
     - github.com
     - raw.githubusercontent.com
-    - registry.npmjs.org
 tools:
   bash: true
   github:
@@ -68,24 +67,19 @@ safe-outputs:
       - 'skills/wow-*/references/*.md'
       - 'skills/wow-client-targets/references/targets.json'
       - 'config/api-owners.json'
-      - 'skills/wow-*/references/generated/retail.json'
-      - 'skills/wow-*/references/generated/forever.json'
-      - 'skills/wow-*/references/generated/classic.json'
+      - 'skills/wow-*/references/generated/catalog.json'
       - 'skills/wow-*/references/generated/README.md'
       - 'skills/wow-api-index/references/generated/manifest.json'
+      - 'skills/wow-api-index/references/generated/provenance.json'
       - 'skills/wow-api-index/references/generated/symbols.json'
-      - '.github/agents/wow-addon.agent.md'
       - 'plugins/wow-addon-dev/skills/wow-*/SKILL.md'
       - 'plugins/wow-addon-dev/skills/wow-*/references/*.md'
       - 'plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json'
-      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/retail.json'
-      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/forever.json'
-      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/classic.json'
+      - 'plugins/wow-addon-dev/skills/wow-*/references/generated/catalog.json'
       - 'plugins/wow-addon-dev/skills/wow-*/references/generated/README.md'
       - 'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'
+      - 'plugins/wow-addon-dev/skills/wow-api-index/references/generated/provenance.json'
       - 'plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json'
-      - 'plugins/wow-addon-dev/agents/wow-addon.md'
-      - 'plugins/wow-addon-dev/com.github.copilot/agents/wow-addon.agent.md'
       - 'config/plugin.json'
       - 'package.json'
       - 'package-lock.json'
@@ -161,10 +155,11 @@ safe-outputs:
         - '/skills/wow-client-targets/references/targets.json'
         - '/config/api-owners.json'
         - '/skills/wow-api-index/references/generated/manifest.json'
+        - '/skills/wow-api-index/references/generated/provenance.json'
         - '/skills/wow-api-index/references/generated/symbols.json'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'
+        - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/provenance.json'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json'
-        - '/.github/agents/wow-addon.agent.md'
         - '/config/plugin.json'
         - '/package.json'
         - '/package-lock.json'

@@ -3,7 +3,7 @@ import { branches, interfaceFromVersion } from '../skills/wow-client-targets/scr
 
 export const repository = 'Gethe/wow-ui-source';
 export const registryPath = 'skills/wow-client-targets/references/targets.json';
-export const relevant = file => file === 'version.txt' || (file.startsWith('Interface/') && /\.(lua|xml|toc|xsd|txt)$/.test(file));
+export const relevant = file => file === 'version.txt' || (file.startsWith('Interface/') && /\.(lua|xml|toc|xsd|txt)$/i.test(file));
 export function sourceFiles(tree) {
   if (tree.truncated) throw new Error('Upstream tree was truncated; refusing an incomplete snapshot');
   if (!Array.isArray(tree.tree)) throw new Error('Missing upstream tree');
@@ -22,8 +22,9 @@ export function changedFiles(before, after) {
 }
 export function createClient({ token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN, fetcher = fetch } = {}) {
   async function request(url, asJSON = true) {
-    const headers = { 'User-Agent': 'wow-addon-api-agents', Accept: 'application/vnd.github+json' };
-    if (token && new URL(url).hostname === 'api.github.com') headers.Authorization = `Bearer ${token}`;
+    const isGitHubAPI = new URL(url).hostname === 'api.github.com';
+    const headers = { 'User-Agent': 'wow-addon-api-agents', ...(isGitHubAPI ? { Accept: 'application/vnd.github+json' } : {}) };
+    if (token && isGitHubAPI) headers.Authorization = `Bearer ${token}`;
     const response = await fetcher(url, { headers, signal: AbortSignal.timeout(60000) });
     if (!response.ok) throw new Error(`Upstream request failed (${response.status}): ${url}`);
     return asJSON ? response.json() : response.text();

@@ -1,4 +1,6 @@
+import fsSync from 'node:fs';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const targetIds = ['retail', 'forever', 'classic'];
@@ -25,7 +27,20 @@ export function apiDecision(evidence) {
   if (!evidence.loadedForTarget || !evidence.signatureVerified || !evidence.addonAccessVerified) return 'verify';
   return evidence.requiresAdapter ? 'adapter' : 'supported';
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+function isMain() {
+  if (!process.argv[1]) return false;
+  let resolved;
+  try {
+    resolved = fsSync.realpathSync(process.argv[1]);
+  } catch {
+    resolved = path.resolve(process.argv[1]);
+  }
+  const entry = pathToFileURL(resolved).href;
+  return process.platform === 'win32'
+    ? entry.toLowerCase() === import.meta.url.toLowerCase()
+    : entry === import.meta.url;
+}
+if (isMain()) {
   try {
     const registry = JSON.parse(await fs.readFile(fileURLToPath(new URL('../references/targets.json', import.meta.url)), 'utf8'));
     const targets = resolveTargets(process.argv.slice(2));

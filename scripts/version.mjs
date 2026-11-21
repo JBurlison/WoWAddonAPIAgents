@@ -1,8 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { pathToFileURL } from 'node:url';
-import { root, json, readJSON, write } from './lib.mjs';
+import { root, json, readJSON, write, isMainModule } from './lib.mjs';
 
 export const versionFiles = [
   'config/plugin.json', 'package.json', 'package-lock.json',
@@ -85,11 +84,15 @@ async function main() {
   } else if (command === 'check') {
     if (!arg) throw new Error('Provide a base Git ref');
     const base = git(['rev-parse', '--verify', `${arg}^{commit}`]);
+    const mergeBase = git(['merge-base', base, 'HEAD']);
     const baseline = JSON.parse(git(['show', `${base}:config/plugin.json`])).version;
+    const mergeBaseBaseline = JSON.parse(git(['show', `${mergeBase}:config/plugin.json`])).version;
     const current = await validateVersions();
-    const changed = git(['diff', '--name-only', base, '--', 'plugins/wow-addon-dev/']).length > 0;
-    checkPRVersion(baseline, current, changed);
-    console.log(`Version policy passed: ${baseline} -> ${current}`);
+    const changed = git(['diff', '--name-only', mergeBase, '--', 'plugins/wow-addon-dev/']).length > 0
+      || git(['ls-files', '--others', '--exclude-standard', '--', 'plugins/wow-addon-dev/']).length > 0;
+    const effectiveBase = changed ? baseline : mergeBaseBaseline;
+    checkPRVersion(effectiveBase, current, changed);
+    console.log(`Version policy passed: ${effectiveBase} -> ${current}`);
   } else if (command === 'guard') {
     if (!arg) throw new Error('Provide the original checkout commit');
     const base = git(['rev-parse', '--verify', `${arg}^{commit}`]);
@@ -100,8 +103,9 @@ async function main() {
     const baseline = JSON.parse(git(['show', `${base}:config/plugin.json`])).version;
     const current = (await readJSON(path.join(root, 'config/plugin.json'))).version;
     await guard(base);
-    const changed = git(['diff', base, '--name-only', '--', 'plugins/wow-addon-dev/']).length > 0;
+    const changed = git(['diff', base, '--name-only', '--', 'plugins/wow-addon-dev/']).length > 0
+      || git(['ls-files', '--others', '--exclude-standard', '--', 'plugins/wow-addon-dev/']).length > 0;
     if (changed) await setVersion(nextPRVersion(baseline, current));
   } else throw new Error('Use bump [major|minor|patch], check BASE, guard BASE, or ensure');
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch(error => { console.error(error.message); process.exitCode = 1; });
+if (isMainModule(import.meta.url)) main().catch(error => { console.error(error.message); process.exitCode = 1; });

@@ -10,8 +10,12 @@ This reference defines how a Retail AddOn should be laid out on disk, how names 
 - The folder name and the .toc file name must match exactly.
 - The .toc file is mandatory and is the entry point for metadata and file order.
 
-Typical Retail path:
-- World of Warcraft\_retail_\Interface\AddOns\AddOnName\AddOnName.toc
+Typical client AddOns paths:
+- Retail: `World of Warcraft\_retail_\Interface\AddOns\AddOnName\AddOnName.toc`
+- Forever: `World of Warcraft\_forever_\Interface\AddOns\AddOnName\AddOnName.toc` (verify exact flavor directory on the target installation)
+- Classic progression: `World of Warcraft\_classic_\Interface\AddOns\AddOnName\AddOnName.toc`
+
+See [CURRENT-STRUCTURE.md](CURRENT-STRUCTURE.md) for current multi-target layout, per-client TOC packaging, and `Locales/` catalog organization.
 
 ## Common layout patterns
 A simple layout keeps everything at the root. A modular layout splits features by folder. Use stable, predictable names so both users and tooling can find files quickly.

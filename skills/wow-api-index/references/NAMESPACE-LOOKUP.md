@@ -15,13 +15,13 @@ Complete routing for every declared `C_` system in the pinned generated inventor
 | `C_AdventureJournal` | [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | retail, forever, classic | client-system |
 | `C_AdventureMap` | [wow-api-quests](../../wow-api-quests/SKILL.md) | retail, forever, classic | client-system |
 | `C_AlliedRaces` | [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | retail, forever | client-system |
-| `C_AnimaDiversion` | [wow-api-widget](../../wow-api-widget/SKILL.md) | retail, forever | client-system |
+| `C_AnimaDiversion` | [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | retail, forever | client-system |
 | `C_ArdenwealdGardening` | [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | retail, forever | client-system |
 | `C_AreaPoiInfo` | [wow-api-map-navigation](../../wow-api-map-navigation/SKILL.md) | retail, forever, classic | client-system |
 | `C_ArtifactUI` | [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | retail, forever | client-system |
 | `C_AssistedCombat` | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | retail, forever, classic | client-system |
 | `C_AuctionHouse` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail, forever, classic | client-system |
-| `C_AuraContainerUtil` | [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | retail, forever | client-system |
+| `C_AuraContainerUtil` | [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) | retail, forever | client-system |
 | `C_AutoComplete` | [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | retail, forever, classic | client-system |
 | `C_AutoLoot` | [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | forever | client-system |
 | `C_AzeriteEmpoweredItem` | [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | retail, forever, classic | client-system |

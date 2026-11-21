@@ -29,27 +29,32 @@ The files are plain Lua. They should be treated as data only and not as code.
 ## Examples
 
 Example 1 - Global defaults:
-```
-MyAddonDB = MyAddonDB or {}
+```lua
+if type(MyAddonDB) ~= "table" then MyAddonDB = {} end
 MyAddonDB.enabled = MyAddonDB.enabled ~= false
 MyAddonDB.opacity = MyAddonDB.opacity or 0.8
 ```
 
 Example 2 - Per-character defaults:
-```
-MyAddonCharDB = MyAddonCharDB or {}
-MyAddonCharDB.profile = MyAddonCharDB.profile or {
-  showMinimap = true,
-  trackedBosses = {},
-}
+```lua
+if type(MyAddonCharDB) ~= "table" then MyAddonCharDB = {} end
+if type(MyAddonCharDB.profile) ~= "table" then
+  MyAddonCharDB.profile = {
+    showMinimap = true,
+    trackedBosses = {},
+  }
+end
 ```
 
-Example 3 - Simple schema migration:
-```
-MyAddonDB = MyAddonDB or { schemaVersion = 1 }
-if MyAddonDB.schemaVersion < 2 then
+Example 3 - Safe schema migration (`tonumber` / `type` guard prevents nil comparison errors):
+```lua
+if type(MyAddonDB) ~= "table" then MyAddonDB = {} end
+local ver = type(MyAddonDB.schemaVersion) == "number" and MyAddonDB.schemaVersion or 1
+if ver < 2 then
   MyAddonDB.newField = true
   MyAddonDB.schemaVersion = 2
+else
+  MyAddonDB.schemaVersion = ver
 end
 ```
 

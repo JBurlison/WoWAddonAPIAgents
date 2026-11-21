@@ -1,4 +1,4 @@
-> **Historical Retail reference:** Verify this material for the selected client/build using [wow-client-targets](../../wow-client-targets/SKILL.md). This file does not establish current or cross-version API availability.
+> **Historical Retail reference:** Verify this material for the selected client/build using [wow-client-targets](../../wow-client-targets/SKILL.md) and [CURRENT-STRUCTURE.md](CURRENT-STRUCTURE.md). This file does not establish current or cross-version API availability.
 
 # AddOn Loading Lifecycle (Retail)
 
@@ -6,30 +6,30 @@
 - Blizzard AddOns load first.
 - Custom AddOns load next in alphabetical order.
 - .toc directives like `LoadOnDemand`, `Dependencies`, and `LoadWith` can override that default behavior.
-- Within a single AddOn, files load in the order listed in the .toc. XML <Include> and <Script> tags load content as they are encountered.
+- Within a single AddOn, files load in the order listed in the .toc. XML `<Include>` and `<Script>` tags load content as they are encountered.
 
 ## SavedVariables timing
 - By default, saved variables load after the last file in the .toc list.
 - `LoadSavedVariablesFirst: 1` loads SavedVariables before all files.
-- `ADDON_LOADED` fires when the AddOn has finished loading files and saved variables. This is the earliest safe point to read SavedVariables.
+- `ADDON_LOADED(addOnName, containsBindings)` fires when the AddOn has finished loading files and saved variables. This is the earliest safe point to read SavedVariables for your own `addOnName`.
 
 ## Login event timeline
 A typical login or reload flow:
-1. `ADDON_LOADED` - per AddOn; saved variables are available.
+1. `ADDON_LOADED(addOnName, containsBindings)` - per AddOn; saved variables are available.
 2. `PLAYER_LOGIN` - most game data is available; finish one-time setup.
-3. `PLAYER_ENTERING_WORLD` - fires for login, reload, and zone transitions.
+3. `PLAYER_ENTERING_WORLD(isInitialLogin, isReloadingUi)` - fires for login, reload, and zone transitions; check the two booleans to separate initial login/reload from zoning.
 4. `PLAYER_REGEN_DISABLED` - combat lockdown begins; avoid secure frame changes after this.
 5. `SPELLS_CHANGED` - spellbook data is available.
 
-LoadOnDemand AddOns can load at any point and will emit their own `ADDON_LOADED` event when they do.
+LoadOnDemand AddOns can load at any point and will emit their own `ADDON_LOADED(addOnName, containsBindings)` event when they do.
 
 ## Logout sequence
 - `PLAYER_LEAVING_WORLD` - not strictly logout; also fires for zone changes.
 - `PLAYER_LOGOUT` - last reliable point to update SavedVariables.
-- `ADDONS_UNLOADING` - AddOns commit SavedVariables before the UI unloads.
+- `ADDONS_UNLOADING(closingClient)` - AddOns commit SavedVariables before the UI unloads (`closingClient == true` on full client exit).
 
 ## Error condition
-- `SAVED_VARIABLES_TOO_LARGE` may fire if SavedVariables fail to load due to memory limits.
+- `SAVED_VARIABLES_TOO_LARGE(addOnName)` may fire if SavedVariables fail to load due to memory limits. See [CURRENT-STRUCTURE.md](CURRENT-STRUCTURE.md) for current contracts and `C_AddOnProfiler`.
 
 ## Examples
 

@@ -8,31 +8,33 @@ The packaged ledger contains every Function, Event, ScriptObject method, Structu
 | Forever | 1.60.1.70938 | 10,258 | 5,145 / 1,816 / 1,477 |
 | Classic progression | 5.5.4.70631 | 7,435 | 3,231 / 1,483 / 1,360 |
 
-The [manifest](generated/manifest.json) pins source commits and Git blob IDs, records expected per-file counts, and hashes every generated chunk and navigation artifact. The [namespace routing](NAMESPACE-LOOKUP.md) and [domain routing](DOMAIN-SKILLS.md) cover every generated system, including data-only files and global/object systems.
+The [manifest](generated/manifest.json) pins source commits and hashes every generated chunk and navigation artifact. Full file/group provenance lives in [provenance.json](generated/provenance.json), and the deduplicated index lives in [symbols.json](generated/symbols.json). The [namespace routing](NAMESPACE-LOOKUP.md) and [domain routing](DOMAIN-SKILLS.md) cover every generated system, including data-only files and global/object systems.
 
 ## Query only the needed contract
 
-With Node.js 22+, run the package-local [query script](../scripts/query.mjs). Paths below are relative to the installed `wow-api-index` skill directory; substitute its actual absolute path when invoking a tool.
+With Node.js 18+, run the package-local [query script](../scripts/query.mjs). Paths below are relative to the installed `wow-api-index` skill directory; substitute its actual absolute path when invoking a tool. Flags can appear in any position.
 
 ```sh
-node scripts/query.mjs forever C_Spell.GetSpellInfo
-node scripts/query.mjs forever SPELL_UPDATE_COOLDOWN --kind event
+node scripts/query.mjs forever C_Spell.GetSpellInfo --compact --resolve-types
+node scripts/query.mjs all SPELL_UPDATE_COOLDOWN --kind event --compact --diff
 node scripts/query.mjs forever C_SwingTimer --full
 node scripts/query.mjs all AuraData --kind structure
-node scripts/query.mjs forever Enum.PlayerSwingType --kind enum
-node scripts/query.mjs forever C_Housing --list --limit 10
+node scripts/query.mjs forever Enum.PlayerSwingType.MainHand --compact
+node scripts/query.mjs forever C_Housing --list --limit 10 --offset 0
 node scripts/query.mjs classic --domain wow-api-professions --kind function --list
+node scripts/query.mjs forever --secret --domain wow-api-combat --list
 ```
 
-Exact symbol/type matches return full schemas. Namespace and substring searches return a bounded summary unless `--full` is requested; `--limit` accepts 1–100. `--list` always returns summaries. The query tool reads the symbol index and only the matching domain chunks, checks their hashes, and performs no network requests. Enum names can be supplied with or without `Enum.`; object methods use their generated object name, or search by the method name.
+Exact symbol/type matches (case-insensitive) return full schemas. Multi-match queries are ranked (exact namespace/method boundaries first, then prefix, then multi-token/substring) and return summaries unless `--full`, `--compact`, `--diff`, or `--resolve-types` is passed. `--limit` accepts 1–100 and `--offset` paginates past 100. Use `--compact` for token-efficient signatures, `--diff` with `all` to highlight cross-target deltas, `--resolve-types` to include referenced structures/enums/callbacks, and `--secret` / `--restricted` / `--environment SecureOnly` to filter security annotations. Enum queries (`Enum.*`) and constant queries (`Constants.*`) automatically scope by kind and support `Enum.Type.Member` lookups.
 
-Without Node.js, choose a domain in the routing tables and open its `references/generated/<target>.json` at the desired symbol. Each declaration occupies one line. Search by exact quoted `symbol`, then inspect `declaration` and any named argument/return structures. Do not read every large file for a narrow addon task.
+Without Node.js, choose a domain in the routing tables and open its `references/generated/catalog.json`. Each declaration occupies one line with its `declaration` schema and per-target `targets.<id>.file`/line metadata. Search by exact quoted `symbol`, then inspect `declaration` and any named argument/return structures. Do not read whole catalogs for a narrow addon task.
 
 ## Schema and evidence rules
 
+- `catalog.json` deduplicates declarations that are identical across targets (`schemaVersion: 2`), hoisting `evidence` and `systems` metadata to the file header while preserving per-target `{ file, line, system }` mappings.
 - `declaration` preserves every generated field except `Documentation` prose, including nested arrays, structure fields, enum values, callback signatures, defaults and security annotations. `Arguments`, `Returns` and `Payload` retain source order.
 - `luaExpression` represents an unevaluated Lua expression such as an enum reference. `luaStringBody` preserves a string containing Lua escapes without interpreting it. Empty Lua tables become JSON arrays; a mixed table uses `luaFields` and `luaValues`.
-- `parent` records the original system and section. A function's explicit `Namespace = ""` exports a global; a nonempty override uses that namespace. The effective name and original system are both retained.
+- `systems[key]` records the original `parent` system and section. A function's explicit `Namespace = ""` exports a global; a nonempty override uses that namespace. The effective name and original system are both retained.
 - `evidence.declaration` is `source-declared`; `loadConditions`, `runtime` and `addonAccess` are `unknown`. A curated guide may add separately cited evidence, but must not silently upgrade this inventory into tested compatibility.
 - `classification` distinguishes client systems, front-end/Glue, mixed context, internal/restricted, platform-specific and SecureOnly definitions. `Environment = All` is not an addon permission flag. `CallbackEvent = true` is not a frame-event subscription.
 - A source miss is unknown, not proof of removal. Loaded FrameXML globals, mixins, internal callbacks, XML/template loading, macro grammar, CVars and runtime-only exports need their separate references and client tests.

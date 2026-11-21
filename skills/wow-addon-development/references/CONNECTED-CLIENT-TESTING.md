@@ -1,5 +1,11 @@
 # Connected game-client UI testing
 
+## Pre-flight check
+
+Before choosing or running connected-client testing on a workstation:
+- Verify the OS and local tooling (typically Windows 10/11, PowerShell, Node 18+ or 24+ when running scripts).
+- Inspect which MCP tools or connected integrations are actually registered (for example, Witchcraft tools) and check computer-use availability if visual comparison is needed. Do not assume an integration is installed or active until verified.
+
 Follow the [Forever testing choice](../SKILL.md#verify-and-deliver) before starting runtime or UI tests, honoring an existing answer. For the Witchcraft route, use its connection for relevant game context and recorded Lua errors, and available computer-use tools or user reproduction for visual inspection and targeted UI interactions. These capabilities provide separate evidence. Choosing Witchcraft calls for checking the installed tool and client build, including after a game release.
 
 ## Verified Witchcraft scope and setup

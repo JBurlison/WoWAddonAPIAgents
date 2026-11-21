@@ -1,24 +1,15 @@
 ---
 name: wow-api-items-inventory
-description: Look up WoW Item, Container (Bag), Bank, Loot, Equipment, Socket,
-  Upgrade, Merchant, and World Loot Object APIs. Covers C_Item
-  info/count/cooldown/equip/type checks, C_Container bag slots/sort/search/use,
-  C_Bank tabs/deposit/withdraw, C_Loot roll/legacy mode, C_ItemSocketInfo gem
-  sockets, C_ItemInteraction conversion, C_MerchantFrame vendor buy/sell/repair,
-  item location/mixin patterns, and looting functions. Use when working with
-  items, bags, inventory, bank, loot, equipment sets, item sockets, item
-  upgrades, merchants, vendors, item links, or world loot objects. Select
-  Retail, Forever, or Classic with wow-client-targets before using historical
-  listings.
+description: Look up WoW item, bag/container, bank, loot, equipment, socket, upgrade, and vendor APIs (`C_Item`, `C_Container`, `C_Bank`, `C_Loot`, `C_MerchantFrame`).
 ---
 
-# api items inventory
+# WoW Items & Inventory API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
 
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
 
 Verify C_Container/C_Item signatures, bag IDs, result tables versus tuples, bank variants, and item-data loading. Normalize only verified fields in the target adapter.
 

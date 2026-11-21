@@ -1,17 +1,9 @@
 ---
 name: wow-api-group-lfg
-description: Look up WoW Party, Raid, Dungeon Finder, Premade Groups (LFG List),
-  Social Queue, Lobby Matchmaker, and Raid Marker APIs. Covers C_PartyInfo
-  (party management, invites, conversion, ready check, countdown), C_LFGInfo
-  (dungeon finder queue, role selection), C_LFGList (premade groups listing,
-  search, application, creation), C_SocialQueue (friend queue tracking),
-  C_LobbyMatchmakerInfo, raid markers, and group-related events. Use when
-  working with party/raid management, group finder, premade group listing,
-  dungeon queue, role selection, ready checks, or raid markers. Select Retail,
-  Forever, or Classic with wow-client-targets before using historical listings.
+description: Look up WoW party, raid, Dungeon Finder, Premade Groups, social queue, and raid marker APIs (`C_PartyInfo`, `C_LFGInfo`, `C_LFGList`, `C_SocialQueue`).
 ---
 
-# api group lfg
+# WoW Group & LFG API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

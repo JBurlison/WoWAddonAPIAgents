@@ -9,6 +9,14 @@ concurrency:
   group: release-plugin
   cancel-in-progress: false
 jobs:
+  guard:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reject non-main release dispatch
+        run: |
+          echo "Release workflow can only run on refs/heads/main (got ${GITHUB_REF})." >&2
+          exit 1
   validate:
     if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/validate.yml
@@ -18,12 +26,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '22'
       - name: Publish versioned archive and checksum

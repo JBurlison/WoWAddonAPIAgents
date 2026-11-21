@@ -1,18 +1,9 @@
 ---
 name: wow-api-professions
-description: Look up WoW Professions, Tradeskill, Crafting Orders, Recipe, and
-  Profession Specialization APIs. Covers C_TradeSkillUI (recipe list, crafting,
-  reagents, skill lines, categories, recrafting, salvage, enchanting),
-  C_CraftingOrders (customer/crafter order system, public/private/guild orders,
-  order creation, fulfillment, listing), C_ProfessionSpecUI (profession
-  knowledge, specialization trees), global tradeskill functions, and
-  profession-specific patterns. Use when working with professions, recipes,
-  crafting, work orders, crafting orders, profession specialization, or
-  tradeskill UI. Select Retail, Forever, or Classic with wow-client-targets
-  before using historical listings.
+description: Look up WoW professions, tradeskills, recipes, reagents, crafting orders, and profession specialization APIs (`C_TradeSkillUI`, `C_CraftingOrders`, `C_ProfessionSpecUI`).
 ---
 
-# api professions
+# WoW Professions & Crafting API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

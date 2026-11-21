@@ -2,8 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { pathToFileURL } from 'node:url';
-import { root, readJSON, write } from './lib.mjs';
+import { root, write, readJSON, isMainModule } from './lib.mjs';
 import { parts, compare } from './version.mjs';
 
 export function releaseNeeded(previous, current, manual = false) {
@@ -19,8 +18,22 @@ export async function publishRelease({ api, repository, sha, version, assets, gh
   if (!/^[a-f0-9]{40}$/.test(sha)) throw new Error('Expected a commit SHA');
   const tag = `v${version}`, prefix = `repos/${repository}`;
   const ref = await api(`${prefix}/git/ref/tags/${tag}`, { allow404: true });
-  if (ref && (ref.object.type !== 'commit' || ref.object.sha !== sha)) throw new Error(`Tag ${tag} belongs to another commit; refusing to move it`);
-  const release = await api(`${prefix}/releases/tags/${tag}`, { allow404: true });
+  if (ref) {
+    let target = ref.object;
+    if (target.type === 'tag') target = (await api(`${prefix}/git/tags/${target.sha}`)).object;
+    if (target.type !== 'commit' || target.sha !== sha) throw new Error(`Tag ${tag} belongs to another commit; refusing to move it`);
+  }
+  // /releases/tags/{tag} only returns published releases; scan paginated /releases to find drafts.
+  let release = await api(`${prefix}/releases/tags/${tag}`, { allow404: true });
+  if (!release) {
+    for (let page = 1; ; page++) {
+      const releases = await api(`${prefix}/releases?per_page=100&page=${page}`, { allow404: true });
+      if (!Array.isArray(releases) || !releases.length) break;
+      const draft = releases.find(item => item.draft && item.tag_name === tag);
+      if (draft) { release = draft; break; }
+      if (releases.length < 100) break;
+    }
+  }
   if (release && !ref) throw new Error('Release has no corresponding tag');
   if (release && !release.draft) return 'already-published';
   if (!ref) await api(`${prefix}/git/refs`, { method: 'POST', body: { ref: `refs/tags/${tag}`, sha } });
@@ -37,7 +50,14 @@ async function main() {
   const event = await readJSON(process.env.GITHUB_EVENT_PATH);
   const manual = process.env.GITHUB_EVENT_NAME === 'workflow_dispatch';
   const before = event.before;
-  const previous = before && !/^0+$/.test(before) ? JSON.parse(git(['show', `${before}:config/plugin.json`])).version : null;
+  let previous = null;
+  if (before && !/^0+$/.test(before)) {
+    try {
+      previous = JSON.parse(git(['show', `${before}:config/plugin.json`])).version;
+    } catch {
+      previous = null;
+    }
+  }
   if (!releaseNeeded(previous, version, manual)) { console.log('Version unchanged; no release.'); return; }
   const repository = process.env.GITHUB_REPOSITORY;
   if (!/^[\w.-]+\/[\w.-]+$/.test(repository || '') || !process.env.GH_TOKEN) throw new Error('Repository and GitHub token required');
@@ -56,4 +76,4 @@ async function main() {
   await write(sums, `${hash}  ${archive}\n`);
   console.log(await publishRelease({ api, repository, sha, version, assets: [path.join(dir, archive), sums] }));
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch(error => { console.error(error.message); process.exitCode = 1; });
+if (isMainModule(import.meta.url)) main().catch(error => { console.error(error.message); process.exitCode = 1; });

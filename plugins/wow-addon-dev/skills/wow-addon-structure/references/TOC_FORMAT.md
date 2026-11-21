@@ -53,7 +53,7 @@ You can add conditions and variables to file entries:
 - Variables: `[Family]`, `[Game]`, `[TextLocale]`
 
 ## Client-specific TOC files
-AddOns can ship multiple .toc files with suffixes for specific game types. Prefer comma-delimited Interface values or per-file conditions when possible.
+For multi-client releases targeting Retail, Forever, and Classic progression, prefer separate client-specific `<Addon>.toc` artifacts with shared core Lua/XML and verified per-target adapters rather than assuming unverified conditional directives or comma-delimited `Interface` lists work identically everywhere. See [CURRENT-STRUCTURE.md](CURRENT-STRUCTURE.md) and [wow-curseforge-packaging](../../wow-curseforge-packaging/SKILL.md).
 
 ## Restricted directives
 The following directives are restricted to Blizzard AddOns and should not be used by third-party AddOns:

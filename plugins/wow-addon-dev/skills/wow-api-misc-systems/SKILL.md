@@ -1,21 +1,9 @@
 ---
 name: wow-api-misc-systems
-description: Catch-all reference for smaller WoW API systems that don't warrant
-  individual skills. Covers Tutorial, ReportSystem, SplashScreen, Cinematic,
-  ChromieTimeInfo, AlliedRaces, UserFeedback, WarbandSceneInfo, ResearchInfo
-  (archaeology), Log, EventUtils, SlashCommand, ClickBindings, TooltipInfo,
-  TooltipComparison, GossipInfo (NPC dialog), PlayerChoice,
-  PlayerInteractionManager, ImmersiveInteraction, Localization, Locale,
-  MirrorTimer, ModelInfo, Movie, ParentalControls, PerksActivities,
-  RecruitAFriend, ContributionCollector, GarrisonInfo (legacy),
-  Covenant/Soulbinds (legacy), AzeriteItem (legacy), and other utility
-  namespaces. Use when working with NPC gossip/dialog, player choices, tooltips,
-  tutorials, cinematics, Chromie Time, allied races, warbands, report system, or
-  any miscellaneous game system. Select Retail, Forever, or Classic with
-  wow-client-targets before using historical listings.
+description: Look up miscellaneous WoW APIs including NPC gossip, tooltips, player choices, tutorials, cinematics, Chromie Time, warbands, archaeology, and legacy expansion systems.
 ---
 
-# api misc systems
+# WoW Miscellaneous Systems API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

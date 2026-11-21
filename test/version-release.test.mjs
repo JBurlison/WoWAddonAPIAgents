@@ -22,6 +22,8 @@ test('stable version policy increments once, preserves explicit releases, and re
 });
 
 test('all version copies agree and only version fields change', async () => {
+  assert.equal(versionFiles.length, 9);
+  assert.ok(versionFiles.includes('plugins/wow-addon-dev/.antigravity-plugin/plugin.json'));
   await validateVersions();
   for (const file of versionFiles) {
     const text = await fs.readFile(root + file, 'utf8');
@@ -38,13 +40,26 @@ test('all version copies agree and only version fields change', async () => {
   assert.throws(() => assertVersionOnly('package.json', pkg, JSON.stringify(changed)), /only version fields/);
 });
 
-async function prFixture({ changed = true, version = '1.0.0', baselineVersion = version, fork = false, race = false } = {}) {
+async function prFixture({
+  changed = true,
+  mergeBaseChanged = changed,
+  mergeBaseSha = 'a'.repeat(40),
+  version = '1.0.0',
+  baselineVersion = version,
+  fork = false,
+  race = false,
+} = {}) {
+  const baseSha = 'a'.repeat(40);
+  const headSha = 'b'.repeat(40);
+  const racedSha = 'c'.repeat(40);
   const calls = [];
   const contents = await Promise.all(versionFiles.map(async file => rewriteVersion(file, await fs.readFile(root + file, 'utf8'), version)));
   const tree = { sha: 'tree', tree: versionFiles.map((file, i) => ({ path: file, type: 'blob', mode: '100644', sha: `blob${i}` })) };
   const baseline = { sha: 'base-tree', tree: tree.tree.map(item => ({ ...item })) };
   baseline.tree.find(item => item.path === 'config/plugin.json').sha = 'base-config';
   if (changed) baseline.tree.find(item => item.path === 'plugins/wow-addon-dev/plugin.json').sha = 'old-plugin';
+  const mergeBaseTree = { sha: 'merge-base-tree', tree: tree.tree.map(item => ({ ...item })) };
+  if (mergeBaseChanged) mergeBaseTree.tree.find(item => item.path === 'plugins/wow-addon-dev/plugin.json').sha = 'old-merge-plugin';
   let reads = 0;
   const api = async (route, options = {}) => {
     calls.push({ route, ...options });
@@ -53,10 +68,12 @@ async function prFixture({ changed = true, version = '1.0.0', baselineVersion = 
       if (route.endsWith('/git/commits')) return { sha: 'new-commit' };
       return null;
     }
-    if (route.endsWith('/pulls/1')) return { state: 'open', head: { sha: race && ++reads > 1 ? 'raced' : 'head', ref: 'feature', repo: { full_name: fork ? 'Other/repo' : 'Owner/repo' } }, base: { ref: 'main' } };
-    if (route.endsWith('/git/ref/heads/main')) return { object: { sha: 'base' } };
-    if (route.endsWith('/git/trees/base?recursive=1')) return baseline;
-    if (route.endsWith('/git/trees/head?recursive=1')) return tree;
+    if (route.endsWith('/pulls/1')) return { state: 'open', head: { sha: race && ++reads > 1 ? racedSha : headSha, ref: 'feature', repo: { full_name: fork ? 'Other/repo' : 'Owner/repo' } }, base: { ref: 'main' } };
+    if (route.endsWith('/git/ref/heads/main')) return { object: { sha: baseSha } };
+    if (route.endsWith(`/compare/${baseSha}...${headSha}`)) return { merge_base_commit: { sha: mergeBaseSha } };
+    if (route.endsWith(`/git/trees/${baseSha}?recursive=1`)) return baseline;
+    if (route.endsWith(`/git/trees/${mergeBaseSha}?recursive=1`)) return mergeBaseTree;
+    if (route.endsWith(`/git/trees/${headSha}?recursive=1`)) return tree;
     if (route.endsWith('/git/blobs/base-config')) {
       const content = rewriteVersion('config/plugin.json', contents[0], baselineVersion);
       return { encoding: 'base64', size: content.length, content: Buffer.from(content).toString('base64') };
@@ -65,32 +82,41 @@ async function prFixture({ changed = true, version = '1.0.0', baselineVersion = 
     if (match) return { encoding: 'base64', size: contents[+match[1]].length, content: Buffer.from(contents[+match[1]]).toString('base64') };
     throw new Error(`Unexpected route: ${route}`);
   };
-  return { api, calls };
+  return { api, calls, headSha };
 }
 
 test('PR bot edits only fixed JSON files, creates one non-forced commit, and dispatches validation', async () => {
-  const { api, calls } = await prFixture();
+  const { api, calls, headSha } = await prFixture();
   assert.equal(await updatePR(api, 'Owner/repo', 1), 'versioned 1.0.1');
   const edits = calls.find(call => call.route.endsWith('/git/trees') && call.method).body;
   assert.equal(edits.base_tree, 'tree');
   assert.deepEqual(edits.tree.map(file => file.path), versionFiles);
   const commit = calls.find(call => call.route.endsWith('/git/commits')).body;
-  assert.deepEqual(commit.parents, ['head']);
+  assert.deepEqual(commit.parents, [headSha]);
   assert.equal(calls.find(call => call.method === 'PATCH').body.force, false);
   assert.ok(calls.at(-1).route.endsWith('/validate.yml/dispatches'));
 });
 
-test('already bumped PRs do not get extra commits and failed validation dispatch can be retried', async () => {
+test('already bumped PRs skip auto-dispatch on normal runs and dispatch only when requested', async () => {
   const { api, calls } = await prFixture({ version: '1.0.1', baselineVersion: '1.0.0' });
   assert.equal(await updatePR(api, 'Owner/repo', 1), 'already-versioned');
-  assert.ok(calls.every(call => call.method !== 'PATCH'));
-  assert.ok(calls.at(-1).route.endsWith('/validate.yml/dispatches'));
+  assert.ok(calls.every(call => !call.method));
+
+  const retry = await prFixture({ version: '1.0.1', baselineVersion: '1.0.0' });
+  assert.equal(await updatePR(retry.api, 'Owner/repo', 1, { dispatchUnchanged: true }), 'already-versioned');
+  assert.ok(retry.calls.every(call => call.method !== 'PATCH'));
+  assert.ok(retry.calls.at(-1).route.endsWith('/validate.yml/dispatches'));
 });
 
-test('PR bot skips forks and unchanged plugins, rejects incomplete trees and racing heads', async () => {
-  for (const settings of [{ fork: true }, { changed: false }]) {
+test('PR bot skips forks, unchanged plugins, and doc-only PRs whose merge-base is behind main', async () => {
+  for (const settings of [
+    { fork: true },
+    { changed: false },
+    { version: '1.0.0', baselineVersion: '1.0.1', mergeBaseSha: 'd'.repeat(40), mergeBaseChanged: false, changed: true },
+  ]) {
     const { api, calls } = await prFixture(settings);
-    await updatePR(api, 'Owner/repo', 1);
+    const outcome = await updatePR(api, 'Owner/repo', 1);
+    assert.ok(['skipped', 'unchanged'].includes(outcome));
     assert.ok(calls.every(call => !call.method));
   }
   const { api, calls } = await prFixture({ race: true });
@@ -107,8 +133,8 @@ test('releases require an increase or manual recovery; lower versions fail', () 
   assert.throws(() => releaseNeeded('2.0.0', '1.0.1'));
 });
 
-test('release publication uploads assets before publishing and recovers draft failures', async () => {
-  const calls = [], commands = [], sha = 'a'.repeat(40);
+test('release publication uploads assets before publishing and recovers draft failures via annotated tags', async () => {
+  const calls = [], commands = [], sha = 'a'.repeat(40), tagSha = 'c'.repeat(40);
   const api = async (route, options) => { calls.push({ route, ...options }); return null; };
   const args = { api, repository: 'Owner/repo', sha, version: '1.0.1', assets: ['plugin.zip', 'SHA256SUMS'], gh: async command => { commands.push(command); } };
   assert.equal(await publishRelease(args), 'published');
@@ -116,7 +142,15 @@ test('release publication uploads assets before publishing and recovers draft fa
   assert.deepEqual(commands.map(command => command[1]), ['create', 'upload', 'edit']);
   assert.ok(commands[0].includes('--verify-tag'));
   commands.length = 0;
-  const draftAPI = async route => route.includes('/git/ref/') ? { object: { type: 'commit', sha } } : { draft: true };
+  const page1 = Array.from({ length: 100 }, (_, i) => ({ draft: false, tag_name: `v0.0.${i}` }));
+  const draftAPI = async route => {
+    if (route.endsWith('/git/ref/tags/v1.0.1')) return { object: { type: 'tag', sha: tagSha } };
+    if (route.endsWith(`/git/tags/${tagSha}`)) return { object: { type: 'commit', sha } };
+    if (route.endsWith('/releases/tags/v1.0.1')) return null;
+    if (route.endsWith('/releases?per_page=100&page=1')) return page1;
+    if (route.endsWith('/releases?per_page=100&page=2')) return [{ draft: true, tag_name: 'v1.0.1' }];
+    throw new Error(`Unexpected route: ${route}`);
+  };
   await publishRelease({ ...args, api: draftAPI });
   assert.deepEqual(commands.map(command => command[1]), ['upload', 'edit']);
   commands.length = 0;

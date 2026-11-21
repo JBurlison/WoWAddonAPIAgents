@@ -1,18 +1,9 @@
 ---
 name: wow-api-transmog
-description: Look up WoW Transmogrification, Appearance Collection, Transmog
-  Sets, Transmog Outfits, Dye Colors, and Barber Shop APIs. Covers
-  C_Transmogrify (applying transmog at NPC), C_TransmogCollection (appearance
-  source info, categories, search, collected status), C_TransmogSets (set
-  collection, set info, base sets, variants), C_TransmogOutfits (outfit
-  management, save/load), C_DyeColor/C_DyeColorInfo (armor dye system new in
-  12.0.0), and C_BarberShop (customization). Use when working with transmog,
-  appearance collections, wardrobe, transmog sets, outfit management, armor
-  dyes, or character customization. Select Retail, Forever, or Classic with
-  wow-client-targets before using historical listings.
+description: Look up WoW transmogrification, appearance collections, sets, outfits, armor dyes, and Barber Shop APIs (`C_TransmogCollection`, `C_TransmogSets`, `C_DyeColor`, `C_BarberShop`).
 ---
 
-# api transmog
+# WoW Transmog & Appearance API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

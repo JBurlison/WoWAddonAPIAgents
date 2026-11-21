@@ -1,34 +1,26 @@
 ---
 name: wow-addon-structure
-description: Verbose guide for WoW AddOn structure, .toc metadata, loading
-  order, SavedVariables, and C_AddOns metadata and load APIs. Use when planning
-  addon folder layout, file order, or SavedVariables wiring. Select Retail,
-  Forever, or Classic with wow-client-targets before using historical listings.
+description: WoW addon structure, .toc metadata, file load order, SavedVariables, C_AddOns, and C_AddOnProfiler APIs. Use when organizing addon files, wiring dependencies, or persisting saved data.
 ---
 
-# addon structure
+# WoW Addon Structure
 
-Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
+Resolve the target client with [wow-client-targets](../wow-client-targets/SKILL.md) and follow [wow-addon-development](../wow-addon-development/SKILL.md) for project localization and options baselines.
 
 ## Target-specific decisions
 
-Load the base [localization catalog](../wow-addon-development/references/LOCALIZATION.md), locale overrides and then text consumers in each target's file list. Initialize/migrate SavedVariables before [options registration](../wow-api-settings-system/references/ADDON-OPTIONS.md); keep database keys independent of display language.
+Start with [current structure contracts](references/CURRENT-STRUCTURE.md) for multi-version TOC packaging rules, exact `C_AddOns` return tuples, `C_AddOnProfiler`, lifecycle event payloads, modern TOC metadata (`AddonCompartmentFunc`, `Group`, localized tags), and safe SavedVariables migrations.
 
-Verify third-party TOC directives, client interface, addon loading APIs, dependencies, initialization order, and SavedVariables. Package a normal TOC per target rather than assuming every client supports the same suffixes or conditions.
-
-Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.
+Package one standard `<Addon>.toc` per client build rather than copying Blizzard's internal `[Family]`/`[Game]` or `AllowLoadGameType` directives into third-party TOCs. Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md) and verify loading order and dependencies per target.
 
 ## Detailed lookup material
 
-Use the [pinned source schemas](references/generated/README.md) for complete generated contracts in this domain, including typed arguments, returns, event payloads and restrictions. Query only the needed symbols. Source declarations leave loading, runtime behavior and addon permission unresolved unless separately verified.
+Use the [pinned source schemas](references/generated/README.md) for complete `C_AddOns` and `C_AddOnProfiler` contracts. The [historical Retail baseline](references/RETAIL-BASELINE.md) and supporting files retain older reference prose; prefer [current structure contracts](references/CURRENT-STRUCTURE.md) wherever they conflict:
 
-The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
-
-- [ADDON_STRUCTURE](references/ADDON_STRUCTURE.md)
-- [C_ADDONS_API](references/C_ADDONS_API.md)
-- [LOADING_LIFECYCLE](references/LOADING_LIFECYCLE.md)
-- [SAVED_VARIABLES](references/SAVED_VARIABLES.md)
-- [TOC_FORMAT](references/TOC_FORMAT.md)
-- [VIEWING_BLIZZARD_UI](references/VIEWING_BLIZZARD_UI.md)
-
-For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).
+- [Current structure contracts](references/CURRENT-STRUCTURE.md)
+- [Addon structure](references/ADDON_STRUCTURE.md)
+- [C_AddOns API](references/C_ADDONS_API.md)
+- [Loading lifecycle](references/LOADING_LIFECYCLE.md)
+- [SavedVariables](references/SAVED_VARIABLES.md)
+- [TOC format](references/TOC_FORMAT.md)
+- [Viewing Blizzard UI](references/VIEWING_BLIZZARD_UI.md)

@@ -89,3 +89,60 @@ test('an individually oversized addition leaves the branch, staging area, and wo
   assert.equal(git('write-tree'), tree);
   assert.equal(git('status', '--porcelain'), status);
 });
+
+test('commit helper fails closed on invalid branches, dirty trees, empty diffs, non-root dirs, and non-regular modes', async t => {
+  const { dir, git, write, refresh } = await fixture(t);
+  await write('base.txt', 'v1\n');
+  git('add', '-A');
+  git('commit', '-qm', 'Base');
+  const base = git('rev-parse', 'HEAD');
+
+  // Empty staged diff
+  const empty = refresh(base);
+  assert.notEqual(empty.status, 0);
+  assert.match(empty.stderr, /No staged API update/);
+
+  // Unstaged modification
+  await write('base.txt', 'v2\n');
+  const unstaged = refresh(base);
+  assert.notEqual(unstaged.status, 0);
+  assert.match(unstaged.stderr, /Unstaged changes/);
+
+  // Untracked file
+  git('checkout', '--', 'base.txt');
+  await write('scratch.tmp', 'x\n');
+  const untracked = refresh(base);
+  assert.notEqual(untracked.status, 0);
+  assert.match(untracked.stderr, /Untracked files/);
+  await fs.unlink(path.join(dir, 'scratch.tmp'));
+
+  // Disallow running from main or detached HEAD
+  git('branch', '-m', 'main');
+  const onMain = refresh(base);
+  assert.notEqual(onMain.status, 0);
+  assert.match(onMain.stderr, /named local proposal branch/);
+
+  git('checkout', '--detach', 'HEAD');
+  const detached = refresh(base);
+  assert.notEqual(detached.status, 0);
+
+  // Disallow running from subdirectory
+  git('checkout', '-b', 'refresh');
+  await fs.mkdir(path.join(dir, 'sub'));
+  await write('sub/ok.txt', 'ok\n');
+  git('add', '-A');
+  const subResult = spawnSync(process.execPath, [script], {
+    cwd: path.join(dir, 'sub'), encoding: 'utf8',
+    env: { ...process.env, GITHUB_SHA: base, GIT_CONFIG_NOSYSTEM: '1', GIT_CONFIG_GLOBAL: path.join(dir, '.unused-config') },
+  });
+  assert.notEqual(subResult.status, 0);
+  assert.match(subResult.stderr, /checkout root/);
+
+  // Reject unsupported git mode (executable bit 100755 staged in index without working-tree drift)
+  git('reset', '-q', '--hard', base);
+  git('config', 'core.filemode', 'false');
+  git('update-index', '--chmod=+x', 'base.txt');
+  const badMode = refresh(base);
+  assert.notEqual(badMode.status, 0);
+  assert.match(badMode.stderr, /Unsupported Git mode/);
+});

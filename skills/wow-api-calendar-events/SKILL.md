@@ -1,15 +1,9 @@
 ---
 name: wow-api-calendar-events
-description: Look up WoW Calendar and Event Scheduler APIs. Covers C_Calendar
-  (event creation, editing, invites, holidays, raid resets, filtered events,
-  date navigation, guild events, community events, texture lookups) and
-  C_EventScheduler (scheduled event system). Use when working with the in-game
-  calendar, creating events, managing invites, displaying holidays, or
-  scheduling guild/community activities. Select Retail, Forever, or Classic with
-  wow-client-targets before using historical listings.
+description: Look up WoW in-game calendar, holiday, raid reset, guild/community invite, and event scheduler APIs (`C_Calendar`, `C_EventScheduler`).
 ---
 
-# api calendar events
+# WoW Calendar & Events API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

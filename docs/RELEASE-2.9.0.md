@@ -1,0 +1,17 @@
+# 2.9.0: schema v2 compaction, query upgrades, curated recipes, and hardening
+
+Release **2.9.0** builds on 2.8.0's Antigravity packaging and radial-menu guidance to compact generated API catalogs (`schemaVersion: 2`), expand `query.mjs`, tighten skill discovery budgets, correct API ownership routes and developer recipes, and harden automation and validation scripts.
+
+## Highlights
+
+- **Compact `schemaVersion: 2` catalogs (`plugins/wow-addon-dev/` at 12.31 MiB / 244 files):** Deduplicated identical cross-target declarations per domain into `catalog.json`, split `manifest.json` + `provenance.json`, compressed `symbols.json` to compact row tuples, compacted `EVENTS-*.md`, deleted obsolete `retail.json` / `forever.json` / `classic.json` / `FRAMEXML-FUNCTIONS.md` artifacts, and enforced file-vs-group ownership parity and `RETAIL-BASELINE.md` counts.
+- **Upgraded `wow-api-index` `query.mjs`:** Added `--compact`, `--diff`, `--resolve-types`, `--secret`, `--restricted`, `--offset`, ranked exact/namespace/member matching, `Enum.` / `Enum.Type.Member` / `Constants.` resolution, any-position CLI flags, and strict validation errors for invalid `--kind`, `--domain`, or `--environment`.
+- **Ownership & reference accuracy:** Corrected routings for `SimpleAnimGroupAPI`, `SimpleFontStringAPI`, `EditModeManager`, `UISystemVisibilityManager`, `AuctionHouseConstants` / `Enums`, `C_AuraContainerUtil` / `AuraContainerShared`, `C_AnimaDiversion`, and `Global:DebugToggle`; added `CURRENT-STRUCTURE.md`, updated `CURRENT-SETTINGS.md`, `SAVED_VARIABLES.md`, `ELEMENTS.md` (`MenuUtil`, `WowStyle1DropdownTemplate`, `ScrollBox` + `MinimalScrollBar`, `UISpecialFrames`), `SKINNING-ARCHITECTURE.md`, `NATIVE-WINDOW-RECIPES.md`, `SOURCE-MAP.md`, and `PACKAGE-LAYOUT.md`.
+- **Discovery budget & multi-host polish:** Trimmed all 39 WoW skill descriptions to **6,368 total characters** (max 216, enforced `<= 320` each / `<= 10,000` total); enforced `#fragment` heading-slug validation, all-43-skill validation, binary-safe plugin asset copying, recursive empty-dir pruning, and Antigravity/Codex manifest alignment.
+- **Security, portability & CI hardening:** Fixed `isMainModule` symlink/Windows-case handling, hardened Git invocations across source-prep/audit/commit helpers, switched PR version bump checks to GitHub merge-base `/compare/`, fixed annotated-tag and paginated draft-release recovery, removed unused updater allowlist hosts, and pinned workflow actions to full commit SHAs.
+
+## Evidence scope
+
+- **Maintained snapshot targets unchanged:** Retail `12.1.5.70783` (`9,981` declarations across `622` files), Forever `1.60.1.70938` (`10,258` declarations across `642` files), and Classic progression `5.5.4.70631` (`7,435` declarations across `533` files), with `0` unrouted namespaces across all three branches.
+- **Checks on Windows:** Re-verified after rebasing onto `origin/main` (`2.8.0 -> 2.9.0`): `generate-api-references.mjs` (plus `--check` and `--verify-source`), `audit-api-coverage.mjs`, `npm run build`, `npm run check`, `compile:workflow` & `check:workflow` (`gh-aw v1.0.1`), `version.mjs check origin/main` (`2.8.0 -> 2.9.0`), and **72 Node tests** (0 failures, 0 skipped).
+- **Not run:** Linux runner execution, hosted GitHub Actions triggers, and in-game client/simulator execution (`Witchcraft`, `UIForever`, hardware controller). Source declarations and static/fixture checks do not replace [per-client acceptance](VALIDATION.md).

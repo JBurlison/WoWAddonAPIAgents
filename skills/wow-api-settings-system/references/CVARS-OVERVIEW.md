@@ -25,7 +25,8 @@ For the complete list, see https://warcraft.wiki.gg/wiki/Console_variables
 
 ## Resetting
 
-- Reset a single CVar with `SetCVar(name, GetCVarDefault(name))`.
+- Reset a single CVar with `C_CVar.SetCVar(name, C_CVar.GetCVarDefault(name))` (for example `C_CVar.SetCVar("autoLootDefault", "1")`).
+- On Classic, verify legacy global `SetCVar` / `GetCVar` aliases separately; Retail and Forever prefer `C_CVar.*`.
 - Use `/console cvar_default` to reset all CVars to defaults.
 - Use `/console cvar_reset` to reset to startup values.
 

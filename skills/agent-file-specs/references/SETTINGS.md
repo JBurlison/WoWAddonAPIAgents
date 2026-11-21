@@ -19,7 +19,7 @@ they are enabled.
 | `chat.instructionsFilesLocations` | string[] | `[".github/instructions"]` | Additional folders where VS Code searches for `*.instructions.md` files. |
 | `chat.promptFilesLocations` | string[] | `[".github/prompts"]` | Additional folders where VS Code searches for `*.prompt.md` files. |
 | `chat.agentFilesLocations` | string[] | `[".github/agents"]` | Additional folders where VS Code searches for `*.agent.md` files. |
-| `chat.agentSkillsLocations` | string[] | — | Additional folders where VS Code searches for skill directories. |
+| `chat.agentSkillsLocations` | object (`Record<string, boolean>`) | — | Additional folders enabled as skill search roots (for example, `{ "skills": true }`). |
 | `chat.useAgentsMdFile` | boolean | — | Enable `AGENTS.md` file at workspace root. |
 | `chat.useNestedAgentsMdFiles` | boolean | — | Enable nested `AGENTS.md` files in subfolders (experimental). |
 | `chat.useAgentSkills` | boolean | — | Enable skills in `.claude/skills/` or `skills/`. |

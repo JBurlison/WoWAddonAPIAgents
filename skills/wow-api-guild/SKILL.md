@@ -1,17 +1,9 @@
 ---
 name: wow-api-guild
-description: Look up WoW Guild Management, Guild Bank, Guild Info, and Guild
-  Event APIs. Covers guild management functions (invite, promote, demote, kick,
-  disband, MOTD, info), guild roster (GetGuildRosterInfo, GuildRoster, sorting),
-  guild bank functions (GetGuildBankItemInfo, deposit, withdraw, tab management,
-  permissions), guild perks/reputation, C_GuildInfo, and the Club API guild
-  integration (guilds are ClubType.Guild in the Club system). Use when working
-  with guild management, guild roster, guild bank, guild chat, guild events, or
-  guild achievements. Select Retail, Forever, or Classic with wow-client-targets
-  before using historical listings.
+description: Look up WoW guild management, roster, guild bank, guild perks/reputation, and guild Club APIs (`C_GuildInfo`, `GetGuildRosterInfo`, `GetGuildBankItemInfo`).
 ---
 
-# api guild
+# WoW Guild API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

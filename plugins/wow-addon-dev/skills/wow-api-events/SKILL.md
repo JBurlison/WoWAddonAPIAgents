@@ -1,6 +1,6 @@
 ---
 name: wow-api-events
-description: Look up complete source-pinned WoW event declarations, ordered typed payloads, nilability, secrecy and callback-versus-frame dispatch across Retail, Forever and Classic progression. Verify addon-facing registration and runtime delivery separately.
+description: Look up source-pinned WoW event declarations, typed payloads, nilability, secrecy, and callback-versus-frame dispatch across Retail, Forever, and Classic progression.
 ---
 
 # Events and payloads

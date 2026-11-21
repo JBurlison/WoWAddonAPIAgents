@@ -1,14 +1,9 @@
 ---
 name: wow-api-weekly-rewards
-description: Look up WoW Weekly Rewards (Great Vault) API. Covers
-  C_WeeklyRewards — vault activities (M+, raids, PvP, world), reward selection,
-  item preview, canEquip checks, vault UI state, and related events. Use when
-  working with the Great Vault, weekly reward choices, vault activity tracking,
-  or end-of-week item selection. Select Retail, Forever, or Classic with
-  wow-client-targets before using historical listings.
+description: Look up WoW Great Vault / Weekly Rewards APIs (`C_WeeklyRewards`) for activity progress, reward choices, item previews, and vault state.
 ---
 
-# api weekly rewards
+# WoW Weekly Rewards API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

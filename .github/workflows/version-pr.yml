@@ -11,7 +11,7 @@ permissions:
   pull-requests: read
   actions: write
 concurrency:
-  group: version-plugin-${{ github.event.pull_request.number || 'sweep' }}
+  group: version-plugin
   cancel-in-progress: false
 jobs:
   version:
@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Never check out the PR head or run its scripts with this write token.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: refs/heads/main
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '22'
       - name: Update only version JSON fields using trusted code

@@ -32,8 +32,9 @@ test('isolated plugin references are complete and cannot escape the package',asy
     for(const [file] of expected) if(file.startsWith('plugins/wow-addon-dev/')&&file.endsWith('.md')) {
       assert.deepEqual(await validateLinks(path.join(temp,file.slice('plugins/wow-addon-dev/'.length)),temp),[],file);
     }
-    await write(path.join(temp,'bad.md'),'[missing](../outside.md)\n[wrong](skills/WOW-client-targets/SKILL.md)');
-    assert.equal((await validateLinks(path.join(temp,'bad.md'),temp)).length,2);
+    await write(path.join(temp,'target.md'),'# Real_Heading\n');
+    await write(path.join(temp,'bad.md'),'[missing](../outside.md)\n[wrong](skills/WOW-client-targets/SKILL.md)\n[ok](target.md#real_heading)\n[broken](target.md#missing)\n`[ignored](target.md#nope)`\n');
+    assert.equal((await validateLinks(path.join(temp,'bad.md'),temp)).length,3);
   } finally {
     const resolved = path.resolve(temp);
     if (path.dirname(resolved) !== path.resolve(os.tmpdir()) || !path.basename(resolved).startsWith('wow-package-test-')) throw new Error('Unexpected temporary directory');
@@ -41,9 +42,10 @@ test('isolated plugin references are complete and cannot escape the package',asy
   }
 });
 
-test('check detects drift without rewriting and build removes obsolete generated files',async()=>{
+test('check detects drift without rewriting, preserves binaries, and prunes obsolete empty directories',async()=>{
   const temp=await fs.mkdtemp(path.join(os.tmpdir(),'wow-package-test-'));
   try {
+    const pngBytes=Buffer.from([0x89,0x50,0x4e,0x47,0x0d,0x0a,0x1a,0x0a,0x00,0x00,0x00,0x0d]);
     await write(path.join(temp,'LICENSE'),'Fixture license\n');
     await write(path.join(temp,'config/plugin.json'),await fs.readFile(root+'config/plugin.json','utf8'));
     await write(path.join(temp,'assets/logo.svg'),await fs.readFile(root+'assets/logo.svg','utf8'));
@@ -51,16 +53,20 @@ test('check detects drift without rewriting and build removes obsolete generated
     await write(path.join(temp,'agents/wow-addon.md'),'---\nname: wow-addon\ndescription: Fixture\n---\nRead [workflow](../skills/wow-addon-development/SKILL.md).\n');
     await write(path.join(temp,'agents/ai-builder.md'),'---\nname: ai-builder\ndescription: Fixture\n---\nMaintainer only.\n');
     await write(path.join(temp,'skills/wow-addon-development/SKILL.md'),'---\nname: wow-addon-development\ndescription: Fixture\n---\n# Fixture\n');
+    await write(path.join(temp,'skills/wow-addon-development/assets/icon.png'),pngBytes);
     await build({base:temp});
+    const copiedPng=await fs.readFile(path.join(temp,'plugins/wow-addon-dev/skills/wow-addon-development/assets/icon.png'));
+    assert.ok(copiedPng.equals(pngBytes));
     const output=path.join(temp,'plugins/wow-addon-dev/skills/wow-addon-development/SKILL.md');
     await fs.appendFile(output,'Manual edit\n');
     await assert.rejects(build({base:temp,check:true}),/Generated content differs/);
     assert.match(await fs.readFile(output,'utf8'),/Manual edit/);
-    const obsolete=path.join(temp,'plugins/wow-addon-dev/obsolete.md');
+    const obsolete=path.join(temp,'plugins/wow-addon-dev/obsolete/nested/old.md');
     await write(obsolete,'Obsolete');
     await build({base:temp});
     assert.doesNotMatch(await fs.readFile(output,'utf8'),/Manual edit/);
     await assert.rejects(fs.access(obsolete));
+    await assert.rejects(fs.access(path.join(temp,'plugins/wow-addon-dev/obsolete')));
     await build({base:temp,check:true});
   } finally {
     const resolved=path.resolve(temp);

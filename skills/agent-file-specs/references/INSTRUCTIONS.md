@@ -49,7 +49,7 @@ Additional locations can be configured with the `chat.instructionsFilesLocations
 setting.
 
 > **Provider note:** `<provider>` is your provider's base folder (`.github/`,
-> `.claude/`, `.codex/`, `.config/opencode/`).
+> `.claude/`, `.codex/`, `.antigravity/`, `.config/opencode/`). Host discovery paths differ by client — consult [FILE-LOCATIONS.md](FILE-LOCATIONS.md).
 
 ---
 

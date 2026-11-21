@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
 import YAML from 'yaml';
 import { root, frontmatter } from '../scripts/lib.mjs';
+import { compileWorkflow } from '../scripts/compile-workflow.mjs';
 import { versionFiles } from '../scripts/version.mjs';
 
 function publicationConfigs(jobs) {
@@ -18,7 +21,7 @@ test('publication budgets fit complete generated snapshots and reach the compile
   const source=YAML.parse(frontmatter(await fs.readFile(root+'.github/workflows/update-wow-api.md','utf8')).yaml);
   const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
   const manifest=JSON.parse(await fs.readFile(root+'skills/wow-api-index/references/generated/manifest.json','utf8'));
-  const references=new Set([...manifest.chunks,...manifest.artifacts].map(entry=>entry.path));
+  const references=new Set([...manifest.chunks,...manifest.artifacts,...(manifest.provenance?[manifest.provenance]:[])].map(entry=>entry.path));
   references.add('wow-api-index/references/generated/manifest.json');
   references.add('wow-client-targets/references/targets.json');
   references.add('wow-client-targets/references/SOURCE-EVIDENCE.md');
@@ -53,9 +56,11 @@ test('compiled publication exempts only the generated README paths in the manife
     assert.ok(exactPaths.every(path=>!/[?*\[]/.test(path)),'Protected-file exceptions must be exact paths');
     const exemptReadmes=exactPaths.filter(path=>path.split('/').at(-1)==='README.md').sort();
     assert.deepEqual(exemptReadmes,expected,'Exempt every generated copy and no other README');
-    for(const file of [...versionFiles,'.github/agents/wow-addon.agent.md']) {
+    for(const file of [...versionFiles]) {
       assert.ok(exactPaths.includes(file),`Missing protected-file exception: ${file}`);
     }
+    assert.ok(!exactPaths.includes('.github/agents/wow-addon.md') && !exactPaths.includes('.github/agents/wow-addon.agent.md'));
+    assert.ok(!config.allowed_files.includes('.github/agents/wow-addon.md') && !config.allowed_files.includes('.github/agents/wow-addon.agent.md'));
     for(const prefix of ['skills/','plugins/wow-addon-dev/skills/']) {
       assert.ok(config.allowed_files.includes(prefix+'wow-*/references/generated/README.md'));
     }
@@ -65,6 +70,7 @@ test('compiled publication exempts only the generated README paths in the manife
 test('compiled publication requires agent success, including post-agent validation',async()=>{
   const source=YAML.parse(frontmatter(await fs.readFile(root+'.github/workflows/update-wow-api.md','utf8')).yaml);
   const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
+  assert.ok(!source.network.allowed.includes('registry.npmjs.org'));
   assert.equal(source.jobs.safe_outputs.if,"needs.agent.result == 'success'");
   assert.match(compiled.jobs.safe_outputs.if,/needs\.agent\.result == 'success'/);
   const validation=compiled.jobs.agent.steps.find(step=>step.name==='Validate proposed content before safe outputs');
@@ -82,7 +88,7 @@ test('compiled publication requires agent success, including post-agent validati
   assert.ok(allowed.includes('skills/wow-client-targets/references/targets.json'));
   assert.ok(allowed.includes('skills/wow-*/SKILL.md'));
   const exclusions=source['safe-outputs']['create-pull-request']['protected-files'].exclude;
-  for (const file of ['config/api-owners.json','skills/wow-*/references/generated/retail.json','skills/wow-*/references/generated/forever.json','skills/wow-*/references/generated/classic.json','skills/wow-*/references/generated/README.md','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/symbols.json']) {
+  for (const file of ['config/api-owners.json','skills/wow-*/references/generated/catalog.json','skills/wow-*/references/generated/README.md','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/provenance.json','skills/wow-api-index/references/generated/symbols.json',...versionFiles]) {
     assert.ok(allowed.includes(file),`Missing output path: ${file}`);
     if(!file.includes('*')) assert.ok(exclusions.includes('/'+file),`Missing protected-file exclusion: ${file}`);
     if(file.startsWith('skills/')) {
@@ -93,6 +99,56 @@ test('compiled publication requires agent success, including post-agent validati
   assert.ok(allowed.every(file=>!file.startsWith('scripts/')&&!file.includes('/scripts/')&&!file.startsWith('test/')&&file!=='config/*.json'));
   assert.ok(exclusions.every(file=>!file.includes('/scripts/')));
   assert.ok(allowed.every(file=>!file.startsWith('.github/skills/')&&!file.startsWith('agents/ai-builder')));
+});
+
+test('workflow files pin third-party actions to full SHAs and compileWorkflow --check never mutates tracked lockfiles',async t=>{
+  for (const name of ['validate.yml','release.yml','version-pr.yml']) {
+    const wf=YAML.parse(await fs.readFile(root+'.github/workflows/'+name,'utf8'));
+    for (const [jobName,job] of Object.entries(wf.jobs)) {
+      if (job.uses && !job.uses.startsWith('./')) assert.match(job.uses,/@[a-f0-9]{40}$/,`${name}:${jobName}`);
+      for (const step of job.steps||[]) {
+        if (step.uses && !step.uses.startsWith('./')) assert.match(step.uses,/@[a-f0-9]{40}$/,`${name}:${jobName}`);
+      }
+    }
+  }
+  const rel=YAML.parse(await fs.readFile(root+'.github/workflows/release.yml','utf8'));
+  assert.ok(rel.jobs.guard);
+  assert.equal(rel.jobs.guard.if,"github.ref != 'refs/heads/main'");
+  const vp=YAML.parse(await fs.readFile(root+'.github/workflows/version-pr.yml','utf8'));
+  assert.equal(vp.concurrency.group,'version-plugin');
+  assert.equal(vp.concurrency['cancel-in-progress'],false);
+  const actionsLock=JSON.parse(await fs.readFile(root+'.github/aw/actions-lock.json','utf8'));
+  assert.ok(!Object.keys(actionsLock.entries).some(k=>k.startsWith('actions/setup-node@')));
+
+  const temp=await fs.mkdtemp(path.join(os.tmpdir(),'wow-compile-check-'));
+  t.after(async()=>{
+    assert.equal(path.dirname(path.resolve(temp)),path.resolve(os.tmpdir()));
+    assert.ok(path.basename(temp).startsWith('wow-compile-check-'));
+    await fs.rm(temp,{recursive:true,force:true});
+  });
+  const lockPath=path.join(temp,'.github/workflows/update-wow-api.lock.yml');
+  const awLockPath=path.join(temp,'.github/aw/actions-lock.json');
+  await fs.mkdir(path.dirname(lockPath),{recursive:true});
+  await fs.mkdir(path.dirname(awLockPath),{recursive:true});
+  await fs.writeFile(lockPath,'original-lock\n');
+  await fs.writeFile(awLockPath,'original-aw-lock\n');
+  const runner=args=>{
+    if (args[0]==='version') return {status:0,stdout:'gh aw version v1.0.1\n',stderr:''};
+    fs.writeFile(lockPath,'drifted-lock\n');
+    return {status:0,stdout:'',stderr:''};
+  };
+  // Use sync write in mock runner before returning so check reads after[0] immediately.
+  const fsSync=await import('node:fs');
+  const syncRunner=args=>{
+    if (args[0]==='version') return {status:0,stdout:'gh aw version v1.0.1\n',stderr:''};
+    fsSync.default.writeFileSync(lockPath,'drifted-lock\n');
+    fsSync.default.writeFileSync(awLockPath,'drifted-aw-lock\n');
+    return {status:0,stdout:'',stderr:''};
+  };
+  void runner;
+  await assert.rejects(compileWorkflow({check:true,base:temp,runner:syncRunner}),/Compiled workflow differs/);
+  assert.equal(await fs.readFile(lockPath,'utf8'),'original-lock\n');
+  assert.equal(await fs.readFile(awLockPath,'utf8'),'original-aw-lock\n');
 });
 
 test('compiled updater uses Copilot Sonnet and personal Copilot credentials with bounded inference',async()=>{

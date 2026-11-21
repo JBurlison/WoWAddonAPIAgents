@@ -31,7 +31,7 @@ Preserve hover, pressed, disabled and selected cues. Changing only the normal te
 
 Use the loaded client's font objects/styles as starting points. Assign a font to your own FontString or create an addon-owned font object for changes; editing a shared `GameFont...` object can affect unrelated UI. Verify the actual font name, fallback glyph coverage, wrapping, truncation and disabled contrast. Localized labels need room to grow.
 
-For an atlas, verify the name in the selected client and the actual `SetAtlas` signature, including whether requesting atlas size changes your layout. For a file texture, verify its path or file ID, crop and aspect ratio. `SetTexCoord` crops a texture; vertex color tints its existing pixels. Neither operation reconstructs arbitrary artwork. Reference available native assets in the client instead of vendoring Blizzard artwork into the plugin.
+For an atlas, verify the name in the selected client and the actual `SetAtlas` signature, including whether requesting atlas size changes your layout. For a file texture, verify its path or file ID, crop and aspect ratio. `SetTexCoord` crops a texture; vertex color tints its existing pixels. Neither operation reconstructs arbitrary artwork. Reference available native assets in the client instead of vendoring Blizzard artwork into the addon.
 
 ## Layout, scaling and lists
 
@@ -64,6 +64,23 @@ end
 ```
 
 The panel deliberately keeps the inherited backdrop resize handler. If adding resizing, dragging, ESC handling, tooltips or persistence, verify and implement those separately rather than treating decoration as a complete window-management contract. Integrate through the addon's normal initialization and expose a local reference to its UI controller. Before shipping, complete the required [controller assessment](../../wow-controller-support/SKILL.md): the click handler alone does not establish controller reachability, focus indication or back/close navigation.
+
+## Window UX, menus, and ScrollBox lists
+
+- **Frame input and screen bounds:** For draggable or modal panels, set `panel:EnableMouse(true)` so clicks do not leak to 3D world movement behind the panel, and `panel:SetClampedToScreen(true)` so dragging or scaling never pushes the frame off-screen.
+- **Closing with Escape (`UISpecialFrames`):** Inserting into `UISpecialFrames` requires a **globally named** frame (`table.insert(UISpecialFrames, "MyAddonMainFrame")` with a globally unique name string passed to `CreateFrame("Frame", "MyAddonMainFrame", ...)`); anonymous frames (`nil` name) cannot be closed via `UISpecialFrames`. Do not add frames dynamically while in combat if protected frames could be affected.
+- **Dropdowns and context menus (`Blizzard_Menu`):** Prefer modern `MenuUtil.CreateContextMenu(ownerRegion, generator)` for context menus and `CreateFrame("DropdownButton", nil, parent, "WowStyle1DropdownTemplate")` paired with `dropdown:SetupMenu(function(owner, rootDescription) ... rootDescription:CreateButton(...) end)` where verified present across Retail, Forever, and Classic progression instead of legacy `UIDropDownMenuTemplate`.
+- **Minimal ScrollBox list (`Blizzard_SharedXML`):** Pair `<Frame inherits="WowScrollBoxList">` and `<EventFrame inherits="MinimalScrollBar">` (anchored cleanly side-by-side) with:
+
+```lua
+local view = CreateScrollBoxListLinearView()
+view:SetElementExtent(24)
+view:SetElementInitializer("BackdropTemplate", function(row, elementData)
+    -- Update existing child text/state per elementData; create child FontStrings once.
+end)
+ScrollUtil.InitScrollBoxListWithScrollBar(panel.ScrollBox, panel.ScrollBar, view)
+panel.ScrollBox:SetDataProvider(CreateDataProvider(items))
+```
 
 ## Verify the result
 
