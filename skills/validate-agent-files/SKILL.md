@@ -111,28 +111,28 @@ description: What this skill does and when to use it.
 **Required Structure:**
 ```yaml
 ---
-mode: agent
+agent: agent
 description: What this prompt does
 ---
 
-[Prompt template with {{variables}}]
+[Prompt template with ${input:variableName} placeholders]
 ```
 
 **Supported Frontmatter Attributes:**
-- `mode` (optional) - One of: `agent` (default), `ask`, `edit`, `generate`
+- `agent` (optional, replaces legacy `mode`) - One of: `agent` (default), `ask`, `edit`
 - `tools` (optional) - Available tools for this prompt
 - `description` (optional but recommended) - What the prompt accomplishes
 
 **Checks:**
 1. ✓ File has `.prompt.md` extension
-2. ✓ If `mode` present, it's a valid value
-3. ✓ Variables use `{{variableName}}` syntax
+2. ✓ If `agent` (or legacy `mode`) is present, it is a valid value
+3. ✓ Variables use `${...}` syntax (such as `${workspaceFolder}`, `${file}`, `${selection}`, `${input:varName}`)
 4. ✓ Body content exists (the prompt itself)
 
 **Common Issues:**
 - Wrong extension (`.md` instead of `.prompt.md`)
-- Invalid `mode` value
-- Undefined variables in template
+- Invalid `agent` value
+- Legacy `{{var}}` syntax or undefined input variables
 
 ## Instruction File Validation (`<provider>/instructions/*.instructions.md`)
 
@@ -146,17 +146,17 @@ applyTo: "**/*.ts"
 ```
 
 **Supported Frontmatter Attributes:**
-- `applyTo` (required) - Glob pattern(s) for when instructions apply
+- `applyTo` (optional) - Glob pattern(s) for automatic application; omit for manual attachment via `#file` or chat attachment
 
 **Checks:**
 1. ✓ File has `.instructions.md` extension
-2. ✓ `applyTo` field exists
-3. ✓ `applyTo` contains valid glob pattern(s)
+2. ✓ If `applyTo` is present, it contains valid glob pattern(s) relative to the workspace root
+3. ✓ `name` and `description` are valid if provided
 4. ✓ Body content provides meaningful guidance
 
 **Common Issues:**
-- Wrong extension
-- Missing `applyTo` field
+- Wrong extension (`.md` instead of `.instructions.md`)
+- Missing `applyTo` when automatic application was intended (manual instructions intentionally omit it)
 - Invalid glob syntax
 - Empty or minimal instructions
 
@@ -185,7 +185,9 @@ When validating all files, provide summary:
 
 | Type | Total | Valid | Warnings | Invalid |
 |------|-------|-------|----------|---------|
-| Agents | X | X | X | X || Sub-Agents | X | X | X | X || Skills | X | X | X | X |
+| Agents | X | X | X | X |
+| Sub-Agents | X | X | X | X |
+| Skills | X | X | X | X |
 | Prompts | X | X | X | X |
 | Instructions | X | X | X | X |
 

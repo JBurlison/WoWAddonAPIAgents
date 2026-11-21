@@ -72,6 +72,9 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 | Approved UI design changes mid-project | Version the design reference and reopen affected visual acceptance rows; retain evidence for the earlier revision without calling it a pass for the new design. |
 | Two agents own dependent work | Assign explicit row/file ownership, record the dependency and let the integrating agent reconcile evidence before marking completion; do not overwrite shared planning documents concurrently. |
 | Small isolated addon bug fix | Use proportionate task notes and focused verification rather than creating unnecessary planning documents. |
+| Single-client CurseForge release with `.pkgmeta` | Configure `package-as`, `ignore` (tests, docs, CI, source artwork), `manual-changelog`, and `## Version: @project-version@`; verify top-level `<Addon>/<Addon>.toc` archive structure with `tar -tf`. |
+| Multi-client CurseForge ZIPs for Retail, Forever, and Classic | Keep shared core Lua and separate client TOCs; avoid nested `dist/<flavor>/` archive roots; resolve `https://wow.curseforge.com/api/game/versions` by WoW flavor version-type rather than mixing client ZIPs. |
+| Embedded Ace3 / LibStub libraries in CurseForge package | Order `LibStub` before `CallbackHandler-1.0` in `externals`, TOC, and `embeds.xml`; pin tags when reproducible builds are required; keep `X-Embeds` / `OptionalDeps` and optional `enable-nolib-creation` consistent. |
 
 Verify installed references without the source repository nearby. Invoke the workflow skill in Codex, the namespaced skill and agent in Claude, and the agent in Copilot. Verify checkout use in VS Code still discovers the existing agent path.
 

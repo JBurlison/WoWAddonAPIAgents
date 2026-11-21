@@ -10,19 +10,19 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-calendar-events](../../wow-api-calendar-events/SKILL.md) | 150 / 150 / 139 | [source schemas](../../wow-api-calendar-events/references/generated/README.md) |
 | [wow-api-collections](../../wow-api-collections/SKILL.md) | 205 / 220 / 167 | [source schemas](../../wow-api-collections/references/generated/README.md) |
 | [wow-api-combat](../../wow-api-combat/SKILL.md) | 317 / 322 / 306 | [source schemas](../../wow-api-combat/references/generated/README.md) |
-| [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | 448 / 452 / 338 | [source schemas](../../wow-api-currency-economy/references/generated/README.md) |
+| [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | 457 / 461 / 346 | [source schemas](../../wow-api-currency-economy/references/generated/README.md) |
 | [wow-api-encounters](../../wow-api-encounters/SKILL.md) | 348 / 350 / 274 | [source schemas](../../wow-api-encounters/references/generated/README.md) |
 | [wow-api-escape-sequences](../../wow-api-escape-sequences/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-api-events](../../wow-api-events/SKILL.md) | 2 / 2 / 2 | [source schemas](../../wow-api-events/references/generated/README.md) |
 | [wow-api-framexml](../../wow-api-framexml/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
-| [wow-api-group-lfg](../../wow-api-group-lfg/SKILL.md) | 312 / 324 / 237 | [source schemas](../../wow-api-group-lfg/references/generated/README.md) |
+| [wow-api-group-lfg](../../wow-api-group-lfg/SKILL.md) | 284 / 296 / 209 | [source schemas](../../wow-api-group-lfg/references/generated/README.md) |
 | [wow-api-guild](../../wow-api-guild/SKILL.md) | 82 / 87 / 80 | [source schemas](../../wow-api-guild/references/generated/README.md) |
-| [wow-api-housing](../../wow-api-housing/SKILL.md) | 701 / 701 / 625 | [source schemas](../../wow-api-housing/references/generated/README.md) |
+| [wow-api-housing](../../wow-api-housing/SKILL.md) | 692 / 692 / 617 | [source schemas](../../wow-api-housing/references/generated/README.md) |
 | [wow-api-index](../../wow-api-index/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
-| [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | 672 / 688 / 440 | [source schemas](../../wow-api-items-inventory/references/generated/README.md) |
+| [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | 644 / 660 / 440 | [source schemas](../../wow-api-items-inventory/references/generated/README.md) |
 | [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | 84 / 90 / 42 | [source schemas](../../wow-api-lua-environment/references/generated/README.md) |
 | [wow-api-map-navigation](../../wow-api-map-navigation/SKILL.md) | 258 / 260 / 147 | [source schemas](../../wow-api-map-navigation/references/generated/README.md) |
-| [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | 628 / 643 / 271 | [source schemas](../../wow-api-misc-systems/references/generated/README.md) |
+| [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | 642 / 657 / 271 | [source schemas](../../wow-api-misc-systems/references/generated/README.md) |
 | [wow-api-professions](../../wow-api-professions/SKILL.md) | 314 / 329 / 53 | [source schemas](../../wow-api-professions/references/generated/README.md) |
 | [wow-api-pvp](../../wow-api-pvp/SKILL.md) | 199 / 200 / 108 | [source schemas](../../wow-api-pvp/references/generated/README.md) |
 | [wow-api-quests](../../wow-api-quests/SKILL.md) | 319 / 325 / 152 | [source schemas](../../wow-api-quests/references/generated/README.md) |
@@ -32,14 +32,14 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | 342 / 364 / 269 | [source schemas](../../wow-api-spells-abilities/references/generated/README.md) |
 | [wow-api-talents](../../wow-api-talents/SKILL.md) | 261 / 278 / 140 | [source schemas](../../wow-api-talents/references/generated/README.md) |
 | [wow-api-transmog](../../wow-api-transmog/SKILL.md) | 333 / 336 / 335 | [source schemas](../../wow-api-transmog/references/generated/README.md) |
-| [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) | 850 / 886 / 649 | [source schemas](../../wow-api-unit-player/references/generated/README.md) |
+| [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) | 878 / 914 / 649 | [source schemas](../../wow-api-unit-player/references/generated/README.md) |
 | [wow-api-weekly-rewards](../../wow-api-weekly-rewards/SKILL.md) | 29 / 29 / 0 | [source schemas](../../wow-api-weekly-rewards/references/generated/README.md) |
-| [wow-api-widget](../../wow-api-widget/SKILL.md) | 1556 / 1574 / 1444 | [source schemas](../../wow-api-widget/references/generated/README.md) |
+| [wow-api-widget](../../wow-api-widget/SKILL.md) | 1627 / 1645 / 1528 | [source schemas](../../wow-api-widget/references/generated/README.md) |
 | [wow-api-xml-schema](../../wow-api-xml-schema/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-client-targets](../../wow-client-targets/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-controller-support](../../wow-controller-support/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-curseforge-packaging](../../wow-curseforge-packaging/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
-| [wow-lua-api](../../wow-lua-api/SKILL.md) | 262 / 264 / 172 | [source schemas](../../wow-lua-api/references/generated/README.md) |
+| [wow-lua-api](../../wow-lua-api/SKILL.md) | 205 / 207 / 116 | [source schemas](../../wow-lua-api/references/generated/README.md) |
 | [wow-macro-commands](../../wow-macro-commands/SKILL.md) | 9 / 9 / 9 | [source schemas](../../wow-macro-commands/references/generated/README.md) |
 | [wow-native-ui](../../wow-native-ui/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-ui-skinning](../../wow-ui-skinning/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
@@ -59,13 +59,13 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | `C_AdventureJournal` | wow-api-misc-systems | client-system | retail, forever, classic |
 | `C_AdventureMap` | wow-api-quests | client-system | retail, forever, classic |
 | `C_AlliedRaces` | wow-api-misc-systems | client-system | retail, forever |
-| `C_AnimaDiversion` | wow-api-widget | client-system | retail, forever |
+| `C_AnimaDiversion` | wow-api-misc-systems | client-system | retail, forever |
 | `C_ArdenwealdGardening` | wow-api-misc-systems | client-system | retail, forever |
 | `C_AreaPoiInfo` | wow-api-map-navigation | client-system | retail, forever, classic |
 | `C_ArtifactUI` | wow-api-items-inventory | client-system | retail, forever |
 | `C_AssistedCombat` | wow-api-spells-abilities | client-system | retail, forever, classic |
 | `C_AuctionHouse` | wow-api-currency-economy | client-system | retail, forever, classic |
-| `C_AuraContainerUtil` | wow-api-items-inventory | client-system | retail, forever |
+| `C_AuraContainerUtil` | wow-api-unit-player | client-system | retail, forever |
 | `C_AutoComplete` | wow-api-social-chat | client-system | retail, forever, classic |
 | `C_AutoLoot` | wow-api-items-inventory | client-system | forever |
 | `C_AzeriteEmpoweredItem` | wow-api-items-inventory | client-system | retail, forever, classic |
@@ -345,9 +345,9 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | `Data:AppearanceSource` | wow-api-transmog | client-system | retail, forever, classic |
 | `Data:ArrowCalloutConstants` | wow-api-widget | client-system | retail, forever, classic |
 | `Data:AsyncAssistActionsConstants` | wow-api-spells-abilities | client-system | retail, forever, classic |
-| `Data:AuctionHouseConstants` | wow-api-housing | client-system | retail, forever, classic |
-| `Data:AuctionHouseEnums` | wow-api-housing | client-system | retail, forever, classic |
-| `Data:AuraContainerShared` | wow-api-items-inventory | client-system | retail, forever |
+| `Data:AuctionHouseConstants` | wow-api-currency-economy | client-system | retail, forever, classic |
+| `Data:AuctionHouseEnums` | wow-api-currency-economy | client-system | retail, forever, classic |
+| `Data:AuraContainerShared` | wow-api-unit-player | client-system | retail, forever |
 | `Data:AutoCompleteShared` | wow-api-social-chat | client-system | retail, forever, classic |
 | `Data:AzeriteConstants` | wow-api-items-inventory | client-system | retail, forever, classic |
 | `Data:BagConstants` | wow-api-items-inventory | client-system | retail, forever, classic |
@@ -583,7 +583,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | `Global:Client` | wow-api-settings-system | client-system | retail, forever, classic |
 | `Global:ConnectionScript` | wow-api-settings-system | client-system | retail, forever, classic |
 | `Global:Console` | wow-api-settings-system | client-system | retail, forever, classic |
-| `Global:DebugToggle` | wow-api-settings-system | client-system | retail, forever, classic |
+| `Global:DebugToggle` | wow-api-settings-system | internal-or-restricted | retail, forever, classic |
 | `Global:Expansion` | wow-api-misc-systems | client-system | retail, forever, classic |
 | `Global:ExpansionInfo` | wow-api-misc-systems | client-system | retail, forever, classic |
 | `Global:Font` | wow-api-widget | client-system | retail, forever, classic |
@@ -656,7 +656,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | `Object:SimpleAnimAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleAnimAlphaAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleAnimFlipBookAPI` | wow-api-widget | client-system | retail, forever, classic |
-| `Object:SimpleAnimGroupAPI` | wow-api-group-lfg | client-system | retail, forever, classic |
+| `Object:SimpleAnimGroupAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleAnimPathAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleAnimRadialProgressAPI` | wow-api-widget | client-system | retail, forever |
 | `Object:SimpleAnimRotationAPI` | wow-api-widget | client-system | retail, forever, classic |
@@ -674,7 +674,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | `Object:SimpleControlPointAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleEditBoxAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleFontAPI` | wow-api-widget | client-system | retail, forever, classic |
-| `Object:SimpleFontStringAPI` | wow-lua-api | client-system | retail, forever, classic |
+| `Object:SimpleFontStringAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleFrameAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleFrameScriptObjectAPI` | wow-api-widget | client-system | retail, forever, classic |
 | `Object:SimpleHTMLAPI` | wow-api-widget | client-system | retail, forever, classic |

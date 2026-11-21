@@ -1,26 +1,19 @@
 ---
 name: wow-native-ui
-description: Build addon-owned windows and controls using Blizzard's native UI templates, buttons, borders, NineSlice, backdrops, fonts, textures, atlases, and scrolling lists. Use when choosing or assembling native-looking UI for Retail, Forever, or Classic progression; use wow-ui-skinning for restyling existing Blizzard windows.
+description: Build addon-owned windows and controls using Blizzard UI templates, borders, NineSlice, buttons, MenuUtil, ScrollBox, textures, and atlases. Use wow-ui-skinning for Blizzard frames.
 ---
 
 # Build with native UI elements
 
-Treat [options-menu discovery](../wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](../wow-addon-development/references/LOCALIZATION.md) as baseline concerns. Catalog addon-owned labels/tooltips and translate their meaning naturally; verify long-text layout and glyphs alongside controller focus. Keep native game-supplied localized text intact where appropriate.
+Resolve targets with [wow-client-targets](../wow-client-targets/SKILL.md) and follow [wow-addon-development](../wow-addon-development/SKILL.md) for baseline UI mock-ups, visual fidelity, options, localization, and controller gates. Reskinning Blizzard-owned frames (like CharacterFrame or SpellBook) belongs in [UI skinning](../wow-ui-skinning/SKILL.md).
 
-Use native controls and artwork when they match the requested appearance. Start with [client targets](../wow-client-targets/SKILL.md): resolve each selected client and pin its branch before choosing templates. A template in the source tree may belong to another game family, depend on another addon, or have client-specific overrides.
+1. **Choose component and ownership:** Select an addon-owned panel, ordinary control, dropdown (`MenuUtil`), scrolling list (`ScrollBox`), or protected action control using [element selection](references/ELEMENTS.md).
+2. **Trace the native template:** Locate the XML declaration, Lua mixins, owning TOC, `[Family]`/`[Game]` selectors, and dependencies at the pinned commit. The [source map](references/SOURCE-MAP.md) supplies dated starting points, not a universal catalog.
+   - For Forever gold dialogs or Edit Mode art, see [Forever native artwork](references/FOREVER-NATIVE-ART.md) (resolve native assets rather than tinting another client's art).
+   - For radial overlays, see [radial composition](../wow-controller-support/references/RADIAL-MENUS.md).
+3. **Preserve template behavior:** Reuse child references, state textures, resizing, and layout lifecycle. Do not overwrite inherited setup scripts or mutate shared global fonts/tables to style one addon window.
+4. **Assess controller paths:** Apply [controller support](../wow-controller-support/SKILL.md) to interactive controls and verify focus/activation rather than relying on template inheritance alone.
+5. **Fallback per target:** Substitute a verified primitive composition where a convenience template is absent, or report the component unsupported for that client.
+6. **Test visually and functionally:** Validate states, interactions, and custom-art composition per [UI design & testing](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) and [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md).
 
-For new visible UI, follow the [design and mock-up choice](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation, honoring an already accepted design or choice.
-
-Apply [controller support](../wow-controller-support/SKILL.md) to every UI element: distinguish decorative regions from interactive controls and plan focus, activation, back navigation, scrolling/text entry and action hints as applicable. Template inheritance alone does not certify controller navigation. Preserve the chosen native input paths and record any explicit user exclusion or target limitation.
-
-1. Identify the component and ownership: an addon-owned window, ordinary control, reusable list row, or protected action control. Use [element selection](references/ELEMENTS.md) for the practical choices. Reskinning an existing CharacterFrame, spellbook, or other Blizzard window belongs in [UI skinning](../wow-ui-skinning/SKILL.md).
-2. Find the native example, its XML declaration and Lua mixins, then trace the owning TOC, includes, client selectors, dependencies and initialization. Record the resolved template, expected parent keys, required scripts, asset identifiers and verified client/build. The [source map](references/SOURCE-MAP.md) supplies dated starting points, not a universal template catalog.
-   For Forever's native gold dialog appearance or a HUD Edit Mode reference, use [Forever native artwork](references/FOREVER-NATIVE-ART.md) for the shell, background, close/button states and compact-control sizing pitfalls. Resolve the client's own assets rather than tinting another client's art; a browser approximation is not a native rendering pass.
-   For a radial overlay, use [radial composition and input evidence](../wow-controller-support/references/RADIAL-MENUS.md): native wheel atlases and sector alignment, transparent overlay ownership, status indicators and configuration in Settings. Do not add a dialog shell to an explicitly wheel-only design.
-3. Preserve the chosen template's behavior. Reuse its child references, normal/highlight/pushed/disabled state handling, resizing and layout lifecycle. Do not replace inherited setup scripts or alter shared fonts/layout tables to style one frame. Add your own children or use an addon-owned wrapper when composition is sufficient.
-4. Choose a fallback separately for each target. A verified primitive composition may replace an unavailable convenience template; otherwise report the component unsupported for that target. Function presence does not prove matching arguments, template loading or addon permission.
-5. Test the visible states and interactions listed in the element guide, using the existing [UI design and testing choices](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) and [visual fidelity guide](../wow-addon-development/references/VISUAL-FIDELITY.md). Honor an accepted custom design; a stock button or border is not automatically a visual match. Reuse the user's established testing choice.
-
-For exact native methods and script contracts, query [widget APIs](../wow-api-widget/SKILL.md). For mixins, pools and load ownership, use [FrameXML](../wow-api-framexml/SKILL.md); for XML inheritance and script composition use [XML schema](../wow-api-xml-schema/SKILL.md). These references complement this construction workflow rather than replace client verification.
-
-Keep ordinary decoration separate from protected gameplay behavior. Native artwork does not grant permission to move protected frames, set restricted attributes, perform actions in combat, or inspect secret values. Apply the selected client's verified restrictions. Report source verification, simulator results and in-game results separately; disclose stale evidence when current sources cannot be checked.
+For widget method contracts, query [widget APIs](../wow-api-widget/SKILL.md); for mixins/pools/load paths, use [FrameXML](../wow-api-framexml/SKILL.md); for XML schema inheritance, use [XML schema](../wow-api-xml-schema/SKILL.md). Keep ordinary styling separate from protected actions, combat lockdown, and secret values.

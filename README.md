@@ -1,6 +1,6 @@
 # WoW Addon API Agents
 
-Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, GitHub Copilot, and Antigravity. It includes 39 skills covering WoW APIs, UI implementation, addon development, client selection and CurseForge packaging. AI-builder remains a repository maintenance tool.
+Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, GitHub Copilot, and Antigravity. It includes 39 skills covering WoW APIs, UI implementation, addon development, client selection and CurseForge packaging (plus 4 repository-maintenance skills excluded from consumer packages). AI-builder remains a repository maintenance tool.
 
 | Target | Upstream branch | Request example |
 |---|---|---|
@@ -25,11 +25,15 @@ Version **2.5.0** adds [controller support](skills/wow-controller-support/SKILL.
 
 Version **2.6.0** makes [addon options-menu integration](skills/wow-api-settings-system/references/ADDON-OPTIONS.md) and [localization](skills/wow-addon-development/references/LOCALIZATION.md) baseline requirements for new addons and relevant changes. Guidance covers discoverable settings, saved preferences and profiles, fallback catalogs, natural target-language meaning and phrasing, translation coverage, and per-client acceptance. Existing skill entrypoints, agent adapters and planning templates carry these requirements.
 
-For help releasing an addon, ask “Set up CurseForge to package my Forever addon when I push a version tag” or “Check that my Retail, Forever and Classic ZIPs each install into the right folder and have the right CurseForge game version.” See [CurseForge setup and automatic packaging](skills/wow-curseforge-packaging/SKILL.md).
+Version **2.7.0** adds [CurseForge setup and automatic packaging](skills/wow-curseforge-packaging/SKILL.md) (`.pkgmeta` / `pkgmeta.yaml`, webhook setup, replacement tokens, multi-client ZIPs, Upload API diagnostics): ask “Set up CurseForge to package my Forever addon when I push a version tag” or “Check that my Retail, Forever and Classic ZIPs each install into the right folder and have the right CurseForge game version.”
+
+Version **2.8.0** adds Antigravity plugin packaging (`.antigravity-plugin/plugin.json`, `assets/logo.svg`, `rules/AGENTS.md`) alongside radial-menu and icon-picker UI guidance.
+
+Version **2.9.0** compacts the generated API catalog (`schemaVersion: 2`, deduplicated `catalog.json` / `provenance.json` / row-table `symbols.json`), expands `query.mjs` (`--compact`, `--diff`, `--resolve-types`, `--offset`, ranked matches, `Enum.Type.Member`), tightens skill descriptions within discovery budgets, adds real-world `C_CVar` / `Settings` / `C_AddOns` / `MenuUtil` / `ScrollBox` / CurseForge recipes, and hardens maintainer/CI scripts. See the [2.9.0 validation report](docs/RELEASE-2.9.0.md).
 
 ## Install
 
-Marketplace: `wow-addon-api-agents`. Plugin: `wow-addon-dev`. Packages are committed; consumers do not need Node.js or a build step.
+Marketplace: `wow-addon-api-agents`. Plugin: `wow-addon-dev`. Packages are committed; consumers do not need **Node.js** to read documentation or run static prompts (Node **18+** — tested on Node 24 — is needed only when running helper scripts such as `query.mjs` or `targets.mjs`).
 
 ### Codex
 
@@ -87,11 +91,11 @@ Open this repository in VS Code with Copilot and select [wow-addon](.github/agen
 | `skills/` | Maintained portable WoW skills and the four maintainer-only helper skills |
 | `agents/` | Maintained shared WoW agent and AI-builder definition |
 | `instructions/` | Maintained client-aware guidance |
-| `config/plugin.json` | Plugin identity and release metadata |
+| `config/plugin.json` | Plugin identity, release metadata, and API ownership config (`config/api-owners.json`) |
 | `assets/logo.svg` | Maintained square plugin icon |
-| `plugins/wow-addon-dev/` | Generated, self-contained installable package |
+| `plugins/wow-addon-dev/` | Generated, self-contained installable package (with Antigravity/Claude/Codex manifests, `assets/logo.svg`, and `rules/AGENTS.md`) |
 | `.github/agents/`, `.github/instructions/` | Generated Copilot checkout adapters |
-| `.github/workflows/` | GitHub Actions validation and upstream updates |
+| `.github/workflows/` | GitHub Actions validation, release, and compiled agentic updater (`.lock.yml`) |
 
 Run `npm run build` after editing maintained files. Host discovery catalogs remain in their required `.agents/`, `.claude-plugin/`, and `.github/plugin/` locations. They all point to the same package.
 

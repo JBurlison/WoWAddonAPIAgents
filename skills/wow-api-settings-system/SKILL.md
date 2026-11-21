@@ -1,39 +1,20 @@
 ---
 name: wow-api-settings-system
-description: Look up WoW Settings registration, CVars, input/keybindings,
-  gamepad, Edit Mode, sound/video, time/build information and Forever game
-  rules. Use for addon preferences, built-in addon options-menu registration, client options and settings integration.
-  Resolve Retail, Forever or Classic with wow-client-targets first.
+description: Look up WoW Settings registration, addon options menus, CVars, keybindings, gamepad input, sound/video, and Forever game rules across Retail, Forever, and Classic.
 ---
 
-# api settings system
+# WoW Settings & System API
 
-Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
+Resolve the target client with [wow-client-targets](../wow-client-targets/SKILL.md) and follow [wow-addon-development](../wow-addon-development/SKILL.md) for UI mock-up, visual fidelity, localization, and testing rules.
 
 ## Target-specific decisions
 
-Start with [addon options integration](references/ADDON-OPTIONS.md) for required menu discoverability, registration lifetime, saved defaults, profile changes and acceptance. Use [localization](../wow-addon-development/references/LOCALIZATION.md) for category names, controls, tooltips and messages; keep setting identifiers unlocalized and translate intent naturally.
-
-For UI input and controller-facing settings, follow [controller support](../wow-controller-support/SKILL.md). Assess controller reachability and operation, preserve user bindings and CVars, and verify client-specific settings APIs before offering an opt-in change.
-
-For a window that cannot acquire controller focus or a Game Menu-style focus shortcut, use [focus acquisition and diagnostics](../wow-controller-support/references/FOCUS-ACQUISITION.md). Resolve the actual action/context and distinguish an unbound action from an unavailable query before installing temporary bindings or rendering a hint.
-
-For visible settings-panel changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
-
-Follow [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md) when an accepted panel design exists. Preserve its appearance while keeping real settings controls functional; verify the rendered result instead of substituting a default settings layout silently.
-
-Verify loaded Settings panel registration APIs, CVars and their permitted scopes, and client/build detection. If an integration is unavailable, use a verified custom configuration UI rather than guessing a legacy replacement.
-
-Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.
+- **Addon options:** Start with [addon options integration](references/ADDON-OPTIONS.md) for required menu discovery, registration lifetime, defaults/migrations, and profile switching. Keep internal identifiers unlocalized and follow [localization](../wow-addon-development/references/LOCALIZATION.md) for visible text.
+- **Settings & CVar contracts:** Read [current settings contracts](references/CURRENT-SETTINGS.md) for `Settings.Create*` control helpers, `RegisterAddOnSetting`, `RegisterProxySetting`, combat-guarded `Settings.OpenToCategory`, and target-scoped `C_CVar` availability (`SetTempCVar`/`RemoveTempCVar` are Forever-only; `AreCVarsLoaded` is absent in Classic).
+- **Controller-facing settings:** Apply [controller support](../wow-controller-support/SKILL.md) and [focus acquisition](../wow-controller-support/references/FOCUS-ACQUISITION.md) when building custom settings panels; preserve user bindings and CVars.
+- **Owned namespaces vs Edit Mode:** This domain owns `C_CVar`, `C_KeyBindings`, `C_ClickBindings`, `C_TTSSettings`, `C_AccessibilityOptions`, `C_GamepadUI`, `C_GamepadTargeting`, `C_InputInterfaceStyle`, `C_Console`, sound/video, and `C_GameRules`. For **`C_EditMode` and `UISystemVisibilityManager` schemas**, query [wow-api-widget](../wow-api-widget/SKILL.md).
+- **Forever game rules:** Use [Forever GameRules](references/FOREVER-GAME-RULES.md) for presets, Hardcore, and game-mode flags (distinguishing login-screen setters from in-game addon APIs).
 
 ## Detailed lookup material
 
-Use the [pinned source schemas](references/generated/README.md) for complete generated contracts in this domain, including typed arguments, returns, event payloads and restrictions. Query only the needed symbols. Source declarations leave loading, runtime behavior and addon permission unresolved unless separately verified.
-
-Start with [current settings contracts and integration](references/CURRENT-SETTINGS.md) for Settings registration, CVars and input/media boundaries. For Forever presets, Hardcore and game-mode rules, use [Forever GameRules](references/FOREVER-GAME-RULES.md); login-screen setters are not automatically addon APIs.
-
-The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
-
-- [CVARS OVERVIEW](references/CVARS-OVERVIEW.md)
-
-For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).
+Use the [pinned source schemas](references/generated/README.md) for complete generated contracts in this domain. The [historical Retail baseline](references/RETAIL-BASELINE.md) and [CVars overview](references/CVARS-OVERVIEW.md) retain older reference listings; prefer [current settings contracts](references/CURRENT-SETTINGS.md) wherever they conflict.

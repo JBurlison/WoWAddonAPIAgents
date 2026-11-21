@@ -1,22 +1,15 @@
 ---
 name: wow-api-pvp
-description: Look up WoW PvP, Battlegrounds, Arenas, Rated PvP, War Mode, Duels,
-  War Games, and Honor/Conquest APIs. Covers C_PvP (PvP info, rated stats,
-  rewards, battlegrounds, arenas, war mode, brawls, special events), duel
-  functions (AcceptDuel, CancelDuel, StartDuel), war game functions,
-  honor/conquest tracking, PvP talent integration, and PvP-related events. Use
-  when working with PvP systems, battlegrounds, arenas, rated PvP, war mode,
-  honor, conquest, duels, or PvP UI. Select Retail, Forever, or Classic with
-  wow-client-targets before using historical listings.
+description: Look up WoW PvP, battleground, arena, rated PvP, War Mode, duel, war game, honor, and conquest APIs (`C_PvP`, `StartDuel`, `AcceptDuel`).
 ---
 
-# api pvp
+# WoW PvP API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
 
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
 
 Verify battleground/arena queues, ratings, honor currencies, war mode, matchmaking, and protected queue actions separately. Do not equate similarly named statistics across clients.
 

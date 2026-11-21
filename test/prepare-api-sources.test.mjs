@@ -66,6 +66,20 @@ test('source preparation rejects dirty files, ignored additions, foreign origins
   f.git(['remote', 'set-url', 'origin', 'https://github.com/other/source.git']);
   await assert.rejects(prepare(), /Unexpected source repository/);
   f.git(['remote', 'set-url', 'origin', 'https://github.com/Gethe/wow-ui-source.git']);
+  f.git(['config', 'core.precomposeunicode', 'true']);
+  await assert.doesNotReject(prepare());
+  f.git(['config', '--unset', 'core.precomposeunicode']);
   f.git(['config', 'filter.test.smudge', 'untrusted-command']);
   await assert.rejects(prepare(), /Unexpected local Git configuration/);
+  f.git(['config', '--unset', 'filter.test.smudge']);
+  await fs.rm(path.join(f.checkout, 'version.txt'));
+  await fs.mkdir(path.join(f.checkout, 'version.txt'));
+  await fs.writeFile(path.join(f.checkout, 'version.txt', 'nested'), '1.2.3.4\n');
+  f.git(['add', '-A']);
+  f.git(['commit', '-m', 'Directory version entry']);
+  const dirCommit = f.git(['rev-parse', 'HEAD']);
+  await assert.rejects(
+    prepareCheckout({ cacheRoot: f.cacheRoot, id: 'forever', pin: { ...f.pin, commit: dirCommit } }),
+    /Unexpected version file type/,
+  );
 });

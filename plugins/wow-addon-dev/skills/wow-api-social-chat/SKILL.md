@@ -1,18 +1,9 @@
 ---
 name: wow-api-social-chat
-description: Look up WoW Chat, Social, Club/Community, Friend List, Voice Chat,
-  BattleNet, Ping, Social Queue, and Addon Messaging APIs. Covers C_ChatInfo,
-  C_Club, C_ClubFinder, C_FriendList, C_BattleNet, C_VoiceChat,
-  C_SocialRestrictions, C_SocialQueue, C_RecentAllies, C_PingManager,
-  C_TTSSettings, ChatFrame functions, chat filters, addon message system, and
-  12.0.0 instance restrictions (SendAddonMessage blocked, chat messages may be
-  secret). Use when working with chat output, chat channels, communities, friend
-  lists, voice chat, BattleNet friends, addon communication, social features, or
-  ping system. Select Retail, Forever, or Classic with wow-client-targets before
-  using historical listings.
+description: Look up WoW chat, channels, addon messaging, communities/clubs, friends, Battle.net, voice chat, and pings (`C_ChatInfo`, `C_Club`, `C_FriendList`, `C_BattleNet`, `C_Ping`).
 ---
 
-# api social chat
+# WoW Social & Chat API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

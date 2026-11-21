@@ -1,6 +1,6 @@
 ---
 name: wow-client-targets
-description: Resolve Retail, Forever, and Classic progression targets and verify version-specific WoW API evidence. Use before addon API lookup, client detection, compatibility decisions, TOC generation, or porting between WoW versions.
+description: Resolve Retail, Forever, and Classic progression client targets, source pins, and compatibility rules. Use before API lookup, client detection, TOC versioning, or porting between WoW versions.
 ---
 
 # Client targets and source evidence
@@ -15,18 +15,16 @@ description: Resolve Retail, Forever, and Classic progression targets and verify
 
 ## Snapshot and current sources
 
-[targets.json](references/targets.json) records source-inventory snapshots, not certification of every API. Interface numbers are derived from `version.txt` and must be confirmed against the target client's `select(4, GetBuildInfo())` before release. A source mirror may lead or lag an installed client; honor an explicitly requested build.
+[targets.json](references/targets.json) records bundled source-inventory snapshots (not certification of every API). Interface numbers are derived from `version.txt` and must be confirmed against `select(4, GetBuildInfo())` in the target client. Optionally run `node` on [scripts/targets.mjs](scripts/targets.mjs) (`retail forever` or `all`) to print bundled metadata; no Node dependency is required to read the files.
 
-With Node.js 22+, optionally run `node <this-skill>/scripts/targets.mjs retail forever` (or `all`) to print bundled metadata. No Node dependency is required to read the skills or perform source lookups using the host's tools.
+For API and source lookup, follow this order:
 
-For current evidence:
+1. **Query the bundled pinned ledger first:** Use [wow-api-index](../wow-api-index/SKILL.md) (`query.mjs`) or domain `catalog.json` files for exact signatures, event payloads, structures, enums, and security annotations at the bundled pins. This avoids unnecessary web calls and GitHub rate limits.
+2. **Check live GitHub only when newer builds or handwritten UI files are needed:** Resolve `https://api.github.com/repos/Gethe/wow-ui-source/commits/<branch>` to capture the full SHA (never mix moving branch content with pinned evidence), then inspect `version.txt`, `Blizzard_APIDocumentationGenerated`, and owning UI addon TOC/XML/Lua files (`[Family]`/`[Game]`/`AllowLoad*`).
+3. **Record evidence separately:** Track target, commit, source path, contract, loading, and restrictions using the [evidence record](references/EVIDENCE-RECORDS.md), keeping declaration, runtime presence, and tested operation distinct. Missing generated docs means unknown, not removed.
+4. **Trace loaded client constants:** Check `WOW_PROJECT_ID` constants for the selected commit rather than guessing a Forever project ID. When runtime detection is inconclusive, rely on per-target packaged configuration plus `GetBuildInfo()` checks.
+5. **Apply per-target compatibility:** Consult [COMPATIBILITY.md](references/COMPATIBILITY.md), then the specific domain skill. Scope deprecations and restrictions strictly to verified builds.
 
-1. Resolve `https://api.github.com/repos/Gethe/wow-ui-source/commits/<branch>` and capture the full SHA. Do not mix moving branch content with pinned evidence.
-2. Inspect `version.txt` and the tree at that SHA. Start with `Interface/AddOns/Blizzard_APIDocumentationGenerated`, then follow the UI addon's TOC/XML includes and client-specific files. Check shared versus game-specific loading conditions.
-3. For each needed capability, use the [evidence record](references/EVIDENCE-RECORDS.md): target, commit, source path, contract, loading and restrictions, with source declaration, runtime observation and operation testing recorded separately. Missing generated documentation alone means unknown, not removed.
-4. Trace the loaded constants before implementing runtime detection. The same tree may contain Mainline, Vanilla, Mists, and other constants with different `WOW_PROJECT_ID` assignments. Do not invent a Forever project ID. When detection cannot uniquely distinguish clients, use per-target packaged configuration plus runtime build validation.
-5. Consult [COMPATIBILITY.md](references/COMPATIBILITY.md), then the specific domain skill. Scope every deprecation and restriction to the target/build where it was verified.
+If online checks fail, state that the latest branch commit could not be checked, use dated bundled evidence where sufficient, flag unresolved features, and never alter snapshot metadata.
 
-If access fails, state that the latest version could not be checked. Use dated bundled evidence only where sufficient; flag unresolved features and do not advance snapshot metadata. A successful function-existence probe does not establish matching semantics or permission to inspect returned values.
-
-For Forever detection, beta defect history and current source boundaries, read [Forever build evidence](references/FOREVER.md). For a fresh runtime comparison, follow the [capture and validation procedure](../wow-addon-development/references/RUNTIME-VALIDATION.md).
+For Forever identity, defect history, and recent updates, read [Forever build evidence](references/FOREVER.md) and [source evidence](references/SOURCE-EVIDENCE.md). For runtime probes, follow [runtime validation](../wow-addon-development/references/RUNTIME-VALIDATION.md).

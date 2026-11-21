@@ -24,3 +24,14 @@ Distinguish three failures: unavailable capability (report unsupported feature),
 ## Deprecation policy
 
 Prefer supported replacements on the selected client. A legacy function still needed by one supported target may remain in that target's adapter even if removed elsewhere. Preserve a source citation and a test scenario; never delete it solely because a Retail reference calls it deprecated.
+
+## Defensive client detection
+
+Guard `WOW_PROJECT_ID` comparisons against `nil` constants before branching so an unknown flavor never silently resolves as Classic or Retail:
+
+```lua
+local project = _G.WOW_PROJECT_ID
+local isRetail  = project ~= nil and project == _G.WOW_PROJECT_MAINLINE
+local isForever = project ~= nil and project == _G.WOW_PROJECT_CAMELOT
+local isClassic = project ~= nil and project == _G.WOW_PROJECT_MISTS_CLASSIC
+```

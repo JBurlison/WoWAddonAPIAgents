@@ -1,24 +1,15 @@
 ---
 name: wow-api-currency-economy
-description: Look up WoW Currency, Auction House, Token, Store, Trading Post,
-  Black Market, Mail, and Player Trading APIs. Covers C_CurrencyInfo (currency
-  data, tracking, backpack), Auction House (full
-  listing/bidding/buying/selling/search/commodity), C_WowTokenPublic (WoW Token
-  market), AccountStore (in-game shop), CatalogShop, C_PerksProgram (Trading
-  Post — Trader's Tender), BlackMarket (BMAH), TradeInfo (player trading),
-  MailInfo (mailbox), and related events. Use when working with currencies,
-  auction house UI, WoW Tokens, the in-game store, Trading Post, black market,
-  mail, or player-to-player trading. Select Retail, Forever, or Classic with
-  wow-client-targets before using historical listings.
+description: Look up WoW currency, Auction House, WoW Token, Trading Post, Black Market, mail, store, and player trading APIs (`C_CurrencyInfo`, `C_AuctionHouse`, `C_PerksProgram`).
 ---
 
-# api currency economy
+# WoW Currency & Economy API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
 
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
 
 Verify currency IDs, auction-house API generations, token/store availability, result structures, and asynchronous request events. Do not assume Retail auction search behavior on other clients.
 

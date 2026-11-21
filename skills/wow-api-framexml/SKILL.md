@@ -1,41 +1,23 @@
 ---
 name: wow-api-framexml
-description: Look up World of Warcraft FrameXML functions — global Lua
-  functions, mixins, object pools, SharedXML utilities, and game utility
-  modules. Use this for UI helpers (StaticPopup_Show, EasyMenu), formatting
-  (SecondsToTime, FormatLargeNumber), table/math utils (tContains, Lerp),
-  mixin/pool patterns, chat frame filters, tooltip helpers, bag functions,
-  texture/atlas markup, and all FrameXML game utility modules. Select Retail,
-  Forever, or Classic with wow-client-targets before using historical listings.
+description: Look up WoW FrameXML Lua helpers, mixins, object pools, SharedXML utilities, callbacks, and secure templates (`StaticPopup_Show`, `Mixin`, `EventRegistry`).
 ---
 
-# api framexml
+# WoW FrameXML API
 
-Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
+Resolve targets with [wow-client-targets](../wow-client-targets/SKILL.md) and follow [wow-addon-development](../wow-addon-development/SKILL.md) for UI design, visual fidelity, and testing baselines.
 
 ## Target-specific decisions
 
-Use [native UI composition](../wow-native-ui/SKILL.md) for template and artwork selection, or [UI skinning](../wow-ui-skinning/SKILL.md) for window-specific loader, hook and refresh design. Use this reference for the underlying helpers, mixins and include graphs.
-
-For visible UI changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
-
-Use [visual fidelity](../wow-addon-development/references/VISUAL-FIDELITY.md) to preserve accepted artwork, layout and styling with verified templates/custom media, and compare the actual render rather than assuming a native template matches.
-
-Trace the owning Blizzard addon and its TOC/XML includes to the selected game type before using a mixin, pool, helper, or global. Verify load-on-demand dependencies and method signatures.
-
-Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.
+Use [native UI composition](../wow-native-ui/SKILL.md) for template/artwork selection or [UI skinning](../wow-ui-skinning/SKILL.md) for Blizzard window hooks. Trace the owning Blizzard addon and its TOC/XML includes to the selected game type before using a mixin, pool, helper, or global; verify load-on-demand dependencies and signatures. Read [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md) and report offline snapshot limits.
 
 ## Detailed lookup material
 
-Start with [current loaded UI sources](references/CURRENT-UI-SOURCES.md) for pinned TOCs, mixins/pools, callback ownership, secure templates and the boundary between Lua helpers and native methods.
+Start with [current loaded UI sources](references/CURRENT-UI-SOURCES.md) for pinned TOCs, mixins/pools, callback ownership, secure templates, and the boundary between Lua helpers and native methods. The [historical Retail baseline](references/RETAIL-BASELINE.md) retains older listings as a research aid only:
 
-The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
-
-- [CHATFRAME CONTAINERS](references/CHATFRAME-CONTAINERS.md)
-- [FRAMEXML GAME UTILS](references/FRAMEXML-GAME-UTILS.md)
-- [MIXINS AND POOLS](references/MIXINS-AND-POOLS.md)
-- [SHAREDXML DATA UTILS](references/SHAREDXML-DATA-UTILS.md)
-- [SHAREDXML UI UTILS](references/SHAREDXML-UI-UTILS.md)
-- [UIPARENT](references/UIPARENT.md)
-
-For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).
+- [ChatFrame containers](references/CHATFRAME-CONTAINERS.md)
+- [FrameXML game utils](references/FRAMEXML-GAME-UTILS.md)
+- [Mixins and pools](references/MIXINS-AND-POOLS.md)
+- [SharedXML data utils](references/SHAREDXML-DATA-UTILS.md)
+- [SharedXML UI utils](references/SHAREDXML-UI-UTILS.md)
+- [UIParent](references/UIPARENT.md)

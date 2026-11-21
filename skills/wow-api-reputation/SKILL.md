@@ -1,17 +1,9 @@
 ---
 name: wow-api-reputation
-description: Look up WoW Reputation, Faction, Major Factions, Paragon, and
-  Neighborhood Initiative APIs. Covers C_Reputation (faction info, standings,
-  watched faction, headers, friendship reps, paragon), C_MajorFactions
-  (Dragonflight+ renown factions, renown levels, rewards),
-  C_NeighborhoodInitiative (12.0.0 housing neighborhood reputation), faction
-  expansion data, and reputation-related events. Use when working with
-  reputation tracking, faction standings, renown systems, paragon rewards,
-  friendship reputations, or neighborhood initiatives. Select Retail, Forever,
-  or Classic with wow-client-targets before using historical listings.
+description: Look up WoW faction standing, Major Factions renown, friendship, paragon, and neighborhood initiative APIs (`C_Reputation`, `C_MajorFactions`, `C_NeighborhoodInitiative`).
 ---
 
-# api reputation
+# WoW Reputation & Factions API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

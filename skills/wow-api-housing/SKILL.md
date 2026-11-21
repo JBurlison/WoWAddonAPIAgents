@@ -1,19 +1,9 @@
 ---
 name: wow-api-housing
-description: Look up WoW Player Housing APIs (new in Patch 12.0.0). Covers
-  HousingUI (core housing system), C_HouseEditorUI (placement/editing modes),
-  C_HousingCatalog (decoration catalog), HousingBasicModeUI,
-  HousingCleanupModeUI, HousingCustomizeModeUI, HousingDecorUI,
-  HousingExpertModeUI, C_HouseExteriorUI (exterior customization),
-  HousingLayoutUI, C_HousingNeighborhood (neighborhoods/visiting),
-  C_NeighborhoodInitiative (community goals), and CatalogShop. Use when working
-  with player housing placement, decoration, editing modes, neighborhoods,
-  housing catalogs, exterior customization, or neighborhood initiatives. Select
-  Retail, Forever, or Classic with wow-client-targets before using historical
-  listings.
+description: Look up WoW Player Housing, decor catalog, placement/editing modes, neighborhoods, and exterior customization APIs (`C_HouseEditorUI`, `C_HousingCatalog`, `C_HousingNeighborhood`).
 ---
 
-# api housing
+# WoW Player Housing API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

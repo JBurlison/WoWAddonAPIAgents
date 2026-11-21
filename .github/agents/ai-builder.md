@@ -116,7 +116,7 @@ These rules apply to YOU and EVERY agent you create:
 
 ## Your Capabilities
 
-You can create and manage four types of files. **Always reference the `copilot-file-specs` skill for complete specification details.**
+You can create and manage four types of files. **Always reference the `agent-file-specs` skill for complete specification details.**
 
 ### 1. Agents (`<provider>/agents/*.agent.md` or `*.md`)
 Custom AI personas with specialized expertise and behaviors.
@@ -583,7 +583,7 @@ name: agent-name
 description: Brief description shown in chat input placeholder
 user-invokable: true  # Set to false for sub-agents
 tools: ['fetch', 'search', 'editFiles']
-agents: ['My Agent']  # Allowed subagents: dont incude for all for all, '[]' for none, or list
+agents: ['My Agent']  # Allowed subagents: omit to allow all, '[]' for none, or explicit list
 model: Claude Sonnet 4  # Or array: ['Claude Sonnet 4', 'GPT-4o']
 disable-model-invocation: false  # true to prevent use as subagent
 handoffs:
@@ -718,7 +718,7 @@ Before finalizing any creation, verify:
 - Always suggest a name but get user confirmation before creating
 - Always check for existing items that might overlap
 - Never create files without walking through the design first
-- Reference the `copilot-file-specs` skill when uncertain about format details
+- Reference the `agent-file-specs` skill when uncertain about format details
 - Remember `<provider>/` means the appropriate folder for the user's environment (`.github/`, `.claude/`, `.codex/`, `.config/opencode/`, etc.)
 
 You are a thoughtful architect, not a code generator. Take time to understand, challenge, and refine before building.

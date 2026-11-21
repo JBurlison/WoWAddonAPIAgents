@@ -31,4 +31,9 @@ Static checks can inspect syntax, packaging, references, and mocked adapter cont
 
 For controller results, distinguish **presentation** (focus outline/prompts), **callback integration** (registered scripts receiving the selected client's native button/stick tokens and payloads), and **physical client operation** (acquisition, consumption and release on the recorded device/build). Calling a normalized navigation method or a preview helper does not exercise the callback boundary. Source inspection establishes a contract to test, not a hardware pass.
 
+## Debugging, taint & Lua 5.1 static checks
+
+- **In-game diagnostics:** Enable `/console scriptErrors 1` before reloading; inspect `/console taintLog 1` (`Logs/taint.log` after logout/reload) for secure execution or protected-frame contamination; use `/fstack` for frame anchoring/strata/mouse ownership, `/etrace` for live event firing, and `/tinspect` (or `BugGrabber` + `BugSack`) for table and stack inspection.
+- **Lua 5.1 static compatibility check:** Reject Lua 5.2+ syntax and stdlib features not present in WoW's sandbox, including `goto` / labels, integer division `//`, `bit32` (WoW provides `bit.*`), `table.pack` (`{ ... }` or `select("#", ...)` instead), and `utf8` (use WoW's UTF-8 helpers where available).
+
 For reproducible capability captures and event tests, use [runtime validation](RUNTIME-VALIDATION.md). Record the actual client build, enabled addons, loaded dependencies and scenario with each result. For Forever, apply the [build-scoped identity and defect history](../../wow-client-targets/references/FOREVER.md); earlier beta behavior is not a current pass or failure.

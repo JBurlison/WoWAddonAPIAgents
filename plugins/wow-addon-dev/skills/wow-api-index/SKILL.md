@@ -1,6 +1,6 @@
 ---
 name: wow-api-index
-description: Find source-pinned WoW functions, events, object methods, structures, enums and domain guidance across Retail, Forever and Classic progression. Use the packaged narrow-query tool and complete ownership routing before implementation.
+description: Find source-pinned WoW functions, events, methods, structures, enums, and domain skill routing across Retail, Forever, and Classic. Use the query tool before implementing.
 ---
 
 # WoW API index
@@ -11,7 +11,7 @@ Resolve the client/build with [wow-client-targets](../wow-client-targets/SKILL.m
 
 Use the [current reference guide](references/CURRENT-REFERENCES.md) and [package-local query tool](scripts/query.mjs) to retrieve only the desired symbol's full typed contract and security annotations. The ledger includes every generated function, event, object method, structure, enum, callback type, constant group and predicate at the pinned target commits. It retains explicit unknown load/runtime/access states.
 
-With Node.js 22+, run `node <this-skill>/scripts/query.mjs forever C_Spell.GetSpellInfo` or `node <this-skill>/scripts/query.mjs forever SPELL_UPDATE_COOLDOWN --kind event`. Exact queries return full records; namespace searches return bounded summaries unless `--full` is used. No Node dependency is needed to follow the domain JSON links directly.
+With Node.js 18+, run `node <this-skill>/scripts/query.mjs forever C_Spell.GetSpellInfo --compact --resolve-types` or `node <this-skill>/scripts/query.mjs all SPELL_UPDATE_COOLDOWN --kind event --diff`. Exact queries return full records; multi-match searches return ranked summaries unless `--full` or `--compact` is used. No Node dependency is needed to inspect the per-domain `catalog.json` files directly.
 
 | Reference | Purpose |
 |---|---|

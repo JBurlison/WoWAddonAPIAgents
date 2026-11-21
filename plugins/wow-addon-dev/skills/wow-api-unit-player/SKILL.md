@@ -1,20 +1,15 @@
 ---
 name: wow-api-unit-player
-description: Look up WoW Unit and Player APIs — UnitId tokens, GUIDs,
-  health/power/stats, auras, roles, casting, threat, inspection, paper doll,
-  death/resurrection, and player-specific functions. Use when querying unit
-  identity, health, power, auras, stats, combat state, group membership, casting
-  info, threat, or player character details. Select Retail, Forever, or Classic
-  with wow-client-targets before using historical listings.
+description: Look up WoW unit and player APIs for tokens, GUIDs, health, power, auras, stats, casting, threat, and inspection (`UnitHealth`, `C_UnitAuras`, `C_PaperDollInfo`).
 ---
 
-# api unit player
+# WoW Unit & Player API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
 
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
 
 Verify unit token restrictions, AuraData fields and UNIT_AURA payloads, health/power return types, identity and inspection APIs. Treat secret/opaque values according to their specific annotations.
 
@@ -26,11 +21,11 @@ Use the [pinned source schemas](references/generated/README.md) for complete gen
 
 The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
 
-- [PLAYER FUNCTIONS](references/PLAYER-FUNCTIONS.md)
-- [UNIT AURAS](references/UNIT-AURAS.md)
-- [UNIT HEALTH POWER](references/UNIT-HEALTH-POWER.md)
-- [UNIT IDENTITY](references/UNIT-IDENTITY.md)
-- [UNIT STATE](references/UNIT-STATE.md)
-- [UNIT THREAT COMBAT](references/UNIT-THREAT-COMBAT.md)
+- [Player functions](references/PLAYER-FUNCTIONS.md)
+- [Unit auras](references/UNIT-AURAS.md)
+- [Unit health and power](references/UNIT-HEALTH-POWER.md)
+- [Unit identity](references/UNIT-IDENTITY.md)
+- [Unit state](references/UNIT-STATE.md)
+- [Unit threat and combat](references/UNIT-THREAT-COMBAT.md)
 
 For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).

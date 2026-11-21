@@ -1,6 +1,6 @@
 # Forever 1.60.1.70707 source changes
 
-Reviewed 2026-11-03: **1.60.1.70532** (`ca8368f2f2380cbe696854f7f2646387c278a61b`) → **1.60.1.70707** (`aff0d8cd53bf4d9ef1c1dd2786b94461a276fb16`). The [source comparison](https://github.com/Gethe/wow-ui-source/compare/ca8368f2f2380cbe696854f7f2646387c278a61b...aff0d8cd53bf4d9ef1c1dd2786b94461a276fb16) contains 118 relevant files, including nine generated API definition files. Retail 12.1.5.70688 and Classic progression 5.5.4.70631 remain at their existing pins.
+Historical transition reviewed 2026-11-03: **1.60.1.70532** (`ca8368f2f2380cbe696854f7f2646387c278a61b`) → **1.60.1.70707** (`aff0d8cd53bf4d9ef1c1dd2786b94461a276fb16`). The [source comparison](https://github.com/Gethe/wow-ui-source/compare/ca8368f2f2380cbe696854f7f2646387c278a61b...aff0d8cd53bf4d9ef1c1dd2786b94461a276fb16) contains 118 relevant files, including nine generated API definition files. At the 2026-11-03 review, Retail 12.1.5.70688 and Classic progression 5.5.4.70631 remained at those earlier pins; see [SOURCE-EVIDENCE.md](SOURCE-EVIDENCE.md) and [targets.json](targets.json) for current snapshot pins (Retail `12.1.5.70783`, Forever `1.60.1.70938`, Classic `5.5.4.70631`).
 
 These are declaration and loaded-source observations. Interface 16001 remains derived and requires confirmation in the client. No addon access, event delivery or visual behavior was tested in game. The packaged ledgers preserve complete typed contracts; this guide records migration implications and handwritten UI changes that the generated API inventory cannot express.
 

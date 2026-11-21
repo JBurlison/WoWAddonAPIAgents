@@ -13,7 +13,7 @@ test('one changed symbol produces a small patch without changing the index schem
   const before=serializeSymbolIndex(index);
   assert.deepEqual(JSON.parse(before),index);
   const changed=structuredClone(index);
-  changed.targets.forever[Math.floor(changed.targets.forever.length/2)][0]+='_PATCH_SIZE_REGRESSION';
+  changed.rows[Math.floor(changed.rows.length/2)][0]+='_PATCH_SIZE_REGRESSION';
   const after=serializeSymbolIndex(changed);
   assert.deepEqual(JSON.parse(after),changed);
   const temp=await fs.mkdtemp(path.join(os.tmpdir(),'wow-symbol-diff-test-'));
@@ -82,7 +82,7 @@ test('packaged query exposes target payload differences and preserves unknown ru
 test('offline checks reject a dropped target and a changed registry commit before trusting ledgers',async()=>{
   const temp=await fs.mkdtemp(path.join(os.tmpdir(),'wow-references-test-'));
   try {
-    for(const relative of ['config/api-owners.json','skills/wow-client-targets/references/targets.json','skills/wow-api-index/references/generated/manifest.json']) {
+    for(const relative of ['config/api-owners.json','skills/wow-client-targets/references/targets.json','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/provenance.json']) {
       await fs.mkdir(path.dirname(path.join(temp,relative)),{recursive:true});
       await fs.copyFile(path.join(root,relative),path.join(temp,relative));
     }
@@ -102,4 +102,78 @@ test('offline checks reject a dropped target and a changed registry commit befor
     if (path.dirname(path.resolve(temp)) !== path.resolve(os.tmpdir()) || !path.basename(temp).startsWith('wow-references-test-')) throw new Error('Unsafe temporary cleanup path');
     await fs.rm(temp,{recursive:true,force:true});
   }
+});
+
+test('parser handles negative hex, floats, long strings, comments, bracketed keys, nested Function types, and Object.prototype keys', () => {
+  const source = `--[[ leading block comment ]]
+  local Edge = {
+    Name = "Edge", Type = "System", Namespace = "C_Edge",
+    Functions = {
+      {
+        Name = "Check", Type = "Function",
+        Arguments = {
+          { Name = "toString", Type = "number", Default = -0x10 },
+          { Name = "constructor", Type = "number", Default = 1.5e-2 },
+          { Name = "hasOwnProperty", Type = "number", Default = .5 },
+          { Name = "cb", Type = "Function" },
+        },
+        Returns = { { Name = "note", Type = "string", Default = [[raw\nbody]] } },
+      },
+    },
+    Tables = {
+      {
+        Name = "Flags", Type = "Structure",
+        ["toString"] = 'escaped\\'quote',
+        [0x10] = true,
+        Fields = { { Name = "hasOwnProperty", Type = "bool", Default = false } },
+      },
+    },
+  };`;
+  const { records } = extractReferenceRecords(source, 'EdgeDocumentation.lua');
+  assert.equal(records.length, 2);
+  const fn = records.find(r => r.kind === 'function');
+  assert.equal(fn.symbol, 'C_Edge.Check');
+  assert.equal(fn.declaration.Arguments[0].Default, -16);
+  assert.equal(fn.declaration.Arguments[1].Default, 0.015);
+  assert.equal(fn.declaration.Arguments[2].Default, 0.5);
+  assert.equal(fn.declaration.Arguments[3].Type, 'Function');
+  assert.equal(fn.declaration.Returns[0].Default, 'raw\nbody');
+  const tbl = records.find(r => r.kind === 'structure');
+  assert.deepEqual(tbl.declaration.toString, { luaStringBody: "escaped\\'quote" });
+  assert.equal(tbl.declaration['0x10'], true);
+});
+
+test('query.mjs supports compact, diff, resolveTypes, Enum member lookup, filters, pagination, ranking, and strict errors', async () => {
+  const compact = await queryReferences({ target: 'forever', query: 'C_Spell.GetSpellCooldownDuration', compact: true });
+  assert.ok(compact.results[0].signature.includes('LuaDurationObject'));
+  assert.equal(compact.results[0].declaration, undefined);
+
+  const diffed = await queryReferences({ target: 'all', query: 'SPELL_UPDATE_COOLDOWN', kind: 'event', diff: true, compact: true });
+  assert.equal(diffed.mode, 'diff');
+  assert.equal(diffed.results[0].identical, false);
+  const same = await queryReferences({ target: 'all', query: 'ADDON_LOADED', kind: 'event', diff: true, compact: true });
+  assert.equal(same.results[0].identical, true);
+
+  const resolved = await queryReferences({ target: 'retail', query: 'C_AddOnProfiler.GetTopKAddOnsForMetric', resolveTypes: true, compact: true });
+  assert.ok(resolved.referencedTypes.AddOnProfilerResult);
+  assert.ok(resolved.referencedTypes.AddOnProfilerMetric);
+
+  const enumMember = await queryReferences({ target: 'retail', query: 'Enum.AddOnEnableState.None', compact: true });
+  assert.equal(enumMember.results[0].symbol, 'AddOnEnableState');
+  assert.match(enumMember.results[0].signature, /None=0/);
+
+  const ranked = await queryReferences({ target: 'retail', query: 'GetSpellInfo', kind: 'function', compact: true });
+  if (ranked.results.length > 1) assert.ok(ranked.results[0].symbol.endsWith('GetSpellInfo'));
+
+  const page1 = await queryReferences({ target: 'retail', domain: 'wow-api-combat', secret: true, limit: 2, offset: 0, compact: true });
+  const page2 = await queryReferences({ target: 'retail', domain: 'wow-api-combat', secret: true, limit: 2, offset: 2, compact: true });
+  assert.ok(page1.matches >= 4 && page1.results.length === 2);
+  assert.notEqual(page1.results[0].symbol, page2.results[0].symbol);
+
+  const restrictedOnly = await queryReferences({ target: 'forever', domain: 'wow-api-settings-system', restricted: true, limit: 5, compact: true });
+  assert.ok(restrictedOnly.matches > 0);
+
+  await assert.rejects(queryReferences({ target: 'retail', query: 'C_Spell', kind: 'bogus' }), /Invalid --kind/);
+  await assert.rejects(queryReferences({ target: 'retail', query: 'C_Spell', domain: 'not-a-skill' }), /Invalid --domain/);
+  await assert.rejects(queryReferences({ target: 'retail', query: 'C_Spell', environment: 'Bogus' }), /Environment/);
 });

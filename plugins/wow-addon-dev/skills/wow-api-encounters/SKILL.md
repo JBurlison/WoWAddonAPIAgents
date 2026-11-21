@@ -1,18 +1,9 @@
 ---
 name: wow-api-encounters
-description: Look up WoW Encounter Journal, Mythic+/Challenge Mode, Instance,
-  Scenario, Raid Lock, and Season APIs. Covers EncounterJournal (dungeon/raid
-  boss database, loot tables, section navigation), C_ChallengeMode (M+
-  keystones, affixes, timers, best times), C_MythicPlus (weekly runs, seasonal
-  data, rating), ScenarioInfo (delves/scenarios objectives and stages),
-  InstanceLeaverInfo (deserter), RaidLocks (saved instances), C_SeasonInfo
-  (seasonal info), and related events. Use when working with dungeon/raid
-  encounter data, M+ keystones, mythic plus scores, scenario stages, raid
-  lockouts, or seasonal content. Select Retail, Forever, or Classic with
-  wow-client-targets before using historical listings.
+description: Look up WoW Encounter Journal, Mythic+/Challenge Mode, scenarios/delves, raid lockouts, instance, and season APIs (`C_EncounterJournal`, `C_ChallengeMode`, `C_MythicPlus`).
 ---
 
-# api encounters
+# WoW Encounters & Instances API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

@@ -1,17 +1,9 @@
 ---
 name: wow-api-escape-sequences
-description: Look up World of Warcraft UI escape sequences — pipe-character
-  sequences embedded in text strings to produce colors, inline textures, atlas
-  icons, grammar inflections, word-wrap hints, Kstrings, and other special
-  rendering. Use when formatting chat output, tooltip text, FontString content,
-  or any UI text that needs color codes, inline icons, named colors,
-  item-quality colors, texture markup, atlas markup, localized grammar forms, or
-  escape-sequence utilities like WrapTextInColorCode, CreateTextureMarkup,
-  CreateSimpleTextureMarkup, and CreateAtlasMarkup. Select Retail, Forever, or
-  Classic with wow-client-targets before using historical listings.
+description: Look up WoW UI pipe escape sequences for colors, inline textures, atlas icons, grammar inflections, and Kstrings (`WrapTextInColorCode`, `CreateAtlasMarkup`).
 ---
 
-# api escape sequences
+# WoW UI Escape Sequences API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

@@ -4,8 +4,8 @@ These are complete extracted source schemas for this domain at the pinned commit
 
 | Target | Build | Declarations | Source schemas |
 |---|---|---:|---|
-| retail | 12.1.5.70783 | 2 | [retail.json](retail.json) |
-| forever | 1.60.1.70938 | 2 | [forever.json](forever.json) |
-| classic | 5.5.4.70631 | 2 | [classic.json](classic.json) |
+| retail | 12.1.5.70783 | 2 | [catalog.json](catalog.json) |
+| forever | 1.60.1.70938 | 2 | [catalog.json](catalog.json) |
+| classic | 5.5.4.70631 | 2 | [catalog.json](catalog.json) |
 
-Use the [package-local query tool](../../../wow-api-index/scripts/query.mjs) to retrieve a named function, event, structure, enum, callback type or predicate without reading the entire file. The [catalogue guide](../../../wow-api-index/references/CURRENT-REFERENCES.md) describes querying, schema representation and evidence status.
+Use the [package-local query tool](../../../wow-api-index/scripts/query.mjs) (for example `node ../../../wow-api-index/scripts/query.mjs forever --domain wow-api-events --list`) to retrieve a named function, event, structure, enum, callback type or predicate without reading the entire file. The [catalogue guide](../../../wow-api-index/references/CURRENT-REFERENCES.md) describes querying, schema representation and evidence status.

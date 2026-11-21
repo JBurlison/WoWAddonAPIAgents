@@ -37,11 +37,9 @@ skill-name/
 | Workspace (project) | `<provider>/skills/<skill-name>/SKILL.md` |
 | Personal (user profile) | `~/.copilot/skills/`, `~/.claude/skills/`, `~/.agents/skills/` |
 
-Additional locations can be configured with the `chat.agentSkillsLocations`
-setting.
+Additional locations can be configured as an object map in `chat.agentSkillsLocations` (for example, `{ "skills": true }`).
 
-> **Provider note:** `<provider>` is your provider's base folder (`.github/`,
-> `.claude/`, `.codex/`, `.config/opencode/`).
+> **Provider note:** `<provider>` above denotes Copilot/Claude/Codex-style folders (`.github/`, `.claude/`, `.codex/`, `.config/opencode/`). Host discovery paths differ by client — consult [FILE-LOCATIONS.md](FILE-LOCATIONS.md).
 
 ---
 

@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { isMainModule } from './lib.mjs';
 
 // Run in the proposal checkout after staging and validating the complete update.
 // The publisher sends each changed file in full when it signs a commit.
@@ -9,7 +10,7 @@ const targetBytes = 8 * 1024 * 1024;
 const maxBytes = 10 * 1024 * 1024;
 
 function git(args, options = {}) {
-  return execFileSync('git', args, { maxBuffer: 16 * 1024 * 1024, ...options });
+  return execFileSync('git', ['-c', 'core.splitIndex=false', ...args], { maxBuffer: 16 * 1024 * 1024, ...options });
 }
 
 function gitLine(args, options) {
@@ -103,9 +104,11 @@ function commitUpdate() {
       parent = gitLine(['commit-tree', tree, '-p', parent, '-m', subject], options);
     }
   } finally {
-    fs.rmSync(index, { force: true });
-    fs.rmSync(index + '.lock', { force: true });
-    fs.rmdirSync(dir);
+    const resolved = path.resolve(dir);
+    if (path.dirname(resolved) !== path.resolve(os.tmpdir()) || !path.basename(resolved).startsWith('wow-api-commit-')) {
+      throw new Error(`Unsafe temporary cleanup path: ${resolved}`);
+    }
+    fs.rmSync(resolved, { recursive: true, force: true });
   }
   checkWorktree();
   if (gitLine(['symbolic-ref', 'HEAD']) !== branch || gitLine(['write-tree']) !== finalTree) {
@@ -115,9 +118,11 @@ function commitUpdate() {
   console.log(`Prepared ${batches.length} linear commit(s) on ${branch.slice('refs/heads/'.length)} at ${parent}.`);
 }
 
-try {
-  commitUpdate();
-} catch (error) {
-  console.error(error.message);
-  process.exitCode = 1;
+if (isMainModule(import.meta.url)) {
+  try {
+    commitUpdate();
+  } catch (error) {
+    console.error(error.message);
+    process.exitCode = 1;
+  }
 }

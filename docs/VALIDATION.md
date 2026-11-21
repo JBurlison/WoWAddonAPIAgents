@@ -1,5 +1,14 @@
 # Validation record
 
+## 2.9.0 schema v2, query upgrades, curated recipes, and hardening
+
+Validated on Windows, 2026-11-21 after rebasing onto `origin/main` (2.8.0 Antigravity/radial-menu baseline) and bumping **2.8.0 → 2.9.0**:
+
+- **Reference generation & source checks:** `node scripts/generate-api-references.mjs` (plus `--check` and `--verify-source`) verified **67 generated artifacts** across all three pinned snapshots (Retail `12.1.5.70783`: `9,981` records / `622` files; Forever `1.60.1.70938`: `10,258` records / `642` files; Classic progression `5.5.4.70631`: `7,435` records / `533` files). `node scripts/audit-api-coverage.mjs` reported `0` unrouted namespaces and `0` duplicate symbols on all three branches.
+- **Build, manifest & link checks:** `npm run build` wrote **250 generated outputs** (`plugins/wow-addon-dev/` compacted to **12.31 MiB** across **244 files**). `npm run check` validated all 39 packaged WoW skills, 43 workspace skills total, **6,368** total WoW skill description characters (max 216), Antigravity/Claude/Codex manifests, `#fragment` heading anchors, and all 9 synchronized version JSON copies (`2.8.0 -> 2.9.0`).
+- **Tests & workflow compiler:** All **72 Node tests** passed (`0` failures, `0` skipped), covering parser edge cases, `query.mjs` options (`--compact`, `--diff`, `--resolve-types`, `Enum.Type.Member`, ranking, pagination, strict errors), merge-base PR bumping, annotated-tag/paginated draft release recovery, fail-closed commit checks, symlink/directory `version.txt` rejection, binary preservation, SHA-pinned CI workflows, and non-mutating `compileWorkflow({ check: true })`. `gh-aw v1.0.1` compiled and verified `update-wow-api.lock.yml` (`156.9 KB`).
+- **Not run:** Linux CI runner, remote GitHub Actions execution, isolated CLI host install sweeps on 2.9.0, and live in-game client/Witchcraft/UIForever/controller execution.
+
 ## 2.2.0 visual fidelity and connected-client testing
 
 Validated on Windows, 2026-11-01. Package build/check verified **280 generated outputs** and all **35 skills**, manifests, reference ledgers and links. All **42 Node tests** passed, the five changed skill entry points passed skill-creator validation, and version policy confirmed **2.1.0 → 2.2.0**.

@@ -8,6 +8,6 @@ Record the literal name, target/build, source commit and caller/dispatcher path,
 
 ## Known separate callback surface
 
-Forever's [Legacy utility](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacySystemUtil.lua) publishes `Legacy.UpdateCurrencyInfo` through EventRegistry. That is a loaded-UI callback, not a generated frame event. Consult the [talent skill](../../wow-api-talents/SKILL.md) and [FrameXML skill](../../wow-api-framexml/SKILL.md) for its ownership and dispatcher evidence before subscribing.
+Forever's [Legacy utility](https://github.com/Gethe/wow-ui-source/blob/bebcb6bf309cf41b41bd74f8ca651e6a105b2676/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacySystemUtil.lua) publishes `Legacy.UpdateCurrencyInfo` through EventRegistry. That is a loaded-UI callback, not a generated frame event. Consult the [talent skill](../../wow-api-talents/SKILL.md) and [FrameXML skill](../../wow-api-framexml/SKILL.md) for its ownership and dispatcher evidence before subscribing.
 
 The older [Forever runtime capture](https://github.com/Thunderz96/forever-addon-kit/blob/8dc297689059dd204bf8663a05aaa36d6a628b76/data/forever_api.json) contains function names and frames but no event catalogue or payload schemas. It cannot fill these gaps. A RegisterAllEvents observer can record only events actually delivered in its tested context; it is not an exhaustive API inventory.

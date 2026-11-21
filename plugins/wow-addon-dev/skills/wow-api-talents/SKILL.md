@@ -1,19 +1,9 @@
 ---
 name: wow-api-talents
-description: Look up WoW Class Talents, Hero Talents, Traits system,
-  Specialization, and Profession Specialization APIs. Covers C_ClassTalents
-  (loadouts, config management, talent tree interactions), C_Traits (the
-  underlying trait system — nodes, entries, configs, currencies, conditions),
-  C_SpecializationInfo (spec queries, recommended content), global
-  specialization functions (GetSpecialization, GetSpecializationInfo,
-  SetSpecialization), and profession specialization. Use when working with
-  talent trees, talent loadouts, hero talent selection, trait nodes,
-  specialization switching, talent import/export, or Forever Legacy trees and
-  their challenge/reward integration. Select Retail, Forever, or
-  Classic with wow-client-targets before using historical listings.
+description: Look up WoW class/hero talents, traits, specializations, loadouts, and Forever Legacy tree/reward APIs (`C_ClassTalents`, `C_Traits`, `C_SpecializationInfo`, `Legacy.*`).
 ---
 
-# api talents
+# WoW Talents & Specializations API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

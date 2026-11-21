@@ -1,19 +1,27 @@
 ---
 name: wow-controller-support
-description: Design, debug, and review controller/gamepad support for addon UI, native controls, and reskinned Blizzard windows across Retail, Forever, and Classic progression. Use for windows that will not acquire focus, input capture and handoff, current-binding prompts, navigation, recycled controls, text editing, scrolling, and controller validation.
+description: Design and validate controller/gamepad support for addon UI, native controls, radial menus, and reskinned Blizzard frames across Retail, Forever, and Classic.
 ---
 
 # Consider controller interaction for every UI element
 
-Apply this skill whenever creating or changing visible addon UI, including native templates and skins. Consider decorative elements too: they must not obscure focus or intercept input. Required consideration means recording the interaction and target-specific limitation; it does not mean forcing a controller mode, adding an unrelated feature, or overriding an explicit user decision.
+Apply this skill whenever creating or changing visible UI, including native templates, reskins, and decorative regions (which must not obscure focus or intercept input). Record interactions and target limits without altering user bindings or overriding explicit user exclusions.
 
-1. Resolve [client targets](../wow-client-targets/SKILL.md), pin each branch, and identify the UI owner and load path. Use the [source map](references/SOURCE-MAP.md) as dated evidence, then verify the actual API, scripts, security and loading for the task. Forever's native navigation machinery is not a portable Retail/Classic API.
-2. Add controller acceptance criteria to the existing requirements/design before implementation. For each element specify reachability, focus indication, primary/secondary action, back, tab/page/scroll behavior, and any disabled or unsupported state. Follow the existing [design and testing choices](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md); do not reopen accepted choices solely because this skill was selected.
-3. Choose a verified native integration, addon-owned ordinary-UI navigation, or controller-driven cursor interaction for each target. A cursor fallback must still reach every supported action. If no verified path exists, state the limitation explicitly rather than claiming support. Preserve the user's settings, bindings, mouse and keyboard interactions.
-4. Establish how an unfocused window receives its first controller action before expanding navigation. Use [focus acquisition and diagnostics](references/FOCUS-ACQUISITION.md) for an unreachable window, Game Menu-style focus shortcut, missing callbacks, or ownership conflict. A glyph is not registration, and an input catcher enabled only after focus cannot acquire focus by itself. Probe consumption, paired release, native-window handoff and combat in the selected client when available; otherwise retain those checks as not run.
-5. Implement focus restoration, input-mode changes, binding/glyph refresh, dynamic-control identity, and editor lifetime using the [interaction guide](references/INTERACTION-GUIDE.md). Register shared widgets through their existing lifecycle and add narrow adapters for exceptional controls. Never copy or replace Blizzard's secure managers or treat a callable function as permission.
-6. Validate the guide's per-client cases using the user's selected workflow. Separate source inspection, simulated behavior, and in-game controller results. Without a controller, compatible client, simulator, or automation access, mark the affected checks **not run**; static inspection cannot establish runtime compatibility.
+## Triage scope by UI surface
 
-For radial menus, stick return-to-center selection, protected spell wheels or radial skins, read [radial menus](references/RADIAL-MENUS.md). It traces Forever's native flow, frame-reference argument scrubbing, wheel-only composition and simulator input fidelity.
+| Surface type | Native ownership & required work |
+|---|---|
+| **Stock Blizzard Settings / native dialogs** | Blizzard owns navigation (`Blizzard_Settings_Shared` / native templates); verify registration, stable focusable labels, and non-blocking custom canvas controls. |
+| **Retail / Classic custom addon frame** | `Blizzard_GamepadSmartNavigation` is **Forever (`camelot`) only**. Use cursor-accessible controls or verified addon-owned focus/back paths (`OnGamePadButtonDown`, `Escape`/close, `SetPropagateKeyboardInput`), and document target limits. |
+| **Forever custom controller window / radial wheel** | Follow full workflow below: trace `SmartNavigation` / `GamepadSharedUtility`, [focus acquisition](references/FOCUS-ACQUISITION.md), [interaction lifecycle](references/INTERACTION-GUIDE.md), and [radial menus](references/RADIAL-MENUS.md). |
 
-For source lookup, use [the API index](../wow-api-index/SKILL.md), [settings/input](../wow-api-settings-system/SKILL.md), [widget contracts](../wow-api-widget/SKILL.md), [FrameXML lifecycle](../wow-api-framexml/SKILL.md), and [secure execution](../wow-api-lua-environment/SKILL.md). Combine this workflow with [native UI construction](../wow-native-ui/SKILL.md) or [UI skinning](../wow-ui-skinning/SKILL.md), as appropriate.
+## Workflow
+
+1. Resolve [client targets](../wow-client-targets/SKILL.md) and inspect [source map](references/SOURCE-MAP.md) (Forever's `C_GamepadUI`, `C_GamepadTargeting`, `C_InputInterfaceStyle`, and `SmartNavigation` are not portable to Retail/Classic).
+2. Add controller acceptance criteria to requirements/notes before coding (reachability, focus cues, primary/back actions, tabs/scrolling/text entry, disabled states). Follow accepted [UI design & testing choices](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md).
+3. Establish unfocused window entry using [focus acquisition and diagnostics](references/FOCUS-ACQUISITION.md) (a visual focus outline alone cannot capture gamepad input).
+4. Implement focus restoration, input-mode glyph updates, recycled-control identity checks, and editor lifetime via [interaction guide](references/INTERACTION-GUIDE.md).
+5. For radial wheels or protected spell wheels, read [radial menus](references/RADIAL-MENUS.md).
+6. Validate per-client cases and mark untested hardware checks **not run** rather than inferring support from mouse clicks or static inspection.
+
+For contracts and loading, query [wow-api-index](../wow-api-index/SKILL.md), [settings/input](../wow-api-settings-system/SKILL.md), [widget APIs](../wow-api-widget/SKILL.md), [FrameXML](../wow-api-framexml/SKILL.md), and [Lua/security](../wow-api-lua-environment/SKILL.md).

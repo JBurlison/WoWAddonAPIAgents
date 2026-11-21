@@ -1,18 +1,9 @@
 ---
 name: wow-api-map-navigation
-description: Look up WoW Map, Navigation, Area POI, Taxi, Vignette, Minimap,
-  Nameplate, Waypoint, Zone Ability, Fog of War, and Exploration APIs. Covers
-  C_Map (50+ functions for map data, coordinates, map IDs, area info),
-  C_MapExplorationInfo, C_AreaPoiInfo, C_TaxiMap (flight paths), C_Vignette,
-  C_SuperTrackManager, C_Navigation (in-game navigation), C_ZoneAbility,
-  C_FogOfWar, Minimap functions, C_NamePlateManager, and coordinate conversion.
-  Use when working with maps, coordinates, waypoints, flight paths, minimap,
-  nameplates, vignettes, exploration, zone abilities, or in-game navigation.
-  Select Retail, Forever, or Classic with wow-client-targets before using
-  historical listings.
+description: Look up WoW map, coordinates, waypoints, flight paths, minimap, nameplates, POIs, vignettes, and exploration APIs (`C_Map`, `C_AreaPoiInfo`, `C_TaxiMap`, `C_NamePlateManager`).
 ---
 
-# api map navigation
+# WoW Map & Navigation API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 

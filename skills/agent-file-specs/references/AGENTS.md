@@ -25,8 +25,8 @@ Additional locations can be configured with the `chat.agentFilesLocations`
 setting.
 
 > **Provider note:** `<provider>` is your provider's base folder (`.github/`,
-> `.claude/`, `.codex/`, `.config/opencode/`). VS Code detects any `.md` file
-> in `.github/agents/` as a custom agent.
+> `.claude/`, `.codex/`, `.antigravity/`, `.config/opencode/`). VS Code detects any `.md` file
+> in `.github/agents/` as a custom agent. Host discovery paths differ by client — consult [FILE-LOCATIONS.md](FILE-LOCATIONS.md).
 
 ---
 
@@ -134,7 +134,7 @@ the agent is selected.
 
 - **Markdown formatting:** Full Markdown including headers, lists, code blocks.
 - **File references:** Link to other files with standard Markdown links
-  (e.g., `[standards](../instructions/react.instructions.md)`).
+  (e.g., `` `[standards](../instructions/react.instructions.md)` ``).
 - **Tool references:** Reference tools with `#tool:<tool-name>` syntax
   (e.g., `#tool:githubRepo`).
 - **Instruction reuse:** Link to `.instructions.md` files to avoid

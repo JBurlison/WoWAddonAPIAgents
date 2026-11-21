@@ -1,14 +1,9 @@
 ---
 name: wow-macro-commands
-description: "Look up WoW macro commands (slash commands), macro conditionals,
-  macro syntax and options, secure command rules, castsequence,
-  #show/#showtooltip, and conditional targeting. Use when writing macros,
-  explaining /cast, /use, /castsequence, conditionals like [mod], [harm],
-  [help], [@unit], or any slash command behavior. Select Retail, Forever, or
-  Classic with wow-client-targets before using historical listings."
+description: Look up WoW macro slash commands, conditionals (`[mod]`, `[harm]`, `[@unit]`), `castsequence`, `#showtooltip`, and secure macro rules.
 ---
 
-# macro commands
+# WoW Macro Commands API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
@@ -26,8 +21,8 @@ For secure action buttons, snippets and protected input, first trace the [curren
 
 The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
 
-- [CONDITIONALS](references/CONDITIONALS.md)
-- [SLASH COMMANDS](references/SLASH-COMMANDS.md)
-- [SYNTAX](references/SYNTAX.md)
+- [Conditionals](references/CONDITIONALS.md)
+- [Slash commands](references/SLASH-COMMANDS.md)
+- [Syntax](references/SYNTAX.md)
 
 For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).

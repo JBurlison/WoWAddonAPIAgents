@@ -18,7 +18,7 @@ For multiple clients, ship the matching adapter in each target's distributable. 
 1. Determine whether the owning Blizzard addon is already loaded, loads later, or creates the requested frame only after a user action. An `ADDON_LOADED` notification does not guarantee every lazily created child exists.
 2. Register the verified owner-load callback/event and also handle the already-loaded case. Reuse the target's verified addon-load helper when suitable; otherwise use the documented addon/event contracts. Avoid timers that poll every frame for a global.
 3. Resolve the window when its owning code makes it available. Defer to its specific creation/show/update callback for late children. Do not force-load unrelated Blizzard addons merely to skin them during login.
-4. Attach each hook once and retain addon-local bookkeeping by object identity. Avoid writing generic flags such as `isSkinned` onto Blizzard-owned frames: they can collide with other addons or taint fields later read by secure code.
+4. Attach each hook once and retain addon-local bookkeeping in weak-keyed tables (`setmetatable({}, { __mode = "k" })`) keyed by frame object rather than writing fields onto Blizzard-owned frames. Generic frame properties like `isSkinned` collide with other addons or taint tables later read by secure code. Note that Lua 5.1 does not implement ephemeron tables: never store strong references from a weak-keyed table's values back to its key frame (for example, avoid capturing the key frame inside a closure stored in that weak value).
 5. Keep initialization callable again. If required children are missing, report/defer the module and retry at the relevant verified lifecycle point. Do not mark incomplete setup as successful.
 
 Use three conceptual operations:
@@ -61,6 +61,28 @@ For deep layout changes, identify the owning layout system and the supported con
 ## Combat, disabling and coexistence
 
 Classify each requested mutation against the selected client's protected-frame and taint rules. Initial login outside combat does not guarantee later callbacks run outside combat. Defer restricted work and use a bounded dirty-module queue for the next permitted update. Queue intent, not restricted values or stale frame bindings. Styling cannot bypass protected action restrictions or secret-value handling.
+
+```lua
+local skinnedFrames = setmetatable({}, { __mode = "k" }) -- Never store values that close over the key frame (no ephemerons in Lua 5.1).
+local pendingQueue = {}
+local regenWatcher = CreateFrame("Frame")
+regenWatcher:SetScript("OnEvent", function(self)
+    self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+    for fn in pairs(pendingQueue) do
+        pendingQueue[fn] = nil
+        fn()
+    end
+end)
+
+local function RunOrDefer(fn)
+    if InCombatLockdown() then
+        pendingQueue[fn] = true
+        regenWatcher:RegisterEvent("PLAYER_REGEN_ENABLED")
+        return
+    end
+    fn()
+end
+```
 
 Choose disable behavior before applying destructive changes. Addon-owned decoration is easy to hide; original textures, fonts and anchors require a recorded restoration strategy. Restoring a captured value after Blizzard has changed the underlying state can itself be wrong. If a reliable live restore is not available, document that disabling the module takes effect after `/reload` instead of claiming complete immediate reversal.
 

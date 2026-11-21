@@ -119,14 +119,14 @@ This skill activates when:
 ## Purpose
 [What task this prompt accomplishes]
 
-## Mode
-`[mode]` - [explanation of what this mode does]
+## Agent
+`[agent]` - [explanation of what agent executes this prompt, e.g., `agent`, `ask`, `edit`, or custom agent name]
 
 ## Variables
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `{{var1}}` | [what it's for] | [example value] |
+| `${input:var1}` | [what it's for] | [example value] |
 
 ## How to Use
 
@@ -136,7 +136,7 @@ This skill activates when:
 ## Example
 
 **With these values:**
-- `{{var1}}` = [value]
+- `${input:var1}` = [value]
 
 **Produces:**
 [Example output]

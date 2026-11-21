@@ -1,23 +1,15 @@
 ---
 name: wow-api-lua-environment
-description: Look up the WoW Lua 5.1 runtime environment, restrictions, secure
-  execution, taint system, addon security model, timers, hooks, frame scripting,
-  logging, and restricted actions. Covers hooksecurefunc, C_Timer,
-  securecallfunction, issecurevariable, taint propagation, combat lockdown,
-  protected frames, InCombatLockdown, C_RestrictedActions, C_Log, and the
-  FrameScript sandbox. Use when working with Lua restrictions, secure code,
-  taint, timers, hooks, addon security, debugging, or the WoW Lua sandbox.
-  Select Retail, Forever, or Classic with wow-client-targets before using
-  historical listings.
+description: Look up WoW Lua 5.1 sandbox rules, taint, combat lockdown, secret-value predicates, timers, hooks, and restricted actions (`InCombatLockdown`, `C_RestrictedActions`, `canaccessvalue`, `C_Timer`).
 ---
 
-# api lua environment
+# WoW Lua Environment & Security API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
 
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
 
 Verify Lua extensions, taint, secure execution, secret-value access and protected operations for the selected build. Never transfer a blanket Retail prohibition or permission to another client.
 

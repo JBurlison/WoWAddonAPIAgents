@@ -1,24 +1,15 @@
 ---
 name: wow-api-spells-abilities
-description: Look up WoW Spell, SpellBook, ActionBar, Cooldown, Totem, and
-  Shapeshifting APIs. Covers C_Spell info/cooldown/usability/range, C_SpellBook
-  navigation/slot queries, C_ActionBar slot management/state/overrides,
-  C_SpellActivationOverlay procs, C_SpellDiminish DR tracking, C_CooldownViewer,
-  C_AssistedCombat rotation helpers, totem queries, shapeshift forms,
-  casting/channeling functions, flyouts, spell confirmation, and global spell
-  category functions. Use when working with spells, abilities, action bars,
-  cooldowns, casting, totems, shapeshift forms, spell procs, or diminishing
-  returns. Select Retail, Forever, or Classic with wow-client-targets before
-  using historical listings.
+description: Look up WoW spell, spellbook, action bar, cooldown duration, totem, shapeshift, and combat rotation APIs (`C_Spell`, `C_SpellBook`, `C_ActionBar`, `C_AssistedCombat`).
 ---
 
-# api spells abilities
+# WoW Spells & Abilities API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
 ## Target-specific decisions
 
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
 
 Verify C_Spell/C_SpellBook signatures, SpellInfo table shapes, spell overrides, bank enums, cooldown representation, and secret-value restrictions. Isolate actual differences in adapters.
 
@@ -32,10 +23,10 @@ Use the [pinned source schemas](references/generated/README.md) for complete gen
 
 The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
 
-- [ACTIONBAR](references/ACTIONBAR.md)
-- [COOLDOWNS CASTING](references/COOLDOWNS-CASTING.md)
-- [SPELLBOOK](references/SPELLBOOK.md)
-- [SPELLS CORE](references/SPELLS-CORE.md)
-- [TOTEM SHAPESHIFT](references/TOTEM-SHAPESHIFT.md)
+- [ActionBar](references/ACTIONBAR.md)
+- [Cooldowns and casting](references/COOLDOWNS-CASTING.md)
+- [SpellBook](references/SPELLBOOK.md)
+- [Spells core](references/SPELLS-CORE.md)
+- [Totems and shapeshifting](references/TOTEM-SHAPESHIFT.md)
 
 For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).

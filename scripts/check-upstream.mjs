@@ -1,8 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { createClient, inspectChanges, registryPath, gate } from './upstream.mjs';
-import { root, readJSON, write, json } from './lib.mjs';
+import { root, readJSON, write, json, isMainModule } from './lib.mjs';
 
 export async function checkUpstream({
   automation = false,
@@ -35,7 +34,7 @@ export async function checkUpstream({
     // Paginate rather than relying on eventually consistent issue search.
     for (let page = 1; ; page++) {
       const prs = await client.api(`repos/${repo}/pulls?state=open&per_page=100&page=${page}`);
-      if (prs.some(pr => pr.title.startsWith('[wow-api-update]') && pr.head.repo?.full_name === repo)) {
+      if (prs.some(pr => pr.title.startsWith('[wow-api-update]') && pr.head.repo?.full_name?.toLowerCase() === repo.toLowerCase())) {
         return noop('An upstream update PR is awaiting review.', 'pending-review');
       }
       if (prs.length < 100) break;
@@ -51,7 +50,7 @@ export async function checkUpstream({
   log(`${updates.length} target(s) changed. Review .cache/upstream-report.json; committed snapshots were not modified.`);
   return { status, reviewRequired: true, reportPath };
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+if (isMainModule(import.meta.url)) {
   const gateOnly = process.argv.includes('--gate');
   checkUpstream({ automation: gateOnly || process.argv.includes('--automation'), gateOnly }).catch(error => { console.error(error.message); process.exitCode = 1; });
 }

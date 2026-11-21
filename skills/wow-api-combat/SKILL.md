@@ -1,13 +1,9 @@
 ---
 name: wow-api-combat
-description: Look up WoW Combat, Damage Meter, Threat, Loss of Control, Combat
-  Text, Combat Audio Alert, Secret Values, and Spectator APIs. Use when working
-  with combat data, damage meters, threat, loss of control, combat text,
-  encounter events, or any combat-related addon functionality. Select Retail,
-  Forever, or Classic with wow-client-targets before using historical listings.
+description: Look up WoW combat, `C_DamageMeter`, threat, `C_LossOfControl`, combat audio/text, Forever `C_SwingTimer`, and combat secret-value APIs.
 ---
 
-# api combat
+# WoW Combat API
 
 Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
 
@@ -25,6 +21,6 @@ Use the [pinned source schemas](references/generated/README.md) for complete gen
 
 The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
 
-- [RETAIL 12 0 CHANGES](references/RETAIL-12-0-CHANGES.md)
+- [Retail 12.0 changes](references/RETAIL-12-0-CHANGES.md)
 
 For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).

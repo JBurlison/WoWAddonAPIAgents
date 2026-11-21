@@ -172,18 +172,19 @@ Replace older item with improved version.
 **Proposed:** `database-helper` agent for SQL query assistance
 
 **Findings:**
-- `dx12-terrain-engine-dev` - No overlap (different domain)
-- `agent-builder` - No overlap (different domain)
+- `wow-addon` - No overlap (different domain)
+- `ai-builder` - No overlap (different domain)
 
 **Result:** ✅ Proceed - no conflicts detected
 
 ---
 
-**Proposed:** `code-reviewer` agent for code review
+**Proposed:** `wow-combat-log-reviewer` skill for reviewing combat event scripts
 
 **Findings:**
-- Existing `dx12-terrain-engine-dev` mentions code quality
-- Partial overlap in "review code" scenarios
+- Existing `wow-api-combat` covers combat logs and secret values
+- Existing `wow-api-events` covers event payload declarations
+- Partial overlap on combat event scenarios
 
 **Result:** ⚠️ Warning - clarify scope boundaries
-- Recommendation: `code-reviewer` for general review, `dx12-terrain-engine-dev` for DX12-specific review only
+- Recommendation: extend `wow-api-combat` references rather than duplicating core combat event guidance in a separate skill

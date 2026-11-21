@@ -1,48 +1,30 @@
 ---
 name: wow-api-widget
-description: Curated guide to the WoW Widget API (Retail). Focuses on core
-  widget types, common methods, and patterns for CreateFrame, anchoring,
-  scripts, textures, fonts, animations, and UI controls. Select Retail, Forever,
-  or Classic with wow-client-targets before using historical listings.
+description: Look up WoW widget object contracts, `CreateFrame`, anchoring, scripts, textures, fonts, animations, and `C_EditMode` schemas across Retail, Forever, and Classic.
 ---
 
-# api widget
+# WoW Widget API
 
-Use for any selected combination of Retail, Forever, and Classic progression. First resolve the target and pinned source with [wow-client-targets](../wow-client-targets/SKILL.md).
+Resolve targets with [wow-client-targets](../wow-client-targets/SKILL.md) and follow [wow-addon-development](../wow-addon-development/SKILL.md) for UI mock-up, visual fidelity, controller support, and testing gates.
 
 ## Target-specific decisions
 
-Every UI element needs the [controller-support assessment](../wow-controller-support/SKILL.md), including focus/reachability and applicable activation, back, scrolling and text entry. Preserve native gamepad behavior and visible state hints when changing widget scripts or artwork; verify the selected client's contracts before wiring input.
-
-For choosing and assembling native controls, read [native UI composition](../wow-native-ui/SKILL.md). For modifying Blizzard-owned windows, read [UI skinning](../wow-ui-skinning/SKILL.md). Keep this skill for the underlying widget contracts and object methods.
-
-For Forever 1.60.1.70707, also consult the [current API and UI changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
-
-For visible UI changes, use the [mock-up choice and UIForever workflow](../wow-addon-development/references/UI-DESIGN-AND-TESTING.md) before production implementation and during visual testing.
-
-Preserve the accepted appearance with the [custom artwork/native-control and screenshot comparison guide](../wow-addon-development/references/VISUAL-FIDELITY.md). Functional stock widgets are not a visual substitute for a materially different mock-up; verify both appearance and interaction.
-
-Verify frame type/method availability, inherited methods, widget script arguments, protected state and loaded templates. Prefer simple verified primitives when a specialized widget is unavailable.
-
-Read the relevant row in [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md). Verify only the APIs needed for this task, using commit-pinned definitions and loaded client code. Missing evidence means unknown, not supported or removed. When offline, disclose the snapshot version/date and unresolved behavior.
+- Use [native UI composition](../wow-native-ui/SKILL.md) to select addon-owned templates/controls, [UI skinning](../wow-ui-skinning/SKILL.md) to restyle Blizzard windows, and [controller support](../wow-controller-support/SKILL.md) to plan element focus/activation.
+- For Forever changes, consult [source evidence](../wow-client-targets/references/SOURCE-EVIDENCE.md) and the [70707 baseline changes](../wow-client-targets/references/FOREVER-70707-CHANGES.md) before applying earlier build guidance.
+- This domain also owns **`C_EditMode` and `UISystemVisibilityManager` schemas** alongside `Simple*API` widget methods (including `SimpleFontStringAPI` and `SimpleAnimGroupAPI`).
+- Verify frame types, inherited methods, script arguments, protected state, and loaded templates per target; read [compatibility guidance](../wow-client-targets/references/COMPATIBILITY.md) and report offline snapshot limits.
 
 ## Detailed lookup material
 
-Use the [pinned source schemas](references/generated/README.md) for complete generated contracts in this domain, including typed arguments, returns, event payloads and restrictions. Query only the needed symbols. Source declarations leave loading, runtime behavior and addon permission unresolved unless separately verified.
+Use the [pinned source schemas](references/generated/README.md) for complete object-method contracts and `C_EditMode` definitions, and [current UI sources](../wow-api-framexml/references/CURRENT-UI-SOURCES.md) before treating a generated ScriptObject name as a `CreateFrame` type. The [historical Retail baseline](references/RETAIL-BASELINE.md) retains older listings as a research aid only:
 
-Use the [current UI source and inheritance guide](../wow-api-framexml/references/CURRENT-UI-SOURCES.md) before treating a generated ScriptObject name as a frame type or applying a shared method to an arbitrary widget.
-
-The [historical Retail baseline](references/RETAIL-BASELINE.md) retains the original API listings and examples. It is a research aid, not current or cross-client verification. Open only relevant supporting references:
-
-- [ADVANCED WIDGETS](references/ADVANCED-WIDGETS.md)
-- [ANIMATION WIDGETS](references/ANIMATION-WIDGETS.md)
-- [BASE WIDGETS](references/BASE-WIDGETS.md)
-- [FONT WIDGETS](references/FONT-WIDGETS.md)
-- [FRAME CONTROLS](references/FRAME-CONTROLS.md)
-- [FRAME MODELS](references/FRAME-MODELS.md)
-- [FRAME SPECIALIZED](references/FRAME-SPECIALIZED.md)
-- [FRAME WIDGETS](references/FRAME-WIDGETS.md)
-- [SCRIPT HANDLERS](references/SCRIPT-HANDLERS.md)
-- [TEXTURE WIDGETS](references/TEXTURE-WIDGETS.md)
-
-For implementation and release validation, use [wow-addon-development](../wow-addon-development/SKILL.md).
+- [Advanced widgets](references/ADVANCED-WIDGETS.md)
+- [Animation widgets](references/ANIMATION-WIDGETS.md)
+- [Base widgets](references/BASE-WIDGETS.md)
+- [Font widgets](references/FONT-WIDGETS.md)
+- [Frame controls](references/FRAME-CONTROLS.md)
+- [Frame models](references/FRAME-MODELS.md)
+- [Frame specialized](references/FRAME-SPECIALIZED.md)
+- [Frame widgets](references/FRAME-WIDGETS.md)
+- [Script handlers](references/SCRIPT-HANDLERS.md)
+- [Texture widgets](references/TEXTURE-WIDGETS.md)
