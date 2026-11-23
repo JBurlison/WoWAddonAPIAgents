@@ -4,24 +4,24 @@ Every row is a generated Event declaration in at least one pinned target. Source
 
 | Target | Build | Pinned source |
 |---|---|---|
-| retail | 12.1.5.70783 | [297d7aaa](https://github.com/Gethe/wow-ui-source/tree/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| forever | 1.60.1.70938 | [bebcb6bf](https://github.com/Gethe/wow-ui-source/tree/bebcb6bf309cf41b41bd74f8ca651e6a105b2676/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| classic | 5.5.4.70631 | [e5d9b3a2](https://github.com/Gethe/wow-ui-source/tree/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| retail | 12.1.5.70961 | [ab5cb850](https://github.com/Gethe/wow-ui-source/tree/ab5cb850a3f65e742959e379c4689353a2f4549f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| forever | 1.60.1.71037 | [734f0653](https://github.com/Gethe/wow-ui-source/tree/734f065329cff4992835b01a84f210a297db91b6/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| classic | 5.5.4.71060 | [e171ae99](https://github.com/Gethe/wow-ui-source/tree/e171ae99b8e582ce9547bd8fc87054fe2e348f20/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
 
 | Event | Owner | Target declarations |
 |---|---|---|
 | `MACRO_ACTION_BLOCKED` | [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | retail (`RestrictedActionsDocumentation.lua:108`), forever (`RestrictedActionsDocumentation.lua:108`), classic (`RestrictedActionsDocumentation.lua:105`) |
 | `MACRO_ACTION_FORBIDDEN` | [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | retail (`RestrictedActionsDocumentation.lua:118`), forever (`RestrictedActionsDocumentation.lua:118`), classic (`RestrictedActionsDocumentation.lua:115`) |
-| `MAIL_CLOSED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:83`), forever (`MailInfoDocumentation.lua:83`), classic (`MailInfoDocumentation.lua:47`) |
-| `MAIL_FAILED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:89`), forever (`MailInfoDocumentation.lua:89`), classic (`MailInfoDocumentation.lua:53`) |
-| `MAIL_INBOX_UPDATE` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:99`), forever (`MailInfoDocumentation.lua:99`), classic (`MailInfoDocumentation.lua:63`) |
-| `MAIL_LOCK_SEND_ITEMS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:106`), forever (`MailInfoDocumentation.lua:106`), classic (`MailInfoDocumentation.lua:70`) |
-| `MAIL_OPEN_ALL_CANCELED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | forever (`MailInfoDocumentation.lua:117`) |
-| `MAIL_SEND_INFO_UPDATE` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:117`), forever (`MailInfoDocumentation.lua:123`), classic (`MailInfoDocumentation.lua:81`) |
-| `MAIL_SEND_SUCCESS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:124`), forever (`MailInfoDocumentation.lua:130`), classic (`MailInfoDocumentation.lua:88`) |
-| `MAIL_SHOW` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:130`), forever (`MailInfoDocumentation.lua:136`), classic (`MailInfoDocumentation.lua:94`) |
-| `MAIL_SUCCESS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:136`), forever (`MailInfoDocumentation.lua:142`), classic (`MailInfoDocumentation.lua:100`) |
-| `MAIL_UNLOCK_SEND_ITEMS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:146`), forever (`MailInfoDocumentation.lua:152`), classic (`MailInfoDocumentation.lua:110`) |
+| `MAIL_CLOSED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:83`), forever (`MailInfoDocumentation.lua:92`), classic (`MailInfoDocumentation.lua:47`) |
+| `MAIL_FAILED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:89`), forever (`MailInfoDocumentation.lua:98`), classic (`MailInfoDocumentation.lua:53`) |
+| `MAIL_INBOX_UPDATE` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:99`), forever (`MailInfoDocumentation.lua:108`), classic (`MailInfoDocumentation.lua:63`) |
+| `MAIL_LOCK_SEND_ITEMS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:106`), forever (`MailInfoDocumentation.lua:115`), classic (`MailInfoDocumentation.lua:70`) |
+| `MAIL_OPEN_ALL_CANCELED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | forever (`MailInfoDocumentation.lua:126`) |
+| `MAIL_SEND_INFO_UPDATE` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:117`), forever (`MailInfoDocumentation.lua:132`), classic (`MailInfoDocumentation.lua:81`) |
+| `MAIL_SEND_SUCCESS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:124`), forever (`MailInfoDocumentation.lua:139`), classic (`MailInfoDocumentation.lua:88`) |
+| `MAIL_SHOW` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:130`), forever (`MailInfoDocumentation.lua:145`), classic (`MailInfoDocumentation.lua:94`) |
+| `MAIL_SUCCESS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:136`), forever (`MailInfoDocumentation.lua:151`), classic (`MailInfoDocumentation.lua:100`) |
+| `MAIL_UNLOCK_SEND_ITEMS` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:146`), forever (`MailInfoDocumentation.lua:161`), classic (`MailInfoDocumentation.lua:110`) |
 | `MAIN_SPEC_NEED_ROLL` | [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | retail (`LootDocumentation.lua:268`), forever (`LootDocumentation.lua:268`) |
 | `MAJOR_FACTION_INTERACTION_ENDED` | [wow-api-reputation](../../wow-api-reputation/SKILL.md) | retail (`MajorFactionsDocumentation.lua:189`), forever (`MajorFactionsDocumentation.lua:220`) |
 | `MAJOR_FACTION_INTERACTION_STARTED` | [wow-api-reputation](../../wow-api-reputation/SKILL.md) | retail (`MajorFactionsDocumentation.lua:195`), forever (`MajorFactionsDocumentation.lua:226`) |

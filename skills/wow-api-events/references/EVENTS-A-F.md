@@ -4,9 +4,9 @@ Every row is a generated Event declaration in at least one pinned target. Source
 
 | Target | Build | Pinned source |
 |---|---|---|
-| retail | 12.1.5.70783 | [297d7aaa](https://github.com/Gethe/wow-ui-source/tree/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| forever | 1.60.1.70938 | [bebcb6bf](https://github.com/Gethe/wow-ui-source/tree/bebcb6bf309cf41b41bd74f8ca651e6a105b2676/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| classic | 5.5.4.70631 | [e5d9b3a2](https://github.com/Gethe/wow-ui-source/tree/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| retail | 12.1.5.70961 | [ab5cb850](https://github.com/Gethe/wow-ui-source/tree/ab5cb850a3f65e742959e379c4689353a2f4549f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| forever | 1.60.1.71037 | [734f0653](https://github.com/Gethe/wow-ui-source/tree/734f065329cff4992835b01a84f210a297db91b6/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| classic | 5.5.4.71060 | [e171ae99](https://github.com/Gethe/wow-ui-source/tree/e171ae99b8e582ce9547bd8fc87054fe2e348f20/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
 
 | Event | Owner | Target declarations |
 |---|---|---|
@@ -384,7 +384,7 @@ Every row is a generated Event declaration in at least one pinned target. Source
 | `CLOSE_CHARTER_CONFIRMATION_UI` | [wow-api-housing](../../wow-api-housing/SKILL.md) | retail (`HousingUIDocumentation.lua:589`), forever (`HousingUIDocumentation.lua:589`), classic (`HousingUIDocumentation.lua:525`) |
 | `CLOSE_CREATE_CHARTER_NEIGHBORHOOD_UI` | [wow-api-housing](../../wow-api-housing/SKILL.md) | retail (`HousingUIDocumentation.lua:595`), forever (`HousingUIDocumentation.lua:595`), classic (`HousingUIDocumentation.lua:531`) |
 | `CLOSE_CREATE_GUILD_NEIGHBORHOOD_UI` | [wow-api-housing](../../wow-api-housing/SKILL.md) | retail (`HousingUIDocumentation.lua:601`), forever (`HousingUIDocumentation.lua:601`), classic (`HousingUIDocumentation.lua:537`) |
-| `CLOSE_INBOX_ITEM` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:73`), forever (`MailInfoDocumentation.lua:73`), classic (`MailInfoDocumentation.lua:37`) |
+| `CLOSE_INBOX_ITEM` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:73`), forever (`MailInfoDocumentation.lua:82`), classic (`MailInfoDocumentation.lua:37`) |
 | `CLOSE_PLOT_CORNERSTONE` | [wow-api-housing](../../wow-api-housing/SKILL.md) | retail (`HousingNeighborhoodUIDocumentation.lua:292`), forever (`HousingNeighborhoodUIDocumentation.lua:292`), classic (`HousingNeighborhoodUIDocumentation.lua:285`) |
 | `CLOSE_TABARD_FRAME` | [wow-api-guild](../../wow-api-guild/SKILL.md) | retail (`GuildInfoDocumentation.lua:382`), forever (`GuildInfoDocumentation.lua:431`), classic (`GuildInfoDocumentation.lua:353`) |
 | `CLUB_ADDED` | [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | retail (`ClubDocumentation.lua:1236`), forever (`ClubDocumentation.lua:1236`), classic (`ClubDocumentation.lua:1139`) |

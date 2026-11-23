@@ -4,9 +4,9 @@ Every row is a generated Event declaration in at least one pinned target. Source
 
 | Target | Build | Pinned source |
 |---|---|---|
-| retail | 12.1.5.70783 | [297d7aaa](https://github.com/Gethe/wow-ui-source/tree/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| forever | 1.60.1.70938 | [bebcb6bf](https://github.com/Gethe/wow-ui-source/tree/bebcb6bf309cf41b41bd74f8ca651e6a105b2676/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| classic | 5.5.4.70631 | [e5d9b3a2](https://github.com/Gethe/wow-ui-source/tree/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| retail | 12.1.5.70961 | [ab5cb850](https://github.com/Gethe/wow-ui-source/tree/ab5cb850a3f65e742959e379c4689353a2f4549f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| forever | 1.60.1.71037 | [734f0653](https://github.com/Gethe/wow-ui-source/tree/734f065329cff4992835b01a84f210a297db91b6/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| classic | 5.5.4.71060 | [e171ae99](https://github.com/Gethe/wow-ui-source/tree/e171ae99b8e582ce9547bd8fc87054fe2e348f20/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
 
 | Event | Owner | Target declarations |
 |---|---|---|
