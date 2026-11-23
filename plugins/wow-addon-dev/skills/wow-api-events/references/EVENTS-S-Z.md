@@ -4,9 +4,9 @@ Every row is a generated Event declaration in at least one pinned target. Source
 
 | Target | Build | Pinned source |
 |---|---|---|
-| retail | 12.1.5.70783 | [297d7aaa](https://github.com/Gethe/wow-ui-source/tree/297d7aaaa736f346b3e036f38ee088eaf7f8c07f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| forever | 1.60.1.70938 | [bebcb6bf](https://github.com/Gethe/wow-ui-source/tree/bebcb6bf309cf41b41bd74f8ca651e6a105b2676/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| classic | 5.5.4.70631 | [e5d9b3a2](https://github.com/Gethe/wow-ui-source/tree/e5d9b3a22c3f0f6f41ebac0e454f4969594261cf/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| retail | 12.1.5.70961 | [ab5cb850](https://github.com/Gethe/wow-ui-source/tree/ab5cb850a3f65e742959e379c4689353a2f4549f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| forever | 1.60.1.71037 | [734f0653](https://github.com/Gethe/wow-ui-source/tree/734f065329cff4992835b01a84f210a297db91b6/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+| classic | 5.5.4.71060 | [e171ae99](https://github.com/Gethe/wow-ui-source/tree/e171ae99b8e582ce9547bd8fc87054fe2e348f20/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
 
 | Event | Owner | Target declarations |
 |---|---|---|
@@ -36,8 +36,8 @@ Every row is a generated Event declaration in at least one pinned target. Source
 | `SECURE_TRANSFER_HOUSING_CURRENCY_PURCHASE_CONFIRMATION` | [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | retail (`SecureTransferDocumentation.lua:123`), forever (`SecureTransferDocumentation.lua:154`), classic (`SecureTransferDocumentation.lua:83`) |
 | `SELECTED_LOADOUT_CHANGED` | [wow-api-talents](../../wow-api-talents/SKILL.md) | retail (`ClassTalentsDocumentation.lua:471`), forever (`ClassTalentsDocumentation.lua:471`) |
 | `SELF_RES_SPELL_CHANGED` | [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) | retail (`DeathInfoDocumentation.lua:170`), forever (`DeathInfoDocumentation.lua:170`), classic (`DeathInfoDocumentation.lua:172`) |
-| `SEND_MAIL_COD_CHANGED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:152`), forever (`MailInfoDocumentation.lua:158`), classic (`MailInfoDocumentation.lua:116`) |
-| `SEND_MAIL_MONEY_CHANGED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:158`), forever (`MailInfoDocumentation.lua:164`), classic (`MailInfoDocumentation.lua:122`) |
+| `SEND_MAIL_COD_CHANGED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:152`), forever (`MailInfoDocumentation.lua:167`), classic (`MailInfoDocumentation.lua:116`) |
+| `SEND_MAIL_MONEY_CHANGED` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:158`), forever (`MailInfoDocumentation.lua:173`), classic (`MailInfoDocumentation.lua:122`) |
 | `SETTINGS_HEADER_TEXT_UPDATE` | [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | forever (`GameRulesDocumentation.lua:396`) |
 | `SETTINGS_LOADED` | [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | retail (`SettingsUtilDocumentation.lua:30`), forever (`SettingsUtilDocumentation.lua:30`), classic (`SettingsUtilDocumentation.lua:29`) |
 | `SETTINGS_PANEL_OPEN` | [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | retail (`SettingsUtilDocumentation.lua:36`), forever (`SettingsUtilDocumentation.lua:36`), classic (`SettingsUtilDocumentation.lua:35`) |
@@ -370,7 +370,7 @@ Every row is a generated Event declaration in at least one pinned target. Source
 | `UPDATE_MOUSEOVER_UNIT` | [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) | retail (`UnitDocumentation.lua:4770`), forever (`UnitDocumentation.lua:4916`), classic (`UnitDocumentation.lua:3354`) |
 | `UPDATE_MULTI_CAST_ACTIONBAR` | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | retail (`ActionBarFrameDocumentation.lua:1084`), forever (`ActionBarFrameDocumentation.lua:1129`), classic (`ActionBarFrameDocumentation.lua:919`) |
 | `UPDATE_OVERRIDE_ACTIONBAR` | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | retail (`ActionBarFrameDocumentation.lua:1090`), forever (`ActionBarFrameDocumentation.lua:1135`), classic (`ActionBarFrameDocumentation.lua:925`) |
-| `UPDATE_PENDING_MAIL` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:164`), forever (`MailInfoDocumentation.lua:170`), classic (`MailInfoDocumentation.lua:128`) |
+| `UPDATE_PENDING_MAIL` | [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | retail (`MailInfoDocumentation.lua:164`), forever (`MailInfoDocumentation.lua:179`), classic (`MailInfoDocumentation.lua:128`) |
 | `UPDATE_POSSESS_BAR` | [wow-api-collections](../../wow-api-collections/SKILL.md) | retail (`PetInfoDocumentation.lua:163`), forever (`PetInfoDocumentation.lua:247`), classic (`PetInfoDocumentation.lua:96`) |
 | `UPDATE_SHAPESHIFT_COOLDOWN` | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | retail (`SpellBookDocumentation.lua:918`), forever (`SpellBookDocumentation.lua:983`), classic (`SpellBookDocumentation.lua:262`) |
 | `UPDATE_SHAPESHIFT_FORM` | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | retail (`SpellBookDocumentation.lua:924`), forever (`SpellBookDocumentation.lua:989`), classic (`SpellBookDocumentation.lua:268`) |

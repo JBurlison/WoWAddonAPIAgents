@@ -4,9 +4,9 @@ The packaged ledger contains every Function, Event, ScriptObject method, Structu
 
 | Target | Build | Declarations | Functions / events / object methods |
 |---|---|---:|---|
-| Retail | 12.1.5.70783 | 9,981 | 4,970 / 1,784 / 1,470 |
-| Forever | 1.60.1.70938 | 10,258 | 5,145 / 1,816 / 1,477 |
-| Classic progression | 5.5.4.70631 | 7,435 | 3,231 / 1,483 / 1,360 |
+| Retail | 12.1.5.70961 | 9,981 | 4,970 / 1,784 / 1,470 |
+| Forever | 1.60.1.71037 | 10,260 | 5,147 / 1,816 / 1,477 |
+| Classic progression | 5.5.4.71060 | 7,435 | 3,231 / 1,483 / 1,360 |
 
 The [manifest](generated/manifest.json) pins source commits and hashes every generated chunk and navigation artifact. Full file/group provenance lives in [provenance.json](generated/provenance.json), and the deduplicated index lives in [symbols.json](generated/symbols.json). The [namespace routing](NAMESPACE-LOOKUP.md) and [domain routing](DOMAIN-SKILLS.md) cover every generated system, including data-only files and global/object systems.
 

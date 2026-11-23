@@ -10,7 +10,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-calendar-events](../../wow-api-calendar-events/SKILL.md) | 150 / 150 / 139 | [source schemas](../../wow-api-calendar-events/references/generated/README.md) |
 | [wow-api-collections](../../wow-api-collections/SKILL.md) | 205 / 220 / 167 | [source schemas](../../wow-api-collections/references/generated/README.md) |
 | [wow-api-combat](../../wow-api-combat/SKILL.md) | 317 / 322 / 306 | [source schemas](../../wow-api-combat/references/generated/README.md) |
-| [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | 457 / 461 / 346 | [source schemas](../../wow-api-currency-economy/references/generated/README.md) |
+| [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | 457 / 462 / 346 | [source schemas](../../wow-api-currency-economy/references/generated/README.md) |
 | [wow-api-encounters](../../wow-api-encounters/SKILL.md) | 348 / 350 / 274 | [source schemas](../../wow-api-encounters/references/generated/README.md) |
 | [wow-api-escape-sequences](../../wow-api-escape-sequences/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-api-events](../../wow-api-events/SKILL.md) | 2 / 2 / 2 | [source schemas](../../wow-api-events/references/generated/README.md) |
@@ -28,7 +28,7 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-api-quests](../../wow-api-quests/SKILL.md) | 319 / 325 / 152 | [source schemas](../../wow-api-quests/references/generated/README.md) |
 | [wow-api-reputation](../../wow-api-reputation/SKILL.md) | 81 / 84 / 15 | [source schemas](../../wow-api-reputation/references/generated/README.md) |
 | [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | 338 / 384 / 279 | [source schemas](../../wow-api-settings-system/references/generated/README.md) |
-| [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | 808 / 834 / 669 | [source schemas](../../wow-api-social-chat/references/generated/README.md) |
+| [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | 808 / 835 / 669 | [source schemas](../../wow-api-social-chat/references/generated/README.md) |
 | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | 342 / 364 / 269 | [source schemas](../../wow-api-spells-abilities/references/generated/README.md) |
 | [wow-api-talents](../../wow-api-talents/SKILL.md) | 261 / 278 / 140 | [source schemas](../../wow-api-talents/references/generated/README.md) |
 | [wow-api-transmog](../../wow-api-transmog/SKILL.md) | 333 / 336 / 335 | [source schemas](../../wow-api-transmog/references/generated/README.md) |
