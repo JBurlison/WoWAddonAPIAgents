@@ -1,6 +1,6 @@
 # AddOn structure, C_AddOns, and lifecycle contracts
 
-Verified against the bundled [target snapshots](../../wow-client-targets/references/targets.json) (`Retail 12.1.5.70783`, `Forever 1.60.1.70938`, `Classic progression 5.5.4.70631`). Complete per-target schemas remain queryable through [wow-api-index](../../wow-api-index/SKILL.md). Source declarations do not certify third-party loading or runtime permissions without per-client testing.
+Verified against the bundled [target snapshots](../../wow-client-targets/references/targets.json) (`Retail 12.1.5.70961`, `Forever 1.60.1.71037`, `Classic progression 5.5.4.71060`). Complete per-target schemas remain queryable through [wow-api-index](../../wow-api-index/SKILL.md). Source declarations do not certify third-party loading or runtime permissions without per-client testing.
 
 ## Multi-version TOC layout and metadata
 

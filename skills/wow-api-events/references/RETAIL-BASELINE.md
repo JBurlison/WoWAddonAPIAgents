@@ -1,6 +1,6 @@
 # Current event contracts and registration
 
-This path is retained for existing links; its historical event summaries have been replaced with source-pinned guidance. The complete catalogues cover Retail 12.1.5.70783, Forever 1.60.1.70938 and Classic progression 5.5.4.70631. There are respectively 1,784, 1,816 and 1,483 generated Event declarations, including 12, 12 and 8 marked CallbackEvent. These totals are source inventories, not counts of events an addon may subscribe to.
+This path is retained for existing links; its historical event summaries have been replaced with source-pinned guidance. The complete catalogues cover Retail 12.1.5.70961, Forever 1.60.1.71037 and Classic progression 5.5.4.71060. There are respectively 1,784, 1,816 and 1,483 generated Event declarations, including 12, 12 and 8 marked CallbackEvent. These totals are source inventories, not counts of events an addon may subscribe to.
 
 ## Read the full payload
 

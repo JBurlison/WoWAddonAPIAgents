@@ -1,6 +1,6 @@
 # WoW Addon API Agents
 
-Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, GitHub Copilot, and Antigravity. It includes 39 skills covering WoW APIs, UI implementation, addon development, client selection and CurseForge packaging (plus 4 repository-maintenance skills excluded from consumer packages). AI-builder remains a repository maintenance tool.
+Version-aware addon development for **Retail**, **Forever**, and **Classic progression**, distributed as one plugin for Codex, Claude Code, GitHub Copilot, and Antigravity. It includes 21 focused skills covering WoW APIs, UI implementation and full HUD overhauls, addon development, client selection, static addon checks, and CurseForge packaging (plus 4 repository-maintenance skills excluded from consumer packages). AI-builder remains a repository maintenance tool.
 
 | Target | Upstream branch | Request example |
 |---|---|---|
@@ -30,6 +30,8 @@ Version **2.7.0** adds [CurseForge setup and automatic packaging](skills/wow-cur
 Version **2.8.0** adds Antigravity plugin packaging (`.antigravity-plugin/plugin.json`, `assets/logo.svg`, `rules/AGENTS.md`) alongside radial-menu and icon-picker UI guidance.
 
 Version **2.9.0** compacts the generated API catalog (`schemaVersion: 2`, deduplicated `catalog.json` / `provenance.json` / row-table `symbols.json`), expands `query.mjs` (`--compact`, `--diff`, `--resolve-types`, `--offset`, ranked matches, `Enum.Type.Member`), tightens skill descriptions within discovery budgets, adds real-world `C_CVar` / `Settings` / `C_AddOns` / `MenuUtil` / `ScrollBox` / CurseForge recipes, and hardens maintainer/CI scripts. See the [2.9.0 validation report](docs/RELEASE-2.9.0.md).
+
+Version **3.0.0** adds [wow-ui-overhaul](skills/wow-ui-overhaul/SKILL.md) for modular HUD and total-conversion suites (unit frames, cast bars, action bars, nameplates, minimap, bags, chat, tooltips, `MaskTexture` custom geometry, and `PixelUtil` 4K scaling), adds zero-dependency [validate-addon.mjs](skills/wow-addon-development/scripts/validate-addon.mjs) and [fetch-source.mjs](skills/wow-client-targets/scripts/fetch-source.mjs) consumer scripts, and consolidates the 19 thin API wrapper skills directly under `wow-api-index` (`skills` reduced from 39 to 21 while keeping all 29 domain catalogs queryable via `--domain`).
 
 ## Install
 
@@ -78,7 +80,7 @@ Start a new session and select the WoW addon agent or workflow skill. Refresh wi
 
 2. **Release ZIP:** Download `wow-addon-dev-<version>.zip` from [GitHub Releases](https://github.com/JBurlison/WoWAddonAPIAgents/releases) and extract `wow-addon-dev/` into `~/.gemini/config/plugins/` (global) or `<addon-repo>/.agents/plugins/` (workspace).
 
-Antigravity loads the plugin's 39 skills, `wow-addon` agent, and WoW-scoped `rules/AGENTS.md` automatically on the next turn. You can toggle the plugin on or off under **Customizations → Plugins**.
+Antigravity loads the plugin's 21 skills, `wow-addon` agent, and WoW-scoped `rules/AGENTS.md` automatically on the next turn. You can toggle the plugin on or off under **Customizations → Plugins**.
 
 ### Existing VS Code workflow
 

@@ -29,6 +29,20 @@ test('one changed symbol produces a small patch without changing the index schem
   }
 });
 
+test('generated declaration catalogs keep source pins centralized in the manifest',async()=>{
+  const manifest=JSON.parse(await fs.readFile(path.join(root,'skills/wow-api-index/references/generated/manifest.json'),'utf8'));
+  for(const target of Object.values(manifest.targets)) {
+    assert.ok(target.commit);
+    assert.ok(target.version);
+  }
+  for(const chunk of manifest.chunks) {
+    const catalog=JSON.parse(await fs.readFile(path.join(root,'skills',chunk.path),'utf8'));
+    for(const target of Object.values(catalog.targets)) {
+      assert.deepEqual(Object.keys(target).sort(),['kinds','records']);
+    }
+  }
+});
+
 test('complete schemas retain nested secrecy, optional/default fields, enums, callbacks and predicates',()=>{
   const source=`local X={Name="X",Type="System",Namespace="C_X",Environment="All",
     Functions={{Name="Read",Type="Function",Namespace="",Environment="SecureOnly",MayReturnNothing=true,
@@ -173,7 +187,92 @@ test('query.mjs supports compact, diff, resolveTypes, Enum member lookup, filter
   const restrictedOnly = await queryReferences({ target: 'forever', domain: 'wow-api-settings-system', restricted: true, limit: 5, compact: true });
   assert.ok(restrictedOnly.matches > 0);
 
+  // Multi-match --compact returns signatures and sources rather than bare summaries.
+  const compactMulti = await queryReferences({ target: 'retail', query: 'C_Spell', compact: true, limit: 3 });
+  assert.equal(compactMulti.results.length, 3);
+  assert.ok(compactMulti.results.every(r => typeof r.signature === 'string' && r.source?.file && r.declaration === undefined));
+
+  // --resolve-types with --compact and --offset > 0 resolves types for the returned page, not page 0.
+  const offsetResolved = await queryReferences({ target: 'retail', domain: 'wow-api-combat', secret: true, offset: 2, limit: 1, compact: true, resolveTypes: true });
+  assert.equal(offsetResolved.results[0].symbol, 'C_CombatAudioAlert.GetCategoryVolume');
+  assert.ok(offsetResolved.referencedTypes?.CombatAudioAlertCategory, 'Expected referencedTypes for offset page record');
+
+  // --diff paginates across unified target symbols before diffing, avoiding false missingIn.
+  const diffPage = await queryReferences({ target: 'all', query: 'C_Spell', diff: true, compact: true, limit: 5 });
+  assert.equal(diffPage.results.length, 5);
+  assert.equal(diffPage.returned, 5);
+  assert.equal(diffPage.truncated, true);
+  assert.ok(diffPage.matches >= 165);
+  const spellBySchool = await queryReferences({ target: 'all', query: 'C_Spell.GetSchoolString', diff: true, compact: true });
+  assert.deepEqual(spellBySchool.results[0].presentIn, ['retail', 'forever', 'classic']);
+  assert.deepEqual(spellBySchool.results[0].missingIn, []);
+  const spellStatChanges = await queryReferences({ target: 'all', query: 'C_Spell.GetAuraStatChanges', diff: true, compact: true });
+  assert.deepEqual(spellStatChanges.results[0].presentIn, ['retail', 'forever']);
+  assert.deepEqual(spellStatChanges.results[0].missingIn, ['classic']);
+  const foreverOnlySpell = await queryReferences({ target: 'all', query: 'C_Spell.CancelAutoRepeatSpell', diff: true, compact: true });
+  assert.deepEqual(foreverOnlySpell.results[0].presentIn, ['forever']);
+  assert.deepEqual(foreverOnlySpell.results[0].missingIn, ['retail', 'classic']);
+  const spellExistsDiff = await queryReferences({ target: 'all', query: 'C_Spell.DoesSpellExist', diff: true, compact: true });
+  assert.deepEqual(spellExistsDiff.results[0].presentIn, ['retail', 'forever', 'classic']);
+
+  // --diff --only-diffs filters out identical entries.
+  const onlyDiffSame = await queryReferences({ target: 'all', query: 'ADDON_LOADED', kind: 'event', diff: true, onlyDiffs: true });
+  assert.equal(onlyDiffSame.matches, 0);
+  assert.equal(onlyDiffSame.results.length, 0);
+  const onlyDiffChanged = await queryReferences({ target: 'all', query: 'C_Spell', diff: true, onlyDiffs: true, compact: true, limit: 3 });
+  assert.equal(onlyDiffChanged.results.length, 3);
+  assert.ok(onlyDiffChanged.results.every(r => r.identical === false));
+
+  // --diff --resolve-types attaches referencedTypes per target.
+  const diffResolved = await queryReferences({ target: 'all', query: 'C_Spell.GetSpellInfo', diff: true, compact: true, resolveTypes: true });
+  assert.ok(diffResolved.referencedTypes?.retail?.SpellInfo);
+  assert.ok(diffResolved.referencedTypes?.forever?.SpellInfo);
+  assert.ok(diffResolved.referencedTypes?.classic?.SpellInfo);
+
+  // --callback returns only CallbackEvent declarations.
+  const callbacks = await queryReferences({ target: 'forever', callback: true, limit: 5 });
+  assert.ok(callbacks.matches > 0 && callbacks.results.length === 5);
+  assert.ok(callbacks.results.every(r => r.declaration.CallbackEvent === true));
+
+  // ScriptObject prefix normalization (SimpleFrame:SetAlpha and Frame:SetAlpha).
+  const simpleMethod = await queryReferences({ target: 'retail', query: 'SimpleFrame:SetAlpha', compact: true });
+  assert.equal(simpleMethod.results[0].symbol, 'SimpleFrameAPI:SetAlpha');
+  const frameMethod = await queryReferences({ target: 'retail', query: 'Frame:SetAlpha', compact: true });
+  assert.equal(frameMethod.results[0].symbol, 'SimpleFrameAPI:SetAlpha');
+
+  // Consolidated domains remain directly queryable via --domain.
+  const questDomain = await queryReferences({ target: 'forever', domain: 'wow-api-quests', kind: 'function', limit: 3, compact: true });
+  assert.equal(questDomain.results.length, 3);
+  assert.ok(questDomain.results.every(r => r.owner === 'wow-api-quests' && r.source?.url?.includes(questDomain.commit)));
+
   await assert.rejects(queryReferences({ target: 'retail', query: 'C_Spell', kind: 'bogus' }), /Invalid --kind/);
   await assert.rejects(queryReferences({ target: 'retail', query: 'C_Spell', domain: 'not-a-skill' }), /Invalid --domain/);
   await assert.rejects(queryReferences({ target: 'retail', query: 'C_Spell', environment: 'Bogus' }), /Environment/);
+  await assert.rejects(queryReferences({ target: 'retail', query: 'C_Spell', diff: true }), /--diff requires TARGET=all/);
+  await assert.rejects(queryReferences({ target: 'all', query: 'C_Spell', diff: true, list: true }), /--diff cannot be combined with --list/);
+  await assert.rejects(queryReferences({ target: 'all', query: 'C_Spell', onlyDiffs: true }), /--only-diffs requires --diff/);
+});
+
+test('validateReferences rejects a chunk catalog with extra undeclared targets', async () => {
+  const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'wow-chunk-target-test-'));
+  try {
+    await fs.cp(path.join(root, 'config/api-owners.json'), path.join(temp, 'config/api-owners.json'));
+    await fs.cp(path.join(root, 'skills'), path.join(temp, 'skills'), { recursive: true });
+    const manifest = JSON.parse(await fs.readFile(path.join(temp, 'skills/wow-api-index/references/generated/manifest.json'), 'utf8'));
+    const chunk = manifest.chunks.find(c => Object.keys(c.targets).length < 3);
+    assert.ok(chunk, 'Expected at least one target-subset domain chunk');
+    const catalogPath = path.join(temp, 'skills', chunk.path);
+    const catalog = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
+    const missingTarget = ['retail', 'forever', 'classic'].find(t => !catalog.targets[t]);
+    catalog.targets[missingTarget] = { records: 0, kinds: {} };
+    const text = JSON.stringify(catalog) + '\n';
+    await fs.writeFile(catalogPath, text);
+    const { createHash } = await import('node:crypto');
+    chunk.sha256 = createHash('sha256').update(text).digest('hex');
+    await fs.writeFile(path.join(temp, 'skills/wow-api-index/references/generated/manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+    await assert.rejects(validateReferences(temp), /Chunk target set drift/);
+  } finally {
+    if (path.dirname(path.resolve(temp)) !== path.resolve(os.tmpdir()) || !path.basename(temp).startsWith('wow-chunk-target-test-')) throw new Error('Unsafe temporary cleanup path');
+    await fs.rm(temp, { recursive: true, force: true });
+  }
 });

@@ -39,8 +39,8 @@ For new addons and relevant changes, follow [addon options](../wow-api-settings-
 
 - Query pinned declarations first with [wow-api-index](../wow-api-index/SKILL.md) (`query.mjs`). Historical baseline guides do not override pinned target contracts.
 - **Security & Secret Values gate:** Whenever an addon reads combat data, units, auras, damage meters, spells/cooldowns, chat, or manipulates secure frames, consult [taint & restricted-value contracts](../wow-api-lua-environment/references/CURRENT-CONTRACTS.md) and [combat contracts](../wow-api-combat/references/CURRENT-CONTRACTS.md) first. On Retail and Forever, keep secret values opaque (pass directly to permitted widget methods; never compare, format, serialize, or cache them as ordinary Lua values) and respect combat lockdown and `SecretArguments` rules.
-- For UI work, pair [native UI composition](../wow-native-ui/SKILL.md) (addon-owned controls/templates) with [UI skinning](../wow-ui-skinning/SKILL.md) (modifying Blizzard windows).
-- Resolve target branches to commits once per task, verify loaded Lua/XML/TOC paths and restrictions, and never assume an API exists or was removed across all clients based on Retail. Report offline snapshot dates when live GitHub lookup is skipped or fails.
+- For UI work, pair [native UI composition](../wow-native-ui/SKILL.md) (addon-owned controls/templates), [UI skinning](../wow-ui-skinning/SKILL.md) (modifying Blizzard windows), and [UI overhaul](../wow-ui-overhaul/SKILL.md) (full modular HUD/total-conversion suites).
+- Resolve target branches to commits once per task, verify loaded Lua/XML/TOC paths and restrictions (using [fetch-source.mjs](../wow-client-targets/scripts/fetch-source.mjs) for pinned Blizzard UI files), and never assume an API exists or was removed across all clients based on Retail. Report offline snapshot dates when live GitHub lookup is skipped or fails.
 
 ## 7. Implement for one or several clients
 
@@ -52,5 +52,5 @@ For new addons and relevant changes, follow [addon options](../wow-api-settings-
 ## Verify and deliver
 
 - **Forever testing pre-flight & prompt:** Before prompting, check OS and discovered host tools. Note that **Witchcraft requires Windows 10/11 + Node 24+ + PowerShell** ([connected testing](references/CONNECTED-CLIENT-TESTING.md)), while **UIForever** requires browser access ([simulator guide](references/UI-DESIGN-AND-TESTING.md)). When a Forever addon needs runtime/UI testing and no prior choice is recorded, ask once: *"Would you like to test in WoW Forever with Witchcraft, or use UIForever for this round?"* — disclosing any route unavailable in the current environment. Honor existing choices and record the selection for resumption.
-- Run static checks and inspect every packaged TOC/file list. Use [client validation](references/CLIENT-VALIDATION.md) (including Lua 5.1 syntax checks, `/console taintLog 1`, `/fstack`, `/etrace`) and [runtime validation](references/RUNTIME-VALIDATION.md) for capability/event probes.
+- Run static checks (`node <this-skill>/scripts/validate-addon.mjs <ADDON_DIR> --target <target>`) and inspect every packaged TOC/file list. Use [client validation](references/CLIENT-VALIDATION.md) (including Lua 5.1 syntax checks, `/console taintLog 1`, `/fstack`, `/etrace`) and [runtime validation](references/RUNTIME-VALIDATION.md) for capability/event probes.
 - Keep **design review**, **static checks**, **simulator observations**, **Witchcraft/computer-use observations**, and **in-game acceptance** strictly separate. Clearly list any unperformed checks as not run.
