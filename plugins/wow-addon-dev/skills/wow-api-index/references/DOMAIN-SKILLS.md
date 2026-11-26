@@ -2,38 +2,21 @@
 
 Every domain below exists. Generated-schema completeness is measured against pinned declarations; it is separate from load-path, runtime and permission verification. Handwritten UI helpers, XML, macros and CVars need their own source evidence. No checkmark means every API is tested.
 
+## Installed skills
+
 | Skill | Generated declarations (Retail / Forever / Classic) | Current ledger |
 |---|---|---|
 | [wow-addon-development](../../wow-addon-development/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-addon-structure](../../wow-addon-structure/SKILL.md) | 53 / 53 / 53 | [source schemas](../../wow-addon-structure/references/generated/README.md) |
-| [wow-api-achievements](../../wow-api-achievements/SKILL.md) | 20 / 20 / 20 | [source schemas](../../wow-api-achievements/references/generated/README.md) |
-| [wow-api-calendar-events](../../wow-api-calendar-events/SKILL.md) | 150 / 150 / 139 | [source schemas](../../wow-api-calendar-events/references/generated/README.md) |
-| [wow-api-collections](../../wow-api-collections/SKILL.md) | 205 / 220 / 167 | [source schemas](../../wow-api-collections/references/generated/README.md) |
 | [wow-api-combat](../../wow-api-combat/SKILL.md) | 317 / 322 / 306 | [source schemas](../../wow-api-combat/references/generated/README.md) |
-| [wow-api-currency-economy](../../wow-api-currency-economy/SKILL.md) | 457 / 462 / 346 | [source schemas](../../wow-api-currency-economy/references/generated/README.md) |
-| [wow-api-encounters](../../wow-api-encounters/SKILL.md) | 348 / 350 / 274 | [source schemas](../../wow-api-encounters/references/generated/README.md) |
-| [wow-api-escape-sequences](../../wow-api-escape-sequences/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-api-events](../../wow-api-events/SKILL.md) | 2 / 2 / 2 | [source schemas](../../wow-api-events/references/generated/README.md) |
 | [wow-api-framexml](../../wow-api-framexml/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
-| [wow-api-group-lfg](../../wow-api-group-lfg/SKILL.md) | 284 / 296 / 209 | [source schemas](../../wow-api-group-lfg/references/generated/README.md) |
-| [wow-api-guild](../../wow-api-guild/SKILL.md) | 82 / 87 / 80 | [source schemas](../../wow-api-guild/references/generated/README.md) |
-| [wow-api-housing](../../wow-api-housing/SKILL.md) | 692 / 692 / 617 | [source schemas](../../wow-api-housing/references/generated/README.md) |
 | [wow-api-index](../../wow-api-index/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
-| [wow-api-items-inventory](../../wow-api-items-inventory/SKILL.md) | 644 / 660 / 440 | [source schemas](../../wow-api-items-inventory/references/generated/README.md) |
 | [wow-api-lua-environment](../../wow-api-lua-environment/SKILL.md) | 84 / 90 / 42 | [source schemas](../../wow-api-lua-environment/references/generated/README.md) |
-| [wow-api-map-navigation](../../wow-api-map-navigation/SKILL.md) | 258 / 260 / 147 | [source schemas](../../wow-api-map-navigation/references/generated/README.md) |
-| [wow-api-misc-systems](../../wow-api-misc-systems/SKILL.md) | 642 / 657 / 271 | [source schemas](../../wow-api-misc-systems/references/generated/README.md) |
-| [wow-api-professions](../../wow-api-professions/SKILL.md) | 314 / 329 / 53 | [source schemas](../../wow-api-professions/references/generated/README.md) |
-| [wow-api-pvp](../../wow-api-pvp/SKILL.md) | 199 / 200 / 108 | [source schemas](../../wow-api-pvp/references/generated/README.md) |
-| [wow-api-quests](../../wow-api-quests/SKILL.md) | 319 / 325 / 152 | [source schemas](../../wow-api-quests/references/generated/README.md) |
-| [wow-api-reputation](../../wow-api-reputation/SKILL.md) | 81 / 84 / 15 | [source schemas](../../wow-api-reputation/references/generated/README.md) |
 | [wow-api-settings-system](../../wow-api-settings-system/SKILL.md) | 338 / 384 / 279 | [source schemas](../../wow-api-settings-system/references/generated/README.md) |
-| [wow-api-social-chat](../../wow-api-social-chat/SKILL.md) | 808 / 835 / 669 | [source schemas](../../wow-api-social-chat/references/generated/README.md) |
 | [wow-api-spells-abilities](../../wow-api-spells-abilities/SKILL.md) | 342 / 364 / 269 | [source schemas](../../wow-api-spells-abilities/references/generated/README.md) |
 | [wow-api-talents](../../wow-api-talents/SKILL.md) | 261 / 278 / 140 | [source schemas](../../wow-api-talents/references/generated/README.md) |
-| [wow-api-transmog](../../wow-api-transmog/SKILL.md) | 333 / 336 / 335 | [source schemas](../../wow-api-transmog/references/generated/README.md) |
 | [wow-api-unit-player](../../wow-api-unit-player/SKILL.md) | 878 / 914 / 649 | [source schemas](../../wow-api-unit-player/references/generated/README.md) |
-| [wow-api-weekly-rewards](../../wow-api-weekly-rewards/SKILL.md) | 29 / 29 / 0 | [source schemas](../../wow-api-weekly-rewards/references/generated/README.md) |
 | [wow-api-widget](../../wow-api-widget/SKILL.md) | 1627 / 1645 / 1528 | [source schemas](../../wow-api-widget/references/generated/README.md) |
 | [wow-api-xml-schema](../../wow-api-xml-schema/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-client-targets](../../wow-client-targets/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
@@ -42,7 +25,34 @@ Every domain below exists. Generated-schema completeness is measured against pin
 | [wow-lua-api](../../wow-lua-api/SKILL.md) | 205 / 207 / 116 | [source schemas](../../wow-lua-api/references/generated/README.md) |
 | [wow-macro-commands](../../wow-macro-commands/SKILL.md) | 9 / 9 / 9 | [source schemas](../../wow-macro-commands/references/generated/README.md) |
 | [wow-native-ui](../../wow-native-ui/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
+| [wow-ui-overhaul](../../wow-ui-overhaul/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
 | [wow-ui-skinning](../../wow-ui-skinning/SKILL.md) | 0 / 0 / 0 | Workflow or non-generated surface; see skill |
+
+## Consolidated API catalog domains
+
+These domains are stored directly under `wow-api-index` to keep skill discovery focused while preserving full schemas and `query.mjs --domain <domain>` lookups.
+
+| Domain | Generated declarations (Retail / Forever / Classic) | Reference |
+|---|---|---|
+| `wow-api-achievements` | 20 / 20 / 20 | [source schemas](domains/wow-api-achievements/generated/README.md) |
+| `wow-api-calendar-events` | 150 / 150 / 139 | [source schemas](domains/wow-api-calendar-events/generated/README.md) |
+| `wow-api-collections` | 205 / 220 / 167 | [source schemas](domains/wow-api-collections/generated/README.md) |
+| `wow-api-currency-economy` | 457 / 462 / 346 | [source schemas](domains/wow-api-currency-economy/generated/README.md) |
+| `wow-api-encounters` | 348 / 350 / 274 | [source schemas](domains/wow-api-encounters/generated/README.md) |
+| `wow-api-escape-sequences` | 0 / 0 / 0 | [historical baseline](domains/wow-api-escape-sequences/RETAIL-BASELINE.md) |
+| `wow-api-group-lfg` | 284 / 296 / 209 | [source schemas](domains/wow-api-group-lfg/generated/README.md) |
+| `wow-api-guild` | 82 / 87 / 80 | [source schemas](domains/wow-api-guild/generated/README.md) |
+| `wow-api-housing` | 692 / 692 / 617 | [source schemas](domains/wow-api-housing/generated/README.md) |
+| `wow-api-items-inventory` | 644 / 660 / 440 | [source schemas](domains/wow-api-items-inventory/generated/README.md) |
+| `wow-api-map-navigation` | 258 / 260 / 147 | [source schemas](domains/wow-api-map-navigation/generated/README.md) |
+| `wow-api-misc-systems` | 642 / 657 / 271 | [source schemas](domains/wow-api-misc-systems/generated/README.md) |
+| `wow-api-professions` | 314 / 329 / 53 | [source schemas](domains/wow-api-professions/generated/README.md) |
+| `wow-api-pvp` | 199 / 200 / 108 | [source schemas](domains/wow-api-pvp/generated/README.md) |
+| `wow-api-quests` | 319 / 325 / 152 | [source schemas](domains/wow-api-quests/generated/README.md) |
+| `wow-api-reputation` | 81 / 84 / 15 | [source schemas](domains/wow-api-reputation/generated/README.md) |
+| `wow-api-social-chat` | 808 / 835 / 669 | [source schemas](domains/wow-api-social-chat/generated/README.md) |
+| `wow-api-transmog` | 333 / 336 / 335 | [source schemas](domains/wow-api-transmog/generated/README.md) |
+| `wow-api-weekly-rewards` | 29 / 29 / 0 | [source schemas](domains/wow-api-weekly-rewards/generated/README.md) |
 
 ## Complete system ownership
 

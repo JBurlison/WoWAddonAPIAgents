@@ -203,7 +203,51 @@ function rankMatch(symbol, group, trimmed, normalized) {
     return 0;
   }
   if (symLower.includes(qLower) || grpLower.includes(qLower)) return 4;
+
+  if (qLower.includes(':') && symLower.includes(':')) {
+    const qParts = qLower.split(':');
+    const sParts = symLower.split(':');
+    if (qParts.length === 2 && sParts.length === 2 && qParts[0] && qParts[1] && sParts[0] && sParts[1]) {
+      const [qObj, qMember] = qParts;
+      const [sObj, sMember] = sParts;
+      const qObjBare = qObj.endsWith('api') ? qObj.slice(0, -3) : qObj;
+      const sObjBare = sObj.endsWith('api') ? sObj.slice(0, -3) : sObj;
+      if (sObjBare === qObjBare && sMember === qMember) return 1;
+      if (sObjBare === 'simple' + qObjBare && sMember === qMember) return 2;
+      if ((sObjBare === qObjBare || sObjBare === 'simple' + qObjBare) && sMember.startsWith(qMember)) return 3;
+    }
+  }
   return 0;
+}
+
+async function resolveReferencedTypes(records, id, code, commit, { compact, typeLookup, loadCatalog }) {
+  const queue = [];
+  const visited = new Set(records.map(r => r.symbol));
+  for (const rec of records) {
+    for (const typeName of collectReferencedTypeNames(rec.declaration)) {
+      if (!visited.has(typeName)) queue.push(typeName);
+    }
+  }
+  const resolvedTypes = {};
+  while (queue.length) {
+    const typeName = queue.shift();
+    if (visited.has(typeName)) continue;
+    visited.add(typeName);
+    const candidateRows = (typeLookup.get(typeName) || []).filter(r => r[4].includes(code));
+    for (const [sym, knd, owner] of candidateRows) {
+      const catalog = await loadCatalog(owner);
+      for (const match of catalog.declarations) {
+        if (match.kind !== knd || match.symbol !== sym || !match.targets[id]) continue;
+        const rec = rehydrateDeclaration(catalog, match, id, commit);
+        const key = Object.hasOwn(resolvedTypes, sym) ? `${sym}@${match.targets[id].file}` : sym;
+        resolvedTypes[key] = compact ? toCompactRecord(rec) : rec;
+        for (const nested of collectReferencedTypeNames(rec.declaration)) {
+          if (!visited.has(nested)) queue.push(nested);
+        }
+      }
+    }
+  }
+  return resolvedTypes;
 }
 
 export async function queryReferences({
@@ -217,9 +261,11 @@ export async function queryReferences({
   list = false,
   compact = false,
   diff = false,
+  onlyDiffs = false,
   resolveTypes = false,
   secret = false,
   restricted = false,
+  callback = false,
   environment,
   skillsRoot = defaultSkillsRoot,
 }) {
@@ -241,14 +287,23 @@ export async function queryReferences({
   if (environment !== undefined && !['All', 'SecureOnly'].includes(environment)) {
     throw new Error('Environment must be All or SecureOnly');
   }
+  if (diff && target !== 'all') {
+    throw new Error('--diff requires TARGET=all');
+  }
+  if (diff && list) {
+    throw new Error('--diff cannot be combined with --list; use --compact for concise cross-target diffs');
+  }
+  if (onlyDiffs && !diff) {
+    throw new Error('--only-diffs requires --diff');
+  }
 
   const manifest = JSON.parse(await fs.readFile(path.join(skillsRoot, 'wow-api-index/references/generated/manifest.json'), 'utf8'));
   const validDomains = new Set(manifest.chunks.map(c => c.owner));
   if (domain !== undefined && !validDomains.has(domain)) {
     throw new Error(`Invalid --domain "${domain}". Valid domains: ${[...validDomains].sort().join(', ')}`);
   }
-  if (!query && !domain && !secret && !restricted && !environment) {
-    throw new Error('Supply a symbol/namespace/type name or --domain / --secret / --restricted / --environment');
+  if (!query && !domain && !secret && !restricted && !environment && !callback) {
+    throw new Error('Supply a symbol/namespace/type name or --domain / --secret / --restricted / --callback / --environment');
   }
 
   const indexText = await fs.readFile(safePath(skillsRoot, manifest.symbolIndex.path), 'utf8');
@@ -278,6 +333,145 @@ export async function queryReferences({
     }
   }
 
+  const needsDeclarationCheck = Boolean(secret || restricted || environment || callback || memberFilter);
+  const rowMatchesFilters = row => {
+    const [, rowKind, owner, , , flags] = row;
+    if (effectiveKind && rowKind !== effectiveKind) return false;
+    if (domain && owner !== domain) return false;
+    if (secret && !flags.includes('S')) return false;
+    if (restricted && !flags.includes('P')) return false;
+    if (callback && !flags.includes('C')) return false;
+    if (environment === 'SecureOnly' && !flags.includes('O')) return false;
+    return true;
+  };
+  const recordMatchesFilters = record => {
+    if (secret && !hasSecretAnnotation(record.declaration)) return false;
+    if (restricted && !(record.declaration.IsProtectedFunction || record.declaration.HasRestrictions)) return false;
+    if (environment && record.environment !== environment) return false;
+    if (callback && !record.declaration.CallbackEvent) return false;
+    if (memberFilter) {
+      const items = record.declaration.Fields || record.declaration.Values || [];
+      const found = items.find(m => m.Name?.toLowerCase() === memberFilter.toLowerCase());
+      if (!found) return false;
+      record.matchedMember = found;
+    }
+    return true;
+  };
+
+  if (diff) {
+    const unified = [];
+    if (effectiveKind !== '__conflict__') {
+      for (const row of index.rows) {
+        if (!rowMatchesFilters(row)) continue;
+        const [symbol, , , group, targets] = row;
+        if (!targetOrder.some(t => targets.includes(targetCodes[t]))) continue;
+        const tier = rankMatch(symbol, group, trimmed, normalized);
+        if (!tier) continue;
+        unified.push({ row, tier });
+      }
+    }
+
+    const exact = normalized ? unified.filter(r => r.tier === 1) : [];
+    const selected = exact.length ? exact : unified;
+    selected.sort((a, b) => (a.tier - b.tier) || compare(a.row[0], b.row[0]) || compare(a.row[1], b.row[1]) || compare(a.row[2], b.row[2]) || compare(a.row[3], b.row[3]));
+
+    const inspectAll = needsDeclarationCheck || onlyDiffs;
+    const rowsToInspect = inspectAll ? selected : selected.slice(offset, offset + limit);
+    const ownerMatches = new Map();
+    for (const { row } of rowsToInspect) {
+      const [symbol, rowKind, owner, group] = row;
+      let set = ownerMatches.get(owner);
+      if (!set) { set = new Set(); ownerMatches.set(owner, set); }
+      set.add(`${rowKind}\0${symbol}\0${group}`);
+    }
+
+    const byKey = new Map();
+    for (const [owner, wanted] of ownerMatches) {
+      const catalog = await loadCatalog(owner);
+      for (const decl of catalog.declarations) {
+        const k = `${decl.kind}\0${decl.symbol}\0${decl.group}`;
+        if (!wanted.has(k)) continue;
+        for (const id of targetOrder) {
+          if (!decl.targets[id]) continue;
+          const record = rehydrateDeclaration(catalog, decl, id, manifest.targets[id].commit);
+          if (!recordMatchesFilters(record)) continue;
+          let targetMap = byKey.get(k);
+          if (!targetMap) { targetMap = {}; byKey.set(k, targetMap); }
+          if (!targetMap[id]) targetMap[id] = record;
+        }
+      }
+    }
+
+    const canonicalContract = r => JSON.stringify({ environment: r.environment, classification: r.classification, declaration: r.declaration });
+    const diffEntries = [];
+    for (const { row: [symbol, rowKind, owner, group] } of rowsToInspect) {
+      const byTarget = byKey.get(`${rowKind}\0${symbol}\0${group}`);
+      if (!byTarget) continue;
+      const presentIn = targetOrder.filter(t => Boolean(byTarget[t]));
+      if (!presentIn.length) continue;
+      const missingIn = targetOrder.filter(t => !presentIn.includes(t));
+      const identical = missingIn.length === 0 && new Set(presentIn.map(t => canonicalContract(byTarget[t]))).size === 1;
+      if (onlyDiffs && identical) continue;
+
+      let item;
+      if (identical) {
+        const first = byTarget[presentIn[0]];
+        item = {
+          symbol: first.symbol,
+          kind: first.kind,
+          owner: first.owner,
+          presentIn,
+          missingIn,
+          identical: true,
+          contract: compact ? toCompactRecord(first).signature : first.declaration,
+          ...(compact ? { classification: first.classification } : {}),
+          sources: Object.fromEntries(presentIn.map(t => [t, byTarget[t].source])),
+        };
+      } else {
+        item = {
+          symbol: byTarget[presentIn[0]].symbol,
+          kind: byTarget[presentIn[0]].kind,
+          owner: byTarget[presentIn[0]].owner,
+          presentIn,
+          missingIn,
+          identical: false,
+          targets: Object.fromEntries(presentIn.map(t => {
+            const r = byTarget[t];
+            return [t, compact
+              ? { signature: toCompactRecord(r).signature, classification: r.classification, source: r.source }
+              : { environment: r.environment, classification: r.classification, declaration: r.declaration, source: r.source }];
+          })),
+        };
+      }
+      diffEntries.push({ item, byTarget });
+    }
+
+    const totalMatches = inspectAll ? diffEntries.length : selected.length;
+    const pageEntries = inspectAll ? diffEntries.slice(offset, offset + limit) : diffEntries;
+    const referencedTypesByTarget = {};
+    if (resolveTypes && pageEntries.length) {
+      for (const id of targetOrder) {
+        const targetRecords = pageEntries.map(e => e.byTarget[id]).filter(Boolean);
+        if (!targetRecords.length) continue;
+        const resolved = await resolveReferencedTypes(targetRecords, id, targetCodes[id], manifest.targets[id].commit, { compact, typeLookup, loadCatalog });
+        if (Object.keys(resolved).length) referencedTypesByTarget[id] = resolved;
+      }
+    }
+
+    return {
+      mode: 'diff',
+      query: trimmed || null,
+      targets: Object.fromEntries(targetOrder.map(id => [id, { version: manifest.targets[id].version, commit: manifest.targets[id].commit }])),
+      evidence: 'Source-declared only. Loading, runtime behavior and addon access remain unknown unless a curated reference supplies separate evidence.',
+      matches: totalMatches,
+      returned: pageEntries.length,
+      offset,
+      truncated: totalMatches > offset + pageEntries.length,
+      results: pageEntries.map(e => e.item),
+      ...(Object.keys(referencedTypesByTarget).length ? { referencedTypes: referencedTypesByTarget } : {}),
+    };
+  }
+
   const targetsToRun = target === 'all' ? targetOrder : [target];
   const result = [];
 
@@ -286,13 +480,9 @@ export async function queryReferences({
     const ranked = [];
     if (effectiveKind !== '__conflict__') {
       for (const row of index.rows) {
-        const [symbol, rowKind, owner, group, targets, flags] = row;
+        if (!rowMatchesFilters(row)) continue;
+        const [symbol, , , group, targets] = row;
         if (!targets.includes(code)) continue;
-        if (effectiveKind && rowKind !== effectiveKind) continue;
-        if (domain && owner !== domain) continue;
-        if (secret && !flags.includes('S')) continue;
-        if (restricted && !flags.includes('P')) continue;
-        if (environment === 'SecureOnly' && !flags.includes('O')) continue;
         const tier = rankMatch(symbol, group, trimmed, normalized);
         if (!tier) continue;
         ranked.push({ row, tier });
@@ -300,11 +490,10 @@ export async function queryReferences({
     }
 
     const exact = normalized ? ranked.filter(r => r.tier === 1) : [];
-    let selected = exact.length ? exact : ranked;
+    const selected = exact.length ? exact : ranked;
     selected.sort((a, b) => (a.tier - b.tier) || compare(a.row[0], b.row[0]) || compare(a.row[1], b.row[1]));
 
-    const needsDeclarationCheck = Boolean(secret || restricted || environment || memberFilter);
-    const needsFullSchema = !list && (full || diff || resolveTypes || exact.length > 0 || (selected.length === 1 && !domain));
+    const needsFullSchema = !list && (full || compact || resolveTypes || exact.length > 0 || (selected.length === 1 && !domain));
 
     const entry = {
       target: id,
@@ -342,66 +531,33 @@ export async function queryReferences({
           const k = `${decl.kind}\0${decl.symbol}\0${decl.group}`;
           if (!wanted.has(k)) continue;
           const record = rehydrateDeclaration(catalog, decl, id, entry.commit);
-          if (secret && !hasSecretAnnotation(record.declaration)) continue;
-          if (restricted && !(record.declaration.IsProtectedFunction || record.declaration.HasRestrictions)) continue;
-          if (environment && record.environment !== environment) continue;
-          if (memberFilter) {
-            const items = record.declaration.Fields || record.declaration.Values || [];
-            const found = items.find(m => m.Name?.toLowerCase() === memberFilter.toLowerCase());
-            if (!found) continue;
-            record.matchedMember = found;
-          }
-          loadedByKey.set(k, record);
+          if (!recordMatchesFilters(record)) continue;
+          let bucket = loadedByKey.get(k);
+          if (!bucket) { bucket = []; loadedByKey.set(k, bucket); }
+          bucket.push(record);
         }
       }
 
       const orderedRecords = [];
+      const seenKeys = new Set();
       for (const { row: [symbol, rowKind, , group] } of rowsToLoad) {
-        const rec = loadedByKey.get(`${rowKind}\0${symbol}\0${group}`);
-        if (rec) orderedRecords.push(rec);
+        const k = `${rowKind}\0${symbol}\0${group}`;
+        if (seenKeys.has(k)) continue;
+        seenKeys.add(k);
+        const recs = loadedByKey.get(k);
+        if (recs) orderedRecords.push(...recs);
       }
 
-      if (needsDeclarationCheck) {
-        entry.matches = orderedRecords.length;
-        const page = orderedRecords.slice(offset, offset + limit);
-        entry.returned = page.length;
-        entry.truncated = orderedRecords.length > offset + page.length;
-        entry.results = list
-          ? page.map(r => ({ symbol: r.symbol, kind: r.kind, owner: r.owner, group: r.group, ...(r.matchedMember ? { matchedMember: r.matchedMember } : {}) }))
-          : compact ? page.map(toCompactRecord) : page;
-      } else {
-        entry.matches = selected.length;
-        entry.returned = orderedRecords.length;
-        entry.truncated = selected.length > offset + orderedRecords.length;
-        entry.results = compact ? orderedRecords.map(toCompactRecord) : orderedRecords;
-      }
+      const pageRecords = needsDeclarationCheck ? orderedRecords.slice(offset, offset + limit) : orderedRecords;
+      entry.matches = needsDeclarationCheck ? orderedRecords.length : selected.length;
+      entry.returned = pageRecords.length;
+      entry.truncated = entry.matches > offset + pageRecords.length;
+      entry.results = list
+        ? pageRecords.map(r => ({ symbol: r.symbol, kind: r.kind, owner: r.owner, group: r.group, ...(r.matchedMember ? { matchedMember: r.matchedMember } : {}) }))
+        : compact ? pageRecords.map(toCompactRecord) : pageRecords;
 
-      if (resolveTypes && entry.results.length && !list) {
-        const targetRecords = compact ? orderedRecords.slice(0, entry.returned) : entry.results;
-        const queue = [];
-        const visited = new Set(targetRecords.map(r => r.symbol));
-        for (const rec of targetRecords) {
-          for (const typeName of collectReferencedTypeNames(rec.declaration)) {
-            if (!visited.has(typeName)) queue.push(typeName);
-          }
-        }
-        const resolvedTypes = {};
-        while (queue.length) {
-          const typeName = queue.shift();
-          if (visited.has(typeName)) continue;
-          visited.add(typeName);
-          const candidateRows = (typeLookup.get(typeName) || []).filter(r => r[4].includes(code));
-          for (const [sym, knd, owner] of candidateRows) {
-            const catalog = await loadCatalog(owner);
-            const match = catalog.declarations.find(d => d.kind === knd && d.symbol === sym && d.targets[id]);
-            if (!match) continue;
-            const rec = rehydrateDeclaration(catalog, match, id, entry.commit);
-            resolvedTypes[sym] = compact ? toCompactRecord(rec) : rec;
-            for (const nested of collectReferencedTypeNames(rec.declaration)) {
-              if (!visited.has(nested)) queue.push(nested);
-            }
-          }
-        }
+      if (resolveTypes && pageRecords.length && !list) {
+        const resolvedTypes = await resolveReferencedTypes(pageRecords, id, code, entry.commit, { compact, typeLookup, loadCatalog });
         if (Object.keys(resolvedTypes).length) entry.referencedTypes = resolvedTypes;
       }
     }
@@ -410,64 +566,6 @@ export async function queryReferences({
       entry.note = 'Not found in this generated inventory. This does not establish removal or lack of runtime availability; inspect loaded FrameXML and runtime evidence.';
     }
     result.push(entry);
-  }
-
-  if (diff) {
-    const bySymbol = new Map();
-    for (const targetEntry of result) {
-      for (const rec of targetEntry.results) {
-        const key = `${rec.kind}\0${rec.symbol}`;
-        let group = bySymbol.get(key);
-        if (!group) {
-          group = { symbol: rec.symbol, kind: rec.kind, owner: rec.owner, presentIn: [], missingIn: [], byTarget: {} };
-          bySymbol.set(key, group);
-        }
-        group.presentIn.push(targetEntry.target);
-        group.byTarget[targetEntry.target] = rec;
-      }
-    }
-    const items = [];
-    for (const group of bySymbol.values()) {
-      group.missingIn = targetsToRun.filter(t => !group.presentIn.includes(t));
-      const signatures = group.presentIn.map(t => {
-        const r = group.byTarget[t];
-        return compact ? r.signature : JSON.stringify({ environment: r.environment, classification: r.classification, declaration: r.declaration });
-      });
-      const identical = group.missingIn.length === 0 && new Set(signatures).size === 1;
-      if (identical) {
-        const first = group.byTarget[group.presentIn[0]];
-        items.push({
-          symbol: group.symbol,
-          kind: group.kind,
-          owner: group.owner,
-          presentIn: group.presentIn,
-          missingIn: group.missingIn,
-          identical: true,
-          contract: compact ? first.signature : first.declaration,
-          sources: Object.fromEntries(group.presentIn.map(t => [t, group.byTarget[t].source])),
-        });
-      } else {
-        items.push({
-          symbol: group.symbol,
-          kind: group.kind,
-          owner: group.owner,
-          presentIn: group.presentIn,
-          missingIn: group.missingIn,
-          identical: false,
-          targets: Object.fromEntries(group.presentIn.map(t => {
-            const r = group.byTarget[t];
-            return [t, compact ? { signature: r.signature, source: r.source } : { environment: r.environment, classification: r.classification, declaration: r.declaration, source: r.source }];
-          })),
-        });
-      }
-    }
-    return {
-      mode: 'diff',
-      query: trimmed || null,
-      targets: Object.fromEntries(result.map(t => [t.target, { version: t.version, commit: t.commit, matches: t.matches, truncated: t.truncated }])),
-      evidence: result[0]?.evidence,
-      results: items,
-    };
   }
 
   return target === 'all' ? result : result[0];
@@ -486,10 +584,12 @@ function printUsage() {
     '    --full                    Return complete schemas even for multi-match searches',
     '    --list                    Return summary rows only',
     '    --compact                 Emit token-efficient signatures and source locations',
-    '    --diff                    Compare matching contracts across targets (use with TARGET=all)',
+    '    --diff                    Compare matching contracts across targets (requires TARGET=all)',
+    '    --only-diffs              With --diff, return only entries that differ across targets',
     '    --resolve-types           Include referenced Structure/Enumeration/CallbackType definitions',
     '    --secret                  Filter to declarations with secret-value/argument annotations',
     '    --restricted              Filter to protected or restricted declarations',
+    '    --callback                Filter to CallbackEvent declarations',
     '    --environment <All|SecureOnly>',
     '    --help                    Show this help message',
   ].join('\n'));
@@ -507,9 +607,11 @@ if (isMainModule(import.meta.url)) {
         ['--list', 'list'],
         ['--compact', 'compact'],
         ['--diff', 'diff'],
+        ['--only-diffs', 'onlyDiffs'],
         ['--resolve-types', 'resolveTypes'],
         ['--secret', 'secret'],
         ['--restricted', 'restricted'],
+        ['--callback', 'callback'],
       ]);
       const positional = [];
       const options = {};

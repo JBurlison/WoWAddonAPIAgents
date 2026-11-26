@@ -68,6 +68,28 @@ async function listDirCached(dir, dirCache) {
   return entries;
 }
 
+async function validatePluginAssetPath(pluginDir, rawPath, label, dirCache, errors, { allowLeadingDotSlash = false } = {}) {
+  if (typeof rawPath !== 'string' || !rawPath) {
+    errors.push(`Invalid ${label}: ${rawPath}`);
+    return;
+  }
+  const normalized = allowLeadingDotSlash && rawPath.startsWith('./') ? rawPath.slice(2) : rawPath;
+  if (!normalized || normalized.startsWith('/') || normalized.startsWith('\\') || /^[a-z][a-z0-9+.-]*:/i.test(normalized) || normalized.split(/[\\/]/).includes('..') || !/\.(png|svg|jpg|jpeg|webp)$/i.test(normalized)) {
+    errors.push(`Invalid ${label}: ${rawPath}`);
+    return;
+  }
+  const relPath = path.relative(pluginDir, path.resolve(pluginDir, normalized));
+  try {
+    let cursor = pluginDir;
+    for (const seg of relPath.split(path.sep).filter(Boolean)) {
+      if (!(await listDirCached(cursor, dirCache)).has(seg)) throw new Error('missing');
+      cursor = path.join(cursor, seg);
+    }
+  } catch {
+    errors.push(`Missing or wrong-case ${label}: ${rawPath}`);
+  }
+}
+
 export function validateSkill(text, expectedName) {
   const { yaml } = frontmatter(text);
   const meta = YAML.parse(yaml, { uniqueKeys: true });
@@ -181,21 +203,15 @@ export async function validate(base = root) {
   const antigravityAllowed = ['name', 'displayName', 'version', 'description', 'author', 'homepage', 'repository', 'logo', 'suggestedPrompts', 'disabled'];
   if (Object.keys(antigravity).some(key => !antigravityAllowed.includes(key))) errors.push('Invalid Antigravity manifest envelope');
   if (antigravity.logo !== undefined) {
-    const logo = antigravity.logo;
-    if (typeof logo !== 'string' || !logo || logo.startsWith('/') || logo.startsWith('\\') || /^[a-z][a-z0-9+.-]*:/i.test(logo) || logo.split(/[\\/]/).includes('..') || !/\.(png|svg|jpg|jpeg|webp)$/i.test(logo)) {
-      errors.push(`Invalid Antigravity logo path: ${logo}`);
-    } else {
-      const relLogo = path.relative(plugin, path.resolve(plugin, logo));
-      try {
-        let cursor = plugin;
-        for (const seg of relLogo.split(path.sep).filter(Boolean)) {
-          if (!(await listDirCached(cursor, dirCache)).has(seg)) throw new Error('missing');
-          cursor = path.join(cursor, seg);
-        }
-      } catch {
-        errors.push(`Missing or wrong-case Antigravity logo: ${logo}`);
-      }
-    }
+    await validatePluginAssetPath(plugin, antigravity.logo, 'Antigravity logo path', dirCache, errors, { allowLeadingDotSlash: false });
+  }
+  const codex = await readJSON(path.join(plugin, '.codex-plugin/plugin.json'));
+  if (codex.skills !== './skills/') errors.push('Invalid Codex skills path');
+  if (codex.interface?.logo !== undefined) {
+    await validatePluginAssetPath(plugin, codex.interface.logo, 'Codex logo path', dirCache, errors, { allowLeadingDotSlash: true });
+  }
+  if (codex.interface?.composerIcon !== undefined) {
+    await validatePluginAssetPath(plugin, codex.interface.composerIcon, 'Codex composerIcon path', dirCache, errors, { allowLeadingDotSlash: true });
   }
   if (antigravity.suggestedPrompts !== undefined) {
     if (!Array.isArray(antigravity.suggestedPrompts) || antigravity.suggestedPrompts.length < 1 || antigravity.suggestedPrompts.length > 3 || antigravity.suggestedPrompts.some(prompt => typeof prompt !== 'string' || !prompt.trim())) {

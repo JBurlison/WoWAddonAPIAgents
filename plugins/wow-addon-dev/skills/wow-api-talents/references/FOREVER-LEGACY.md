@@ -55,7 +55,7 @@ The same utility defines `LegacySystem.GetCurrencyInfo()`, `UpdateCurrencyInfo()
 
 ## Challenges and reward track
 
-[LegacyChallenges.lua](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacyChallenges.lua) uses achievement records, search/filter state and criteria updates. Character completion matters: [LegacySystemUtil.lua](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacySystemUtil.lua) treats an achievement earned by another character as incomplete for its filter. Do not replace that logic with account-wide completion alone. See [achievements](../../wow-api-achievements/SKILL.md) for the underlying system.
+[LegacyChallenges.lua](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacyChallenges.lua) uses achievement records, search/filter state and criteria updates. Character completion matters: [LegacySystemUtil.lua](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacySystemUtil.lua) treats an achievement earned by another character as incomplete for its filter. Do not replace that logic with account-wide completion alone. See [achievements](../../wow-api-index/references/domains/wow-api-achievements/generated/README.md) for the underlying system.
 
 [LegacyRewardTrack.lua](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_LegacySystem/Blizzard_LegacyRewardTrack.lua) first queries faction data; it defers refresh if that data is absent. It builds cards from the faction's renown levels and each level's rewards. Relevant [MajorFactions contracts](https://github.com/Gethe/wow-ui-source/blob/ca8368f2f2380cbe696854f7f2646387c278a61b/Interface/AddOns/Blizzard_APIDocumentationGenerated/MajorFactionsDocumentation.lua) are:
 
@@ -66,7 +66,7 @@ The same utility defines `LegacySystem.GetCurrencyInfo()`, `UpdateCurrencyInfo()
 | `C_MajorFactions.GetRenownLevels(majorFactionID)` | `MajorFactionRenownLevelInfo[]` |
 | `C_MajorFactions.GetRenownRewardsForLevel(majorFactionID, renownLevel)` | `MajorFactionRenownRewardInfo[]` |
 
-All four declare `SecretArguments = "AllowedWhenUntainted"`. Preserve the distinction between trait points and renown, even when the built-in UI shows both. See [reputation](../../wow-api-reputation/SKILL.md) for broader major-faction behavior.
+All four declare `SecretArguments = "AllowedWhenUntainted"`. Preserve the distinction between trait points and renown, even when the built-in UI shows both. See [reputation](../../wow-api-index/references/domains/wow-api-reputation/generated/README.md) for broader major-faction behavior.
 
 ## Engine events versus UI callbacks
 

@@ -230,7 +230,7 @@ async function reconcileKit(result, kitDir, output) {
   return artifact;
 }
 
-const isGeneratedDoc = rel => rel.includes('/references/generated/')
+const isGeneratedDoc = rel => rel.includes('/generated/')
   || /\/wow-api-events\/references\/EVENTS-(?:A-F|G-L|M-R|S-Z)\.md$/.test(rel)
   || /\/wow-api-index\/references\/(?:NAMESPACE-LOOKUP|DOMAIN-SKILLS)\.md$/.test(rel);
 

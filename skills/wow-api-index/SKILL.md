@@ -11,7 +11,7 @@ Resolve the client/build with [wow-client-targets](../wow-client-targets/SKILL.m
 
 Use the [current reference guide](references/CURRENT-REFERENCES.md) and [package-local query tool](scripts/query.mjs) to retrieve only the desired symbol's full typed contract and security annotations. The ledger includes every generated function, event, object method, structure, enum, callback type, constant group and predicate at the pinned target commits. It retains explicit unknown load/runtime/access states.
 
-With Node.js 18+, run `node <this-skill>/scripts/query.mjs forever C_Spell.GetSpellInfo --compact --resolve-types` or `node <this-skill>/scripts/query.mjs all SPELL_UPDATE_COOLDOWN --kind event --diff`. Exact queries return full records; multi-match searches return ranked summaries unless `--full` or `--compact` is used. No Node dependency is needed to inspect the per-domain `catalog.json` files directly.
+With Node.js 18+, run `node <this-skill>/scripts/query.mjs forever C_Spell.GetSpellInfo --compact --resolve-types` or `node <this-skill>/scripts/query.mjs all SPELL_UPDATE_COOLDOWN --kind event --diff` (supports `--only-diffs`, `--callback`, `--secret`, `--restricted`). Exact queries return full records; multi-match searches return ranked summaries unless `--full`, `--compact`, or `--resolve-types` is used. Domain catalogs for consolidated gameplay APIs live under `references/domains/<domain>/` and remain directly queryable via `--domain <domain>`. No Node dependency is needed to inspect `catalog.json` files directly.
 
 | Reference | Purpose |
 |---|---|

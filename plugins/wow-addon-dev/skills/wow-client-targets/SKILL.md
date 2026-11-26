@@ -15,7 +15,7 @@ description: Resolve Retail, Forever, and Classic progression client targets, so
 
 ## Snapshot and current sources
 
-[targets.json](references/targets.json) records bundled source-inventory snapshots (not certification of every API). Interface numbers are derived from `version.txt` and must be confirmed against `select(4, GetBuildInfo())` in the target client. Optionally run `node` on [scripts/targets.mjs](scripts/targets.mjs) (`retail forever` or `all`) to print bundled metadata; no Node dependency is required to read the files.
+[targets.json](references/targets.json) records bundled source-inventory snapshots (not certification of every API). Interface numbers are derived from `version.txt` and must be confirmed against `select(4, GetBuildInfo())` in the target client. Optionally run `node` on [scripts/targets.mjs](scripts/targets.mjs) (`retail forever` or `all`) to print bundled metadata, or [scripts/fetch-source.mjs](scripts/fetch-source.mjs) (`<target> <Interface/...>`) to inspect commit-pinned Blizzard FrameXML/XML/TOC files with local disk caching; no Node dependency is required to read the reference files.
 
 For API and source lookup, follow this order:
 

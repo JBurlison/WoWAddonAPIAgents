@@ -5,7 +5,7 @@ description: Reskin and customize existing Blizzard frames (character screen, pa
 
 # Skin Blizzard UI without a framework dependency
 
-Use this skill for modifying Blizzard-owned windows; for addon-owned panels, use [wow-native-ui](../wow-native-ui/SKILL.md). Follow [wow-addon-development](../wow-addon-development/SKILL.md) for options, localization, mock-up, visual fidelity, and testing baselines, and preserve Blizzard's localized labels.
+Use this skill for modifying Blizzard-owned windows; for addon-owned panels, use [wow-native-ui](../wow-native-ui/SKILL.md); for full modular HUD/total-conversion suites, use [wow-ui-overhaul](../wow-ui-overhaul/SKILL.md). Follow [wow-addon-development](../wow-addon-development/SKILL.md) for options, localization, mock-up, visual fidelity, and testing baselines, and preserve Blizzard's localized labels.
 
 ## Establish the surface and target
 

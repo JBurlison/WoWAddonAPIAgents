@@ -11,7 +11,7 @@ const indexDir = 'skills/wow-api-index/references/generated';
 const targetOrder = ['retail', 'forever', 'classic'];
 const targetCodes = { retail: 'r', forever: 'f', classic: 'c' };
 const compare = (a, b) => a < b ? -1 : a > b ? 1 : 0;
-const hash = text => createHash('sha256').update(text).digest('hex');
+const hash = text => createHash('sha256').update(text.replace(/\r\n/g, '\n')).digest('hex');
 const json = value => JSON.stringify(value, null, 2) + '\n';
 const countKinds = records => Object.fromEntries([...new Set(records.map(r => r.kind))].sort(compare).map(kind => [kind, records.filter(r => r.kind === kind).length]));
 const evidence = { declaration: 'source-declared', loadConditions: 'unknown', runtime: 'unknown', addonAccess: 'unknown' };
@@ -80,15 +80,44 @@ function safeResolve(boundary, relative) {
   return full;
 }
 
+async function loadDomainSets(base) {
+  const skillsRoot = path.join(base, 'skills');
+  const topLevelSkills = new Set((await fs.readdir(skillsRoot)).filter(s => s.startsWith('wow-')));
+  const domainsDir = path.join(skillsRoot, 'wow-api-index/references/domains');
+  const consolidatedList = await fs.readdir(domainsDir).catch(err => err.code === 'ENOENT' ? [] : Promise.reject(err));
+  const consolidatedDomains = new Set(consolidatedList.filter(s => s.startsWith('wow-')));
+  for (const name of consolidatedDomains) {
+    if (topLevelSkills.has(name)) throw new Error(`Duplicate domain across top-level skill and consolidated domains: ${name}`);
+  }
+  const knownOwners = new Set([...topLevelSkills, ...consolidatedDomains]);
+  return { topLevelSkills, consolidatedDomains, knownOwners };
+}
+
+async function generatedDirsInScope(base) {
+  const dirs = [];
+  const skillsDir = path.join(base, 'skills');
+  for (const skill of await fs.readdir(skillsDir)) {
+    if (skill.startsWith('wow-')) dirs.push(path.join(skillsDir, skill, 'references/generated'));
+  }
+  const domainsDir = path.join(skillsDir, 'wow-api-index/references/domains');
+  for (const domain of await fs.readdir(domainsDir).catch(err => err.code === 'ENOENT' ? [] : Promise.reject(err))) {
+    if (domain.startsWith('wow-')) dirs.push(path.join(domainsDir, domain, 'generated'));
+  }
+  return dirs;
+}
+
 export async function generateReferences({ base = root, sourceRoot = path.join(base, '.cache/api-audit'), write = true } = {}) {
   const registry = JSON.parse(await fs.readFile(path.join(base, 'skills/wow-client-targets/references/targets.json'), 'utf8'));
   const owners = JSON.parse(await fs.readFile(path.join(base, 'config/api-owners.json'), 'utf8'));
-  const knownSkills = new Set((await fs.readdir(path.join(base, 'skills'))).filter(s => s.startsWith('wow-')));
+  const { topLevelSkills, consolidatedDomains, knownOwners } = await loadDomainSets(base);
+  const ownerGenDir = owner => topLevelSkills.has(owner)
+    ? `skills/${owner}/references/generated`
+    : `skills/wow-api-index/references/domains/${owner}/generated`;
   const ownerFor = (group, file) => {
     const fileOwner = owners.files[file];
     const row = owners.groups[group];
     if (!row || !fileOwner) throw new Error(`Unowned source: ${group} / ${file}; update config/api-owners.json deliberately`);
-    if (!knownSkills.has(row.owner) || !knownSkills.has(fileOwner.owner)) throw new Error(`Unknown owner: ${group}`);
+    if (!knownOwners.has(row.owner) || !knownOwners.has(fileOwner.owner)) throw new Error(`Unknown owner: ${group}`);
     if (row.owner !== fileOwner.owner) throw new Error(`Ownership mismatch: group ${group} (${row.owner}) vs file ${file} (${fileOwner.owner})`);
     return row;
   };
@@ -230,7 +259,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
       || compare(Object.keys(a.targets).join(','), Object.keys(b.targets).join(','))
       || compare(Object.values(a.targets)[0].file, Object.values(b.targets)[0].file),
     );
-    const relative = `skills/${owner}/references/generated/catalog.json`;
+    const relative = `${ownerGenDir(owner)}/catalog.json`;
     const header = { schemaVersion: 3, owner, repository: registry.repository, sourceBasePath: apiPath, evidence, targets: targetHeaders, systems: sortedSystems };
     const content = serializeCatalog(header, declarations);
     outputs.set(relative, content);
@@ -255,26 +284,57 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
   outputs.set(`${indexDir}/provenance.json`, provenanceContent);
   manifest.provenance = { path: skillsPrefix(`${indexDir}/provenance.json`), sha256: hash(provenanceContent) };
 
+  const ownerLinkFromIndexRefs = owner => {
+    if (topLevelSkills.has(owner)) return `../../${owner}/SKILL.md`;
+    return manifest.chunks.some(c => c.owner === owner)
+      ? `domains/${owner}/generated/README.md`
+      : `domains/${owner}/RETAIL-BASELINE.md`;
+  };
+  const ownerLinkFromEventsRefs = owner => topLevelSkills.has(owner)
+    ? `../../${owner}/SKILL.md`
+    : `../../wow-api-index/references/domains/${owner}/generated/README.md`;
+
   for (const chunk of manifest.chunks) {
-    const lines = [`# ${chunk.owner}: generated declaration ledger`, '', 'These are complete extracted source schemas for this domain at the commits pinned in the [central manifest](../../../wow-api-index/references/generated/manifest.json). They establish declarations, not addon-facing availability. Load conditions, runtime behavior and addon access are explicitly unknown. Read the handwritten current guide for semantic and loading evidence; preserve restrictions when implementing.', '', '| Target | Declarations | Source schemas |', '|---|---:|---|'];
+    const isTopLevel = topLevelSkills.has(chunk.owner);
+    const manifestLink = isTopLevel ? '../../../wow-api-index/references/generated/manifest.json' : '../../../generated/manifest.json';
+    const queryPath = isTopLevel ? '../../../wow-api-index/scripts/query.mjs' : '../../../../scripts/query.mjs';
+    const guideLink = isTopLevel ? '../../../wow-api-index/references/CURRENT-REFERENCES.md' : '../../../CURRENT-REFERENCES.md';
+    const lines = [
+      `# ${chunk.owner}: generated declaration ledger`,
+      '',
+      `These are complete extracted source schemas for this domain at the commits pinned in the [central manifest](${manifestLink}). They establish declarations, not addon-facing availability. Load conditions, runtime behavior and addon access are explicitly unknown. Read the handwritten current guide for semantic and loading evidence; preserve restrictions when implementing.`,
+      '',
+      '| Target | Declarations | Source schemas |',
+      '|---|---:|---|',
+    ];
     for (const [target, info] of Object.entries(chunk.targets)) {
       lines.push(`| ${target} | ${info.records} | [catalog.json](catalog.json) |`);
     }
-    lines.push('', `Use the [package-local query tool](../../../wow-api-index/scripts/query.mjs) (for example \`node ../../../wow-api-index/scripts/query.mjs forever --domain ${chunk.owner} --list\`) to retrieve a named function, event, structure, enum, callback type or predicate without reading the entire file. The [catalogue guide](../../../wow-api-index/references/CURRENT-REFERENCES.md) describes querying, schema representation and evidence status.`, '');
-    outputs.set(`skills/${chunk.owner}/references/generated/README.md`, lines.join('\n'));
+    lines.push(
+      '',
+      `Use the [package-local query tool](${queryPath}) (for example \`node ${queryPath} forever --domain ${chunk.owner} --list\`) to retrieve a named function, event, structure, enum, callback type or predicate without reading the entire file. The [catalogue guide](${guideLink}) describes querying, schema representation and evidence status.${isTopLevel ? '' : ' Historical listings are archived in the [historical Retail baseline](../RETAIL-BASELINE.md).'}`,
+      '',
+    );
+    outputs.set(`${ownerGenDir(chunk.owner)}/README.md`, lines.join('\n'));
   }
 
   const namespaceRows = Object.entries(provenance.groups).filter(([group]) => group.startsWith('C_'));
   const namespaceMD = ['# Namespace → skill lookup', '', 'Complete routing for every declared `C_` system in the pinned generated inventories. This is ownership, not cross-client support. Target presence is source-only. For global systems, objects and data definitions use the [complete domain routing](DOMAIN-SKILLS.md) and [query tool](../scripts/query.mjs).', '', '| Namespace | Owner | Declared targets | Scope classification |', '|---|---|---|---|'];
-  for (const [group, row] of namespaceRows) namespaceMD.push(`| \`${group}\` | [${row.owner}](../../${row.owner}/SKILL.md) | ${row.targets.join(', ')} | ${row.classification} |`);
+  for (const [group, row] of namespaceRows) namespaceMD.push(`| \`${group}\` | [${row.owner}](${ownerLinkFromIndexRefs(row.owner)}) | ${row.targets.join(', ')} | ${row.classification} |`);
   namespaceMD.push('');
   outputs.set('skills/wow-api-index/references/NAMESPACE-LOOKUP.md', namespaceMD.join('\n'));
 
-  const domainMD = ['# Domain routing and evidence status', '', 'Every domain below exists. Generated-schema completeness is measured against pinned declarations; it is separate from load-path, runtime and permission verification. Handwritten UI helpers, XML, macros and CVars need their own source evidence. No checkmark means every API is tested.', '', '| Skill | Generated declarations (Retail / Forever / Classic) | Current ledger |', '|---|---|---|'];
-  for (const owner of [...knownSkills].sort(compare)) {
+  const domainMD = ['# Domain routing and evidence status', '', 'Every domain below exists. Generated-schema completeness is measured against pinned declarations; it is separate from load-path, runtime and permission verification. Handwritten UI helpers, XML, macros and CVars need their own source evidence. No checkmark means every API is tested.', '', '## Installed skills', '', '| Skill | Generated declarations (Retail / Forever / Classic) | Current ledger |', '|---|---|---|'];
+  for (const owner of [...topLevelSkills].sort(compare)) {
     const chunk = manifest.chunks.find(c => c.owner === owner);
     const rows = targetOrder.map(target => chunk?.targets[target]?.records || 0);
     domainMD.push(`| [${owner}](../../${owner}/SKILL.md) | ${rows.join(' / ')} | ${rows.some(Boolean) ? `[source schemas](../../${owner}/references/generated/README.md)` : 'Workflow or non-generated surface; see skill'} |`);
+  }
+  domainMD.push('', '## Consolidated API catalog domains', '', 'These domains are stored directly under `wow-api-index` to keep skill discovery focused while preserving full schemas and `query.mjs --domain <domain>` lookups.', '', '| Domain | Generated declarations (Retail / Forever / Classic) | Reference |', '|---|---|---|');
+  for (const owner of [...consolidatedDomains].sort(compare)) {
+    const chunk = manifest.chunks.find(c => c.owner === owner);
+    const rows = targetOrder.map(target => chunk?.targets[target]?.records || 0);
+    domainMD.push(`| \`${owner}\` | ${rows.join(' / ')} | ${rows.some(Boolean) ? `[source schemas](domains/${owner}/generated/README.md)` : `[historical baseline](domains/${owner}/RETAIL-BASELINE.md)`} |`);
   }
   domainMD.push('', '## Complete system ownership', '', '| Namespace / global / object / data system | Owner | Scope classification | Declared targets |', '|---|---|---|---|');
   for (const [group, row] of Object.entries(provenance.groups)) domainMD.push(`| \`${group}\` | ${row.owner} | ${row.classification} | ${row.targets.join(', ')} |`);
@@ -297,7 +357,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
     const lines = [`# Current event catalogue: ${band}`, '', 'Every row is a generated Event declaration in at least one target pinned in the [central manifest](../../wow-api-index/references/generated/manifest.json). Source presence does not certify frame registration or addon access. `CallbackEvent` declarations use a different dispatch mechanism. Retrieve the full typed payload, source URL and restrictions with the [query tool](../../wow-api-index/scripts/query.mjs); the [event skill](../SKILL.md) explains usage.', '', '| Event | Owner | Target declarations |', '|---|---|---|'];
     for (const event of eventNames.filter(e => pattern.test(e))) {
       const entries = eventsByName.get(event);
-      const eventOwners = [...new Set(entries.map(e => e.record.owner))].sort(compare).map(o => `[${o}](../../${o}/SKILL.md)`).join(', ');
+      const eventOwners = [...new Set(entries.map(e => e.record.owner))].sort(compare).map(o => `[${o}](${ownerLinkFromEventsRefs(o)})`).join(', ');
       const cells = entries.map(({ target, record: r }) => `${target} (\`${r.source.file}:${r.source.line}\`${r.declaration.CallbackEvent ? ' (callback)' : ''})`);
       lines.push(`| \`${event}\` | ${eventOwners} | ${cells.join(', ')} |`);
     }
@@ -315,9 +375,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
       await fs.writeFile(path.join(base, relative), content);
     }
     // Remove obsolete generated files (such as legacy per-target retail/forever/classic JSONs).
-    for (const skill of await fs.readdir(path.join(base, 'skills'))) {
-      if (!skill.startsWith('wow-')) continue;
-      const genDir = path.join(base, 'skills', skill, 'references/generated');
+    for (const genDir of await generatedDirsInScope(base)) {
       const exists = await fs.stat(genDir).catch(() => null);
       if (!exists?.isDirectory()) continue;
       for (const file of await filesUnder(genDir)) {
@@ -404,6 +462,9 @@ export async function validateReferences(base = root) {
         for (const ch of computeFlags(rehydrated)) sym.flagSet.add(ch);
       }
     }
+    if (Object.keys(data.targets || {}).sort().join(',') !== Object.keys(chunk.targets).sort().join(',')) {
+      throw new Error(`Chunk target set drift: ${chunk.path}`);
+    }
     for (const [t, info] of Object.entries(chunk.targets)) {
       const targetData = data.targets[t];
       if (!targetData || Object.keys(targetData).sort().join(',') !== 'kinds,records' || targetData.records !== info.records || JSON.stringify(targetData.kinds) !== JSON.stringify(info.kinds) || perTargetRecords[t].length !== info.records) throw new Error(`Chunk target count drift: ${chunk.path}/${t}`);
@@ -440,10 +501,8 @@ export async function validateReferences(base = root) {
     ]);
   if (symbols.schemaVersion !== 2 || JSON.stringify(symbols.rows) !== JSON.stringify(expectedSymbolRows)) throw new Error('Symbol index incomplete or drifted');
 
-  // Reject orphaned files inside skills/*/references/generated/.
-  for (const skill of await fs.readdir(skills)) {
-    if (!skill.startsWith('wow-')) continue;
-    const genDir = path.join(skills, skill, 'references/generated');
+  // Reject orphaned files inside skills/*/references/generated/ and consolidated domain generated dirs.
+  for (const genDir of await generatedDirsInScope(base)) {
     const exists = await fs.stat(genDir).catch(() => null);
     if (!exists?.isDirectory()) continue;
     for (const file of await filesUnder(genDir)) {
@@ -517,7 +576,7 @@ if (isMainModule(import.meta.url)) {
     } else if (args.includes('--verify-source')) {
       const { outputs } = await generateReferences({ write: false });
       for (const [relative, content] of outputs) {
-        if (await fs.readFile(path.join(root, relative), 'utf8') !== content) throw new Error(`Source-derived reference drift: ${relative}`);
+        if ((await fs.readFile(path.join(root, relative), 'utf8')).replace(/\r\n/g, '\n') !== content) throw new Error(`Source-derived reference drift: ${relative}`);
       }
       console.log(`Verified ${outputs.size} generated artifacts against pinned source checkouts.`);
     } else {

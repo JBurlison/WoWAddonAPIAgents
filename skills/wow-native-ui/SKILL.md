@@ -5,7 +5,7 @@ description: Build addon-owned windows and controls using Blizzard UI templates,
 
 # Build with native UI elements
 
-Resolve targets with [wow-client-targets](../wow-client-targets/SKILL.md) and follow [wow-addon-development](../wow-addon-development/SKILL.md) for baseline UI mock-ups, visual fidelity, options, localization, and controller gates. Reskinning Blizzard-owned frames (like CharacterFrame or SpellBook) belongs in [UI skinning](../wow-ui-skinning/SKILL.md).
+Resolve targets with [wow-client-targets](../wow-client-targets/SKILL.md) and follow [wow-addon-development](../wow-addon-development/SKILL.md) for baseline UI mock-ups, visual fidelity, options, localization, and controller gates. Reskinning Blizzard-owned frames (like CharacterFrame or SpellBook) belongs in [UI skinning](../wow-ui-skinning/SKILL.md); full modular HUD/total-conversion suites belong in [UI overhaul](../wow-ui-overhaul/SKILL.md).
 
 1. **Choose component and ownership:** Select an addon-owned panel, ordinary control, dropdown (`MenuUtil`), scrolling list (`ScrollBox`), or protected action control using [element selection](references/ELEMENTS.md).
 2. **Trace the native template:** Locate the XML declaration, Lua mixins, owning TOC, `[Family]`/`[Game]` selectors, and dependencies at the pinned commit. The [source map](references/SOURCE-MAP.md) supplies dated starting points, not a universal catalog.

@@ -45,7 +45,7 @@ test('compiled publication exempts only the generated README paths in the manife
   const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
   const manifest=JSON.parse(await fs.readFile(root+'skills/wow-api-index/references/generated/manifest.json','utf8'));
   const generatedReadmes=manifest.artifacts.map(entry=>entry.path)
-    .filter(path=>path.endsWith('/references/generated/README.md'));
+    .filter(path=>path.endsWith('/generated/README.md'));
   assert.ok(generatedReadmes.length>0);
   const expected=generatedReadmes.flatMap(path=>['skills/'+path,'plugins/wow-addon-dev/skills/'+path]).sort();
   for(const config of publicationConfigs(compiled.jobs)) {
@@ -63,6 +63,7 @@ test('compiled publication exempts only the generated README paths in the manife
     assert.ok(!config.allowed_files.includes('.github/agents/wow-addon.md') && !config.allowed_files.includes('.github/agents/wow-addon.agent.md'));
     for(const prefix of ['skills/','plugins/wow-addon-dev/skills/']) {
       assert.ok(config.allowed_files.includes(prefix+'wow-*/references/generated/README.md'));
+      assert.ok(config.allowed_files.includes(prefix+'wow-api-index/references/domains/wow-*/generated/README.md'));
     }
   }
 });
@@ -77,7 +78,7 @@ test('compiled publication requires agent success, including post-agent validati
   assert.ok(validation); assert.equal(validation['continue-on-error'],undefined);
   assert.equal(validation.if,"steps.upstream.outputs.review_required == 'true'");
   assert.match(validation.run,/npm run check/); assert.match(validation.run,/npm test/);
-  const trustedPaths='scripts/ test/ .github/workflows/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/';
+  const trustedPaths='scripts/ test/ .github/workflows/ skills/wow-addon-development/scripts/ plugins/wow-addon-dev/skills/wow-addon-development/scripts/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/';
   assert.ok(validation.run.includes('git diff --exit-code "$GITHUB_SHA" -- '+trustedPaths));
   assert.ok(validation.run.includes('test -z "$(git ls-files --others -- '+trustedPaths+')"'));
   assert.match(validation.run,/node scripts\/prepare-api-sources\.mjs/);
@@ -88,7 +89,7 @@ test('compiled publication requires agent success, including post-agent validati
   assert.ok(allowed.includes('skills/wow-client-targets/references/targets.json'));
   assert.ok(allowed.includes('skills/wow-*/SKILL.md'));
   const exclusions=source['safe-outputs']['create-pull-request']['protected-files'].exclude;
-  for (const file of ['config/api-owners.json','skills/wow-*/references/generated/catalog.json','skills/wow-*/references/generated/README.md','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/provenance.json','skills/wow-api-index/references/generated/symbols.json',...versionFiles]) {
+  for (const file of ['config/api-owners.json','skills/wow-*/references/generated/catalog.json','skills/wow-*/references/generated/README.md','skills/wow-api-index/references/domains/wow-*/generated/catalog.json','skills/wow-api-index/references/domains/wow-*/generated/README.md','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/provenance.json','skills/wow-api-index/references/generated/symbols.json',...versionFiles]) {
     assert.ok(allowed.includes(file),`Missing output path: ${file}`);
     if(!file.includes('*')) assert.ok(exclusions.includes('/'+file),`Missing protected-file exclusion: ${file}`);
     if(file.startsWith('skills/')) {
@@ -132,11 +133,6 @@ test('workflow files pin third-party actions to full SHAs and compileWorkflow --
   await fs.mkdir(path.dirname(awLockPath),{recursive:true});
   await fs.writeFile(lockPath,'original-lock\n');
   await fs.writeFile(awLockPath,'original-aw-lock\n');
-  const runner=args=>{
-    if (args[0]==='version') return {status:0,stdout:'gh aw version v1.0.1\n',stderr:''};
-    fs.writeFile(lockPath,'drifted-lock\n');
-    return {status:0,stdout:'',stderr:''};
-  };
   // Use sync write in mock runner before returning so check reads after[0] immediately.
   const fsSync=await import('node:fs');
   const syncRunner=args=>{
@@ -145,7 +141,6 @@ test('workflow files pin third-party actions to full SHAs and compileWorkflow --
     fsSync.default.writeFileSync(awLockPath,'drifted-aw-lock\n');
     return {status:0,stdout:'',stderr:''};
   };
-  void runner;
   await assert.rejects(compileWorkflow({check:true,base:temp,runner:syncRunner}),/Compiled workflow differs/);
   assert.equal(await fs.readFile(lockPath,'utf8'),'original-lock\n');
   assert.equal(await fs.readFile(awLockPath,'utf8'),'original-aw-lock\n');

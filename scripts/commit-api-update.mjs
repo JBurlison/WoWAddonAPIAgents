@@ -9,8 +9,27 @@ import { isMainModule } from './lib.mjs';
 const targetBytes = 8 * 1024 * 1024;
 const maxBytes = 10 * 1024 * 1024;
 
+const strippedGitEnv = new Set([
+  'GIT_DIR', 'GIT_WORK_TREE', 'GIT_INDEX_FILE', 'GIT_OBJECT_DIRECTORY',
+  'GIT_ALTERNATE_OBJECT_DIRECTORIES', 'GIT_COMMON_DIR', 'GIT_NAMESPACE',
+  'GIT_CONFIG_PARAMETERS', 'GIT_CONFIG_COUNT', 'GIT_EXEC_PATH',
+  'GIT_EXTERNAL_DIFF', 'GIT_SSH', 'GIT_SSH_COMMAND', 'GIT_ASKPASS',
+  'GIT_PROXY_COMMAND', 'GIT_TEMPLATE_DIR',
+]);
+const unusedHooksPath = path.join(os.tmpdir(), 'wow-disabled-hooks-unused');
+
 function git(args, options = {}) {
-  return execFileSync('git', ['-c', 'core.splitIndex=false', ...args], { maxBuffer: 16 * 1024 * 1024, ...options });
+  const env = { ...process.env };
+  for (const key of strippedGitEnv) delete env[key];
+  Object.assign(env, { GIT_TERMINAL_PROMPT: '0', GIT_OPTIONAL_LOCKS: '0' }, options.env);
+  return execFileSync('git', [
+    '-c', 'core.splitIndex=false',
+    '-c', 'core.fsmonitor=false',
+    '-c', 'core.symlinks=false',
+    '-c', 'submodule.recurse=false',
+    '-c', `core.hooksPath=${unusedHooksPath}`,
+    ...args,
+  ], { maxBuffer: 16 * 1024 * 1024, ...options, env });
 }
 
 function gitLine(args, options) {
@@ -90,7 +109,7 @@ function commitUpdate() {
   // index and branch intact. Publish the finished chain with one ref update.
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wow-api-commit-'));
   const index = path.join(dir, 'index');
-  const options = { env: { ...process.env, GIT_INDEX_FILE: index } };
+  const options = { env: { GIT_INDEX_FILE: index } };
   let parent = base;
   try {
     git(['read-tree', baseTree], options);
