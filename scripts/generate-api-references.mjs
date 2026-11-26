@@ -93,7 +93,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
     return row;
   };
   const manifest = {
-    schemaVersion: 2, generatorVersion: 2, sourceRepository: registry.repository, sourceBasePath: apiPath,
+    schemaVersion: 2, generatorVersion: 3, sourceRepository: registry.repository, sourceBasePath: apiPath,
     scope: 'Complete generated declaration schemas at pinned commits. Handwritten Lua/FrameXML, XML definitions, macro grammar and runtime-only exports are separate surfaces.',
     statusMeaning: 'Source declaration is verified by extraction; loading, runtime behavior and addon access remain unknown unless a curated reference supplies separate evidence. Environment All is not addon permission. CallbackEvent is not a frame-event subscription.',
     representation: 'Declarations shared identically across targets are stored once per domain in catalog.json with per-target source location and system mappings. Evidence and system metadata are hoisted per domain. luaExpression preserves unevaluated Lua expressions; luaStringBody preserves escaped Lua string bodies without executing them.',
@@ -193,7 +193,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
     for (const target of targetOrder) {
       const subset = targetBuckets.get(target);
       if (!subset?.length) continue;
-      targetHeaders[target] = { commit: manifest.targets[target].commit, version: manifest.targets[target].version, records: subset.length, kinds: countKinds(subset) };
+      targetHeaders[target] = { records: subset.length, kinds: countKinds(subset) };
       for (const r of subset) {
         const sysKey = resolveSystemKey(r.parent);
         const canonical = JSON.stringify([r.kind, r.symbol, r.group, r.namespace, r.environment, r.classification, r.declaration]);
@@ -231,7 +231,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
       || compare(Object.values(a.targets)[0].file, Object.values(b.targets)[0].file),
     );
     const relative = `skills/${owner}/references/generated/catalog.json`;
-    const header = { schemaVersion: 2, owner, repository: registry.repository, sourceBasePath: apiPath, evidence, targets: targetHeaders, systems: sortedSystems };
+    const header = { schemaVersion: 3, owner, repository: registry.repository, sourceBasePath: apiPath, evidence, targets: targetHeaders, systems: sortedSystems };
     const content = serializeCatalog(header, declarations);
     outputs.set(relative, content);
     manifest.chunks.push({ owner, path: skillsPrefix(relative), sha256: hash(content), targets: Object.fromEntries(Object.entries(targetHeaders).map(([t, info]) => [t, { records: info.records, kinds: info.kinds }])) });
@@ -256,9 +256,9 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
   manifest.provenance = { path: skillsPrefix(`${indexDir}/provenance.json`), sha256: hash(provenanceContent) };
 
   for (const chunk of manifest.chunks) {
-    const lines = [`# ${chunk.owner}: generated declaration ledger`, '', 'These are complete extracted source schemas for this domain at the pinned commits. They establish declarations, not addon-facing availability. Load conditions, runtime behavior and addon access are explicitly unknown. Read the handwritten current guide for semantic and loading evidence; preserve restrictions when implementing.', '', '| Target | Build | Declarations | Source schemas |', '|---|---|---:|---|'];
+    const lines = [`# ${chunk.owner}: generated declaration ledger`, '', 'These are complete extracted source schemas for this domain at the commits pinned in the [central manifest](../../../wow-api-index/references/generated/manifest.json). They establish declarations, not addon-facing availability. Load conditions, runtime behavior and addon access are explicitly unknown. Read the handwritten current guide for semantic and loading evidence; preserve restrictions when implementing.', '', '| Target | Declarations | Source schemas |', '|---|---:|---|'];
     for (const [target, info] of Object.entries(chunk.targets)) {
-      lines.push(`| ${target} | ${manifest.targets[target].version} | ${info.records} | [catalog.json](catalog.json) |`);
+      lines.push(`| ${target} | ${info.records} | [catalog.json](catalog.json) |`);
     }
     lines.push('', `Use the [package-local query tool](../../../wow-api-index/scripts/query.mjs) (for example \`node ../../../wow-api-index/scripts/query.mjs forever --domain ${chunk.owner} --list\`) to retrieve a named function, event, structure, enum, callback type or predicate without reading the entire file. The [catalogue guide](../../../wow-api-index/references/CURRENT-REFERENCES.md) describes querying, schema representation and evidence status.`, '');
     outputs.set(`skills/${chunk.owner}/references/generated/README.md`, lines.join('\n'));
@@ -293,13 +293,8 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
   const eventNames = [...eventsByName.keys()].sort(compare);
   const bands = [['A-F', /^[A-F]/], ['G-L', /^[G-L]/], ['M-R', /^[M-R]/], ['S-Z', /^[S-Z]/]];
   for (const event of eventNames) if (bands.filter(([, pattern]) => pattern.test(event)).length !== 1) throw new Error(`Event is not assigned exactly once to a catalogue band: ${event}`);
-  const headerTargets = [
-    '| Target | Build | Pinned source |',
-    '|---|---|---|',
-    ...targetOrder.map(t => `| ${t} | ${manifest.targets[t].version} | [${manifest.targets[t].commit.slice(0, 8)}](https://github.com/${registry.repository}/tree/${manifest.targets[t].commit}/${apiPath}) |`),
-  ];
   for (const [band, pattern] of bands) {
-    const lines = [`# Current event catalogue: ${band}`, '', 'Every row is a generated Event declaration in at least one pinned target. Source presence does not certify frame registration or addon access. `CallbackEvent` declarations use a different dispatch mechanism. Retrieve the full typed payload, source URL and restrictions with the [query tool](../../wow-api-index/scripts/query.mjs); the [event skill](../SKILL.md) explains usage.', '', ...headerTargets, '', '| Event | Owner | Target declarations |', '|---|---|---|'];
+    const lines = [`# Current event catalogue: ${band}`, '', 'Every row is a generated Event declaration in at least one target pinned in the [central manifest](../../wow-api-index/references/generated/manifest.json). Source presence does not certify frame registration or addon access. `CallbackEvent` declarations use a different dispatch mechanism. Retrieve the full typed payload, source URL and restrictions with the [query tool](../../wow-api-index/scripts/query.mjs); the [event skill](../SKILL.md) explains usage.', '', '| Event | Owner | Target declarations |', '|---|---|---|'];
     for (const event of eventNames.filter(e => pattern.test(e))) {
       const entries = eventsByName.get(event);
       const eventOwners = [...new Set(entries.map(e => e.record.owner))].sort(compare).map(o => `[${o}](../../${o}/SKILL.md)`).join(', ');
@@ -339,7 +334,7 @@ export async function validateReferences(base = root) {
   const manifest = JSON.parse(await fs.readFile(path.join(base, indexDir, 'manifest.json'), 'utf8'));
   const owners = JSON.parse(await fs.readFile(path.join(base, 'config/api-owners.json'), 'utf8'));
   const registry = JSON.parse(await fs.readFile(path.join(skills, 'wow-client-targets/references/targets.json'), 'utf8'));
-  if (manifest.schemaVersion !== 2 || manifest.generatorVersion !== 2 || manifest.ownerConfigHash !== hash(JSON.stringify(owners))) throw new Error('Ownership config or schema drift: regenerate references');
+  if (manifest.schemaVersion !== 2 || manifest.generatorVersion !== 3 || manifest.ownerConfigHash !== hash(JSON.stringify(owners))) throw new Error('Ownership config or schema drift: regenerate references');
   if (Object.keys(manifest.targets).sort().join(',') !== Object.keys(registry.targets).sort().join(',')) throw new Error('Reference target set differs from registry');
 
   const provenanceText = await fs.readFile(safeResolve(skills, manifest.provenance.path), 'utf8');
@@ -370,7 +365,7 @@ export async function validateReferences(base = root) {
     const text = await fs.readFile(safeResolve(skills, chunk.path), 'utf8');
     if (hash(text) !== chunk.sha256) throw new Error(`Reference hash drift: ${chunk.path}`);
     const data = JSON.parse(text);
-    if (data.schemaVersion !== 2 || data.owner !== chunk.owner || JSON.stringify(data.evidence) !== JSON.stringify(evidence)) throw new Error(`Reference metadata drift: ${chunk.path}`);
+    if (data.schemaVersion !== 3 || data.owner !== chunk.owner || JSON.stringify(data.evidence) !== JSON.stringify(evidence)) throw new Error(`Reference metadata drift: ${chunk.path}`);
     const perTargetRecords = Object.fromEntries(targetOrder.map(t => [t, []]));
     for (const d of data.declarations) {
       if (owners.groups[d.group]?.owner !== chunk.owner) throw new Error(`Unowned group in ${chunk.path}: ${d.group}`);
@@ -410,7 +405,8 @@ export async function validateReferences(base = root) {
       }
     }
     for (const [t, info] of Object.entries(chunk.targets)) {
-      if (data.targets[t]?.commit !== manifest.targets[t]?.commit || data.targets[t]?.records !== info.records || perTargetRecords[t].length !== info.records) throw new Error(`Chunk target count drift: ${chunk.path}/${t}`);
+      const targetData = data.targets[t];
+      if (!targetData || Object.keys(targetData).sort().join(',') !== 'kinds,records' || targetData.records !== info.records || JSON.stringify(targetData.kinds) !== JSON.stringify(info.kinds) || perTargetRecords[t].length !== info.records) throw new Error(`Chunk target count drift: ${chunk.path}/${t}`);
       if (JSON.stringify(countKinds(perTargetRecords[t])) !== JSON.stringify(info.kinds)) throw new Error(`Chunk kind counts drift: ${chunk.path}/${t}`);
     }
   }

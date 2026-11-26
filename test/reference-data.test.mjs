@@ -29,6 +29,20 @@ test('one changed symbol produces a small patch without changing the index schem
   }
 });
 
+test('generated declaration catalogs keep source pins centralized in the manifest',async()=>{
+  const manifest=JSON.parse(await fs.readFile(path.join(root,'skills/wow-api-index/references/generated/manifest.json'),'utf8'));
+  for(const target of Object.values(manifest.targets)) {
+    assert.ok(target.commit);
+    assert.ok(target.version);
+  }
+  for(const chunk of manifest.chunks) {
+    const catalog=JSON.parse(await fs.readFile(path.join(root,'skills',chunk.path),'utf8'));
+    for(const target of Object.values(catalog.targets)) {
+      assert.deepEqual(Object.keys(target).sort(),['kinds','records']);
+    }
+  }
+});
+
 test('complete schemas retain nested secrecy, optional/default fields, enums, callbacks and predicates',()=>{
   const source=`local X={Name="X",Type="System",Namespace="C_X",Environment="All",
     Functions={{Name="Read",Type="Function",Namespace="",Environment="SecureOnly",MayReturnNothing=true,

@@ -1,12 +1,6 @@
 # Current event catalogue: A-F
 
-Every row is a generated Event declaration in at least one pinned target. Source presence does not certify frame registration or addon access. `CallbackEvent` declarations use a different dispatch mechanism. Retrieve the full typed payload, source URL and restrictions with the [query tool](../../wow-api-index/scripts/query.mjs); the [event skill](../SKILL.md) explains usage.
-
-| Target | Build | Pinned source |
-|---|---|---|
-| retail | 12.1.5.70961 | [ab5cb850](https://github.com/Gethe/wow-ui-source/tree/ab5cb850a3f65e742959e379c4689353a2f4549f/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| forever | 1.60.1.71037 | [734f0653](https://github.com/Gethe/wow-ui-source/tree/734f065329cff4992835b01a84f210a297db91b6/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
-| classic | 5.5.4.71060 | [e171ae99](https://github.com/Gethe/wow-ui-source/tree/e171ae99b8e582ce9547bd8fc87054fe2e348f20/Interface/AddOns/Blizzard_APIDocumentationGenerated) |
+Every row is a generated Event declaration in at least one target pinned in the [central manifest](../../wow-api-index/references/generated/manifest.json). Source presence does not certify frame registration or addon access. `CallbackEvent` declarations use a different dispatch mechanism. Retrieve the full typed payload, source URL and restrictions with the [query tool](../../wow-api-index/scripts/query.mjs); the [event skill](../SKILL.md) explains usage.
 
 | Event | Owner | Target declarations |
 |---|---|---|
