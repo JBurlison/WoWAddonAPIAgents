@@ -1,8 +1,8 @@
 import { createHash } from 'node:crypto';
-import { branches, interfaceFromVersion } from '../skills/wow-client-targets/scripts/targets.mjs';
+import { branches, interfaceFromVersion } from '../plugins/wow-addon-dev/skills/wow-client-targets/scripts/targets.mjs';
 
 export const repository = 'Gethe/wow-ui-source';
-export const registryPath = 'skills/wow-client-targets/references/targets.json';
+export const registryPath = 'plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json';
 export const relevant = file => file === 'version.txt' || (file.startsWith('Interface/') && /\.(lua|xml|toc|xsd|txt)$/i.test(file));
 export function sourceFiles(tree) {
   if (tree.truncated) throw new Error('Upstream tree was truncated; refusing an incomplete snapshot');

@@ -7,7 +7,8 @@ import { hardenedGit, isMainModule } from './lib.mjs';
 
 export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const apiPath = 'Interface/AddOns/Blizzard_APIDocumentationGenerated';
-const indexDir = 'skills/wow-api-index/references/generated';
+const skillsRel = 'plugins/wow-addon-dev/skills';
+const indexDir = `${skillsRel}/wow-api-index/references/generated`;
 const targetOrder = ['retail', 'forever', 'classic'];
 const targetCodes = { retail: 'r', forever: 'f', classic: 'c' };
 const compare = (a, b) => a < b ? -1 : a > b ? 1 : 0;
@@ -15,7 +16,7 @@ const hash = text => createHash('sha256').update(text.replace(/\r\n/g, '\n')).di
 const json = value => JSON.stringify(value, null, 2) + '\n';
 const countKinds = records => Object.fromEntries([...new Set(records.map(r => r.kind))].sort(compare).map(kind => [kind, records.filter(r => r.kind === kind).length]));
 const evidence = { declaration: 'source-declared', loadConditions: 'unknown', runtime: 'unknown', addonAccess: 'unknown' };
-const skillsPrefix = relative => relative.replace(/^skills\//, '');
+const skillsPrefix = relative => relative.replace(/^plugins\/wow-addon-dev\/skills\//, '');
 
 // Keep one tuple per line so a changed export does not replace the entire index.
 export function serializeSymbolIndex({ rows, ...metadata }) {
@@ -81,7 +82,7 @@ function safeResolve(boundary, relative) {
 }
 
 async function loadDomainSets(base) {
-  const skillsRoot = path.join(base, 'skills');
+  const skillsRoot = path.join(base, skillsRel);
   const topLevelSkills = new Set((await fs.readdir(skillsRoot)).filter(s => s.startsWith('wow-')));
   const domainsDir = path.join(skillsRoot, 'wow-api-index/references/domains');
   const consolidatedList = await fs.readdir(domainsDir).catch(err => err.code === 'ENOENT' ? [] : Promise.reject(err));
@@ -95,7 +96,7 @@ async function loadDomainSets(base) {
 
 async function generatedDirsInScope(base) {
   const dirs = [];
-  const skillsDir = path.join(base, 'skills');
+  const skillsDir = path.join(base, skillsRel);
   for (const skill of await fs.readdir(skillsDir)) {
     if (skill.startsWith('wow-')) dirs.push(path.join(skillsDir, skill, 'references/generated'));
   }
@@ -107,12 +108,12 @@ async function generatedDirsInScope(base) {
 }
 
 export async function generateReferences({ base = root, sourceRoot = path.join(base, '.cache/api-audit'), write = true } = {}) {
-  const registry = JSON.parse(await fs.readFile(path.join(base, 'skills/wow-client-targets/references/targets.json'), 'utf8'));
+  const registry = JSON.parse(await fs.readFile(path.join(base, `${skillsRel}/wow-client-targets/references/targets.json`), 'utf8'));
   const owners = JSON.parse(await fs.readFile(path.join(base, 'config/api-owners.json'), 'utf8'));
   const { topLevelSkills, consolidatedDomains, knownOwners } = await loadDomainSets(base);
   const ownerGenDir = owner => topLevelSkills.has(owner)
-    ? `skills/${owner}/references/generated`
-    : `skills/wow-api-index/references/domains/${owner}/generated`;
+    ? `${skillsRel}/${owner}/references/generated`
+    : `${skillsRel}/wow-api-index/references/domains/${owner}/generated`;
   const ownerFor = (group, file) => {
     const fileOwner = owners.files[file];
     const row = owners.groups[group];
@@ -322,7 +323,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
   const namespaceMD = ['# Namespace → skill lookup', '', 'Complete routing for every declared `C_` system in the pinned generated inventories. This is ownership, not cross-client support. Target presence is source-only. For global systems, objects and data definitions use the [complete domain routing](DOMAIN-SKILLS.md) and [query tool](../scripts/query.mjs).', '', '| Namespace | Owner | Declared targets | Scope classification |', '|---|---|---|---|'];
   for (const [group, row] of namespaceRows) namespaceMD.push(`| \`${group}\` | [${row.owner}](${ownerLinkFromIndexRefs(row.owner)}) | ${row.targets.join(', ')} | ${row.classification} |`);
   namespaceMD.push('');
-  outputs.set('skills/wow-api-index/references/NAMESPACE-LOOKUP.md', namespaceMD.join('\n'));
+  outputs.set(`${skillsRel}/wow-api-index/references/NAMESPACE-LOOKUP.md`, namespaceMD.join('\n'));
 
   const domainMD = ['# Domain routing and evidence status', '', 'Every domain below exists. Generated-schema completeness is measured against pinned declarations; it is separate from load-path, runtime and permission verification. Handwritten UI helpers, XML, macros and CVars need their own source evidence. No checkmark means every API is tested.', '', '## Installed skills', '', '| Skill | Generated declarations (Retail / Forever / Classic) | Current ledger |', '|---|---|---|'];
   for (const owner of [...topLevelSkills].sort(compare)) {
@@ -339,7 +340,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
   domainMD.push('', '## Complete system ownership', '', '| Namespace / global / object / data system | Owner | Scope classification | Declared targets |', '|---|---|---|---|');
   for (const [group, row] of Object.entries(provenance.groups)) domainMD.push(`| \`${group}\` | ${row.owner} | ${row.classification} | ${row.targets.join(', ')} |`);
   domainMD.push('');
-  outputs.set('skills/wow-api-index/references/DOMAIN-SKILLS.md', domainMD.join('\n'));
+  outputs.set(`${skillsRel}/wow-api-index/references/DOMAIN-SKILLS.md`, domainMD.join('\n'));
 
   const eventsByName = new Map();
   for (const target of targetOrder) {
@@ -362,7 +363,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
       lines.push(`| \`${event}\` | ${eventOwners} | ${cells.join(', ')} |`);
     }
     lines.push('');
-    outputs.set(`skills/wow-api-events/references/EVENTS-${band}.md`, lines.join('\n'));
+    outputs.set(`${skillsRel}/wow-api-events/references/EVENTS-${band}.md`, lines.join('\n'));
   }
 
   for (const [relative, content] of outputs) {
@@ -388,7 +389,7 @@ export async function generateReferences({ base = root, sourceRoot = path.join(b
 }
 
 export async function validateReferences(base = root) {
-  const skills = path.join(base, 'skills');
+  const skills = path.join(base, skillsRel);
   const manifest = JSON.parse(await fs.readFile(path.join(base, indexDir, 'manifest.json'), 'utf8'));
   const owners = JSON.parse(await fs.readFile(path.join(base, 'config/api-owners.json'), 'utf8'));
   const registry = JSON.parse(await fs.readFile(path.join(skills, 'wow-client-targets/references/targets.json'), 'utf8'));

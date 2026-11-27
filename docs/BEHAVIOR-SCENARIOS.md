@@ -33,7 +33,7 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 | User requests a flat theme inspired by ElvUI | Read pinned ElvUI architecture examples and derive an independent implementation. Do not add ElvUI as a dependency or copy textures/framework helpers without checking their separate license and dependencies. |
 | New UI request mentions mouse clicks but no controller | Load controller support and record an interaction plan for the changed controls. Preserve prior mock-up/testing choices; do not add another approval gate. Decorative regions need no focus stops. |
 | Forever settings window with a scrolling list and modal | Verify native navigation and addon access at the selected commit; cover focus entry/return, recycled rows, off-screen items, activation, back, tabs, scrolling and text entry. Keep modal ownership and cleanup explicit. |
-| Focus outline appears in a preview but the actual controller cannot enter the window | Follow [focus acquisition](../skills/wow-controller-support/references/FOCUS-ACQUISITION.md): verify the loaded revision, effective binding, eligibility, input catcher and registered callback path. Painting focus again does not fix acquisition or establish a hardware pass. |
+| Focus outline appears in a preview but the actual controller cannot enter the window | Follow [focus acquisition](../plugins/wow-addon-dev/skills/wow-controller-support/references/FOCUS-ACQUISITION.md): verify the loaded revision, effective binding, eligibility, input catcher and registered callback path. Painting focus again does not fix acquisition or establish a hardware pass. |
 | Focus action is remapped or unbound | Follow the effective binding and report the unbound state accurately. Keep acquisition available when eligible without permanently replacing user bindings or deriving behavior from device artwork. |
 | Controller tests call only normalized navigation helpers | Add callback-boundary coverage using source-verified native button/stick tokens and payloads. Distinguish this from presentation and physical-client input consumption/release checks. |
 | Reskin moves buttons or hides native art | Preserve verified controller paths, visible focus and action hints along with native mouse/keyboard behavior; check that hidden/recycled controls cannot trap focus. |
@@ -78,7 +78,7 @@ Run in an isolated host profile with only this plugin. Record host version, mode
 
 Verify installed references without the source repository nearby. Invoke the workflow skill in Codex, the namespaced skill and agent in Claude, and the agent in Copilot. Verify checkout use in VS Code still discovers the existing agent path.
 
-Use the [per-client checklist](../skills/wow-addon-development/references/CLIENT-VALIDATION.md) for actual addon releases.
+Use the [per-client checklist](../plugins/wow-addon-dev/skills/wow-addon-development/references/CLIENT-VALIDATION.md) for actual addon releases.
 
 ## Controller guidance review — 2.5.2
 

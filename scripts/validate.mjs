@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import YAML from 'yaml';
 import { root, files, frontmatter, readJSON, isMainModule } from './lib.mjs';
-import { branches, interfaceFromVersion } from '../skills/wow-client-targets/scripts/targets.mjs';
+import { branches, interfaceFromVersion } from '../plugins/wow-addon-dev/skills/wow-client-targets/scripts/targets.mjs';
 import { registryPath } from './upstream.mjs';
 import { validateVersions } from './version.mjs';
 
@@ -151,10 +151,23 @@ export async function validate(base = root) {
   const dirCache = new Map();
   const headingCache = new Map();
   const plugin = path.resolve(base, 'plugins/wow-addon-dev');
-  const sourceSkills = await files(path.join(base, 'skills'));
+  const pluginSkillsDir = path.join(plugin, 'skills');
+  const maintainerSkillsDir = path.join(base, 'skills');
+  const maintainerSkills = await files(maintainerSkillsDir);
   const settings = await readJSON(path.join(base, '.vscode/settings.json'));
-  if (settings['chat.agentSkillsLocations']?.['./skills'] !== true) errors.push('VS Code must discover the maintained skills directory');
-  for (const relative of ['agents/wow-addon.md', 'agents/ai-builder.md', 'instructions/wow-api.instructions.md', '.github/agents/ai-builder.md']) {
+  if (settings['chat.agentSkillsLocations']?.['./plugins/wow-addon-dev/skills'] !== true) errors.push('VS Code must discover the canonical plugin skills directory');
+  if (settings['chat.agentSkillsLocations']?.['./skills'] !== true) errors.push('VS Code must discover the maintainer skills directory');
+
+  // Guard against reintroducing duplicated root copies of plugin sources.
+  const rootSkillNames = await fs.readdir(maintainerSkillsDir);
+  const duplicateRootSkills = rootSkillNames.filter(name => name.startsWith('wow-'));
+  if (duplicateRootSkills.length) errors.push(`Duplicate WoW skills under root skills/: ${duplicateRootSkills.join(', ')} (maintain under plugins/wow-addon-dev/skills/)`);
+  for (const legacyDir of ['agents', 'instructions', 'assets']) {
+    const exists = await fs.stat(path.join(base, legacyDir)).catch(() => null);
+    if (exists) errors.push(`Legacy duplicated directory present: ${legacyDir}/ (maintain canonical files under plugins/wow-addon-dev/ or .github/)`);
+  }
+
+  for (const relative of ['.github/agents/ai-builder.md']) {
     const file = path.join(base, relative);
     const metadata = YAML.parse(frontmatter(await fs.readFile(file, 'utf8')).yaml);
     if (!metadata.name || !metadata.description) errors.push(`Missing source metadata: ${relative}`);
@@ -163,7 +176,7 @@ export async function validate(base = root) {
 
   let totalWowDescChars = 0;
   const docs = [
-    ...sourceSkills,
+    ...maintainerSkills,
     ...await files(plugin),
     path.join(base, '.github/agents/wow-addon.agent.md'),
     path.join(base, '.github/instructions/wow-api-important.instructions.md'),
@@ -176,7 +189,7 @@ export async function validate(base = root) {
       if (file.endsWith('SKILL.md')) {
         const skillName = path.basename(path.dirname(file));
         const meta = validateSkill(await fs.readFile(file, 'utf8'), skillName);
-        if (skillName.startsWith('wow-') && !path.resolve(file).startsWith(plugin + path.sep)) {
+        if (skillName.startsWith('wow-') && path.resolve(file).startsWith(pluginSkillsDir + path.sep)) {
           if (meta.description.length > 320) errors.push(`${path.relative(base, file)}: WoW skill description exceeds 320 chars (${meta.description.length})`);
           totalWowDescChars += meta.description.length;
         }
@@ -235,9 +248,8 @@ export async function validate(base = root) {
     const entry = market.plugins[0];
     if (entry.name !== portable.name || (typeof entry.source === 'string' ? entry.source : entry.source.path) !== './plugins/wow-addon-dev') errors.push(`Invalid marketplace source: ${file}`);
   }
-  const skills = await fs.readdir(path.join(plugin, 'skills'));
-  const maintainedSkills = (await fs.readdir(path.join(base, 'skills'))).filter(name => name.startsWith('wow-')).sort();
-  if (JSON.stringify(skills.sort()) !== JSON.stringify(maintainedSkills)) errors.push('Packaged skills must match the maintained WoW skill set exactly');
+  const skills = (await fs.readdir(pluginSkillsDir)).sort();
+  if (!skills.length || skills.some(name => !name.startsWith('wow-'))) errors.push('Packaged skills must contain only wow-* skills');
 
   const workflowPath = path.join(base, '.github/workflows/update-wow-api.md');
   try {

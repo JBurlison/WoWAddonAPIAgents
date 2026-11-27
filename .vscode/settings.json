@@ -3,6 +3,7 @@
     "github.copilot.chat.askQuestions.enabled": true,
     "chat.useAgentSkills": true,
     "chat.agentSkillsLocations": {
+        "./plugins/wow-addon-dev/skills": true,
         "./skills": true
     }
 }

@@ -6,7 +6,7 @@ Prepared 2026-10-31. The requested major version change is **1.0.1 → 2.0.0** a
 
 The [filled gap matrix](audit/GAP-MATRIX.md) records all 17 findings and distinguishes implemented documentation from outstanding runtime/external-source evidence. High-priority fixes cover damage meters, duration-object cooldowns, cooldown event payloads, taint/secrets and restricted values. New Forever guides cover current identity and beta history, GameRules/presets, swing timers, Legacy loading/currency/rewards/callbacks, and clean runtime validation.
 
-The [source-schema catalogue](../skills/wow-api-index/references/CURRENT-REFERENCES.md) contains every generated declaration from the three pinned snapshots:
+The [source-schema catalogue](../plugins/wow-addon-dev/skills/wow-api-index/references/CURRENT-REFERENCES.md) contains every generated declaration from the three pinned snapshots:
 
 | Target | Build | Functions | Events | Object methods | All declarations, including types/predicates |
 |---|---|---:|---:|---:|---:|

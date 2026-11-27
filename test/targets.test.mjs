@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { resolveTargets, interfaceFromVersion, apiDecision } from '../skills/wow-client-targets/scripts/targets.mjs';
+import { resolveTargets, interfaceFromVersion, apiDecision } from '../plugins/wow-addon-dev/skills/wow-client-targets/scripts/targets.mjs';
 import { validateRegistry, validateSkill } from '../scripts/validate.mjs';
 import { readJSON, root } from '../scripts/lib.mjs';
 import { registryPath } from '../scripts/upstream.mjs';
