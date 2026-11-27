@@ -1,6 +1,6 @@
 # 2.3.0: persistent addon plans and Forever refresh
 
-The addon-development skill now creates or maintains a requirements document and implementation matrix for new addons and larger changes. The [planning reference](../skills/wow-addon-development/references/PROJECT-PLANNING.md) links two packaged templates. Records live in the user's addon repository, preserve stable requirement IDs and user decisions, map work to dependencies and owners, distinguish implementation from per-target acceptance, and keep a resumption checkpoint. Small isolated fixes can use concise existing notes. This workflow assumes no particular Ultracode, Hydrafusion or host memory integration.
+The addon-development skill now creates or maintains a requirements document and implementation matrix for new addons and larger changes. The [planning reference](../plugins/wow-addon-dev/skills/wow-addon-development/references/PROJECT-PLANNING.md) links two packaged templates. Records live in the user's addon repository, preserve stable requirement IDs and user decisions, map work to dependencies and owners, distinguish implementation from per-target acceptance, and keep a resumption checkpoint. Small isolated fixes can use concise existing notes. This workflow assumes no particular Ultracode, Hydrafusion or host memory integration.
 
 ## Reviewed source snapshots
 
@@ -12,7 +12,7 @@ Checked 2026-11-03 against the selected Gethe branches. Only Forever changed; al
 | Forever | 1.60.1.70532 → 1.60.1.70707 | `aff0d8cd53bf4d9ef1c1dd2786b94461a276fb16` | 5,142 / 1,816 / 1,477 | 10,255 |
 | Classic progression | 5.5.4.70631 → unchanged | `e5d9b3a22c3f0f6f41ebac0e454f4969594261cf` | 3,231 / 1,483 / 1,360 | 7,435 |
 
-The [70707 migration guide](../skills/wow-client-targets/references/FOREVER-70707-CHANGES.md) records the preset setter split/Enhanced enum, settings-header and pet-order events, secret damage-meter icon fields, stricter loss-of-control and spell argument annotations, enum/constants changes, and loaded container/item-button/gamepad/PvP UI changes. Source hashes, declaration ledgers, event tables and packaged copies are regenerated together. Older audits and community runtime captures retain their original build scope.
+The [70707 migration guide](../plugins/wow-addon-dev/skills/wow-client-targets/references/FOREVER-70707-CHANGES.md) records the preset setter split/Enhanced enum, settings-header and pet-order events, secret damage-meter icon fields, stricter loss-of-control and spell argument annotations, enum/constants changes, and loaded container/item-button/gamepad/PvP UI changes. Source hashes, declaration ledgers, event tables and packaged copies are regenerated together. Older audits and community runtime captures retain their original build scope.
 
 ## Updater publication
 

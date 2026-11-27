@@ -1,6 +1,6 @@
 # Contributing
 
-Use Node.js 22+. Maintained sources are curated `skills/` content, `agents/`, `instructions/wow-api.instructions.md`, `assets/logo.svg`, `config/plugin.json`, and the explicit declaration ownership map `config/api-owners.json`. The shared WoW agent delegates to the `wow-addon-development` workflow skill. Do not hand-edit generated `.github/agents/`, `.github/instructions/`, reference JSON/catalogs/event tables, or `plugins/wow-addon-dev`.
+Use Node.js 22+. Maintained WoW plugin sources live directly under `plugins/wow-addon-dev/` (`skills/wow-*`, `agents/wow-addon.md`, `rules/AGENTS.md`, `assets/logo.svg`), alongside `config/plugin.json` and the explicit declaration ownership map `config/api-owners.json`. Maintainer-only helper skills live under `skills/` and the maintainer agent lives at `.github/agents/ai-builder.md`. The shared WoW agent delegates to the `wow-addon-development` workflow skill. Do not hand-edit generated manifests (`plugin.json`, `.antigravity-plugin/`, `.claude-plugin/`, `.codex-plugin/`, marketplace catalogs), `plugins/wow-addon-dev/com.github.copilot/`, `.github/agents/wow-addon.agent.md`, `.github/instructions/`, or generated reference JSON/catalogs/event tables.
 
 ```sh
 npm ci --ignore-scripts

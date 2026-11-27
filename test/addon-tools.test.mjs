@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { validateAddon } from '../skills/wow-addon-development/scripts/validate-addon.mjs';
-import { fetchPinnedSource } from '../skills/wow-client-targets/scripts/fetch-source.mjs';
+import { validateAddon } from '../plugins/wow-addon-dev/skills/wow-addon-development/scripts/validate-addon.mjs';
+import { fetchPinnedSource } from '../plugins/wow-addon-dev/skills/wow-client-targets/scripts/fetch-source.mjs';
 import { root } from '../scripts/lib.mjs';
 
 function makeTga(width, height, { bpp = 32, imageType = 2 } = {}) {
@@ -87,7 +87,7 @@ test('fetchPinnedSource pins commit URLs, caches remotely, slices lines, searche
   const cacheDir = await fs.mkdtemp(path.join(os.tmpdir(), 'wow-fetch-cache-'));
   t.after(() => fs.rm(cacheDir, { recursive: true, force: true }));
 
-  const registry = JSON.parse(await fs.readFile(path.join(root, 'skills/wow-client-targets/references/targets.json'), 'utf8'));
+  const registry = JSON.parse(await fs.readFile(path.join(root, 'plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json'), 'utf8'));
   const expectedCommit = registry.targets.forever.commit;
   let calls = 0;
   const fetcher = async (url, init) => {

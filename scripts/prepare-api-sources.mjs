@@ -80,7 +80,7 @@ export async function prepareCheckout({ cacheRoot, id, pin }) {
 }
 
 export async function prepareSources({ base = root, candidates = false } = {}) {
-  const registry = JSON.parse(await fs.readFile(path.join(base, 'skills/wow-client-targets/references/targets.json'), 'utf8'));
+  const registry = JSON.parse(await fs.readFile(path.join(base, 'plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json'), 'utf8'));
   const report = candidates ? JSON.parse(await fs.readFile(path.join(base, '.cache/upstream-report.json'), 'utf8')) : undefined;
   const pins = selectPins(registry, report);
   const cache = path.join(base, '.cache');

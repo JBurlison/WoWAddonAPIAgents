@@ -6,10 +6,10 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { extractReferenceRecords } from '../scripts/reference-data.mjs';
 import { validateReferences, serializeSymbolIndex, root } from '../scripts/generate-api-references.mjs';
-import { queryReferences } from '../skills/wow-api-index/scripts/query.mjs';
+import { queryReferences } from '../plugins/wow-addon-dev/skills/wow-api-index/scripts/query.mjs';
 
 test('one changed symbol produces a small patch without changing the index schema',async()=>{
-  const index=JSON.parse(await fs.readFile(path.join(root,'skills/wow-api-index/references/generated/symbols.json'),'utf8'));
+  const index=JSON.parse(await fs.readFile(path.join(root,'plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json'),'utf8'));
   const before=serializeSymbolIndex(index);
   assert.deepEqual(JSON.parse(before),index);
   const changed=structuredClone(index);
@@ -30,13 +30,13 @@ test('one changed symbol produces a small patch without changing the index schem
 });
 
 test('generated declaration catalogs keep source pins centralized in the manifest',async()=>{
-  const manifest=JSON.parse(await fs.readFile(path.join(root,'skills/wow-api-index/references/generated/manifest.json'),'utf8'));
+  const manifest=JSON.parse(await fs.readFile(path.join(root,'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'),'utf8'));
   for(const target of Object.values(manifest.targets)) {
     assert.ok(target.commit);
     assert.ok(target.version);
   }
   for(const chunk of manifest.chunks) {
-    const catalog=JSON.parse(await fs.readFile(path.join(root,'skills',chunk.path),'utf8'));
+    const catalog=JSON.parse(await fs.readFile(path.join(root,'plugins/wow-addon-dev/skills',chunk.path),'utf8'));
     for(const target of Object.values(catalog.targets)) {
       assert.deepEqual(Object.keys(target).sort(),['kinds','records']);
     }
@@ -96,18 +96,18 @@ test('packaged query exposes target payload differences and preserves unknown ru
 test('offline checks reject a dropped target and a changed registry commit before trusting ledgers',async()=>{
   const temp=await fs.mkdtemp(path.join(os.tmpdir(),'wow-references-test-'));
   try {
-    for(const relative of ['config/api-owners.json','skills/wow-client-targets/references/targets.json','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/provenance.json']) {
+    for(const relative of ['config/api-owners.json','plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json','plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json','plugins/wow-addon-dev/skills/wow-api-index/references/generated/provenance.json']) {
       await fs.mkdir(path.dirname(path.join(temp,relative)),{recursive:true});
       await fs.copyFile(path.join(root,relative),path.join(temp,relative));
     }
-    const file=path.join(temp,'skills/wow-api-index/references/generated/manifest.json');
+    const file=path.join(temp,'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json');
     const manifest=JSON.parse(await fs.readFile(file,'utf8'));
     const original=structuredClone(manifest);
     delete manifest.targets.classic;
     await fs.writeFile(file,JSON.stringify(manifest));
     await assert.rejects(validateReferences(temp),/target set differs/);
     await fs.writeFile(file,JSON.stringify(original));
-    const registryPath=path.join(temp,'skills/wow-client-targets/references/targets.json');
+    const registryPath=path.join(temp,'plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json');
     const registry=JSON.parse(await fs.readFile(registryPath,'utf8'));
     registry.targets.forever.commit='0'.repeat(40);
     await fs.writeFile(registryPath,JSON.stringify(registry));
@@ -257,11 +257,11 @@ test('validateReferences rejects a chunk catalog with extra undeclared targets',
   const temp = await fs.mkdtemp(path.join(os.tmpdir(), 'wow-chunk-target-test-'));
   try {
     await fs.cp(path.join(root, 'config/api-owners.json'), path.join(temp, 'config/api-owners.json'));
-    await fs.cp(path.join(root, 'skills'), path.join(temp, 'skills'), { recursive: true });
-    const manifest = JSON.parse(await fs.readFile(path.join(temp, 'skills/wow-api-index/references/generated/manifest.json'), 'utf8'));
+    await fs.cp(path.join(root, 'plugins/wow-addon-dev/skills'), path.join(temp, 'plugins/wow-addon-dev/skills'), { recursive: true });
+    const manifest = JSON.parse(await fs.readFile(path.join(temp, 'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'), 'utf8'));
     const chunk = manifest.chunks.find(c => Object.keys(c.targets).length < 3);
     assert.ok(chunk, 'Expected at least one target-subset domain chunk');
-    const catalogPath = path.join(temp, 'skills', chunk.path);
+    const catalogPath = path.join(temp, 'plugins/wow-addon-dev/skills', chunk.path);
     const catalog = JSON.parse(await fs.readFile(catalogPath, 'utf8'));
     const missingTarget = ['retail', 'forever', 'classic'].find(t => !catalog.targets[t]);
     catalog.targets[missingTarget] = { records: 0, kinds: {} };
@@ -269,7 +269,7 @@ test('validateReferences rejects a chunk catalog with extra undeclared targets',
     await fs.writeFile(catalogPath, text);
     const { createHash } = await import('node:crypto');
     chunk.sha256 = createHash('sha256').update(text).digest('hex');
-    await fs.writeFile(path.join(temp, 'skills/wow-api-index/references/generated/manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
+    await fs.writeFile(path.join(temp, 'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
     await assert.rejects(validateReferences(temp), /Chunk target set drift/);
   } finally {
     if (path.dirname(path.resolve(temp)) !== path.resolve(os.tmpdir()) || !path.basename(temp).startsWith('wow-chunk-target-test-')) throw new Error('Unsafe temporary cleanup path');

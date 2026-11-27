@@ -20,19 +20,19 @@ function publicationConfigs(jobs) {
 test('publication budgets fit complete generated snapshots and reach the compiled handlers',async()=>{
   const source=YAML.parse(frontmatter(await fs.readFile(root+'.github/workflows/update-wow-api.md','utf8')).yaml);
   const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
-  const manifest=JSON.parse(await fs.readFile(root+'skills/wow-api-index/references/generated/manifest.json','utf8'));
+  const manifest=JSON.parse(await fs.readFile(root+'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json','utf8'));
   const references=new Set([...manifest.chunks,...manifest.artifacts,...(manifest.provenance?[manifest.provenance]:[])].map(entry=>entry.path));
   references.add('wow-api-index/references/generated/manifest.json');
   references.add('wow-client-targets/references/targets.json');
   references.add('wow-client-targets/references/SOURCE-EVIDENCE.md');
   const files=new Set([...versionFiles,'config/api-owners.json']);
   for(const file of references) {
-    files.add('skills/'+file); files.add('plugins/wow-addon-dev/skills/'+file);
+    files.add('plugins/wow-addon-dev/skills/'+file);
   }
   const policy=source['safe-outputs']['create-pull-request'];
-  // Reserve room for 16 handwritten guides and their packaged copies.
-  assert.ok(Number.isInteger(policy['max-patch-files']) && policy['max-patch-files']>=files.size+32,
-    `A complete refresh and guide updates need at least ${files.size+32} output paths`);
+  // Reserve room for 16 handwritten guides.
+  assert.ok(Number.isInteger(policy['max-patch-files']) && policy['max-patch-files']>=files.size+16,
+    `A complete refresh and guide updates need at least ${files.size+16} output paths`);
   assert.ok(policy['max-patch-size']>0 && policy['max-patch-size']<=10240);
   for(const config of publicationConfigs(compiled.jobs)) {
     assert.equal(config.base_branch,'main','Use the same literal remote branch in both publisher configurations');
@@ -43,11 +43,11 @@ test('publication budgets fit complete generated snapshots and reach the compile
 
 test('compiled publication exempts only the generated README paths in the manifest and package',async()=>{
   const compiled=YAML.parse(await fs.readFile(root+'.github/workflows/update-wow-api.lock.yml','utf8'));
-  const manifest=JSON.parse(await fs.readFile(root+'skills/wow-api-index/references/generated/manifest.json','utf8'));
+  const manifest=JSON.parse(await fs.readFile(root+'plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json','utf8'));
   const generatedReadmes=manifest.artifacts.map(entry=>entry.path)
     .filter(path=>path.endsWith('/generated/README.md'));
   assert.ok(generatedReadmes.length>0);
-  const expected=generatedReadmes.flatMap(path=>['skills/'+path,'plugins/wow-addon-dev/skills/'+path]).sort();
+  const expected=generatedReadmes.map(path=>'plugins/wow-addon-dev/skills/'+path).sort();
   for(const config of publicationConfigs(compiled.jobs)) {
     assert.equal(config.protected_files_policy,'blocked');
     assert.ok(config.protected_files.includes('README.md'),'Keep basename protection for root and other READMEs');
@@ -61,10 +61,8 @@ test('compiled publication exempts only the generated README paths in the manife
     }
     assert.ok(!exactPaths.includes('.github/agents/wow-addon.md') && !exactPaths.includes('.github/agents/wow-addon.agent.md'));
     assert.ok(!config.allowed_files.includes('.github/agents/wow-addon.md') && !config.allowed_files.includes('.github/agents/wow-addon.agent.md'));
-    for(const prefix of ['skills/','plugins/wow-addon-dev/skills/']) {
-      assert.ok(config.allowed_files.includes(prefix+'wow-*/references/generated/README.md'));
-      assert.ok(config.allowed_files.includes(prefix+'wow-api-index/references/domains/wow-*/generated/README.md'));
-    }
+    assert.ok(config.allowed_files.includes('plugins/wow-addon-dev/skills/wow-*/references/generated/README.md'));
+    assert.ok(config.allowed_files.includes('plugins/wow-addon-dev/skills/wow-api-index/references/domains/wow-*/generated/README.md'));
   }
 });
 
@@ -78,7 +76,7 @@ test('compiled publication requires agent success, including post-agent validati
   assert.ok(validation); assert.equal(validation['continue-on-error'],undefined);
   assert.equal(validation.if,"steps.upstream.outputs.review_required == 'true'");
   assert.match(validation.run,/npm run check/); assert.match(validation.run,/npm test/);
-  const trustedPaths='scripts/ test/ .github/workflows/ skills/wow-addon-development/scripts/ plugins/wow-addon-dev/skills/wow-addon-development/scripts/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/';
+  const trustedPaths='scripts/ test/ .github/workflows/ plugins/wow-addon-dev/skills/wow-addon-development/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/';
   assert.ok(validation.run.includes('git diff --exit-code "$GITHUB_SHA" -- '+trustedPaths));
   assert.ok(validation.run.includes('test -z "$(git ls-files --others -- '+trustedPaths+')"'));
   assert.match(validation.run,/node scripts\/prepare-api-sources\.mjs/);
@@ -86,20 +84,16 @@ test('compiled publication requires agent success, including post-agent validati
   assert.match(validation.run,/node scripts\/generate-api-references\.mjs --verify-source/);
   assert.equal(compiled.jobs.agent.permissions.contents,'read');
   const allowed=source['safe-outputs']['create-pull-request']['allowed-files'];
-  assert.ok(allowed.includes('skills/wow-client-targets/references/targets.json'));
-  assert.ok(allowed.includes('skills/wow-*/SKILL.md'));
+  assert.ok(allowed.includes('plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json'));
+  assert.ok(allowed.includes('plugins/wow-addon-dev/skills/wow-*/SKILL.md'));
   const exclusions=source['safe-outputs']['create-pull-request']['protected-files'].exclude;
-  for (const file of ['config/api-owners.json','skills/wow-*/references/generated/catalog.json','skills/wow-*/references/generated/README.md','skills/wow-api-index/references/domains/wow-*/generated/catalog.json','skills/wow-api-index/references/domains/wow-*/generated/README.md','skills/wow-api-index/references/generated/manifest.json','skills/wow-api-index/references/generated/provenance.json','skills/wow-api-index/references/generated/symbols.json',...versionFiles]) {
+  for (const file of ['config/api-owners.json','plugins/wow-addon-dev/skills/wow-*/references/generated/catalog.json','plugins/wow-addon-dev/skills/wow-*/references/generated/README.md','plugins/wow-addon-dev/skills/wow-api-index/references/domains/wow-*/generated/catalog.json','plugins/wow-addon-dev/skills/wow-api-index/references/domains/wow-*/generated/README.md','plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json','plugins/wow-addon-dev/skills/wow-api-index/references/generated/provenance.json','plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json',...versionFiles]) {
     assert.ok(allowed.includes(file),`Missing output path: ${file}`);
     if(!file.includes('*')) assert.ok(exclusions.includes('/'+file),`Missing protected-file exclusion: ${file}`);
-    if(file.startsWith('skills/')) {
-      assert.ok(allowed.includes('plugins/wow-addon-dev/'+file));
-      if(!file.includes('*')) assert.ok(exclusions.includes('/plugins/wow-addon-dev/'+file));
-    }
   }
   assert.ok(allowed.every(file=>!file.startsWith('scripts/')&&!file.includes('/scripts/')&&!file.startsWith('test/')&&file!=='config/*.json'));
   assert.ok(exclusions.every(file=>!file.includes('/scripts/')));
-  assert.ok(allowed.every(file=>!file.startsWith('.github/skills/')&&!file.startsWith('agents/ai-builder')));
+  assert.ok(allowed.every(file=>!file.startsWith('.github/skills/')&&!file.startsWith('agents/ai-builder')&&!file.startsWith('skills/')));
 });
 
 test('workflow files pin third-party actions to full SHAs and compileWorkflow --check never mutates tracked lockfiles',async t=>{

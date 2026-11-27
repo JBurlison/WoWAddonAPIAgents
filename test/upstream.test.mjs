@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fingerprint, changedFiles, inspectChanges, createClient, gate } from '../scripts/upstream.mjs';
-import { branches } from '../skills/wow-client-targets/scripts/targets.mjs';
+import { branches } from '../plugins/wow-addon-dev/skills/wow-client-targets/scripts/targets.mjs';
 
 const tree = entries => ({ tree: entries.map(([path,sha])=>({path,sha,type:'blob'})), truncated:false });
 const before=tree([['version.txt','a'],['Interface/AddOns/API.lua','b'],['README.md','c']]);

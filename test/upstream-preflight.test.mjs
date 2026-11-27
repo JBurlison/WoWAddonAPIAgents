@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { checkUpstream } from '../scripts/check-upstream.mjs';
 import { fingerprint, registryPath } from '../scripts/upstream.mjs';
-import { branches } from '../skills/wow-client-targets/scripts/targets.mjs';
+import { branches } from '../plugins/wow-addon-dev/skills/wow-client-targets/scripts/targets.mjs';
 
 const baselineCommit = 'a'.repeat(40);
 const changedCommit = 'b'.repeat(40);

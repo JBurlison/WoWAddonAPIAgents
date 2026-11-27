@@ -59,22 +59,11 @@ safe-outputs:
     max: 1
     draft: true
     fallback-as-issue: false
-    # Full client refreshes include maintained references and packaged copies.
-    max-patch-files: 300
+    # Full client refreshes include generated catalogs, manifests, and curated guides.
+    max-patch-files: 200
     max-patch-size: 10240
     allowed-files:
-      - 'skills/wow-*/SKILL.md'
-      - 'skills/wow-*/references/*.md'
-      - 'skills/wow-client-targets/references/targets.json'
       - 'config/api-owners.json'
-      - 'skills/wow-*/references/generated/catalog.json'
-      - 'skills/wow-*/references/generated/README.md'
-      - 'skills/wow-api-index/references/domains/wow-*/RETAIL-BASELINE.md'
-      - 'skills/wow-api-index/references/domains/wow-*/generated/catalog.json'
-      - 'skills/wow-api-index/references/domains/wow-*/generated/README.md'
-      - 'skills/wow-api-index/references/generated/manifest.json'
-      - 'skills/wow-api-index/references/generated/provenance.json'
-      - 'skills/wow-api-index/references/generated/symbols.json'
       - 'plugins/wow-addon-dev/skills/wow-*/SKILL.md'
       - 'plugins/wow-addon-dev/skills/wow-*/references/*.md'
       - 'plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json'
@@ -99,36 +88,7 @@ safe-outputs:
       policy: blocked
       exclude:
         # gh-aw v1.0.1 matches protected path exceptions literally. List the
-        # generated domain READMEs and their packaged copies from the manifest.
-        - '/skills/wow-addon-structure/references/generated/README.md'
-        - '/skills/wow-api-combat/references/generated/README.md'
-        - '/skills/wow-api-events/references/generated/README.md'
-        - '/skills/wow-api-lua-environment/references/generated/README.md'
-        - '/skills/wow-api-settings-system/references/generated/README.md'
-        - '/skills/wow-api-spells-abilities/references/generated/README.md'
-        - '/skills/wow-api-talents/references/generated/README.md'
-        - '/skills/wow-api-unit-player/references/generated/README.md'
-        - '/skills/wow-api-widget/references/generated/README.md'
-        - '/skills/wow-lua-api/references/generated/README.md'
-        - '/skills/wow-macro-commands/references/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-achievements/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-calendar-events/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-collections/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-currency-economy/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-encounters/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-group-lfg/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-guild/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-housing/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-items-inventory/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-map-navigation/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-misc-systems/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-professions/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-pvp/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-quests/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-reputation/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-social-chat/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-transmog/generated/README.md'
-        - '/skills/wow-api-index/references/domains/wow-api-weekly-rewards/generated/README.md'
+        # generated domain READMEs from the manifest.
         - '/plugins/wow-addon-dev/skills/wow-addon-structure/references/generated/README.md'
         - '/plugins/wow-addon-dev/skills/wow-api-combat/references/generated/README.md'
         - '/plugins/wow-addon-dev/skills/wow-api-events/references/generated/README.md'
@@ -158,11 +118,8 @@ safe-outputs:
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/domains/wow-api-social-chat/generated/README.md'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/domains/wow-api-transmog/generated/README.md'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/domains/wow-api-weekly-rewards/generated/README.md'
-        - '/skills/wow-client-targets/references/targets.json'
+        - '/plugins/wow-addon-dev/skills/wow-client-targets/references/targets.json'
         - '/config/api-owners.json'
-        - '/skills/wow-api-index/references/generated/manifest.json'
-        - '/skills/wow-api-index/references/generated/provenance.json'
-        - '/skills/wow-api-index/references/generated/symbols.json'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/manifest.json'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/provenance.json'
         - '/plugins/wow-addon-dev/skills/wow-api-index/references/generated/symbols.json'
@@ -194,8 +151,8 @@ post-steps:
   - name: Validate proposed content before safe outputs
     if: steps.upstream.outputs.review_required == 'true'
     run: |
-      git diff --exit-code "$GITHUB_SHA" -- scripts/ test/ .github/workflows/ skills/wow-addon-development/scripts/ plugins/wow-addon-dev/skills/wow-addon-development/scripts/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/
-      test -z "$(git ls-files --others -- scripts/ test/ .github/workflows/ skills/wow-addon-development/scripts/ plugins/wow-addon-dev/skills/wow-addon-development/scripts/ skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ skills/wow-client-targets/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/)"
+      git diff --exit-code "$GITHUB_SHA" -- scripts/ test/ .github/workflows/ plugins/wow-addon-dev/skills/wow-addon-development/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/
+      test -z "$(git ls-files --others -- scripts/ test/ .github/workflows/ plugins/wow-addon-dev/skills/wow-addon-development/scripts/ plugins/wow-addon-dev/skills/wow-api-index/scripts/ plugins/wow-addon-dev/skills/wow-client-targets/scripts/)"
       node scripts/version.mjs guard "$GITHUB_SHA"
       node scripts/version.mjs check "$GITHUB_SHA"
       node scripts/prepare-api-sources.mjs
@@ -217,8 +174,8 @@ post-step independently checks it. Do not hand-edit version fields; no other
 metadata or dependency changes are permitted in an upstream update.
 
 Inspect commit-pinned API definitions and affected UI loading paths for every
-changed target. Read `skills/wow-client-targets/SKILL.md` and
-`skills/wow-addon-development/SKILL.md` from the repository root. Update
+changed target. Read `plugins/wow-addon-dev/skills/wow-client-targets/SKILL.md` and
+`plugins/wow-addon-dev/skills/wow-addon-development/SKILL.md` from the repository root. Update
 only affected WoW guidance. Keep historical claims dated; do not stamp an entire
 domain verified after checking one function. New claims need target/build, source
 links, signatures, event payloads, loading conditions, and access restrictions.
@@ -252,8 +209,8 @@ configuration editable by this update. Assign new groups deliberately, preservin
 unknown runtime/access states. Run `node scripts/generate-api-references.mjs` to
 regenerate all per-domain JSON, symbol/manifest catalogs, namespace/domain routes
 and central event tables. Also update the build/declaration summary table in
-`skills/wow-api-index/references/CURRENT-REFERENCES.md` and the event-count
-summary sentence in `skills/wow-api-events/references/RETAIL-BASELINE.md` to
+`plugins/wow-addon-dev/skills/wow-api-index/references/CURRENT-REFERENCES.md` and the event-count
+summary sentence in `plugins/wow-addon-dev/skills/wow-api-events/references/RETAIL-BASELINE.md` to
 match the regenerated manifest. Never hand-edit these generated artifacts or advance a
 target registry while retaining references generated from its previous commit.
 

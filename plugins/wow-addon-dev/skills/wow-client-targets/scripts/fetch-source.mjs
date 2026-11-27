@@ -5,7 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const defaultTargetsPath = fileURLToPath(new URL('../references/targets.json', import.meta.url));
-const defaultRepoCacheRoot = fileURLToPath(new URL('../../../.cache/api-audit', import.meta.url));
+const defaultRepoCacheRoot = fileURLToPath(new URL('../../../../../.cache/api-audit', import.meta.url));
 const defaultDiskCacheDir = path.join(os.tmpdir(), 'wow-ui-source-cache');
 const validTargets = ['retail', 'forever', 'classic'];
 

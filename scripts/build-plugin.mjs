@@ -3,8 +3,13 @@ import path from 'node:path';
 import YAML from 'yaml';
 import { root, readJSON, write, json, files, frontmatter, isMainModule } from './lib.mjs';
 
-const textExtensions = new Set(['.md', '.json', '.mjs', '.js', '.txt', '.svg', '.yml', '.yaml', '.xml', '.lua', '.toc', '.sh', '.ps1', '.py', '.css', '.html']);
-const isTextFile = file => textExtensions.has(path.extname(file).toLowerCase()) || path.basename(file) === 'LICENSE';
+export const pluginDir = 'plugins/wow-addon-dev';
+
+const copilotInstructionMeta = {
+  name: 'WoW client-aware API guidance',
+  description: 'Select the target client before applying WoW API signatures, security rules, and TOC metadata.',
+  applyTo: '**/*.lua,**/*.xml,**/*.toc',
+};
 
 async function pruneEmptyDirs(dir, guard) {
   const entries = await fs.readdir(dir, { withFileTypes: true }).catch(error => {
@@ -20,27 +25,35 @@ async function pruneEmptyDirs(dir, guard) {
   }
 }
 
+export function isCanonicalPluginSource(relative, config = {}) {
+  const normalized = relative.replaceAll('\\', '/');
+  if (normalized.startsWith(`${pluginDir}/skills/`)) return true;
+  if (normalized === `${pluginDir}/agents/wow-addon.md`) return true;
+  if (normalized === `${pluginDir}/rules/AGENTS.md`) return true;
+  if (config.logo && normalized === `${pluginDir}/${config.logo.replaceAll('\\', '/')}`) return true;
+  return false;
+}
+
 export async function expectedFiles(base = root) {
   const config = await readJSON(path.join(base, 'config/plugin.json'));
   const output = new Map();
-  const plugin = 'plugins/wow-addon-dev';
+  const plugin = pluginDir;
   const add = (file, data) => output.set(file, Buffer.isBuffer(data) ? data : data.replace(/\r\n/g, '\n'));
-  const skillRoot = path.join(base, 'skills');
-  for (const skill of (await fs.readdir(skillRoot)).filter(name => name.startsWith('wow-')).sort()) {
-    for (const file of await files(path.join(skillRoot, skill))) {
-      const targetPath = `${plugin}/skills/${path.relative(skillRoot, file).replaceAll('\\', '/')}`;
-      add(targetPath, isTextFile(file) ? await fs.readFile(file, 'utf8') : await fs.readFile(file));
-    }
-  }
+
   add(`${plugin}/LICENSE`, await fs.readFile(path.join(base, 'LICENSE'), 'utf8'));
 
   const prompts = Array.isArray(config.suggestedPrompts) ? config.suggestedPrompts.filter(Boolean).slice(0, 3) : [];
-  const common = { name: config.name, version: config.version, description: config.description, author: config.author,
-    repository: config.repository, homepage: config.repository, license: config.license, keywords: ['wow', 'addons', 'lua', 'retail', 'forever', 'classic'] };
+  const common = {
+    name: config.name, version: config.version, description: config.description, author: config.author,
+    repository: config.repository, homepage: config.repository, license: config.license,
+    keywords: ['wow', 'addons', 'lua', 'retail', 'forever', 'classic'],
+  };
   const ui = { displayName: config.displayName, shortDescription: 'WoW addons for Retail, Forever, and Classic', websiteURL: config.repository };
   const codexUi = { ...ui, logo: './assets/logo.svg', composerIcon: './assets/logo.svg', ...(prompts.length ? { defaultPrompt: prompts } : {}) };
-  add(`${plugin}/plugin.json`, json({ $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', ...common,
-    extensions: { 'com.openai': { interface: codexUi } } }));
+  add(`${plugin}/plugin.json`, json({
+    $schema: 'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json', ...common,
+    extensions: { 'com.openai': { interface: codexUi } },
+  }));
   add(`${plugin}/.codex-plugin/plugin.json`, json({ ...common, skills: './skills/', interface: codexUi }));
   add(`${plugin}/.claude-plugin/plugin.json`, json(common));
   const antigravity = {
@@ -55,44 +68,37 @@ export async function expectedFiles(base = root) {
     ...(prompts.length ? { suggestedPrompts: prompts } : {}),
   };
   add(`${plugin}/.antigravity-plugin/plugin.json`, json(antigravity));
-  if (config.logo) {
-    add(`${plugin}/${config.logo.replaceAll('\\', '/')}`, await fs.readFile(path.join(base, config.logo)));
-  }
-  // Shared agents delegate to portable skills; translate metadata and relocate links per host.
-  const agent = frontmatter(await fs.readFile(path.join(base, 'agents/wow-addon.md'), 'utf8'));
-  function agentBody(prefix) {
-    return agent.body
-      .replace(/<!--[\s\S]*?-->/g, '')
-      .replace(/^This is the shared agent definition\..*$/gm, '')
-      .replace(/\n{3,}/g, '\n\n')
-      .trim()
-      .replaceAll('../skills/', `${prefix}/`);
-  }
+
+  // Canonical WoW agent and rules live inside plugins/wow-addon-dev/; generate host adapters with relocated links.
+  const agent = frontmatter(await fs.readFile(path.join(base, `${plugin}/agents/wow-addon.md`), 'utf8'));
+  const agentBody = prefix => agent.body.replace(/\r\n/g, '\n').trim().replaceAll('../skills/', `${prefix}/`);
   const sharedMetadata = YAML.parse(agent.yaml);
   const metadata = { name: sharedMetadata.name, description: sharedMetadata.description };
-  add('.github/agents/wow-addon.agent.md', `---\n${YAML.stringify(metadata)}---\n\n<!-- Generated by npm run build from agents/wow-addon.md. -->\n\n${agentBody('../../skills')}\n`);
-  add(`${plugin}/agents/wow-addon.md`, `---\n${YAML.stringify(metadata)}---\n\n${agentBody('../skills')}\n`);
+  add('.github/agents/wow-addon.agent.md', `---\n${YAML.stringify(metadata)}---\n\n<!-- Generated by npm run build from ${plugin}/agents/wow-addon.md. -->\n\n${agentBody(`../../${plugin}/skills`)}\n`);
   add(`${plugin}/com.github.copilot/agents/wow-addon.agent.md`, `---\n${YAML.stringify(metadata)}---\n\n${agentBody('../../skills')}\n`);
 
-  const maintainer = frontmatter(await fs.readFile(path.join(base, 'agents/ai-builder.md'), 'utf8'));
-  add('.github/agents/ai-builder.md', `---\n${maintainer.yaml}\n---\n\n<!-- Generated by npm run build from agents/ai-builder.md. -->\n\n${maintainer.body.replaceAll('../skills/', '../../skills/')}\n`);
+  const rulesRaw = (await fs.readFile(path.join(base, `${plugin}/rules/AGENTS.md`), 'utf8')).replace(/\r\n/g, '\n').trim();
+  const instructionBody = rulesRaw.replace(/^Apply these rules[^\n]*\n+/, '').trim();
+  const copilotFrontmatter = `---\nname: ${copilotInstructionMeta.name}\ndescription: ${copilotInstructionMeta.description}\napplyTo: "${copilotInstructionMeta.applyTo}"\n---`;
+  add('.github/instructions/wow-api-important.instructions.md', `${copilotFrontmatter}\n\n<!-- Generated by npm run build from ${plugin}/rules/AGENTS.md. -->\n\n${instructionBody.replaceAll('../skills/', `../../${plugin}/skills/`)}\n`);
+  add(`${plugin}/com.github.copilot/rules/wow-api.instructions.md`, `${copilotFrontmatter}\n\n${instructionBody.replaceAll('../skills/', '../../skills/')}\n`);
 
-  const instruction = (await fs.readFile(path.join(base, 'instructions/wow-api.instructions.md'), 'utf8')).replace(/\r\n/g, '\n');
-  add('.github/instructions/wow-api-important.instructions.md', instruction.replace('---\n\n#', '---\n\n<!-- Generated by npm run build from instructions/wow-api.instructions.md. -->\n\n#').replaceAll('../skills/', '../../skills/'));
-  add(`${plugin}/com.github.copilot/rules/wow-api.instructions.md`, instruction.replaceAll('../skills/', '../../skills/'));
-  const instructionBody = frontmatter(instruction).body;
-  add(`${plugin}/rules/AGENTS.md`, `Apply these rules when working on World of Warcraft addons (\`.lua\`, \`.xml\`, \`.toc\`, or WoW addon tasks).\n\n${instructionBody}\n`);
-  const entry = { name: config.name, source: './plugins/wow-addon-dev', description: config.description, version: config.version };
+  const entry = { name: config.name, source: `./${plugin}`, description: config.description, version: config.version };
   const market = { name: config.marketplace, description: config.description, owner: config.author, plugins: [entry] };
   add('.claude-plugin/marketplace.json', json(market));
   add('.github/plugin/marketplace.json', json(market));
-  add('.agents/plugins/marketplace.json', json({ name: config.marketplace, interface: { displayName: 'WoW Addon API Agents' },
-    plugins: [{ name: config.name, source: { source: 'local', path: entry.source },
-      policy: { installation: 'AVAILABLE', authentication: 'ON_INSTALL' }, category: 'Developer Tools' }] }));
+  add('.agents/plugins/marketplace.json', json({
+    name: config.marketplace, interface: { displayName: 'WoW Addon API Agents' },
+    plugins: [{
+      name: config.name, source: { source: 'local', path: entry.source },
+      policy: { installation: 'AVAILABLE', authentication: 'ON_INSTALL' }, category: 'Developer Tools',
+    }],
+  }));
   return output;
 }
 
 export async function build({ check = false, base = root } = {}) {
+  const config = await readJSON(path.join(base, 'config/plugin.json'));
   const expected = await expectedFiles(base);
   const errors = [];
   for (const [file, data] of expected) {
@@ -108,10 +114,11 @@ export async function build({ check = false, base = root } = {}) {
       else await write(path.join(base, file), data);
     }
   }
-  // Only remove obsolete generated files inside this exact package; never recursive deletion.
-  const packageRoot = path.resolve(base, 'plugins/wow-addon-dev');
+  // Remove obsolete generated files inside this exact package while preserving canonical plugin sources.
+  const packageRoot = path.resolve(base, pluginDir);
   for (const file of await files(packageRoot)) {
     const relative = path.relative(base, file).replaceAll('\\', '/');
+    if (isCanonicalPluginSource(relative, config)) continue;
     if (!expected.has(relative)) {
       if (check) errors.push(`Unexpected generated file: ${relative}`);
       else {
